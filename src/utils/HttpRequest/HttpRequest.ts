@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-02-15 14:36:19
- * @LastEditTime: 2023-02-18 22:51:49
+ * @LastEditTime: 2023-02-18 22:56:58
  * @FilePath: /my-vue3-project/src/utils/HttpRequest/HttpRequest.ts
  * 介绍:请求封装文件
  */
@@ -70,6 +70,9 @@ export class HttpRequest {
     config?: RequestConfig,
     requestOptions?: HttpRequest
   ) {
+    if (config?.mode?.includes("removeReqVoid")) {
+      data = omit(data, isNuLL);
+    }
     let res: UniApp.RequestOptions = {
       ...requestOptions,
       url: this.baseUrl + url,
