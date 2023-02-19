@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-02-15 14:36:19
- * @LastEditTime: 2023-02-19 10:45:55
+ * @LastEditTime: 2023-02-19 10:54:41
  * @FilePath: /my-vue3-project/src/utils/HttpRequest/HttpRequest.ts
  * 介绍:请求封装文件
  */
@@ -8,21 +8,24 @@ import omit from "lodash/fp/omit";
 import isNuLL from "lodash/fp/isNuLL";
 
 export class HttpRequest {
+  /**请求前 */
   before?: (
     url: string,
     data: any,
     config?: RequestConfig,
     requestOptions?: HttpRequest
   ) => HttpRequestOptions;
+  /**成功回调 */
   succeeded?: (
     res: UniApp.RequestSuccessCallbackResult,
     config: RequestConfig | undefined
   ) => any;
+  /**失败回调 */
   failed?: (
     error: UniApp.GeneralCallbackResult,
     config: RequestConfig | undefined
   ) => any;
-  baseUrl: string;
+  public baseUrl: string;
   constructor(config: CreateConfig) {
     this.before = config.before;
     this.succeeded = config.succeeded;
@@ -176,6 +179,7 @@ export interface CreateConfig {
   ) => any;
   baseUrl?: string;
 }
+/**请求操作配置 */
 export interface RequestConfig extends AnyObject {
   mode?: Mode[];
 }
@@ -186,7 +190,7 @@ export type Mode =
   | "removeReqVoid"
   | "removeResVoid";
 
-/**请求选项 */
+/**发起请求选项 */
 export interface HttpRequestOptions {
   /**
    * 资源url

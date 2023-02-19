@@ -1,3 +1,9 @@
+<!--
+ * @Date: 2023-02-18 20:06:36
+ * @LastEditTime: 2023-02-19 10:57:33
+ * @FilePath: /my-vue3-project/src/pages/index/index.vue
+ * 介绍:
+-->
 <template>
   <view class="content">
     <image class="logo" src="/static/logo.png" />
@@ -8,10 +14,10 @@
 </template>
 
 <script setup lang="ts">
+import { apiTest400 } from "@@/api/module/apiTest";
 import { ref } from "vue";
-import { defaHttp } from "@@/api/index";
-defaHttp.post("/test", {}, { mode: ["showError"] });
 const title = ref("Hello");
+apiTest400();
 </script>
 
 <style>

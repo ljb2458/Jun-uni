@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-02-18 20:06:36
- * @LastEditTime: 2023-02-18 20:49:46
+ * @LastEditTime: 2023-02-19 12:28:03
  * @FilePath: /my-vue3-project/vite.config.ts
  * 介绍:
  */
@@ -14,8 +14,8 @@ const envResolver = {
   development: () => ({ ...viteBaseConfig, ...viteDevConfig }), //开发环境
 };
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
+export default defineConfig((config) => {
   return {
-    ...envResolver[mode](),
+    ...envResolver[config.mode as keyof typeof envResolver](),
   };
 });

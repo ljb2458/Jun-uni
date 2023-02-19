@@ -13,6 +13,5 @@ export default defineConfig({
       "@@": path.join(__dirname, "src"),
     },
   },
-
   plugins: [uni()],
 });
