@@ -1,20 +1,21 @@
 /*
  * @Date: 2023-02-19 13:37:05
- * @LastEditTime: 2023-02-19 13:59:00
+ * @LastEditTime: 2023-02-19 15:21:22
  * @FilePath: /my-vue3-project/src/hooks/router.ts
  * 介绍:路由跳转
  */
 import { objToQuery } from "@@/utils/tools/index";
+
 const router = {
   /**跳转路由 */
   push(url: string, config?: RouterToOption) {
     return new Promise<UniApp.NavigateToSuccessOptions>((resolve, reject) => {
       let queryStr = "";
-      if (config?.query) queryStr = `?${objToQuery(config.query)}`;
+      if (config?.query) queryStr = `?${objToQuery(config.query, true)}`;
       delete config?.query;
       uni.navigateTo({
         ...config,
-        url: `${url}${queryStr}`,
+        url: `${url}?${queryStr}`,
         success: resolve,
         fail: reject,
       });
@@ -24,11 +25,11 @@ const router = {
   replace(url: string, config?: RouterToOption) {
     return new Promise<UniApp.NavigateToSuccessOptions>((resolve, reject) => {
       let queryStr = "";
-      if (config?.query) queryStr = `?${objToQuery(config.query)}`;
+      if (config?.query) queryStr = `?${objToQuery(config.query, true)}`;
       delete config?.query;
       uni.redirectTo({
         ...config,
-        url: `${url}${queryStr}`,
+        url: `${url}?${queryStr}`,
         success: resolve,
         fail: reject,
       });
@@ -59,11 +60,11 @@ const router = {
   replaceAll(url: string, config?: RouterToOption) {
     return new Promise<UniApp.NavigateToSuccessOptions>((resolve, reject) => {
       let queryStr = "";
-      if (config?.query) queryStr = `?${objToQuery(config.query)}`;
+      if (config?.query) queryStr = `?${objToQuery(config.query, true)}`;
       delete config?.query;
       uni.reLaunch({
         ...config,
-        url: `${url}${queryStr}`,
+        url: `${url}?${queryStr}`,
         success: resolve,
         fail: reject,
       });

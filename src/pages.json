@@ -1,48 +1,55 @@
 {
-	"pages": [{
-		"path": "pages/home/home",
-		"style": {
-			"navigationBarTitleText": "主页"
-		}
-	},
-	{
-		"path": "pages/index/index",
-		"style": {
-			"navigationBarTitleText": "主页"
-		}
-	},
-	{
-		"path": "pages/myCenter/myCenter",
-		"style": {
-			"navigationBarTitleText": "主页"
-		}
-	}],
-	"tabBar": {
-		"color": "black",
-		"selectedColor": "#3cc51f",
-		"backgroundColor": "#F8F8F8",
-		"list": [{
-			"pagePath": "pages/home/home",
-			"iconPath": "",
-			"selectedIconPath": "",
-			"text": "主页"
-		}, {
-			"pagePath": "pages/myCenter/myCenter",
-			"iconPath": "",
-			"selectedIconPath": "",
-			"text": "个人中心"
-		}]
-	},
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8",
-		"navigationStyle": "custom"
-	},
-	"easycom": {
-		"custom": {
-			"^u-(.*)": "uview-plus/components/u-$1/u-$1.vue"
-		}
-	}
+  "pages": [
+    {
+      "path": "pages/home/home",
+      "style": {
+        "navigationBarTitleText": "主页",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/myCenter/myCenter",
+      "style": {
+        "navigationBarTitleText": "个人中心",
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "个人中心",
+        "navigationStyle": "custom"
+      }
+    }
+  ],
+  "tabBar": {
+    "color": "black",
+    "selectedColor": "#3cc51f",
+    "backgroundColor": "#F8F8F8",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "iconPath": "",
+        "selectedIconPath": "",
+        "text": "主页"
+      },
+      {
+        "pagePath": "pages/myCenter/myCenter",
+        "iconPath": "",
+        "selectedIconPath": "",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "easycom": {
+    "custom": {
+      "^u-(.*)": "uview-plus/components/u-$1/u-$1.vue"
+    }
+  }
 }
