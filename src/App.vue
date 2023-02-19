@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-18 20:06:36
- * @LastEditTime: 2023-02-19 13:15:02
+ * @LastEditTime: 2023-02-19 19:04:13
  * @FilePath: /my-vue3-project/src/App.vue
  * 介绍:
 -->
@@ -18,4 +18,8 @@ onHide(() => {
 </script>
 <style lang="scss">
 @import "uview-plus/index.scss";
+@import "@@/common/common.scss";
+@import "@@/common/global.scss";
+@import "@@/common/init.css";
+@import "@@/common/var.css";
 </style>

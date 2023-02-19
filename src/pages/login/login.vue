@@ -1,13 +1,24 @@
-<script lang="ts" setup></script>
+<!--
+ * @Date: 2023-02-19 17:17:55
+ * @LastEditTime: 2023-02-19 20:44:05
+ * @FilePath: /my-vue3-project/src/pages/login/login.vue
+ * 介绍:
+-->
+<!--
+ * @Date: 2023-02-19 17:17:55
+ * @LastEditTime: 2023-02-19 20:23:16
+ * @FilePath: /my-vue3-project/src/pages/login/login.vue
+ * 介绍:
+-->
+<script lang="ts" setup>
+function onLogin() {}
+</script>
 
 <template>
-  <view>
-    <u-input placeholder="请输入账号" border="bottom" clearable>
-      <template #prefix> </template>
-    </u-input>
-    <u-input type="password" placeholder="请输入密码" border="bottom" clearable>
-      <template #prefix> </template>
-    </u-input>
+  <view class="auto-mt">
+    <MInput prefixIcon="account-fill" placeholder="请输入账号"> </MInput>
+    <MInput prefixIcon="lock-fill" placeholder="请输入密码" type="pwd"></MInput>
+    <u-button type="primary" @click="onLogin">登录</u-button>
   </view>
 </template>
 

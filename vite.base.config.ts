@@ -4,6 +4,8 @@
  */
 
 import uni from "@dcloudio/vite-plugin-uni";
+import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
 import commonjs from "@rollup/plugin-commonjs";
 import { defineConfig } from "vite";
 import path from "path";
@@ -14,7 +16,28 @@ export default defineConfig({
       "@@": path.join(__dirname, "src"),
     },
   },
-  plugins: [uni(), commonjs()],
+  plugins: [
+    uni(),
+    commonjs(),
+    AutoImport({
+      // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
+      imports: ["vue"],
+      dts: "./src/types/dts/auto-importsVue.d.ts",
+    }),
+    Components({
+      dirs: ["src/components", "uview-plus"],
+      deep: true,
+      extensions: ["vue"],
+      dts: "./src/types/dts/auto-importsComponents.d.ts",
+      resolvers: [
+        (componentName) => {
+          console.log(componentName);
+          // if (componentName.startsWith('Van'))
+          //   return { name: componentName.slice(3), from: 'vant' }
+        },
+      ],
+    }),
+  ],
   //@ts-ignore
   transpileDependencies: ["uview-plus", "luch-request"],
 });

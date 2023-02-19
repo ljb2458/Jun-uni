@@ -1,0 +1,50 @@
+body,
+page {
+  color: var(--C-main);
+  font-size: var(--T-S-main);
+}
+page {
+  padding: var(--gap-middle);
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: inherit;
+  color: inherit;
+}
+h1 {
+  font-size: 60rpx;
+}
+h2 {
+  font-size: 50rpx;
+}
+h3 {
+  font-size: 40rpx;
+}
+h4 {
+  font-size: 30rpx;
+}
+h5 {
+  font-size: 20rpx;
+}
+p {
+  font-size: var(--T-S-mini);
+}
+/*input提示文本样式*/
+input::-webkit-input-placeholder {
+  /* WebKit browsers */
+  opacity: 0.75;
+}
+input:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  opacity: 0.75;
+}
+input::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  opacity: 0.75;
+}
+input:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  opacity: 0.75;
+}

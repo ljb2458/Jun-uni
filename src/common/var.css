@@ -1,0 +1,17 @@
+:root {
+  --gap-big: 40rpx;
+  --gap-middle: 30rpx;
+  --gap-mini: 20rpx;
+
+  --T-S-big: 36rpx;
+  --T-S-main: 30rpx;
+  --T-S-middle: 24rpx;
+  --T-S-mini: 20rpx;
+  --C-main: #fff;
+  --C-B1: #24252a;
+  --C-B2: #3b3f48;
+  --C-M1: #8775de;
+  --C-M2: #47d5d7;
+  --C-O1: rgba(255, 255, 255, 0.1);
+  --C-O2: rgba(255, 255, 255, 0.2);
+}

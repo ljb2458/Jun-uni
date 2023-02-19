@@ -1,0 +1,185 @@
+.flex-J-SB {
+  display: flex;
+  justify-content: space-between;
+}
+.flex-J-SA {
+  display: flex;
+  justify-content: space-around;
+}
+.flex-J-SE {
+  display: flex;
+  justify-content: space-evenly;
+}
+.flex-J-C {
+  display: flex;
+  justify-content: center;
+}
+.flex-A-C {
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+.info-layout {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  align-items: center;
+  gap: var(--gap-mini);
+  & > * {
+    &:nth-child(3n + 1) {
+      justify-self: start;
+    }
+    &:nth-child(3n + 3) {
+      justify-self: end;
+    }
+  }
+}
+.list-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  gap: var(--gap-mini);
+  & > * {
+    &:nth-child(3n + 1) {
+      justify-self: start;
+    }
+    &:nth-child(3n + 3) {
+      justify-self: end;
+    }
+  }
+}
+
+.auto-mt {
+  & > * + * {
+    margin-top: var(--gap-mini);
+  }
+}
+.auto-ml {
+  & > * + * {
+    margin-left: var(--gap-mini);
+  }
+}
+.T-S-mini {
+  font-size: var(--T-S-mini);
+}
+.T-S-middle {
+  font-size: var(--T-S-middle);
+}
+.T-minor {
+  color: #ffffff88;
+}
+/* 文字单行省略号 */
+.T-omit {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 文字多行省略号 */
+.T-omit-many {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  word-break: break-all;
+}
+
+/* 文字多了自動換行 */
+.T-break {
+  word-break: break-all;
+  word-wrap: break-word;
+}
+.T-nowrap {
+  white-space: nowrap;
+}
+.price {
+  color: var(--C-B2);
+  font-weight: 600;
+}
+.active:active {
+  filter: brightness(80%) invert(0.3);
+}
+//斜面立体阴影
+.bevel {
+  --box-show-C: var(--C-O1);
+  box-shadow: inset var(--box-show-C) 3rem 3rem 6rem,
+    var(--box-show-C) 3rem 3rem 6rem;
+}
+//长编码class
+.code {
+  word-break: break-all;
+}
+// 切换动画
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.5s ease;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  position: absolute !important;
+  top: 0;
+  transform: translate(50vw);
+  opacity: 0;
+}
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 0rem;
+  height: 0rem;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #d3d3d3;
+  border-radius: 999rem;
+  box-shadow: inset 0 0 0 white;
+}
+input {
+  border: none;
+  background: none;
+  outline: none;
+}
+// 解决阿里图标失效的问题
+[class^="icon-"] {
+  font-family: "iconfont";
+  font-size: 1.5em;
+  vertical-align: -0.09em;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+/* 外边距、内边距全局样式 */
+@for $i from 0 through 80 {
+  .mt#{$i} {
+    margin-top: #{$i}rpx !important;
+  }
+  .mr#{$i} {
+    margin-right: #{$i}rpx !important;
+  }
+  .mb#{$i} {
+    margin-bottom: #{$i}rpx !important;
+  }
+  .ml#{$i} {
+    margin-left: #{$i}rpx !important;
+  }
+  .pt#{$i} {
+    padding-top: #{$i}rpx !important;
+  }
+  .pr#{$i} {
+    padding-right: #{$i}rpx !important;
+  }
+  .pb#{$i} {
+    padding-bottom: #{$i}rpx !important;
+  }
+  .pl#{$i} {
+    padding-left: #{$i}rpx !important;
+  }
+}
