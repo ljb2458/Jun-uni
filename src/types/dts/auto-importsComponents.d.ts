@@ -9,7 +9,10 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    MInput: typeof import('./../../components/rewrite/Input/MInput.vue')['default']
+    Mbutton: typeof import('./../../components/rewrite/Mbutton.vue')['default']
+    MImage: typeof import('./../../components/rewrite/MImage.vue')['default']
+    MInput: typeof import('./../../components/rewrite/MInput.vue')['default']
+    Mtext: typeof import('./../../components/rewrite/Mtext.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
