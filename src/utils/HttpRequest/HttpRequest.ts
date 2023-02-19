@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-02-15 14:36:19
- * @LastEditTime: 2023-02-18 22:56:58
+ * @LastEditTime: 2023-02-19 10:45:55
  * @FilePath: /my-vue3-project/src/utils/HttpRequest/HttpRequest.ts
  * 介绍:请求封装文件
  */
@@ -32,7 +32,7 @@ export class HttpRequest {
   #failed(
     error: UniApp.GeneralCallbackResult,
     config: RequestConfig | undefined
-  ) {
+  ): any {
     if (config?.mode?.includes("showLoading")) {
       uni.hideLoading();
     }
@@ -48,7 +48,7 @@ export class HttpRequest {
   #succeeded(
     res: UniApp.RequestSuccessCallbackResult,
     config: RequestConfig | undefined
-  ) {
+  ): any {
     if (config?.mode?.includes("showLoading")) {
       uni.hideLoading();
     }
@@ -81,13 +81,13 @@ export class HttpRequest {
     if (typeof this.before === "function") res = this.before(url, data, config);
     return res;
   }
-  get(
+  get<T>(
     url: string,
     data?: any,
     config?: RequestConfig,
     requestOptions?: HttpRequest
-  ) {
-    new Promise((resolve) => {
+  ): Promise<T> {
+    return new Promise<T>((resolve) => {
       uni.request({
         ...this.#before(url, data, config, requestOptions),
         method: "GET",
@@ -100,13 +100,13 @@ export class HttpRequest {
       });
     });
   }
-  post(
+  post<T>(
     url: string,
     data?: any,
     config?: RequestConfig,
     requestOptions?: HttpRequest
-  ) {
-    new Promise((resolve) => {
+  ): Promise<T> {
+    return new Promise<T>((resolve) => {
       uni.request({
         ...this.#before(url, data, config, requestOptions),
         method: "POST",
@@ -119,13 +119,13 @@ export class HttpRequest {
       });
     });
   }
-  put(
+  put<T>(
     url: string,
     data?: any,
     config?: RequestConfig,
     requestOptions?: HttpRequest
-  ) {
-    new Promise((resolve) => {
+  ): Promise<T> {
+    return new Promise<T>((resolve) => {
       uni.request({
         ...this.#before(url, data, config, requestOptions),
         method: "PUT",
@@ -138,13 +138,13 @@ export class HttpRequest {
       });
     });
   }
-  delete(
+  delete<T>(
     url: string,
     data?: any,
     config?: RequestConfig,
     requestOptions?: HttpRequest
-  ) {
-    new Promise((resolve) => {
+  ): Promise<T> {
+    return new Promise<T>((resolve) => {
       uni.request({
         ...this.#before(url, data, config, requestOptions),
         method: "DELETE",
