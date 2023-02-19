@@ -1,13 +1,12 @@
 /*
  * @Date: 2023-02-15 14:36:19
- * @LastEditTime: 2023-02-19 17:09:55
+ * @LastEditTime: 2023-02-19 18:10:21
  * @FilePath: /my-vue3-project/src/utils/HttpRequest/HttpRequest.ts
  * 介绍:请求封装文件https://www.quanzhan.co/luch-request/guide/3.x/#example
  */
 import luchRequest, { HttpRequestConfig, HttpResponse } from "luch-request";
-import omit from "lodash/fp/omit";
-import isNuLL from "lodash/fp/isNuLL";
 import type { IncomingHttpHeaders } from "http";
+import { filterParams } from "@@/utils/tools/index";
 
 export class HttpRequest {
   luch: luchRequest;
@@ -92,8 +91,8 @@ export class HttpRequest {
     if (config.mode?.includes("removeResVoid")) {
       let data: AnyObject | undefined = config.data;
       let params: AnyObject | undefined = config.params;
-      if (data) config.data = omit(data as any, isNuLL);
-      if (params) config.params = omit(params as any, isNuLL);
+      if (data) config.data = filterParams(data);
+      if (params) config.params = filterParams(params);
       config = { ...config, data, params };
     }
     delete config.mode;
@@ -110,7 +109,7 @@ export class HttpRequest {
       });
     }
     if (config?.mode?.includes("removeResVoid")) {
-      res.data = omit(res.data, isNuLL);
+      res.data = filterParams(res.data);
     }
     return res.data;
   }
@@ -127,7 +126,7 @@ export class HttpRequest {
     return {
       code: error.statusCode,
       message: error.errMsg,
-      data: error.data,
+      data: error.data?.data,
     };
   }
 }

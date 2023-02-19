@@ -19,5 +19,4 @@ declare module "mp-storage" {
 }
 
 declare module "uview-plus";
-
 declare module "@rollup/plugin-commonjs";

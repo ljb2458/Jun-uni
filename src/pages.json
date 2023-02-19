@@ -20,10 +20,17 @@
         "navigationBarTitleText": "个人中心",
         "navigationStyle": "custom"
       }
+    },
+    {
+      "path": "pages/login/login",
+      "style": {
+        "navigationBarTitleText": "登录",
+        "navigationStyle": "custom"
+      }
     }
   ],
   "tabBar": {
-    "color": "black",
+    "color": "#333333",
     "selectedColor": "#3cc51f",
     "backgroundColor": "#F8F8F8",
     "list": [
