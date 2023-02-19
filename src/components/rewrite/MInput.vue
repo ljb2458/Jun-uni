@@ -1,5 +1,11 @@
 <!--
  * @Date: 2023-02-19 18:44:54
+ * @LastEditTime: 2023-02-19 21:37:48
+ * @FilePath: /my-vue3-project/src/components/rewrite/MInput.vue
+ * 介绍:
+-->
+<!--
+ * @Date: 2023-02-19 18:44:54
  * @LastEditTime: 2023-02-19 20:45:10
  * @FilePath: /my-vue3-project/src/components/rewrite/Input/MInput.vue
  * 介绍:
@@ -31,6 +37,8 @@ const props = withDefaults(
     prefixIcon?: string;
     inputAlign?: "left" | "center" | "right";
     border?: "bottom" | "surround";
+    fontSize?: StrNumber;
+    readonly?: boolean;
   }>(),
   {
     border: "bottom",

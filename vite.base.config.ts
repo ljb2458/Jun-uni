@@ -29,13 +29,6 @@ export default defineConfig({
       deep: true,
       extensions: ["vue"],
       dts: "./src/types/dts/auto-importsComponents.d.ts",
-      resolvers: [
-        (componentName) => {
-          console.log(componentName);
-          // if (componentName.startsWith('Van'))
-          //   return { name: componentName.slice(3), from: 'vant' }
-        },
-      ],
     }),
   ],
   //@ts-ignore

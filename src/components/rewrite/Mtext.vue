@@ -31,7 +31,7 @@ const props = withDefaults(
 </script>
 
 <template>
-  <u--text v-bind="props"></u--text>
+  <u--text v-bind="props"><slot></slot></u--text>
 </template>
 
 <style lang="less" scoped></style>

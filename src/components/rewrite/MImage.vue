@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 21:04:28
- * @LastEditTime: 2023-02-19 21:16:15
+ * @LastEditTime: 2023-02-19 21:22:55
  * @FilePath: /my-vue3-project/src/components/rewrite/MImage.vue
  * 介绍:
 -->
@@ -45,7 +45,7 @@ const emit = defineEmits<{
     v-bind="props"
   >
     <template v-slot:loading>
-      <slot name="loading"><u-loading-icon></u-loading-icon></slot>
+      <slot name="loading"></slot>
     </template>
     <template #error>
       <slot name="error"></slot>
