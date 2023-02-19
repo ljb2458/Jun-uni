@@ -4,6 +4,7 @@
  */
 
 import uni from "@dcloudio/vite-plugin-uni";
+import commonjs from "@rollup/plugin-commonjs";
 import { defineConfig } from "vite";
 import path from "path";
 export default defineConfig({
@@ -13,5 +14,7 @@ export default defineConfig({
       "@@": path.join(__dirname, "src"),
     },
   },
-  plugins: [uni()],
+  plugins: [uni(), commonjs()],
+  //@ts-ignore
+  transpileDependencies: ["uview-plus"],
 });

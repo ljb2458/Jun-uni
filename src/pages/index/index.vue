@@ -1,11 +1,12 @@
 <!--
  * @Date: 2023-02-18 20:06:36
- * @LastEditTime: 2023-02-19 10:57:33
+ * @LastEditTime: 2023-02-19 14:09:48
  * @FilePath: /my-vue3-project/src/pages/index/index.vue
  * 介绍:
 -->
 <template>
   <view class="content">
+    <u-button type="primary" text="确定"></u-button>
     <image class="logo" src="/static/logo.png" />
     <view class="text-area">
       <text class="title">{{ title }}</text>

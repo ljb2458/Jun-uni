@@ -15,6 +15,7 @@ const envResolver = {
 };
 // https://vitejs.dev/config/
 export default defineConfig((config) => {
+  console.log(config)
   return {
     ...envResolver[config.mode as keyof typeof envResolver](),
   };

@@ -17,3 +17,7 @@ declare module "mp-storage" {
   export type localStorage = Storage;
   export type sessionStorage = Storage;
 }
+
+declare module "uview-plus";
+
+declare module "@rollup/plugin-commonjs";
