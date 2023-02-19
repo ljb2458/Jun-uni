@@ -16,5 +16,5 @@ export default defineConfig({
   },
   plugins: [uni(), commonjs()],
   //@ts-ignore
-  transpileDependencies: ["uview-plus"],
+  transpileDependencies: ["uview-plus", "luch-request"],
 });

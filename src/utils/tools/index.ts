@@ -1,10 +1,9 @@
 /*
  * @Date: 2022-12-22 11:57:46
- * @LastEditTime: 2023-02-19 15:25:45
+ * @LastEditTime: 2023-02-19 15:30:16
  * @FilePath: /my-vue3-project/src/utils/tools/index.ts
  * 介绍:工具函数
  */
-
 
 /**
  * * 格式化number
@@ -50,8 +49,8 @@ export function parseNumber(
  * @returns
  */
 export function _require(path: string) {
-  return new URL(`../../${(path.replace("src/", ""), window.location.origin)}`)
-    .href;
+  const url = import.meta.url;
+  return new URL(`../../${path.replace("src/", "")}`, url).href;
 }
 
 /**
