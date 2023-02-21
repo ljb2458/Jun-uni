@@ -14,8 +14,7 @@
     "baseUrl": ".",
     "paths": {
       "@@/*": ["src/*"],
-      "@@": ["src"],
-      "pages/*": ["src/pages/*"]//这是为了路由提示准备的
+      "@@": ["src"]
     }
   },
   "include": [

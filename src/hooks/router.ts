@@ -1,10 +1,11 @@
 /*
  * @Date: 2023-02-19 13:37:05
- * @LastEditTime: 2023-02-19 17:57:18
+ * @LastEditTime: 2023-02-21 22:59:50
  * @FilePath: /my-vue3-project/src/hooks/router.ts
  * 介绍:路由跳转
  */
 import { objToQuery } from "@@/utils/tools/index";
+import { repeat } from "lodash";
 
 const router = {
   /**跳转路由 */
@@ -15,7 +16,7 @@ const router = {
       delete config?.query;
       uni.navigateTo({
         ...config,
-        url: `${url}?${queryStr}`,
+        url: `${repeat(url)}?${queryStr}`,
         success: resolve,
         fail: reject,
       });
@@ -29,7 +30,7 @@ const router = {
       delete config?.query;
       uni.redirectTo({
         ...config,
-        url: `${url}?${queryStr}`,
+        url: `${repeat(url)}?${queryStr}`,
         success: resolve,
         fail: reject,
       });
@@ -39,7 +40,7 @@ const router = {
   tabbar(url: string) {
     return new Promise<void>((resolve, reject) => {
       uni.switchTab({
-        url,
+        url: replaceUrl(url),
         fail: reject,
         success: resolve,
       });
@@ -64,13 +65,16 @@ const router = {
       delete config?.query;
       uni.reLaunch({
         ...config,
-        url: `${url}?${queryStr}`,
+        url: `${repeat(url)}?${queryStr}`,
         success: resolve,
         fail: reject,
       });
     });
   },
 };
+function replaceUrl(url: string) {
+  return url.replace(/^src/, "").replace(/.vue$/, "");
+}
 export default router;
 interface RouterToOption extends Partial<UniApp.NavigateToOptions> {
   query?: AnyObject;

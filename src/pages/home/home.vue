@@ -19,7 +19,7 @@ function testShowModal() {
 <template>
   <view>
     <view>
-      <Mbutton type="primary" @click="router.push('/pages/login/login')">
+      <Mbutton type="primary" @click="router.push('src/pages/login/login.vue')">
         登录
       </Mbutton>
       <Mbutton @click="testShowModal"> 测试弹出窗口 </Mbutton>
