@@ -1,7 +1,6 @@
 /*效果*/
 /*斜面立体阴影*/
 .bevelVar--c {
-  --c: var(--C-O1);
   box-shadow: inset var(--c) 3rem 3rem 6rem, var(--c) 3rem 3rem 6rem;
 }
 .active:active {
@@ -55,7 +54,7 @@
   display: grid;
   grid-template-columns: auto 1fr 1fr;
   align-items: center;
-  gap: var(--gap-mini);
+  gap: var(--gap-l);
   & > * {
     text-align: center;
     &:nth-child(3n + 1) {
@@ -71,7 +70,7 @@
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   justify-items: center;
-  gap: var(--gap-mini);
+  gap: var(--gap-l);
   & > * {
     text-align: center;
     &:nth-child(3n + 1) {
@@ -109,11 +108,11 @@
 }
 
 /* 文字多行省略号 */
-.T-omit-many {
+.T-omitVar--n {
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: var(--n);
   word-break: break-all;
 }
 

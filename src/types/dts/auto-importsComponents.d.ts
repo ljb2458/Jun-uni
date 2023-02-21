@@ -9,10 +9,17 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    copy: typeof import('./../../components/base/Mh1 copy.vue')['default']
     Mbutton: typeof import('./../../components/rewrite/Mbutton.vue')['default']
+    Mh1: typeof import('./../../components/base/Mh1.vue')['default']
+    Mh2: typeof import('./../../components/base/Mh2.vue')['default']
+    Mh3: typeof import('./../../components/base/Mh3.vue')['default']
+    Mh4: typeof import('./../../components/base/Mh4.vue')['default']
+    Mh5: typeof import('./../../components/base/Mh5.vue')['default']
     MImage: typeof import('./../../components/rewrite/MImage.vue')['default']
     MInput: typeof import('./../../components/rewrite/MInput.vue')['default']
     Mtext: typeof import('./../../components/rewrite/Mtext.vue')['default']
+    PageView: typeof import('./../../components/base/PageView.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

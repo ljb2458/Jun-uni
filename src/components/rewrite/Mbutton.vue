@@ -30,4 +30,4 @@ const props = defineProps<{
   <u-button class="Mbutton" v-bind="props"><slot></slot></u-button>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="scss" scoped></style>

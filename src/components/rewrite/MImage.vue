@@ -53,4 +53,4 @@ const emit = defineEmits<{
   </u--image>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="scss" scoped></style>

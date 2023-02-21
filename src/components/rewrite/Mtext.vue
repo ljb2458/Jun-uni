@@ -34,4 +34,4 @@ const props = withDefaults(
   <u--text v-bind="props"><slot></slot></u--text>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="scss" scoped></style>

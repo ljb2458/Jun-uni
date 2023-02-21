@@ -16,4 +16,4 @@ function onLogin() {}
   </view>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="scss" scoped></style>
