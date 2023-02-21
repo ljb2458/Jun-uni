@@ -26,9 +26,13 @@
   --C-T1: #eee;
   --C-T2: #999;
   --C-T3: #666;
+  --C-T4: #333;
+  --C-T5: #111;
   /*圆角*/
-  --R1: 11rpx;
-  --R2: 22rpx;
-  --R3: 33rpx;
-  --R4: 44rpx;
+  --R-s: 6rpx;
+  --R-m: 12rpx;
+  --R-l: 18rpx;
+  --R-xl: 24rpx;
+  --R-xxl: 30rpx;
+  --R-xxxl: 36rpx;
 }
