@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 20:46:35
- * @LastEditTime: 2023-02-19 21:22:17
+ * @LastEditTime: 2023-02-21 21:11:00
  * @FilePath: /my-vue3-project/src/components/rewrite/Mbutton.vue
  * 介绍:
 -->
@@ -27,7 +27,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <u-button v-bind="props"><slot></slot></u-button>
+  <u-button class="Mbutton" v-bind="props"><slot></slot></u-button>
 </template>
 
 <style lang="less" scoped></style>

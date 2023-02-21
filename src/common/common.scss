@@ -1,3 +1,35 @@
+/*效果*/
+/*斜面立体阴影*/
+.bevelVar--c {
+  --c: var(--C-O1);
+  box-shadow: inset var(--c) 3rem 3rem 6rem, var(--c) 3rem 3rem 6rem;
+}
+.active:active {
+  filter: brightness(80%) invert(0.3);
+}
+// 切换动画
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.5s ease;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  position: absolute !important;
+  top: 0;
+  transform: translate(50vw);
+  opacity: 0;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+/*布局*/
 .flex-J-SB {
   display: flex;
   justify-content: space-between;
@@ -25,6 +57,7 @@
   align-items: center;
   gap: var(--gap-mini);
   & > * {
+    text-align: center;
     &:nth-child(3n + 1) {
       justify-self: start;
     }
@@ -40,6 +73,7 @@
   justify-items: center;
   gap: var(--gap-mini);
   & > * {
+    text-align: center;
     &:nth-child(3n + 1) {
       justify-self: start;
     }
@@ -48,25 +82,24 @@
     }
   }
 }
-
-.auto-mt {
-  & > * + * {
-    margin-top: var(--gap-mini);
-  }
+/*文本*/
+.T-S-m {
+  font-size: var(--T-S-m);
 }
-.auto-ml {
-  & > * + * {
-    margin-left: var(--gap-mini);
-  }
+.T-S-s {
+  font-size: var(--T-S-s);
 }
-.T-S-mini {
-  font-size: var(--T-S-mini);
+.T-S-xl {
+  font-size: var(--T-S-xl);
 }
-.T-S-middle {
-  font-size: var(--T-S-middle);
+.C-T2 {
+  color: var(--C-T2);
 }
-.T-minor {
-  color: #ffffff88;
+.C-T3 {
+  color: var(--C-T3);
+}
+.C-T4 {
+  color: var(--C-T4);
 }
 /* 文字单行省略号 */
 .T-omit {
@@ -92,70 +125,46 @@
 .T-nowrap {
   white-space: nowrap;
 }
-.price {
-  color: var(--C-B2);
-  font-weight: 600;
-}
-.active:active {
-  filter: brightness(80%) invert(0.3);
-}
-//斜面立体阴影
-.bevel {
-  --box-show-C: var(--C-O1);
-  box-shadow: inset var(--box-show-C) 3rem 3rem 6rem,
-    var(--box-show-C) 3rem 3rem 6rem;
-}
+
 //长编码class
 .code {
   word-break: break-all;
 }
-// 切换动画
-.slide-enter-active,
-.slide-leave-active {
-  transition: all 0.5s ease;
+
+//间距
+.mt-l {
+  margin-top: var(--gap-l);
+}
+.ml-l {
+  margin-left: var(--gap-l);
+}
+.mt-xl {
+  margin-top: var(--gap-xl);
+}
+.ml-xl {
+  margin-left: var(--gap-xl);
 }
 
-.slide-enter-from,
-.slide-leave-to {
-  position: absolute !important;
-  top: 0;
-  transform: translate(50vw);
-  opacity: 0;
+.auto-mt {
+  & > * + * {
+    margin-top: var(--gap-l);
+  }
 }
-/* 滚动条 */
-::-webkit-scrollbar {
-  width: 0rem;
-  height: 0rem;
+.auto-ml {
+  & > * + * {
+    margin-left: var(--gap-l);
+  }
 }
-::-webkit-scrollbar-thumb {
-  background-color: #d3d3d3;
-  border-radius: 999rem;
-  box-shadow: inset 0 0 0 white;
+.auto-mtVar--s {
+  & > * + * {
+    margin-top: var(--s);
+  }
 }
-input {
-  border: none;
-  background: none;
-  outline: none;
+.auto-mlVar--s {
+  & > * + * {
+    margin-left: var(--s);
+  }
 }
-// 解决阿里图标失效的问题
-[class^="icon-"] {
-  font-family: "iconfont";
-  font-size: 1.5em;
-  vertical-align: -0.09em;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-stroke-width: 0.2px;
-  -moz-osx-font-smoothing: grayscale;
-}
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-
 /* 外边距、内边距全局样式 */
 @for $i from 0 through 80 {
   .mt#{$i} {
