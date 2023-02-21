@@ -1,3 +1,9 @@
+/*
+ * @Date: 2023-02-18 22:28:47
+ * @LastEditTime: 2023-02-21 21:43:54
+ * @FilePath: /my-vue3-project/src/types/global/reset.d.ts
+ * 介绍:
+ */
 interface ImportMetaEnv {
   /** 开发环境环境变量*/
   VITE_BASE_URL: string;
@@ -11,4 +17,7 @@ declare namespace UniNamespace {
   interface RequestSuccessCallbackResult {
     data: any;
   }
+}
+interface Uni {
+  $u: AnyObject;
 }

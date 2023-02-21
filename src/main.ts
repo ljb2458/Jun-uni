@@ -9,6 +9,7 @@ import App from "./App.vue";
 import * as Pinia from "pinia";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import uviewPlus from "uview-plus";
+import "@@/hooks/initApp";
 
 export function createApp() {
   const app = createSSRApp(App);

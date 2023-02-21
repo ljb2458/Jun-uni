@@ -29,9 +29,9 @@
     }
   ],
   "tabBar": {
-    "color": "#333333",
-    "selectedColor": "#3cc51f",
-    "backgroundColor": "#F8F8F8",
+    "color": "#eeeeee",
+    "selectedColor": "#8775de",
+    "backgroundColor": "#3b3f48",
     "list": [
       {
         "pagePath": "pages/home/home",
@@ -48,10 +48,10 @@
     ]
   },
   "globalStyle": {
-    "navigationBarTextStyle": "black",
+    "navigationBarTextStyle": "white",
     "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
+    "navigationBarBackgroundColor": "#3b3f48",
+    "backgroundColor": "#3b3f48"
   },
   "easycom": {
     "custom": {

@@ -21,4 +21,5 @@ onHide(() => {
 @import "@@/common/common.scss";
 @import "@@/common/init.css";
 @import "@@/common/var.css";
+@import "@@/common/reset.scss";
 </style>

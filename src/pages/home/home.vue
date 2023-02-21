@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-02-19 22:23:35
+ * @LastEditTime: 2023-02-21 21:37:57
  * @FilePath: /my-vue3-project/src/pages/home/home.vue
  * 介绍:
 -->
@@ -19,7 +19,9 @@ function testShowModal() {
 <template>
   <view>
     <view>
-      <Mbutton @click="router.push('/pages/login/login')"> 登录 </Mbutton>
+      <Mbutton type="primary" @click="router.push('/pages/login/login')">
+        登录
+      </Mbutton>
       <Mbutton @click="testShowModal"> 测试弹出窗口 </Mbutton>
     </view>
   </view>

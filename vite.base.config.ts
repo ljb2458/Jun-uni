@@ -25,7 +25,7 @@ export default defineConfig({
       dts: "./src/types/dts/auto-importsVue.d.ts",
     }),
     Components({
-      dirs: ["src/components", "uview-plus"],
+      dirs: ["src/components"],
       deep: true,
       extensions: ["vue"],
       dts: "./src/types/dts/auto-importsComponents.d.ts",

@@ -167,28 +167,28 @@
 }
 /* 外边距、内边距全局样式 */
 @for $i from 0 through 80 {
-  .mt#{$i} {
+  .mt-#{$i} {
     margin-top: #{$i}rpx !important;
   }
-  .mr#{$i} {
+  .mr-#{$i} {
     margin-right: #{$i}rpx !important;
   }
-  .mb#{$i} {
+  .mb-#{$i} {
     margin-bottom: #{$i}rpx !important;
   }
-  .ml#{$i} {
+  .ml-#{$i} {
     margin-left: #{$i}rpx !important;
   }
-  .pt#{$i} {
+  .pt-#{$i} {
     padding-top: #{$i}rpx !important;
   }
-  .pr#{$i} {
+  .pr-#{$i} {
     padding-right: #{$i}rpx !important;
   }
-  .pb#{$i} {
+  .pb-#{$i} {
     padding-bottom: #{$i}rpx !important;
   }
-  .pl#{$i} {
+  .pl-#{$i} {
     padding-left: #{$i}rpx !important;
   }
 }
