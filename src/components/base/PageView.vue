@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-21 22:32:00
- * @LastEditTime: 2023-02-22 22:46:17
+ * @LastEditTime: 2023-02-22 23:04:07
  * @FilePath: /my-vue3-project/src/components/base/PageView.vue
  * 介绍:
 -->
@@ -20,7 +20,7 @@ const rootFontSize = uni.upx2px(1) + "px";
 <template>
   <page-meta
     :root-font-size="rootFontSize"
-    :enable-pull-down-refresh="porps.usePullDownRefresh || false"
+    :enable-pull-down-refresh="true || porps.usePullDownRefresh || false"
     @resize="(e:any)=>emit('resize',e)"
     @scroll="(e:any)=>emit('scroll',e)"
     @scrolldone="(e:any)=>emit('scrolldone',e)"
