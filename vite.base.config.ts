@@ -21,7 +21,7 @@ export default defineConfig({
     commonjs(),
     AutoImport({
       // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
-      imports: ["vue"],
+      imports: ["vue", "uni-app"],
       dts: "./src/types/dts/auto-importsVue.d.ts",
     }),
     Components({

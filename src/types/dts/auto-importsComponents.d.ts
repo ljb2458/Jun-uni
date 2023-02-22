@@ -9,7 +9,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    copy: typeof import('./../../components/base/Mh1 copy.vue')['default']
     Mbutton: typeof import('./../../components/rewrite/Mbutton.vue')['default']
     Mh1: typeof import('./../../components/base/Mh1.vue')['default']
     Mh2: typeof import('./../../components/base/Mh2.vue')['default']
