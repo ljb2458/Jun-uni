@@ -4,7 +4,7 @@ const rootFontSize = ref(1);
 async function resetRem() {
   const res = await uniGetSystemInfo();
   console.log(res.screenWidth);
-  
+
   rootFontSize.value = res.screenWidth / 375;
 }
 resetRem();

@@ -1,6 +1,6 @@
 /*
  * @Date: 2022-12-22 11:57:46
- * @LastEditTime: 2023-02-19 15:30:16
+ * @LastEditTime: 2023-02-22 22:04:25
  * @FilePath: /my-vue3-project/src/utils/tools/index.ts
  * 介绍:工具函数
  */
@@ -49,8 +49,7 @@ export function parseNumber(
  * @returns
  */
 export function _require(path: string) {
-  const url = import.meta.url;
-  return new URL(`../../${path.replace("src/", "")}`, url).href;
+  return path.replace(/^src/, "");
 }
 
 /**
