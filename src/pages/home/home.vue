@@ -1,14 +1,14 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-02-22 19:26:31
+ * @LastEditTime: 2023-02-22 20:21:51
  * @FilePath: /my-vue3-project/src/pages/home/home.vue
  * 介绍:
 -->
 <script lang="ts" setup>
 import router from "@@/hooks/router";
-import showModal from "@@/hooks/showModal";
+import { uniShowModal } from "@@/hooks/rewriteUni";
 function testShowModal() {
-  showModal("请确定", { title: "温馨提示", editable: true })
+  uniShowModal("请确定", { title: "温馨提示", editable: true })
     .then((res) => {
       console.log(res);
     })
@@ -19,10 +19,10 @@ function testShowModal() {
 <template>
   <PageView>
     <view>
-      <Mbutton type="primary" @click="router.push('src/pages/login/login.vue')">
-        登录
-      </Mbutton>
-      <Mbutton @click="testShowModal"> 测试弹出窗口 </Mbutton>
+      <Mbutton type="primary" @click="router.push('src/pages/login/login.vue')"
+        >登录</Mbutton
+      >
+      <Mbutton @click="testShowModal">测试弹出窗口</Mbutton>
       <Mh1>h1 测试</Mh1>
       <Mh2>h2 测试</Mh2>
       <Mh3>h3 测试</Mh3>

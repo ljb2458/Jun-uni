@@ -1,11 +1,10 @@
 /*
  * @Date: 2023-02-19 13:37:05
- * @LastEditTime: 2023-02-21 22:59:50
+ * @LastEditTime: 2023-02-22 20:01:08
  * @FilePath: /my-vue3-project/src/hooks/router.ts
  * 介绍:路由跳转
  */
 import { objToQuery } from "@@/utils/tools/index";
-import { repeat } from "lodash";
 
 const router = {
   /**跳转路由 */
@@ -16,7 +15,7 @@ const router = {
       delete config?.query;
       uni.navigateTo({
         ...config,
-        url: `${repeat(url)}?${queryStr}`,
+        url: `${replaceUrl(url)}?${queryStr}`,
         success: resolve,
         fail: reject,
       });
@@ -30,7 +29,7 @@ const router = {
       delete config?.query;
       uni.redirectTo({
         ...config,
-        url: `${repeat(url)}?${queryStr}`,
+        url: `${replaceUrl(url)}?${queryStr}`,
         success: resolve,
         fail: reject,
       });
@@ -65,7 +64,7 @@ const router = {
       delete config?.query;
       uni.reLaunch({
         ...config,
-        url: `${repeat(url)}?${queryStr}`,
+        url: `${replaceUrl(url)}?${queryStr}`,
         success: resolve,
         fail: reject,
       });

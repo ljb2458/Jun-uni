@@ -5,13 +5,13 @@
  * 介绍:
 -->
 <template>
-  <view class="content">
+  <PageView class="content">
     <u-button type="primary" text="确定"></u-button>
     <image class="logo" src="/static/logo.png" />
     <view class="text-area">
       <text class="title">{{ title }}</text>
     </view>
-  </view>
+  </PageView>
 </template>
 
 <script setup lang="ts">

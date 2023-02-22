@@ -7,7 +7,7 @@
 <script lang="ts" setup></script>
 
 <template>
-  <view> 我是个人中心 </view>
+  <PageView> 我是个人中心 </PageView>
 </template>
 
 <style lang="scss" scoped></style>

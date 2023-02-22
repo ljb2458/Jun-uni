@@ -9,11 +9,11 @@ function onLogin() {}
 </script>
 
 <template>
-  <view class="auto-mt">
+  <PageView class="auto-mt">
     <MInput prefixIcon="account-fill" placeholder="请输入账号"> </MInput>
     <MInput prefixIcon="lock-fill" placeholder="请输入密码" type="pwd"></MInput>
     <Mbutton type="primary" text="登录" @click="onLogin" />
-  </view>
+  </PageView>
 </template>
 
 <style lang="scss" scoped></style>

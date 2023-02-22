@@ -1,18 +1,18 @@
 :root {
   /*间距全局变量*/
-  --gap-s: 20rpx;
-  --gap-m: 25rpx;
-  --gap-l: 30rpx;
-  --gap-xl: 35rpx;
-  --gap-xxl: 45rpx;
-  --gap-xxxl: 50rpx;
+  --gap-s: 8rem;
+  --gap-m: 12rem;
+  --gap-l: 16rem;
+  --gap-xl: 20rem;
+  --gap-xxl: 24rem;
+  --gap-xxxl: 32rem;
   /*文字全局变量*/
-  --T-S-s: 20rpx;
-  --T-S-m: 25rpx;
-  --T-S-l: 30rpx;
-  --T-S-xl: 35rpx;
-  --T-S-xxl: 45rpx;
-  --T-S-xxxl: 50rpx;
+  --T-S-s: 8rem;
+  --T-S-m: 12rem;
+  --T-S-l: 16rem;
+  --T-S-xl: 20rem;
+  --T-S-xxl: 24rem;
+  --T-S-xxxl: 32rem;
   /*适合作为背景的颜色*/
   --C-B1: #24252a;
   --C-B2: #3b3f48;
@@ -29,10 +29,10 @@
   --C-T4: #333;
   --C-T5: #111;
   /*圆角*/
-  --R-s: 6rpx;
-  --R-m: 12rpx;
-  --R-l: 18rpx;
-  --R-xl: 24rpx;
-  --R-xxl: 30rpx;
-  --R-xxxl: 36rpx;
+  --R-s: 6rem;
+  --R-m: 12rem;
+  --R-l: 18rem;
+  --R-xl: 24rem;
+  --R-xxl: 30rem;
+  --R-xxxl: 36rem;
 }
