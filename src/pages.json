@@ -51,7 +51,8 @@
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "uni-app",
     "navigationBarBackgroundColor": "#3b3f48",
-    "backgroundColor": "#3b3f48"
+    "backgroundColor": "#3b3f48",
+    "pageOrientation": false
   },
   "easycom": {
     "custom": {

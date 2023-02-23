@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-02-19 13:37:05
- * @LastEditTime: 2023-02-22 20:01:08
+ * @LastEditTime: 2023-02-23 22:39:55
  * @FilePath: /my-vue3-project/src/hooks/router.ts
  * 介绍:路由跳转
  */
@@ -46,7 +46,7 @@ const router = {
     });
   },
   /**路由返回 */
-  back(delta: number, config?: Partial<UniApp.NavigateBackOptions>) {
+  back(delta: number = 1, config?: Partial<UniApp.NavigateBackOptions>) {
     return new Promise<void>((resolve, reject) => {
       uni.navigateBack({
         ...config,

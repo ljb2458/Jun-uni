@@ -1,6 +1,6 @@
 /*
  * @Date: 2022-12-22 11:57:46
- * @LastEditTime: 2023-02-22 22:04:25
+ * @LastEditTime: 2023-02-23 21:52:34
  * @FilePath: /my-vue3-project/src/utils/tools/index.ts
  * 介绍:工具函数
  */
@@ -168,4 +168,16 @@ export function getCurrentHrefQueryParam() {
     Object.assign(obj, queryToObj("?" + val));
   });
   return obj;
+}
+export function unitPx(pixel: string | undefined | number): string {
+  return (pixel || 0) + "px";
+}
+export function unitRem(pixel: string | undefined | number): string {
+  return (pixel || 0) + "rem";
+}
+export function unitVmax(pixel: string | undefined | number): string {
+  return (pixel || 0) + "vmax";
+}
+export function unitVmin(pixel: string | undefined | number): string {
+  return (pixel || 0) + "Vmin";
 }

@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-02-22 23:06:52
+ * @LastEditTime: 2023-02-23 22:52:39
  * @FilePath: /my-vue3-project/src/pages/home/home.vue
  * 介绍:
 -->
@@ -8,7 +8,7 @@
 import router from "@@/hooks/router";
 import { uniShowModal } from "@@/hooks/rewriteUni";
 function testShowModal() {
-  uniShowModal("请确定", { title: "温馨提示", editable: true })
+  uniShowModal("请确定")
     .then((res) => {
       console.log(res);
     })
