@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-18 20:06:36
- * @LastEditTime: 2023-02-22 22:14:03
+ * @LastEditTime: 2023-02-22 23:07:56
  * @FilePath: /my-vue3-project/src/pages/index/index.vue
  * 介绍:
 -->
@@ -13,7 +13,7 @@ const title = ref("Hello");
 apiTest400();
 </script>
 <template>
-  <PageView class="content">
+  <PageView use-pull-down>
     <Mimage
       height="100rem"
       class="logo"

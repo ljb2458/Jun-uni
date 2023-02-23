@@ -1,13 +1,13 @@
 <!--
  * @Date: 2023-02-21 22:32:00
- * @LastEditTime: 2023-02-22 23:04:07
+ * @LastEditTime: 2023-02-23 21:11:35
  * @FilePath: /my-vue3-project/src/components/base/PageView.vue
  * 介绍:
 -->
 <script lang="ts" setup>
 const porps = defineProps<{
-  /**开启下拉刷新吗 */
-  usePullDownRefresh?: boolean;
+  /**使用下拉刷新 */
+  usePullDown?: boolean;
 }>();
 const emit = defineEmits<{
   (e: "resize", v: any): void;
@@ -20,7 +20,7 @@ const rootFontSize = uni.upx2px(1) + "px";
 <template>
   <page-meta
     :root-font-size="rootFontSize"
-    :enable-pull-down-refresh="true || porps.usePullDownRefresh || false"
+    :enable-pull-down-refresh="porps.usePullDown || false"
     @resize="(e:any)=>emit('resize',e)"
     @scroll="(e:any)=>emit('scroll',e)"
     @scrolldone="(e:any)=>emit('scrolldone',e)"
