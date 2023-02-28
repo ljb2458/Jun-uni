@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-18 20:06:36
- * @LastEditTime: 2023-02-23 22:49:30
+ * @LastEditTime: 2023-02-28 21:15:15
  * @FilePath: /my-vue3-project/src/App.vue
  * 介绍:
 -->
@@ -23,7 +23,10 @@ onLaunch(() => {
 </script>
 <style lang="scss">
 @import "uview-plus/index.scss";
-@import "@@/common/common.scss";
+@import "@@/common/effects.scss";
+@import "@@/common/text.scss";
+@import "@@/common/layout.scss";
+@import "@@/common/transition.scss";
 @import "@@/common/init.css";
 @import "@@/common/var.css";
 @import "@@/common/reset.scss";

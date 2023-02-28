@@ -1,0 +1,9 @@
+/***********************效果***********************/
+//斜面立体效果
+.bevelVar--c {
+  box-shadow: inset var(--c) 3px 3px 6px, var(--c) 3px 3px 6px;
+}
+//点击效果
+.active:active {
+  filter: brightness(80%) invert(0.3);
+}

@@ -1,0 +1,44 @@
+/***********************文本***********************/
+.T-S-m {
+    font-size: var(--T-S-m);
+  }
+  .T-S-s {
+    font-size: var(--T-S-s);
+  }
+  .T-S-xl {
+    font-size: var(--T-S-xl);
+  }
+  .C-T2 {
+    color: var(--C-T2);
+  }
+  .C-T3 {
+    color: var(--C-T3);
+  }
+  .C-T4 {
+    color: var(--C-T4);
+  }
+  
+  /* 文字单行省略号 */
+  .T-omit {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  /* 文字多行省略号 */
+  .T-omitVar--n {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--n);
+    word-break: break-all;
+  }
+  
+  /* 文字多了自動換行 */
+  .T-break {
+    word-break: break-all;
+    word-wrap: break-word;
+  }
+  .T-nowrap {
+    white-space: nowrap;
+  }
