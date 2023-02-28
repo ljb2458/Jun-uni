@@ -21,7 +21,6 @@ dist-ssr
 .idea
 .hbuilderx/*
 !.hbuilderx/launch.json
-src/types/dts
 .DS_Store
 *.suo
 *.ntvs*
