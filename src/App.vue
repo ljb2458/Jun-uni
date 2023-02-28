@@ -6,6 +6,9 @@
 -->
 <script setup lang="ts">
 import { onLaunch, onShow, onHide } from "@dcloudio/uni-app";
+// #ifdef APP-PLUS
+plus.screen.lockOrientation("portrait-primary");
+// #endif
 onLaunch(() => {
   console.log("App Launch");
 });
@@ -14,11 +17,6 @@ onShow(() => {
 });
 onHide(() => {
   console.log("App Hide");
-});
-onLaunch(() => {
-  // #ifdef APP-PLUS
-  plus.screen.lockOrientation("portrait-primary");
-  // #endif
 });
 </script>
 <style lang="scss">
