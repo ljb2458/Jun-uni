@@ -1,6 +1,6 @@
 /*
  * @Date: 2022-12-22 11:57:46
- * @LastEditTime: 2023-02-23 21:52:34
+ * @LastEditTime: 2023-02-28 23:43:15
  * @FilePath: /my-vue3-project/src/utils/tools/index.ts
  * 介绍:工具函数
  */
@@ -180,4 +180,7 @@ export function unitVmax(pixel: string | undefined | number): string {
 }
 export function unitVmin(pixel: string | undefined | number): string {
   return (pixel || 0) + "Vmin";
+}
+export function unitPercent(pixel: string | undefined | number): string {
+  return Number(pixel || 0) * 100 + "%";
 }

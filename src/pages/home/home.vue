@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-02-23 22:52:39
+ * @LastEditTime: 2023-03-02 00:07:51
  * @FilePath: /my-vue3-project/src/pages/home/home.vue
  * 介绍:
 -->
@@ -33,6 +33,34 @@ function testShowModal() {
       <Mh5>h5 测试</Mh5>
       <view>view 测试</view>
       <text>text 测试</text>
+      <Tabs>
+        <TabsItem title="1">
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+          <Mh1> 我是内容aaa aaaaaaaaa</Mh1>
+        </TabsItem>
+        <TabsItem title="2">
+          <Mh1> 我是内容aaa bbbbbbbbbb</Mh1>
+        </TabsItem>
+      </Tabs>
     </view>
   </PageView>
 </template>

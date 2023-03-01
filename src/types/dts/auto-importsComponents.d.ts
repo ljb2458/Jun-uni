@@ -21,5 +21,7 @@ declare module '@vue/runtime-core' {
     PageView: typeof import('./../../components/base/PageView.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Tabs: typeof import('./../../components/Tabs/Tabs.vue')['default']
+    TabsItem: typeof import('./../../components/Tabs/TabsItem.vue')['default']
   }
 }

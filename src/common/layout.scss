@@ -64,6 +64,16 @@
     margin-left: var(--gap-l);
   }
 }
+.auto-mt-m {
+  & > * + * {
+    margin-top: var(--gap-m);
+  }
+}
+.auto-ml-m {
+  & > * + * {
+    margin-left: var(--gap-m);
+  }
+}
 .mt-l {
   margin-top: var(--gap-l);
 }
