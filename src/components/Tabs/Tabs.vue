@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-03-04 16:24:02
+ * @LastEditTime: 2023-03-04 16:25:49
  * @FilePath: /my-vue3-project/src/components/Tabs/Tabs.vue
  * 介绍:
 -->
@@ -73,7 +73,6 @@ uniGetSystemInfo().then((res) => (sysInfo = res));
 
 /**触摸开始 */
 function onTouchstart(e: TouchEvent) {
-  state.isStatic = false;
   startTime = dayjs().valueOf();
   /**最后一根手指的信息 */
   const touchPosition = e.changedTouches[0];
@@ -98,6 +97,7 @@ function onTouchmove(e: TouchEvent) {
   if (skewingX > 0 && currentIndex.value == 0) return;
   //*右滑边界限制
   if (isRightTo() && !(currentIndex.value + 1 < tabList.length)) return;
+  state.isStatic = false;
   contentItemStyle["--x"] = unitPercent(percent);
 }
 /**触摸中断 */
