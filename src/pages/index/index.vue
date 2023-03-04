@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-18 20:06:36
- * @LastEditTime: 2023-02-23 22:34:49
+ * @LastEditTime: 2023-03-04 16:27:41
  * @FilePath: /my-vue3-project/src/pages/index/index.vue
  * 介绍:
 -->
@@ -14,16 +14,12 @@ const title = ref("Hello");
 apiTest400();
 </script>
 <template>
-  <PageView use-pull-down>
-    <Mimage
-      height="100rem"
-      class="logo"
-      :src="_require('src/static/logo.png')"
-    />
+  <BpageView use-pull-down>
+    <Mimage class="logo" :src="_require('src/static/logo.png')" />
     <view class="text-area">
       <text class="title">{{ title }}</text>
     </view>
-  </PageView>
+  </BpageView>
 </template>
 
 <style></style>

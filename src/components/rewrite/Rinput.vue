@@ -74,6 +74,7 @@ function onChangeType() {
 
 <template>
   <u-input
+  class="Rinput"
     v-bind="$props"
     v-model="$moduleValue"
     :placeholder="props.placeholder"

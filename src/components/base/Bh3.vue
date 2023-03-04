@@ -1,13 +1,14 @@
 <script lang="ts" setup></script>
 
 <template>
-  <view class="Mh5"><slot></slot></view>
+  <view class="Bh3"><slot></slot></view>
 </template>
 
 <style lang="scss" scoped>
-.Mh5 {
+.Bh3 {
   text-align: center;
-  font-size: var(--T-S-xs);
+  font-size: var(--T-S-md);
   font-weight: 800;
+
 }
 </style>

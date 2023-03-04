@@ -1,11 +1,11 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-03-04 16:25:49
- * @FilePath: /my-vue3-project/src/components/Tabs/Tabs.vue
+ * @LastEditTime: 2023-03-04 16:48:33
+ * @FilePath: /my-vue3-project/src/components/base/Btabs/Btabs.vue
  * 介绍:
 -->
 <script lang="ts" setup>
-import TabsItem from "./TabsItem.vue";
+import BtabsItem from "./BtabsItem.vue";
 import { unitPercent } from "@@/utils/tools";
 import { uniGetSystemInfo } from "@@/hooks/rewriteUni";
 import { CSSProperties } from "vue";
@@ -31,7 +31,7 @@ if (slot.default) {
 /**找到tabsItem */
 function findTabsItem(childs: AnyObject[]) {
   childs.forEach((child) => {
-    if (child.type === TabsItem) {
+    if (child.type === BtabsItem) {
       tabList.push(child as any);
     } else if (child.children.constructor === Array) {
       findTabsItem(child.children);
@@ -52,7 +52,7 @@ const contentItemStyle = reactive<CSSProperties>({
   "--x": "0%",
 });
 const contentItemClass = reactive({
-  Tabs_content_item__transit: false,
+  Btabs_content_item__transit: false,
 });
 const state = reactive({
   /**是否静止中 */
@@ -164,7 +164,7 @@ let transitTimeout: NodeJS.Timeout;
 function swiperTo(index: number = currentIndex.value) {
   if (transitTimeout) clearTimeout(transitTimeout);
   currentIndex.value = index;
-  contentItemClass.Tabs_content_item__transit = true;
+  contentItemClass.Btabs_content_item__transit = true;
   skewingX = 0;
   skewingY = 0;
   startX = 0;
@@ -172,7 +172,7 @@ function swiperTo(index: number = currentIndex.value) {
   contentItemStyle["--x"] = unitPercent(0 - index);
   //*定时清除过渡
   transitTimeout = setTimeout(() => {
-    contentItemClass.Tabs_content_item__transit = false;
+    contentItemClass.Btabs_content_item__transit = false;
     state.isStatic = true;
   }, 200);
 }
@@ -181,15 +181,15 @@ function swiperTo(index: number = currentIndex.value) {
 <template>
   <view
     :style="{ '--gap': props.gap, '--stickyTop': props.stickyTop }"
-    class="Tabs"
+    class="Btabs"
   >
     <!-- tabs标题部分 -->
-    <view class="Tabs_title auto-ml-sm">
+    <view class="Btabs_title auto-ml-sm">
       <template
         v-for="(tab, index) in tabList"
         :key="getTabKey(tab, index) || index"
       >
-        <view @click="setTab(tab, index)" class="Tabs_title_item">
+        <view @click="setTab(tab, index)" class="Btabs_title_item">
           <!-- props标题 -->
           <text v-if="tab.props?.title">{{ tab.props.title }}</text>
           <!-- slot标题 -->
@@ -209,16 +209,16 @@ function swiperTo(index: number = currentIndex.value) {
       @touchcancel="onTouchcancel"
       @touchend="onTouchend"
       @touchstart="onTouchstart"
-      class="Tabs_content"
+      class="Btabs_content"
     >
       <view
         :class="{
           ...contentItemClass,
-          Tabs_content_item__hiddle: currentTab !== tab && state.isStatic,
+          Btabs_content_item__hiddle: currentTab !== tab && state.isStatic,
         }"
         :style="{ ...contentItemStyle }"
         v-for="tab in tabList"
-        class="Tabs_content_item"
+        class="Btabs_content_item"
       >
         <component :is="tab" :active="currentTab === tab"> </component>
       </view>
@@ -227,10 +227,10 @@ function swiperTo(index: number = currentIndex.value) {
 </template>
 
 <style lang="scss" scoped>
-.Tabs {
+.Btabs {
   margin: 0 calc(0px - var(--gap));
   padding: 0 var(--gap);
-  .Tabs_title {
+  .Btabs_title {
     position: sticky;
     top: var(--stickyTop);
     display: flex;
@@ -239,21 +239,21 @@ function swiperTo(index: number = currentIndex.value) {
     padding: 0.2em var(--gap-sm);
     border-radius: 6px;
   }
-  .Tabs_content {
+  .Btabs_content {
     overflow-x: hidden;
     display: flex;
     width: 100%;
-    .Tabs_content_item {
+    .Btabs_content_item {
       transform: translateX(var(--x));
       flex: 0 0 100%;
       width: 100%;
     }
   }
-  .Tabs_content_item__transit {
+  .Btabs_content_item__transit {
     transition: all 200ms linear;
     overflow: hidden;
   }
-  .Tabs_content_item__hiddle {
+  .Btabs_content_item__hiddle {
     height: 0;
   }
 }

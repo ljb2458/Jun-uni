@@ -9,6 +9,14 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Bh1: typeof import('./../../components/base/Bh1.vue')['default']
+    Bh2: typeof import('./../../components/base/Bh2.vue')['default']
+    Bh3: typeof import('./../../components/base/Bh3.vue')['default']
+    Bh4: typeof import('./../../components/base/Bh4.vue')['default']
+    Bh5: typeof import('./../../components/base/Bh5.vue')['default']
+    BpageView: typeof import('./../../components/base/BpageView.vue')['default']
+    Btabs: typeof import('./../../components/base/Btabs/Btabs.vue')['default']
+    BtabsItem: typeof import('./../../components/base/Btabs/BtabsItem.vue')['default']
     Mbutton: typeof import('./../../components/rewrite/Mbutton.vue')['default']
     Mh1: typeof import('./../../components/base/Mh1.vue')['default']
     Mh2: typeof import('./../../components/base/Mh2.vue')['default']
@@ -19,9 +27,13 @@ declare module '@vue/runtime-core' {
     Minput: typeof import('./../../components/rewrite/Minput.vue')['default']
     Mtext: typeof import('./../../components/rewrite/Mtext.vue')['default']
     PageView: typeof import('./../../components/base/PageView.vue')['default']
+    Rbutton: typeof import('./../../components/rewrite/Rbutton.vue')['default']
+    Rimage: typeof import('./../../components/rewrite/Rimage.vue')['default']
+    Rinput: typeof import('./../../components/rewrite/Rinput.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Tabs: typeof import('./../../components/Tabs/Tabs.vue')['default']
-    TabsItem: typeof import('./../../components/Tabs/TabsItem.vue')['default']
+    Rtext: typeof import('./../../components/rewrite/Rtext.vue')['default']
+    Tabs: typeof import('./../../components/base/Btabs/Tabs.vue')['default']
+    TabsItem: typeof import('./../../components/base/Btabs/TabsItem.vue')['default']
   }
 }

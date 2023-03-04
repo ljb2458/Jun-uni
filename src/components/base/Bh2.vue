@@ -7,11 +7,11 @@
 <script lang="ts" setup></script>
 
 <template>
-  <view class="Mh2"><slot></slot></view>
+  <view class="Bh2"><slot></slot></view>
 </template>
 
 <style lang="scss" scoped>
-.Mh2 {
+.Bh2 {
   text-align: center;
   font-size: var(--T-S-lg);
   font-weight: 800;

@@ -45,6 +45,7 @@ const emit = defineEmits<{
 
 <template>
   <u-image
+    class="Rimage"
     @load="emit('load')"
     @error="(e:any) => emit('error', e)"
     v-bind="props"

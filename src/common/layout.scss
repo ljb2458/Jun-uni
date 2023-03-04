@@ -96,6 +96,16 @@
     margin-left: var(--gap-lg);
   }
 }
+.auto-mt-xl {
+  & > * + * {
+    margin-top: var(--gap-xl);
+  }
+}
+.auto-ml-xl {
+  & > * + * {
+    margin-left: var(--gap-xl);
+  }
+}
 
 .mt-xs {
   margin-top: var(--gap-xs);
@@ -120,6 +130,12 @@
 }
 .ml-lg {
   margin-left: var(--gap-lg);
+}
+.mt-xl {
+  margin-top: var(--gap-xl);
+}
+.ml-xl {
+  margin-left: var(--gap-xl);
 }
 /* 外边距、内边距全局样式 */
 /*

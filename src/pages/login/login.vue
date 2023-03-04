@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 17:17:55
- * @LastEditTime: 2023-02-23 22:52:15
+ * @LastEditTime: 2023-03-04 16:32:10
  * @FilePath: /my-vue3-project/src/pages/login/login.vue
  * 介绍:
 -->
@@ -12,7 +12,7 @@ function onLogin() {}
   <PageView class="auto-mt">
     <Minput prefixIcon="account-fill" placeholder="请输入账号"> </Minput>
     <Minput prefixIcon="lock-fill" placeholder="请输入密码" type="pwd"></Minput>
-    <Mbutton type="primary" text="登录" @click="onLogin" />
+    <Mbutton @click="onLogin" type="primary" text="登录" class="mt-lg" />
   </PageView>
 </template>
 
