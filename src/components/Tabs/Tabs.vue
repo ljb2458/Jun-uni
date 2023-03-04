@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-03-02 00:23:25
+ * @LastEditTime: 2023-03-04 14:25:52
  * @FilePath: /my-vue3-project/src/components/Tabs/Tabs.vue
  * 介绍:
 -->
@@ -9,11 +9,12 @@ import TabsItem from "./TabsItem.vue";
 import { unitPercent } from "@@/utils/tools";
 import { uniGetSystemInfo } from "@@/hooks/rewriteUni";
 import { CSSProperties } from "vue";
+import dayjs from "dayjs";
 const props = withDefaults(
   defineProps<{
     /**间距 */
-    gap: string;
-    stickyTop: string;
+    gap?: string;
+    stickyTop?: string;
   }>(),
   {
     gap: "var(--gap-l)",
@@ -55,65 +56,114 @@ const contentItemClass = reactive({
 });
 /**起始x */
 let startX = 0;
+let startY = 0;
 /**拖动偏移 */
-let skewing = 0;
+let skewingX = 0;
+let skewingY = 0;
+/**开始时间戳 */
+let startTime = 0;
+/**取消本次滑动? */
+let abandon = false;
 let sysInfo: UniApp.GetSystemInfoResult;
 uniGetSystemInfo().then((res) => (sysInfo = res));
 
 /**触摸开始 */
 function onTouchstart(e: TouchEvent) {
+  startTime = dayjs().valueOf();
   /**最后一根手指的信息 */
   const touchPosition = e.changedTouches[0];
   startX = touchPosition.clientX;
+  startY = touchPosition.clientY;
 }
 /**触摸移动 */
 function onTouchmove(e: TouchEvent) {
   /**最后一根手指的信息 */
   const touchPosition = e.changedTouches[0];
-  skewing = touchPosition.clientX - startX;
-  const percent = skewing / sysInfo.windowWidth - currentIndex.value;
+  skewingX = touchPosition.clientX - startX;
+  skewingY = touchPosition.clientY - startY;
+  const currTime = getTouchTime();
+  if (!(Math.abs(skewingY) < Math.abs(skewingX)) && currTime < 100) {
+    abandon = true;
+    swiperTo(currentIndex.value);
+    return;
+  }
+  if (abandon) return;
+  const percent = skewingX / sysInfo.windowWidth - currentIndex.value;
   //*左滑边界限制
-  if (skewing > 0 && currentIndex.value == 0) return;
+  if (skewingX > 0 && currentIndex.value == 0) return;
   //*右滑边界限制
-  if (skewing < 0 && !(currentIndex.value + 1 < tabList.length)) return;
+  if (isRightTo() && !(currentIndex.value + 1 < tabList.length)) return;
   contentItemStyle["--x"] = unitPercent(percent);
 }
 /**触摸中断 */
 function onTouchcancel(e: TouchEvent) {
+  if (abandon) return (abandon = false);
   /**最后一根手指的信息 */
   const touchPosition = e.changedTouches[0];
+  abandon = false;
   swiperTo(currentIndex.value);
 }
 /**触摸结束 */
 function onTouchend(e: TouchEvent) {
+  if (abandon) return (abandon = false);
   /**最后一根手指的信息 */
   const touchPosition = e.changedTouches[0];
   //*左滑边界限制
-  if (skewing > 0 && currentIndex.value == 0)
+  if (skewingX > 0 && currentIndex.value == 0)
     return swiperTo(currentIndex.value);
   //*右滑边界限制
-  if (skewing < 0 && !(currentIndex.value + 1 < tabList.length))
+  if (isRightTo() && !(currentIndex.value + 1 < tabList.length)) {
+    abandon = false;
     return swiperTo(currentIndex.value);
-  if (skewing < 0 && skewing < -sysInfo.windowWidth * 0.2) {
+  }
+  if (
+    (getTouchTime() < 500 &&
+      isRightTo() &&
+      skewingX < -sysInfo.windowWidth * 0.15) ||
+    (isRightTo() && skewingX < -sysInfo.windowWidth * 0.4)
+  ) {
     //* 右滑满足
+    abandon = false;
     swiperTo(++currentIndex.value);
-  } else if (skewing > 0 && skewing > sysInfo.windowWidth * 0.2) {
+  } else if (
+    (getTouchTime() < 200 &&
+      isLeftTo() &&
+      skewingX > sysInfo.windowWidth * 0.15) ||
+    (isLeftTo() && skewingX > sysInfo.windowWidth * 0.4)
+  ) {
     //*左滑满足
+    abandon = false;
     swiperTo(--currentIndex.value);
   } else {
+    abandon = false;
     swiperTo(currentIndex.value);
   }
+}
+/**给出滑动时间 */
+function getTouchTime() {
+  return dayjs().valueOf() - startTime;
+}
+/**是左滑 */
+function isRightTo() {
+  return skewingX < 0;
+}
+/**是右滑 */
+function isLeftTo() {
+  return skewingX > 0;
 }
 let transitTimeout: NodeJS.Timeout;
 /**
  * * 前往swiper页
  * @param index 当前索引数
  */
-function swiperTo(index: number) {
+function swiperTo(index: number = currentIndex.value) {
   if (transitTimeout) clearTimeout(transitTimeout);
   currentIndex.value = index;
   contentItemClass.Tabs_content_item__transit = true;
-  skewing = 0;
+  skewingX = 0;
+  skewingY = 0;
+  startX = 0;
+  startY = 0;
   contentItemStyle["--x"] = unitPercent(0 - index);
   //*定时清除过渡
   transitTimeout = setTimeout(
@@ -141,7 +191,7 @@ function swiperTo(index: number) {
           <component
             v-else
             :is="tab.children.title"
-            :active="currentTab == tab"
+            :active="currentTab === tab"
           >
           </component>
         </view>
@@ -162,7 +212,7 @@ function swiperTo(index: number) {
         v-for="tab in tabList"
         class="Tabs_content_item"
       >
-        <component :is="tab"> </component>
+        <component :is="tab" :active="currentTab === tab"> </component>
       </view>
     </view>
   </view>
