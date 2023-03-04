@@ -1,12 +1,12 @@
 //uview按钮
 .u-button {
-  font-size: var(--T-S-l) !important;
+  font-size: var(--T-S-md) !important;
   &:active {
     filter: invert(0.3) brightness(0.5) opacity(0.8);
   }
 }
 .u-button--normal{
-  padding: var(--gap-l) !important;
+  padding: var(--gap-md) !important;
 }
 .u-button--primary {
   background-color: var(--C-M1) !important;

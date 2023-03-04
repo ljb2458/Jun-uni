@@ -17,8 +17,8 @@ const props = withDefaults(
     stickyTop?: string;
   }>(),
   {
-    gap: "var(--gap-l)",
-    stickyTop: "calc(var(--gap-l) + var(--window-top))",
+    gap: "var(--gap-md)",
+    stickyTop: "calc(var(--gap-md) + var(--window-top))",
   }
 );
 const tabList: AnyObject[] = [];

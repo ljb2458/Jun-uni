@@ -1,17 +1,17 @@
 /*
  * @Date: 2023-02-19 18:22:42
- * @LastEditTime: 2023-03-02 00:01:50
+ * @LastEditTime: 2023-03-04 16:02:36
  * @FilePath: /my-vue3-project/src/common/init.css
  * 介绍:
  */
 body,
 page {
   color: var(--C-T1);
-  font-size: var(--T-S-l);
+  font-size: var(--T-S-md);
   background-color: var(--C-B1);
 }
 page {
-  padding: var(--gap-l);
+  padding: var(--gap-md);
 }
 * {
   padding: 0;
@@ -21,19 +21,19 @@ page {
   color: inherit;
 }
 h1 {
-  font-size: var(--T-S-xxxl);
-}
-h2 {
-  font-size: var(--T-S-xxl);
-}
-h3 {
   font-size: var(--T-S-xl);
 }
+h2 {
+  font-size: var(--T-S-lg);
+}
+h3 {
+  font-size: var(--T-S-md);
+}
 h4 {
-  font-size: var(--T-S-l);
+  font-size: var(--T-S-sm);
 }
 h5 {
-  font-size: var(--T-S-m);
+  font-size: var(--T-S-xs);
 }
 
 /*input提示文本样式*/

@@ -1,53 +1,38 @@
 :root {
-  /*间距全局变量*/
-  --gap-s: 8px;
-  --gap-m: 12px;
-  --gap-l: 16px;
-  --gap-xl: 20px;
-  --gap-xxl: 24px;
-  --gap-xxxl: 32px;
-  --gap-xs: var(--gap-s);
-  --gap-sm: var(--gap-m);
-  --gap-md: var(--gap-l);
-  --gap-lg: var(--gap-xl);
-  --gap-xl: var(--gap-xxl);
-  /*文字全局变量*/
-  --T-S-s: 8px;
-  --T-S-m: 12px;
-  --T-S-l: 16px;
-  --T-S-xl: 20px;
-  --T-S-xxl: 24px;
-  --T-S-xxxl: 32px;
-  --T-S-xs: var(--T-S-s);
-  --T-S-sm: var(--T-S-m);
-  --T-S-md: var(--T-S-l);
-  --T-S-lg: var(--T-S-xl);
-  --T-S-xl: var(--T-S-xxl);
-  /*适合作为背景的颜色*/
+  /**间距全局变量*/
+  --gap-xs: 8px;
+  --gap-sm: 12px;
+  --gap-md: 16px;
+  --gap-lg: 20px;
+  --gap-xl: 24px;
+  --gap-xxl: 32px;
+  /**文字全局变量*/
+  --T-S-xs: 8px;
+  --T-S-sm: 12px;
+  --T-S-md: 16px;
+  --T-S-lg: 20px;
+  --T-S-xl: 24px;
+  --T-S-xxl: 32px;
+  /**适合作为背景的颜色*/
   --C-B1: #24252a;
   --C-B2: #3b3f48;
   /*主色*/
   --C-M1: #8775de;
   --C-M2: #47d5d7;
-  /*透明色*/
+  /**透明色*/
   --C-O1: rgba(255, 255, 255, 0.1);
   --C-O2: rgba(255, 255, 255, 0.2);
-  /*适合作文字的颜色*/
+  /**适合作文字的颜色*/
   --C-T1: #eee;
   --C-T2: #999;
   --C-T3: #666;
   --C-T4: #333;
   --C-T5: #111;
-  /*圆角*/
-  --R-s: 6px;
-  --R-m: 12px;
-  --R-l: 18px;
-  --R-xl: 24px;
-  --R-xxl: 30px;
-  --R-xxxl: 36px;
-  --R-xs: var(--R-s);
-  --R-sm: var(--R-m);
-  --R-md: var(--R-l);
-  --R-lg: var(--R-xl);
-  --R-xl: var(--R-xxl);
+  /**圆角*/
+  --R-xs: 6px;
+  --R-sm: 12px;
+  --R-md: 18px;
+  --R-lg: 24px;
+  --R-xl: 30px;
+  --R-xxl: 36px;
 }

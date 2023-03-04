@@ -7,7 +7,7 @@
 <style lang="scss" scoped>
 .Mh4 {
   text-align: center;
-  font-size: var(--T-S-l);
+  font-size: var(--T-S-sm);
   font-weight: 800;
 }
 </style>
