@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-03-04 14:25:52
+ * @LastEditTime: 2023-03-04 14:39:42
  * @FilePath: /my-vue3-project/src/components/Tabs/Tabs.vue
  * 介绍:
 -->
@@ -54,6 +54,10 @@ const contentItemStyle = reactive<CSSProperties>({
 const contentItemClass = reactive({
   Tabs_content_item__transit: false,
 });
+const state = reactive({
+  /**是否静止中 */
+  isStatic: true,
+});
 /**起始x */
 let startX = 0;
 let startY = 0;
@@ -69,6 +73,7 @@ uniGetSystemInfo().then((res) => (sysInfo = res));
 
 /**触摸开始 */
 function onTouchstart(e: TouchEvent) {
+  state.isStatic = false;
   startTime = dayjs().valueOf();
   /**最后一根手指的信息 */
   const touchPosition = e.changedTouches[0];
@@ -166,10 +171,10 @@ function swiperTo(index: number = currentIndex.value) {
   startY = 0;
   contentItemStyle["--x"] = unitPercent(0 - index);
   //*定时清除过渡
-  transitTimeout = setTimeout(
-    () => (contentItemClass.Tabs_content_item__transit = false),
-    200
-  );
+  transitTimeout = setTimeout(() => {
+    contentItemClass.Tabs_content_item__transit = false;
+    state.isStatic = true;
+  }, 200);
 }
 </script>
 
@@ -207,7 +212,10 @@ function swiperTo(index: number = currentIndex.value) {
       class="Tabs_content"
     >
       <view
-        :class="{ ...contentItemClass }"
+        :class="{
+          ...contentItemClass,
+          Tabs_content_item__hiddle: currentTab !== tab && state.isStatic,
+        }"
         :style="{ ...contentItemStyle }"
         v-for="tab in tabList"
         class="Tabs_content_item"
@@ -243,6 +251,10 @@ function swiperTo(index: number = currentIndex.value) {
   }
   .Tabs_content_item__transit {
     transition: all 200ms linear;
+    overflow: hidden;
+  }
+  .Tabs_content_item__hiddle {
+    height: 0;
   }
 }
 </style>
