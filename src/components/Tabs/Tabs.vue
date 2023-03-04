@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-03-04 14:39:42
+ * @LastEditTime: 2023-03-04 16:24:02
  * @FilePath: /my-vue3-project/src/components/Tabs/Tabs.vue
  * 介绍:
 -->
@@ -184,7 +184,7 @@ function swiperTo(index: number = currentIndex.value) {
     class="Tabs"
   >
     <!-- tabs标题部分 -->
-    <view class="Tabs_title auto-ml-m">
+    <view class="Tabs_title auto-ml-sm">
       <template
         v-for="(tab, index) in tabList"
         :key="getTabKey(tab, index) || index"
@@ -236,7 +236,7 @@ function swiperTo(index: number = currentIndex.value) {
     display: flex;
     align-items: center;
     background-color: var(--C-O2);
-    padding: 0.2em var(--gap-m);
+    padding: 0.2em var(--gap-sm);
     border-radius: 6px;
   }
   .Tabs_content {

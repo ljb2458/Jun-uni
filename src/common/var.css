@@ -1,14 +1,14 @@
 :root {
   /**间距全局变量*/
   --gap-xs: 8px;
-  --gap-sm: 12px;
+  --gap-sm: 14px;
   --gap-md: 16px;
   --gap-lg: 20px;
   --gap-xl: 24px;
   --gap-xxl: 32px;
   /**文字全局变量*/
   --T-S-xs: 8px;
-  --T-S-sm: 12px;
+  --T-S-sm: 14px;
   --T-S-md: 16px;
   --T-S-lg: 20px;
   --T-S-xl: 24px;

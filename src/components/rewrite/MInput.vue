@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-02-19 18:44:54
- * @LastEditTime: 2023-02-19 21:37:48
- * @FilePath: /my-vue3-project/src/components/rewrite/MInput.vue
+ * @LastEditTime: 2023-03-04 16:21:00
+ * @FilePath: /my-vue3-project/src/components/rewrite/Minput.vue
  * 介绍:
 -->
 <!--
@@ -39,8 +39,10 @@ const props = withDefaults(
     border?: "bottom" | "surround";
     fontSize?: StrNumber;
     readonly?: boolean;
+    color?: string;
   }>(),
   {
+    color: "var(--C-T1)",
     border: "bottom",
   }
 );
