@@ -1,13 +1,7 @@
 <!--
  * @Date: 2023-02-19 20:46:35
- * @LastEditTime: 2023-03-04 16:50:21
- * @FilePath: /my-vue3-project/src/components/rewrite/Rbutton.vue
- * 介绍:
--->
-<!--
- * @Date: 2023-02-19 20:46:35
- * @LastEditTime: 2023-03-04 16:21:55
- * @FilePath: /my-vue3-project/src/components/rewrite/Mbutton.vue
+ * @LastEditTime: 2023-04-20 20:11:04
+ * @FilePath: /music-client/src/components/rewrite/Rbutton.vue
  * 介绍:
 -->
 <script lang="ts" setup>
