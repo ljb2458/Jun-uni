@@ -1,5 +1,5 @@
 /*
- * @FilePath: /my-vue3-project/vite.base.config.ts
+ * @FilePath: /music-client/vite.base.config.ts
  * 介绍:无论哪个环境都会执行的配置项
  */
 
@@ -22,13 +22,13 @@ export default defineConfig({
     AutoImport({
       // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
       imports: ["vue", "uni-app"],
-      dts: "./src/types/dts/auto-importsVue.d.ts",
+      dts: "./types/dts/auto-importsVue.d.ts",
     }),
     Components({
       dirs: ["src/components"],
       deep: true,
       extensions: ["vue"],
-      dts: "./src/types/dts/auto-importsComponents.d.ts",
+      dts: "./types/dts/auto-importsComponents.d.ts",
     }),
   ],
   //@ts-ignore

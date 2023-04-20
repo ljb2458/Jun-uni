@@ -13,6 +13,9 @@ dist-test
 dist-ssr
 *.local
 
+
+types/dts/*
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -26,6 +26,8 @@
     "vite.dev.config.ts",
     "vite.base.config.ts",
     "vite.prod.config.ts",
-    "vite.test.config.ts"
+    "vite.test.config.ts",
+    "types/**/*.ts",
+    "types/**/*.d.ts"
   ]
 }
