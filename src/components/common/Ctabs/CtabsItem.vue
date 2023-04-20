@@ -12,7 +12,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <view>
+  <view class="CtabsItem">
     <slot></slot>
   </view>
 </template>

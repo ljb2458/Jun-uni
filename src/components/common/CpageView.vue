@@ -40,14 +40,14 @@ interface ResizeEvent {
     @resize="on_resize"
     @scroll="(e:any)=>emit('scroll',e)"
     @scrolldone="(e:any)=>emit('scrolldone',e)"
-    class="PageView"
+    class="CpageView"
   >
     <slot></slot>
   </page-meta>
 </template>
 
 <style lang="scss" scoped>
-.PageView {
+.CpageView {
   display: block !important;
 }
 </style>

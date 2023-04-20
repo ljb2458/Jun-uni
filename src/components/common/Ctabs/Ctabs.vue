@@ -1,12 +1,12 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-03-04 16:48:33
- * @FilePath: /my-vue3-project/src/components/base/Btabs/Btabs.vue
+ * @LastEditTime: 2023-04-20 19:03:57
+ * @FilePath: /music-client/src/components/common/Ctabs/Ctabs.vue
  * 介绍:
 -->
 <script lang="ts" setup>
-import BtabsItem from "./BtabsItem.vue";
-import { unitPercent } from "@@/utils/tools";
+import CtabsItem from "./CtabsItem.vue";
+import { unitPercent } from "@@/utils/tools/css";
 import { uniGetSystemInfo } from "@@/hooks/rewriteUni";
 import { CSSProperties } from "vue";
 import dayjs from "dayjs";
@@ -31,7 +31,7 @@ if (slot.default) {
 /**找到tabsItem */
 function findTabsItem(childs: AnyObject[]) {
   childs.forEach((child) => {
-    if (child.type === BtabsItem) {
+    if (child.type === CtabsItem) {
       tabList.push(child as any);
     } else if (child.children.constructor === Array) {
       findTabsItem(child.children);
@@ -52,7 +52,7 @@ const contentItemStyle = reactive<CSSProperties>({
   "--x": "0%",
 });
 const contentItemClass = reactive({
-  Btabs_content_item__transit: false,
+  Ctabs_content_item__transit: false,
 });
 const state = reactive({
   /**是否静止中 */
@@ -164,7 +164,7 @@ let transitTimeout: NodeJS.Timeout;
 function swiperTo(index: number = currentIndex.value) {
   if (transitTimeout) clearTimeout(transitTimeout);
   currentIndex.value = index;
-  contentItemClass.Btabs_content_item__transit = true;
+  contentItemClass.Ctabs_content_item__transit = true;
   skewingX = 0;
   skewingY = 0;
   startX = 0;
@@ -172,7 +172,7 @@ function swiperTo(index: number = currentIndex.value) {
   contentItemStyle["--x"] = unitPercent(0 - index);
   //*定时清除过渡
   transitTimeout = setTimeout(() => {
-    contentItemClass.Btabs_content_item__transit = false;
+    contentItemClass.Ctabs_content_item__transit = false;
     state.isStatic = true;
   }, 200);
 }
@@ -181,15 +181,15 @@ function swiperTo(index: number = currentIndex.value) {
 <template>
   <view
     :style="{ '--gap': props.gap, '--stickyTop': props.stickyTop }"
-    class="Btabs"
+    class="Ctabs"
   >
     <!-- tabs标题部分 -->
-    <view class="Btabs_title auto-ml-sm">
+    <view class="Ctabs_title auto-ml-sm">
       <template
         v-for="(tab, index) in tabList"
         :key="getTabKey(tab, index) || index"
       >
-        <view @click="setTab(tab, index)" class="Btabs_title_item">
+        <view @click="setTab(tab, index)" class="Ctabs_title_item">
           <!-- props标题 -->
           <text v-if="tab.props?.title">{{ tab.props.title }}</text>
           <!-- slot标题 -->
@@ -209,16 +209,16 @@ function swiperTo(index: number = currentIndex.value) {
       @touchcancel="onTouchcancel"
       @touchend="onTouchend"
       @touchstart="onTouchstart"
-      class="Btabs_content"
+      class="Ctabs_content"
     >
       <view
         :class="{
           ...contentItemClass,
-          Btabs_content_item__hiddle: currentTab !== tab && state.isStatic,
+          Ctabs_content_item__hiddle: currentTab !== tab && state.isStatic,
         }"
         :style="{ ...contentItemStyle }"
         v-for="tab in tabList"
-        class="Btabs_content_item"
+        class="Ctabs_content_item"
       >
         <component :is="tab" :active="currentTab === tab"> </component>
       </view>
@@ -227,10 +227,10 @@ function swiperTo(index: number = currentIndex.value) {
 </template>
 
 <style lang="scss" scoped>
-.Btabs {
+.Ctabs {
   margin: 0 calc(0px - var(--gap));
   padding: 0 var(--gap);
-  .Btabs_title {
+  .Ctabs_title {
     position: sticky;
     top: var(--stickyTop);
     display: flex;
@@ -239,21 +239,21 @@ function swiperTo(index: number = currentIndex.value) {
     padding: 0.2em var(--gap-sm);
     border-radius: 6px;
   }
-  .Btabs_content {
+  .Ctabs_content {
     overflow-x: hidden;
     display: flex;
     width: 100%;
-    .Btabs_content_item {
+    .Ctabs_content_item {
       transform: translateX(var(--x));
       flex: 0 0 100%;
       width: 100%;
     }
   }
-  .Btabs_content_item__transit {
+  .Ctabs_content_item__transit {
     transition: all 200ms linear;
     overflow: hidden;
   }
-  .Btabs_content_item__hiddle {
+  .Ctabs_content_item__hiddle {
     height: 0;
   }
 }

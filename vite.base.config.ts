@@ -22,13 +22,13 @@ export default defineConfig({
     AutoImport({
       // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
       imports: ["vue", "uni-app"],
-      dts: "./types/dts/auto-importsVue.d.ts",
+      dts: "./src/types/dts/auto-importsVue.d.ts",
     }),
     Components({
       dirs: ["src/components"],
       deep: true,
       extensions: ["vue"],
-      dts: "./types/dts/auto-importsComponents.d.ts",
+      dts: "./src/types/dts/auto-importsComponents.d.ts",
     }),
   ],
   //@ts-ignore

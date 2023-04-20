@@ -14,12 +14,12 @@ const title = ref("Hello");
 apiTest400();
 </script>
 <template>
-  <BpageView use-pull-down>
-    <Mimage class="logo" :src="_require('src/static/logo.png')" />
+  <CpageView use-pull-down>
+    <Rimage class="logo" :src="_require('src/static/logo.png')" />
     <view class="text-area">
       <text class="title">{{ title }}</text>
     </view>
-  </BpageView>
+  </CpageView>
 </template>
 
 <style></style>
