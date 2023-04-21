@@ -1,11 +1,11 @@
 <!--
  * @Date: 2023-04-21 18:13:53
- * @LastEditTime: 2023-04-21 19:32:18
+ * @LastEditTime: 2023-04-21 20:20:32
  * @FilePath: /music-client/src/components/rewrite/Rtabs/Rtabs.vue
  * 介绍:
 -->
 <script lang="ts" setup>
-import { RtabsList } from "./index";
+import { RtabsList, RtabsListItem } from "./index";
 import { StyleValue } from "vue";
 const props = withDefaults(
   defineProps<{
@@ -38,8 +38,8 @@ const props = withDefaults(
 );
 
 const emit = defineEmits<{
-  (e: "click", v: StrNumber): void;
-  (e: "change", v: StrNumber): void;
+  (e: "click", v: RtabsListItem & { index: number }): void;
+  (e: "change", v: RtabsListItem & { index: number }): void;
 }>();
 </script>
 <template>

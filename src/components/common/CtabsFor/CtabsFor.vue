@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-04-21 20:05:39
+ * @LastEditTime: 2023-04-21 20:21:17
  * @FilePath: /music-client/src/components/common/CtabsFor/CtabsFor.vue
  * 介绍:
 -->
@@ -152,12 +152,12 @@ function isLeftTo() {
 let transitTimeout: NodeJS.Timeout;
 /**
  * * 前往swiper页
- * @param index 当前key
+ * @param key 当前key
  */
-function swiperTo(index: StrNumber = currentIndex.value) {
+function swiperTo(key: StrNumber = currentIndex.value) {
   if (transitTimeout) clearTimeout(transitTimeout);
   for (let key in tabsList.value) {
-    if (tabsList.value[key].key === index) {
+    if (tabsList.value[key].key === key) {
       swiperToByIndex(key as unknown as number);
       break;
     }
@@ -195,7 +195,7 @@ const platformOffsetTop = computed(() => {
       <Rtabs
         :list="tabsList"
         :current="currentIndex"
-        @change="(e) => swiperToByIndex(Number(e))"
+        @change="(e) => swiperToByIndex(e.index)"
       >
         <template #right>
           <slot name="title-right"></slot>
