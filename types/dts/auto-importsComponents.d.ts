@@ -9,7 +9,8 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    Clist: typeof import('./../../src/components/common/Clist/Clist.vue')['default']
+    CfullList: typeof import('./../../src/components/common/CfullList/CfullList.vue')['default']
+    ClistStatus: typeof import('./../../src/components/common/ClistStatus/ClistStatus.vue')['default']
     CpageView: typeof import('./../../src/components/common/CpageView/CpageView.vue')['default']
     Cswiper: typeof import('./../../src/components/common/Cswiper/Cswiper.vue')['default']
     Ctabs: typeof import('./../../src/components/common/Ctabs/Ctabs.vue')['default']
@@ -17,8 +18,11 @@ declare module '@vue/runtime-core' {
     CtabsItem: typeof import('./../../src/components/common/Ctabs/CtabsItem.vue')['default']
     Rbutton: typeof import('./../../src/components/rewrite/Rbutton/Rbutton.vue')['default']
     Rdivider: typeof import('./../../src/components/rewrite/Rdivider/Rdivider.vue')['default']
+    Rempty: typeof import('./../../src/components/rewrite/Rempty/Rempty.vue')['default']
     Rimage: typeof import('./../../src/components/rewrite/Rimage/Rimage.vue')['default']
     Rinput: typeof import('./../../src/components/rewrite/Rinput/Rinput.vue')['default']
+    Rloading: typeof import('./../../src/components/rewrite/Rloading/Rloading.vue')['default']
+    RloadMore: typeof import('./../../src/components/rewrite/RloadMore/RloadMore.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Rsticky: typeof import('./../../src/components/rewrite/Rsticky/Rsticky.vue')['default']

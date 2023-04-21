@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-04-21 21:26:04
+ * @LastEditTime: 2023-04-21 22:41:03
  * @FilePath: /music-client/src/components/common/CtabsFor/CtabsFor.vue
  * 介绍:
 -->
@@ -11,7 +11,7 @@ import { CSSProperties } from "vue";
 import dayjs from "dayjs";
 import { CtabsForOptions } from "./index";
 import { generateUUID } from "@@/utils/tools/generate";
-import { platform } from "@@/hooks/rewriteUni";
+import { getPlatform } from "@@/hooks/rewriteUni";
 
 const props = withDefaults(
   defineProps<{
@@ -60,6 +60,8 @@ let nodeInfo: GetRectRes;
 /**更新CtabsFor节点信息 */
 function updateNodeInfo() {
   getRect(`#${CtabsForId}`).then((res) => {
+    console.log(res);
+
     nodeInfo = res;
   });
 }
@@ -179,7 +181,7 @@ function swiperToByIndex(index: number) {
 }
 defineExpose({ swiperTo, updateNodeInfo, currentIndex });
 const platformOffsetTop = computed(() => {
-  if (platform === "h5") return 88;
+  if (getPlatform() === "h5") return 88;
   return 0;
 });
 </script>

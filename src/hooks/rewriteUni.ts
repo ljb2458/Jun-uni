@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-04-20 18:38:28
- * @LastEditTime: 2023-04-21 19:51:13
+ * @LastEditTime: 2023-04-21 23:23:15
  * @FilePath: /music-client/src/hooks/rewriteUni.ts
  * 介绍:
  */
@@ -50,6 +50,15 @@ export function uniGetSystemInfo(): Promise<
     });
   });
 }
+let systemInfo: UniApp.GetSystemInfoResult;
+/**获取设备信息，缓存 */
+export async function getSystemInfo(config?: { force?: boolean }) {
+  if (systemInfo && config?.force !== true) return systemInfo;
+  else {
+    const res = await uniGetSystemInfo();
+    return (systemInfo = res);
+  }
+}
 
 /**
  * 返回平台名称
@@ -63,7 +72,9 @@ export type GetOsRes = "ios" | "android";
 /**
  * 用于获取当前运行的平台名称
  */
-export const platform: Platform = uni.$u.platform;
+export function getPlatform(): getPlatformRes {
+  return uni.$u?.platform;
+}
 
 /**
  * VUE3，HBuilderX 3.2.0+	vue3
@@ -83,7 +94,7 @@ QQ小程序	qq
 快应用联盟	webview-union
 快应用华为	webview-huawei
  */
-export type Platform =
+export type getPlatformRes =
   | "vue3"
   | "vue2"
   | "plus"
@@ -125,3 +136,25 @@ export function getRect(queryNode: string): Promise<GetRectRes> {
   });
 }
 export interface GetRectRes extends UniApp.NodeInfo {}
+
+/**
+ * * 获取节点可见状态
+ * @param queryNode 节点名称 .class #id
+ * @returns
+ */
+export async function isNodeVisible(queryNode: string) {
+  const [sysInfo, nodeInfo] = await Promise.all([
+    getSystemInfo(),
+    getRect(queryNode),
+  ]);
+  const left = Number(nodeInfo.left);
+  const right = Number(nodeInfo.right);
+  const top = Number(nodeInfo.top);
+  const bottom = Number(nodeInfo.bottom);
+  return (
+    left > 0 &&
+    right < sysInfo.screenWidth &&
+    bottom > 0 &&
+    top < sysInfo.screenHeight
+  );
+}
