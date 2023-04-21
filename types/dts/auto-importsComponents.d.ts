@@ -19,6 +19,8 @@ declare module '@vue/runtime-core' {
     Rinput: typeof import('./../../src/components/rewrite/Rinput/Rinput.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Rsticky: typeof import('./../../src/components/rewrite/Rsticky/Rsticky.vue')['default']
+    Rtabs: typeof import('./../../src/components/rewrite/Rtabs/Rtabs.vue')['default']
     Rtext: typeof import('./../../src/components/rewrite/Rtext/Rtext.vue')['default']
   }
 }

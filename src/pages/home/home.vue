@@ -1,34 +1,34 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-04-21 17:42:54
+ * @LastEditTime: 2023-04-21 19:40:09
  * @FilePath: /music-client/src/pages/home/home.vue
  * 介绍:
 -->
 <script lang="ts" setup>
-import { CswiperOptions } from "@@/components/common/Cswiper";
-const swiperOption = reactive<CswiperOptions<{ name: string }>>([
+import { CtabsForOptions } from "@@/components/common/CtabsFor";
+const tabsForOptions = reactive<CtabsForOptions<{ name: string }>>([
   {
-    name: "a",
+    name: "全部",
   },
   {
-    name: "b",
+    name: "商品1",
   },
   {
-    name: "c",
+    name: "商品2",
   },
 ]);
 </script>
 
 <template>
   <CpageView>
-    <Cswiper :options="swiperOption">
+    <view style="border: red solid 1rpx; height: 200rpx">6666</view>
+    <CtabsFor :sticky="true" :options="tabsForOptions">
       <template #default="{ option }">
         <view style="border: red solid 1rpx; height: 200vh">
           {{ option.name }}
         </view>
       </template>
-    </Cswiper>
-    
+    </CtabsFor>
   </CpageView>
 </template>
 

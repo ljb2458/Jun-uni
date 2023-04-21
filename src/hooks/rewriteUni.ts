@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-04-20 18:38:28
- * @LastEditTime: 2023-04-21 15:11:40
+ * @LastEditTime: 2023-04-21 19:51:13
  * @FilePath: /music-client/src/hooks/rewriteUni.ts
  * 介绍:
  */
@@ -63,9 +63,8 @@ export type GetOsRes = "ios" | "android";
 /**
  * 用于获取当前运行的平台名称
  */
-export function getPlatform(): GetPlatformRes {
-  return uni.$u.platform;
-}
+export const platform: Platform = uni.$u.platform;
+
 /**
  * VUE3，HBuilderX 3.2.0+	vue3
 VUE2	vue2
@@ -84,7 +83,7 @@ QQ小程序	qq
 快应用联盟	webview-union
 快应用华为	webview-huawei
  */
-export type GetPlatformRes =
+export type Platform =
   | "vue3"
   | "vue2"
   | "plus"

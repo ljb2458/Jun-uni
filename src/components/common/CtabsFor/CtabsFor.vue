@@ -1,43 +1,44 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-04-21 15:16:59
+ * @LastEditTime: 2023-04-21 19:57:55
  * @FilePath: /music-client/src/components/common/CtabsFor/CtabsFor.vue
  * 介绍:
 -->
 <script lang="ts" setup>
 import { unitPercent } from "@@/utils/tools/css";
-import { uniGetSystemInfo } from "@@/hooks/rewriteUni";
+import { getRect, GetRectRes } from "@@/hooks/rewriteUni";
 import { CSSProperties } from "vue";
 import dayjs from "dayjs";
 import { CtabsForOptions } from "./index";
+import { generateUUID } from "@@/utils/tools/generate";
+import { platform } from "@@/hooks/rewriteUni";
 
 const props = withDefaults(
   defineProps<{
     /**间距 */
     gap?: string;
-    offsetTop?: string;
-    sticky?: boolean;
     options: CtabsForOptions;
+    sticky?: Boolean;
+    offsetTop?: string;
   }>(),
   {
-    sticky: true,
     gap: "var(--gap-md)",
-    offsetTop: "calc(var(--gap-md) + var(--window-top))",
+    offsetTop: "0",
   }
 );
-const tabList: AnyObject[] = [];
 
-function setTab(tab: typeof tabList[0], index: number) {
-  swiperTo(index);
-}
-const currentTab = computed(() => tabList[currentIndex.value]);
+const tabsList = computed<CtabsForOptions>(() =>
+  props.options.map((v, key) => ({ ...v, key: v.key || key }))
+);
+
+const currentSwiper = computed(() => tabsList.value[currentIndex.value]);
 const currentIndex = ref(0);
 
-const contentItemStyle = reactive<CSSProperties>({
-  "--x": "0%",
+const contentSwiperItemStyle = reactive<CSSProperties>({
+  "--CtabsFor-x": "0%",
 });
 const contentItemClass = reactive({
-  Ctabs_content_item__transit: false,
+  CtabsFor_item__transit: false,
 });
 const state = reactive({
   /**是否静止中 */
@@ -53,9 +54,15 @@ let skewingY = 0;
 let startTime = 0;
 /**取消本次滑动? */
 let abandon = false;
-let boxInfo: UniApp.GetSystemInfoResult;
-uniGetSystemInfo().then((res) => (boxInfo = res));
-
+let CtabsForId = `CtabsFor${generateUUID()}`;
+/**swiper节点信息 */
+let nodeInfo: GetRectRes;
+function updateNodeInfo() {
+  getRect(`#${CtabsForId}`).then((res) => {
+    nodeInfo = res;
+  });
+}
+onMounted(() => updateNodeInfo());
 /**触摸开始 */
 function onTouchstart(e: TouchEvent) {
   startTime = dayjs().valueOf();
@@ -66,6 +73,8 @@ function onTouchstart(e: TouchEvent) {
 }
 /**触摸移动 */
 function onTouchmove(e: TouchEvent) {
+  if (!nodeInfo.width)
+    return console.error("CtabsFor能获取到节点宽度", nodeInfo);
   /**最后一根手指的信息 */
   const touchPosition = e.changedTouches[0];
   skewingX = touchPosition.clientX - startX;
@@ -73,17 +82,17 @@ function onTouchmove(e: TouchEvent) {
   const currTime = getTouchTime();
   if (!(Math.abs(skewingY) < Math.abs(skewingX)) && currTime < 100) {
     abandon = true;
-    swiperTo(currentIndex.value);
+    swiperToByIndex(currentIndex.value);
     return;
   }
   if (abandon) return;
-  const percent = skewingX / boxInfo.windowWidth - currentIndex.value;
+  const percent = skewingX / nodeInfo.width - currentIndex.value;
   //*左滑边界限制
   if (skewingX > 0 && currentIndex.value == 0) return;
   //*右滑边界限制
-  if (isRightTo() && !(currentIndex.value + 1 < tabList.length)) return;
+  if (isRightTo() && !(currentIndex.value + 1 < props.options.length)) return;
   state.isStatic = false;
-  contentItemStyle["--x"] = unitPercent(percent);
+  contentSwiperItemStyle["--CtabsFor-x"] = unitPercent(percent);
 }
 /**触摸中断 */
 function onTouchcancel(e: TouchEvent) {
@@ -91,42 +100,42 @@ function onTouchcancel(e: TouchEvent) {
   /**最后一根手指的信息 */
   // const touchPosition = e.changedTouches[0];
   abandon = false;
-  swiperTo(currentIndex.value);
+  swiperToByIndex(currentIndex.value);
 }
 /**触摸结束 */
 function onTouchend(e: TouchEvent) {
+  if (!nodeInfo.width)
+    return console.error("CtabsFor未能获取到节点宽度", nodeInfo);
   if (abandon) return (abandon = false);
   /**最后一根手指的信息 */
   // const touchPosition = e.changedTouches[0];
   //*左滑边界限制
   if (skewingX > 0 && currentIndex.value == 0)
-    return swiperTo(currentIndex.value);
+    return swiperToByIndex(currentIndex.value);
   //*右滑边界限制
-  if (isRightTo() && !(currentIndex.value + 1 < tabList.length)) {
+  if (isRightTo() && !(currentIndex.value + 1 < props.options.length)) {
     abandon = false;
-    return swiperTo(currentIndex.value);
+    return swiperToByIndex(currentIndex.value);
   }
   if (
     (getTouchTime() < 500 &&
       isRightTo() &&
-      skewingX < -boxInfo.windowWidth * 0.15) ||
-    (isRightTo() && skewingX < -boxInfo.windowWidth * 0.4)
+      skewingX < -nodeInfo.width * 0.15) ||
+    (isRightTo() && skewingX < -nodeInfo.width * 0.4)
   ) {
     //* 右滑满足
     abandon = false;
-    swiperTo(++currentIndex.value);
+    swiperToByIndex(++currentIndex.value);
   } else if (
-    (getTouchTime() < 200 &&
-      isLeftTo() &&
-      skewingX > boxInfo.windowWidth * 0.15) ||
-    (isLeftTo() && skewingX > boxInfo.windowWidth * 0.4)
+    (getTouchTime() < 200 && isLeftTo() && skewingX > nodeInfo.width * 0.15) ||
+    (isLeftTo() && skewingX > nodeInfo.width * 0.4)
   ) {
     //*左滑满足
     abandon = false;
-    swiperTo(--currentIndex.value);
+    swiperToByIndex(--currentIndex.value);
   } else {
     abandon = false;
-    swiperTo(currentIndex.value);
+    swiperToByIndex(currentIndex.value);
   }
 }
 /**给出滑动时间 */
@@ -144,106 +153,105 @@ function isLeftTo() {
 let transitTimeout: NodeJS.Timeout;
 /**
  * * 前往swiper页
- * @param index 当前索引数
+ * @param index 当前key
  */
-function swiperTo(index: number = currentIndex.value) {
+function swiperTo(index: StrNumber = currentIndex.value) {
   if (transitTimeout) clearTimeout(transitTimeout);
+  for (let key in tabsList.value) {
+    if (tabsList.value[key].key === index) {
+      swiperToByIndex(key as unknown as number);
+      break;
+    }
+  }
+}
+function swiperToByIndex(index: number) {
   currentIndex.value = index;
-  contentItemClass.Ctabs_content_item__transit = true;
+  contentItemClass.CtabsFor_item__transit = true;
   skewingX = 0;
   skewingY = 0;
   startX = 0;
   startY = 0;
-  contentItemStyle["--x"] = unitPercent(0 - index);
+  contentSwiperItemStyle["--CtabsFor-x"] = unitPercent(0 - index);
   //*定时清除过渡
   transitTimeout = setTimeout(() => {
-    contentItemClass.Ctabs_content_item__transit = false;
+    contentItemClass.CtabsFor_item__transit = false;
     state.isStatic = true;
   }, 200);
 }
+defineExpose({ swiperTo, updateNodeInfo, currentIndex });
+const platformOffsetTop = computed(() => {
+  if (platform === "h5") return 88;
+  return 0;
+});
 </script>
 
 <template>
-  <view
-    :style="{ '--gap': props.gap, '--offsetTop': props.offsetTop }"
-    class="Ctabs"
-  >
-    <!-- tabs标题部分 -->
-    <view
-      class="Ctabs_title auto-ML-sm"
-      :class="{ Ctabs_title__sticky: props.sticky }"
+  <view :style="{ '--gap': props.gap }" :id="CtabsForId" class="CtabsFor">
+    <Rsticky
+      class="CtabsFor_title"
+      :disabled="!props.sticky"
+      :offset-top="props.offsetTop"
+      :customNavHeight="platformOffsetTop"
     >
-      <template
-        v-for="(tab, index) in tabList"
-        :key="getTabKey(tab, index) || index"
+      <Rtabs
+        :list="tabsList"
+        :current="currentIndex"
+        @change="(e) => swiperToByIndex(Number(e))"
       >
-        <view @click="setTab(tab, index)" class="Ctabs_title_item">
-          <!-- props标题 -->
-          <text v-if="tab.props?.title">{{ tab.props.title }}</text>
-          <!-- slot标题 -->
-          <component
-            v-else
-            :is="tab.children.title"
-            :active="currentTab === tab"
-          >
-          </component>
-        </view>
-      </template>
-    </view>
-
-    <!-- tabs内容部分 -->
+        <template #right>
+          <slot name="title-right"></slot>
+        </template>
+      </Rtabs>
+    </Rsticky>
+    <!-- 内容部分 -->
     <view
       @touchmove="onTouchmove"
       @touchcancel="onTouchcancel"
       @touchend="onTouchend"
       @touchstart="onTouchstart"
-      class="Ctabs_content"
+      class="CtabsFor_item-wrap"
     >
       <view
         :class="{
           ...contentItemClass,
-          Ctabs_content_item__hiddle: currentTab !== tab && state.isStatic,
+          CtabsFor_item__hiddle: currentSwiper !== tab && state.isStatic,
         }"
-        :style="{ ...contentItemStyle }"
-        v-for="tab in tabList"
-        class="Ctabs_content_item"
+        :style="{ ...contentSwiperItemStyle }"
+        v-for="tab in tabsList"
+        :key="tab.key"
+        class="CtabsFor_item"
       >
-        <component :is="tab" :active="currentTab === tab"> </component>
+        <view class="CtabsFor_item_content">
+          <slot name="default" :option="tab" :active="currentSwiper === tab">
+          </slot>
+        </view>
       </view>
     </view>
   </view>
 </template>
 
 <style lang="scss" scoped>
-.Ctabs {
+.CtabsFor {
   margin: 0 calc(0px - var(--gap));
-  padding: 0 var(--gap);
-  .Ctabs_title {
-    display: flex;
-    align-items: center;
-    background-color: var(--C-O2);
-    padding: 0.2em var(--gap-sm);
-    border-radius: 6px;
-  }
-  .Ctabs_title__sticky {
-    position: sticky;
-    top: var(--offsetTop);
-  }
-  .Ctabs_content {
+
+  .CtabsFor_item-wrap {
     overflow-x: hidden;
     display: flex;
     width: 100%;
-    .Ctabs_content_item {
-      transform: translateX(var(--x));
+    .CtabsFor_item {
+      transform: translateX(var(--CtabsFor-x));
       flex: 0 0 100%;
       width: 100%;
+      .CtabsFor_item_content {
+        margin: 0 var(--gap);
+      }
     }
   }
-  .Ctabs_content_item__transit {
+  .CtabsFor_item__transit {
     transition: all 200ms linear;
     overflow: hidden;
   }
-  .Ctabs_content_item__hiddle {
+  .CtabsFor_item__hiddle {
     height: 0;
   }
 }
