@@ -15,6 +15,7 @@ declare module '@vue/runtime-core' {
     CtabsFor: typeof import('./../../src/components/common/CtabsFor/CtabsFor.vue')['default']
     CtabsItem: typeof import('./../../src/components/common/Ctabs/CtabsItem.vue')['default']
     Rbutton: typeof import('./../../src/components/rewrite/Rbutton/Rbutton.vue')['default']
+    Rdivider: typeof import('./../../src/components/rewrite/Rdivider/Rdivider.vue')['default']
     Rimage: typeof import('./../../src/components/rewrite/Rimage/Rimage.vue')['default']
     Rinput: typeof import('./../../src/components/rewrite/Rinput/Rinput.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

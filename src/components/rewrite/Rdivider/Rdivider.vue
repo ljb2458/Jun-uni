@@ -1,0 +1,27 @@
+<!--
+ * @Date: 2023-02-19 20:46:35
+ * @LastEditTime: 2023-04-21 20:08:32
+ * @FilePath: /music-client/src/components/rewrite/Rdivider/Rdivider.vue
+ * 介绍:
+-->
+<script lang="ts" setup>
+const props = defineProps<{
+  /**是否虚线 */
+  dashed?: boolean;
+  /**是否细线 */
+  hairline?: boolean;
+  /**是否以点替代文字，优先于text字段起作用 */
+  dot?: boolean;
+  textPosition?: "center" | "left" | "right";
+  text?: StrNumber;
+  textSize?: StrNumber;
+  textColor?: StrNumber;
+  lineColor?: string;
+}>();
+</script>
+
+<template>
+  <u-divider class="Rdivider" v-bind="props"></u-divider>
+</template>
+
+<style lang="scss" scoped></style>

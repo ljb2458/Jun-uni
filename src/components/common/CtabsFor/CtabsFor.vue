@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-04-21 19:57:55
+ * @LastEditTime: 2023-04-21 20:05:39
  * @FilePath: /music-client/src/components/common/CtabsFor/CtabsFor.vue
  * 介绍:
 -->
@@ -57,10 +57,15 @@ let abandon = false;
 let CtabsForId = `CtabsFor${generateUUID()}`;
 /**swiper节点信息 */
 let nodeInfo: GetRectRes;
+/**更新CtabsFor节点信息 */
 function updateNodeInfo() {
   getRect(`#${CtabsForId}`).then((res) => {
     nodeInfo = res;
   });
+}
+/**节点宽度 */
+function nodeWidth() {
+  return nodeInfo.width || 750;
 }
 onMounted(() => updateNodeInfo());
 /**触摸开始 */
@@ -73,8 +78,6 @@ function onTouchstart(e: TouchEvent) {
 }
 /**触摸移动 */
 function onTouchmove(e: TouchEvent) {
-  if (!nodeInfo.width)
-    return console.error("CtabsFor能获取到节点宽度", nodeInfo);
   /**最后一根手指的信息 */
   const touchPosition = e.changedTouches[0];
   skewingX = touchPosition.clientX - startX;
@@ -86,7 +89,7 @@ function onTouchmove(e: TouchEvent) {
     return;
   }
   if (abandon) return;
-  const percent = skewingX / nodeInfo.width - currentIndex.value;
+  const percent = skewingX / nodeWidth() - currentIndex.value;
   //*左滑边界限制
   if (skewingX > 0 && currentIndex.value == 0) return;
   //*右滑边界限制
@@ -104,8 +107,6 @@ function onTouchcancel(e: TouchEvent) {
 }
 /**触摸结束 */
 function onTouchend(e: TouchEvent) {
-  if (!nodeInfo.width)
-    return console.error("CtabsFor未能获取到节点宽度", nodeInfo);
   if (abandon) return (abandon = false);
   /**最后一根手指的信息 */
   // const touchPosition = e.changedTouches[0];
@@ -118,17 +119,15 @@ function onTouchend(e: TouchEvent) {
     return swiperToByIndex(currentIndex.value);
   }
   if (
-    (getTouchTime() < 500 &&
-      isRightTo() &&
-      skewingX < -nodeInfo.width * 0.15) ||
-    (isRightTo() && skewingX < -nodeInfo.width * 0.4)
+    (getTouchTime() < 500 && isRightTo() && skewingX < -nodeWidth() * 0.15) ||
+    (isRightTo() && skewingX < -nodeWidth() * 0.4)
   ) {
     //* 右滑满足
     abandon = false;
     swiperToByIndex(++currentIndex.value);
   } else if (
-    (getTouchTime() < 200 && isLeftTo() && skewingX > nodeInfo.width * 0.15) ||
-    (isLeftTo() && skewingX > nodeInfo.width * 0.4)
+    (getTouchTime() < 200 && isLeftTo() && skewingX > nodeWidth() * 0.15) ||
+    (isLeftTo() && skewingX > nodeWidth() * 0.4)
   ) {
     //*左滑满足
     abandon = false;
