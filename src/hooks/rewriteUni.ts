@@ -121,12 +121,12 @@ export function getCurrentPath(): string {
 /**
  * * 获取节点信息
  * @param queryNode 节点名称 .class #id
- * @param all
+ * @param _this 当前this，小程序兼容
  * @returns
  */
-export function getRect(queryNode: string): Promise<GetRectRes> {
+export function getRect(queryNode: string, _this?: any): Promise<GetRectRes> {
   return new Promise((resolve) => {
-    const query = uni.createSelectorQuery().in(getCurrentInstance());
+    const query = uni.createSelectorQuery().in(_this || getCurrentInstance());
     query
       .select(queryNode)
       .boundingClientRect((data) => {
@@ -140,12 +140,13 @@ export interface GetRectRes extends UniApp.NodeInfo {}
 /**
  * * 获取节点可见状态
  * @param queryNode 节点名称 .class #id
+ * @param _this 当前this，小程序兼容
  * @returns
  */
-export async function isNodeVisible(queryNode: string) {
+export async function isNodeVisible(queryNode: string, _this?: any) {
   const [sysInfo, nodeInfo] = await Promise.all([
     getSystemInfo(),
-    getRect(queryNode),
+    getRect(queryNode, _this || getCurrentInstance()),
   ]);
   const left = Number(nodeInfo.left);
   const right = Number(nodeInfo.right);
