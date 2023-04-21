@@ -1,15 +1,15 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-04-21 13:36:31
- * @FilePath: /music-client/src/components/common/Ctabs/Ctabs.vue
+ * @LastEditTime: 2023-04-21 15:16:59
+ * @FilePath: /music-client/src/components/common/CtabsFor/CtabsFor.vue
  * 介绍:
 -->
 <script lang="ts" setup>
-import CtabsItem from "./CtabsItem.vue";
 import { unitPercent } from "@@/utils/tools/css";
 import { uniGetSystemInfo } from "@@/hooks/rewriteUni";
 import { CSSProperties } from "vue";
 import dayjs from "dayjs";
+import { CtabsForOptions } from "./index";
 
 const props = withDefaults(
   defineProps<{
@@ -17,6 +17,7 @@ const props = withDefaults(
     gap?: string;
     offsetTop?: string;
     sticky?: boolean;
+    options: CtabsForOptions;
   }>(),
   {
     sticky: true,
@@ -25,22 +26,6 @@ const props = withDefaults(
   }
 );
 const tabList: AnyObject[] = [];
-
-const slot = useSlots();
-if (slot.default) {
-  const temp = slot.default();
-  findTabsItem(temp);
-}
-/**找到tabsItem */
-function findTabsItem(childs: AnyObject[]) {
-  childs.forEach((child) => {
-    if (child.type === CtabsItem) {
-      tabList.push(child as any);
-    } else if (child.children.constructor === Array) {
-      findTabsItem(child.children);
-    }
-  });
-}
 
 function setTab(tab: typeof tabList[0], index: number) {
   swiperTo(index);
@@ -190,7 +175,7 @@ function swiperTo(index: number = currentIndex.value) {
     >
       <template
         v-for="(tab, index) in tabList"
-        :key="tab.props?.key || tab.props?.title || index"
+        :key="getTabKey(tab, index) || index"
       >
         <view @click="setTab(tab, index)" class="Ctabs_title_item">
           <!-- props标题 -->

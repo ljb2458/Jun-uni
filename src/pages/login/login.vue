@@ -9,7 +9,7 @@ function onLogin() {}
 </script>
 
 <template>
-  <CpageView class="auto-mt">
+  <CpageView>
     <Rinput prefixIcon="account-fill" placeholder="请输入账号"> </Rinput>
     <Rinput prefixIcon="lock-fill" placeholder="请输入密码" type="pwd"></Rinput>
     <Rbutton @click="onLogin" type="primary" text="登录" class="mt-lg" />

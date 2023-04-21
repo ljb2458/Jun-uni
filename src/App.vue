@@ -25,6 +25,7 @@ onHide(() => {
 @import "@@/common/text.scss";
 @import "@@/common/layout.scss";
 @import "@@/common/transition.scss";
+@import "@@/common/color.scss";
 @import "@@/common/init.css";
 @import "@@/common/var.css";
 @import "@@/common/reset.scss";

@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-02-18 20:06:36
- * @LastEditTime: 2023-03-04 16:27:41
- * @FilePath: /my-vue3-project/src/pages/index/index.vue
+ * @LastEditTime: 2023-04-21 17:15:12
+ * @FilePath: /music-client/src/pages/index/index.vue
  * 介绍:
 -->
 
@@ -14,7 +14,7 @@ const title = ref("Hello");
 apiTest400();
 </script>
 <template>
-  <CpageView use-pull-down>
+  <CpageView>
     <Rimage class="logo" :src="_require('src/static/logo.png')" />
     <view class="text-area">
       <text class="title">{{ title }}</text>

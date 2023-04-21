@@ -5,7 +5,6 @@
 
 import uni from "@dcloudio/vite-plugin-uni";
 import AutoImport from "unplugin-auto-import/vite";
-import Components from "unplugin-vue-components/vite";
 import commonjs from "@rollup/plugin-commonjs";
 import { defineConfig } from "vite";
 import path from "path";
@@ -22,13 +21,7 @@ export default defineConfig({
     AutoImport({
       // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
       imports: ["vue", "uni-app"],
-      dts: "./src/types/dts/auto-importsVue.d.ts",
-    }),
-    Components({
-      dirs: ["src/components"],
-      deep: true,
-      extensions: ["vue"],
-      dts: "./src/types/dts/auto-importsComponents.d.ts",
+      dts: "./types/dts/auto-importsVue.d.ts",
     }),
   ],
   //@ts-ignore
