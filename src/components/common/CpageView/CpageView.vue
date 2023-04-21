@@ -1,10 +1,12 @@
 <!--
  * @Date: 2023-02-21 22:32:00
- * @LastEditTime: 2023-04-21 17:43:21
+ * @LastEditTime: 2023-04-21 20:33:33
  * @FilePath: /music-client/src/components/common/CpageView/CpageView.vue
  * 介绍:
 -->
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+
+</script>
 
 <template>
   <view class="CpageView">

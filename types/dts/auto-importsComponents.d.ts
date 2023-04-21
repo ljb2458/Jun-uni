@@ -9,6 +9,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Clist: typeof import('./../../src/components/common/Clist/Clist.vue')['default']
     CpageView: typeof import('./../../src/components/common/CpageView/CpageView.vue')['default']
     Cswiper: typeof import('./../../src/components/common/Cswiper/Cswiper.vue')['default']
     Ctabs: typeof import('./../../src/components/common/Ctabs/Ctabs.vue')['default']

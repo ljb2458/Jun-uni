@@ -49,7 +49,8 @@
     "navigationBarTitleText": "uni-app",
     "navigationBarBackgroundColor": "#eeeeee",
     "backgroundColor": "#eeeeee",
-    "pageOrientation": "portrait"
+    "pageOrientation": "portrait",
+	"onReachBottomDistance": 200
   },
   "easycom": {
     "custom": {

@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-02-18 20:06:36
- * @LastEditTime: 2023-02-28 21:15:15
- * @FilePath: /my-vue3-project/src/App.vue
+ * @LastEditTime: 2023-04-21 20:28:54
+ * @FilePath: /music-client/src/App.vue
  * 介绍:
 -->
 <script setup lang="ts">
