@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-04-21 21:24:10
+ * @LastEditTime: 2023-04-21 21:26:04
  * @FilePath: /music-client/src/components/common/CtabsFor/CtabsFor.vue
  * 介绍:
 -->
@@ -192,6 +192,7 @@ const platformOffsetTop = computed(() => {
       :offset-top="props.offsetTop"
       :customNavHeight="platformOffsetTop"
     >
+      <slot name="title-top"></slot>
       <Rtabs
         :list="tabsList"
         :current="currentIndex"
@@ -201,6 +202,7 @@ const platformOffsetTop = computed(() => {
           <slot name="title-right"></slot>
         </template>
       </Rtabs>
+      <slot name="title-bottom"></slot>
     </Rsticky>
     <!-- 内容部分 -->
     <view
