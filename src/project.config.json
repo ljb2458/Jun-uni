@@ -1,5 +1,5 @@
 {
-  "description": "项目配置文件。",
+  "description": "小程序配置",
   "packOptions": {
     "ignore": [],
     "include": []
