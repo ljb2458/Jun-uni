@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-06-12 20:31:38
- * @LastEditTime: 2023-06-12 21:22:00
+ * @LastEditTime: 2023-06-12 23:34:00
  * @FilePath: /music-client/generatePagesConfig/index.ts
  * 介绍:
  */
@@ -18,7 +18,7 @@ const blacklist = ["/components"];
 const extname = ".vue";
 
 /**将页面配置转换为uniapp配置 */
-function getpageConfig(cfg: PageCfg) {
+function getPageConfig(cfg: PageCfg) {
   return {
     style: {
       navigationBarTitleText: cfg.title,
@@ -54,7 +54,7 @@ function traverseDir(dirPath: string) {
       const cfg = findPageCfg(pageContent);
       pages.push({
         path: pagePath,
-        ...getpageConfig(cfg),
+        ...getPageConfig(cfg),
       });
     }
   });
