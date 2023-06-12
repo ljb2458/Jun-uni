@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-04-20 18:38:28
- * @LastEditTime: 2023-06-12 11:23:29
+ * @LastEditTime: 2023-06-12 11:40:54
  * @FilePath: /music-client/src/hooks/rewriteUni.ts
  * 介绍:
  */
@@ -51,7 +51,7 @@ export function uniGetSystemInfo(): Promise<
   });
 }
 let systemInfo: UniApp.GetSystemInfoResult;
-/**获取设备信息，缓存 */
+/**获取设备信息，缓存优化过的方法 */
 export async function getSystemInfo(config?: { force?: boolean }) {
   if (systemInfo && config?.force !== true) return systemInfo;
   else {

@@ -9,11 +9,12 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    CfullList: typeof import('./../../src/components/common/CfullList/CfullList.vue')['default']
+    Cerror: typeof import('./../../src/components/common/Cerror/Cerror.vue')['default']
+    Clist: typeof import('./../../src/components/common/Clist/Clist.vue')['default']
     ClistStatus: typeof import('./../../src/components/common/ClistStatus/ClistStatus.vue')['default']
     CpageView: typeof import('./../../src/components/common/CpageView/CpageView.vue')['default']
-    CrequestFullList: typeof import('./../../src/components/common/CrequestFullList/CrequestFullList.vue')['default']
-    CrequsetFullList: typeof import('./../../src/components/common/CrequestFullList/CrequsetFullList.vue')['default']
+    CrequesList: typeof import('./../../src/components/common/CrequestList/CrequesList.vue')['default']
+    CrequestList: typeof import('./../../src/components/common/CrequestList/CrequestList.vue')['default']
     Cswiper: typeof import('./../../src/components/common/Cswiper/Cswiper.vue')['default']
     Ctabs: typeof import('./../../src/components/common/Ctabs/Ctabs.vue')['default']
     CtabsFor: typeof import('./../../src/components/common/CtabsFor/CtabsFor.vue')['default']

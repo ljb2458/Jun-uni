@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-04-21 23:27:24
- * @LastEditTime: 2023-04-22 00:03:00
+ * @LastEditTime: 2023-06-12 15:00:05
  * @FilePath: /music-client/src/components/common/ClistStatus/ClistStatus.vue
  * 介绍:
 -->
@@ -12,23 +12,44 @@ const props = withDefaults(
     message?: string;
   }>(),
   {
-    type: "",
+    type: "next",
   }
 );
 const emit = defineEmits<{
   (e: "load"): void;
+  (e: "reload"): void;
 }>();
+onMounted(load);
+function reload() {
+  emit("reload");
+}
+function load() {
+  emit("load");
+}
 </script>
 <template>
   <view class="ClistStatus">
     <Rloading :show="props.type === 'loading'" :text="props.message"></Rloading>
-    <Rempty :show="props.type === 'null'" :text="props.message"></Rempty>
+    <Rempty
+      :show="props.type === 'null'"
+      class="Rempty"
+      margin-top="80px"
+      :text="props.message"
+    >
+    </Rempty>
     <Rdivider
-      @click="emit('load')"
-      v-show="props.type === ''"
+      v-show="props.type === 'next'"
+      @click="load"
       :text="props.message"
     />
     <Rdivider v-show="props.type === 'end'" :text="props.message" />
+    <Cerror
+      v-show="props.type === 'error'"
+      margin-top="80px"
+      :message="props.message"
+      @click-button="reload"
+    >
+    </Cerror>
   </view>
 </template>
 <style lang="scss" scoped></style>

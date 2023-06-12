@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-04-21 23:08:50
+ * @LastEditTime: 2023-06-12 15:47:43
  * @FilePath: /music-client/src/pages/home/home.vue
  * 介绍:
 -->
@@ -17,6 +17,19 @@ const tabsForOptions = reactive<CtabsForOptions<{ name: string }>>([
     name: "商品2",
   },
 ]);
+
+function api() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        code: 200,
+        data: {
+          data: [1, 2, 3, 4, 5, 6],
+        },
+      });
+    }, 3000);
+  });
+}
 </script>
 
 <template>
@@ -24,11 +37,9 @@ const tabsForOptions = reactive<CtabsForOptions<{ name: string }>>([
     <view style="border: red solid 1rpx; height: 200rpx">6666</view>
     <CtabsFor :sticky="true" :options="tabsForOptions">
       <template #default="{ option }">
-        <CfullList>
-          <view style="border: red solid 1rpx; height: 200vh">
-            {{ option.name }}
-          </view>
-        </CfullList>
+        <CrequestList :api="api">
+        
+        </CrequestList>
       </template>
     </CtabsFor>
   </CpageView>
