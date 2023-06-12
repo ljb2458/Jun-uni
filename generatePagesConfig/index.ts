@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-06-12 20:31:38
- * @LastEditTime: 2023-06-12 21:06:52
+ * @LastEditTime: 2023-06-12 21:11:39
  * @FilePath: /music-client/generatePagesConfig/index.ts
  * 介绍:
  */
@@ -10,7 +10,7 @@ import defaultConfig from "./pages.json";
 
 const src = path.join(__dirname, "../src");
 const pagesPath = path.join(src, "/pages");
-const outDir = path.join(src, "/generatePagesConfig.json");
+const outDir = path.join(src, "/pages.json");
 
 /**将页面配置转换为uniapp配置 */
 function getpageConfig(cfg: PageCfg) {

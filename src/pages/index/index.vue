@@ -4,7 +4,11 @@
  * @FilePath: /music-client/src/pages/index/index.vue
  * 介绍:
 -->
-
+<cfg lang="json">
+  {
+    "title": "首页"
+  }
+  </cfg>
 <script setup lang="ts">
 import { _require } from "@@/utils/tools";
 import { ref } from "vue";

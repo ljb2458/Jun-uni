@@ -1,9 +1,14 @@
 <!--
  * @Date: 2023-02-19 17:17:55
- * @LastEditTime: 2023-03-04 16:32:10
- * @FilePath: /my-vue3-project/src/pages/login/login.vue
+ * @LastEditTime: 2023-06-12 21:11:00
+ * @FilePath: /music-client/src/pages/login/login.vue
  * 介绍:
 -->
+<cfg lang="json">
+  {
+    "title": "登录"
+  }
+  </cfg>
 <script lang="ts" setup>
 function onLogin() {}
 </script>
