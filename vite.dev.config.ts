@@ -3,19 +3,20 @@
  * 介绍:开发环境配置项
  */
 
-import { defineConfig, loadEnv } from "vite";
+import { defineConfig, loadEnv, ConfigEnv } from "vite";
 import path from "path";
-const mode = "development";
-const env = loadEnv(mode, process.cwd(), "VITE_");
-export default defineConfig({
-  server: {
-    host: "0.0.0.0",
-    port: 5173,
-    proxy: {
-      [env.VITE_API_PREFIX]: {
-        changeOrigin: env.VITE_PROXY == "1", //改变源头开关
-        target: env.VITE_BASE_URL,
+export default (config: ConfigEnv) => {
+  const env = loadEnv(config.mode, process.cwd(), "VITE_");
+  return defineConfig({
+    server: {
+      host: true,
+      port: 5173,
+      proxy: {
+        [env.VITE_API_PREFIX]: {
+          changeOrigin: env.VITE_PROXY == "1", //改变源头开关
+          target: env.VITE_BASE_URL,
+        },
       },
     },
-  },
-});
+  });
+};

@@ -1,15 +1,15 @@
 /*
  * @Date: 2023-01-16 15:49:10
- * @LastEditTime: 2023-04-22 00:03:43
+ * @LastEditTime: 2023-04-24 10:56:36
  * @FilePath: /music-client/src/hooks/useRequestList.ts
  * 介绍:请求分页接口hooks
  */
 import { Paging, ApiRes } from "@@/api";
 export default function usePaging(
-  api?: Function,
-  /**返回值作为请求数据 */
-  before?: (page: number) => any,
-  config?: { onePage?: boolean }
+  api: Function,
+  /**返回值作为请求数据，返回fase取消请求 */
+  before?: (params: RequsetParams) => any,
+  config?: RequestConfig
 ) {
   /**api请求状态*/
   const state = ref<GetListDataReturn>({
@@ -18,27 +18,25 @@ export default function usePaging(
   });
   /**接口返回数据 */
   const data = ref<any[]>([]);
-  let page = 1;
+  const params: RequsetParams = { page: 1 };
   /**重置分页接口 */
-  async function reRequset() {
-    page = 1;
-    return await requset();
+  async function reRequest() {
+    params.page = 1;
+    return await request();
   }
   /**请求分页接口 */
-  async function requset(): Promise<GetListDataReturn> {
+  async function request(): Promise<GetListDataReturn> {
     try {
       stateLoading();
-      if (!api || typeof api != "function") {
-        return stateErr();
-      }
       /**请求之前执行 */
       let extraParams;
       if (before && typeof before === "function")
-        extraParams = await before(page!);
+        extraParams = await before(params);
       if (extraParams === false) return state.value;
-      const params: AnyObject = { ...extraParams };
-      if (!isOnePage()) params.page = page;
-      const res: ApiRes<Paging.Data<any[]>> = await api(params);
+      const res: ApiRes<Paging.Data<any[]>> = await api({
+        ...params,
+        ...extraParams,
+      });
       if (res.code !== 200) {
         return stateErr(res.msg);
       }
@@ -53,13 +51,13 @@ export default function usePaging(
       //   return stateNull();
       // }
       //首次请求
-      if (!page || page <= 1) data.value = [];
+      if (!params.page || params.page <= 1) data.value = [];
       // //当前数据大于总数
       // if (apiData.value.length >= res.data.total) {
       //   return stateEnd();
       // }
       //当前页码不等于服务器查询的页码
-      if (res.data.current_page != page) {
+      if (res.data.current_page != params.page) {
         return stateVoid();
       }
       if (res.data.current_page == 1 && res.data?.data.length == 0)
@@ -67,7 +65,7 @@ export default function usePaging(
       if (res.data?.data.length == 0) return stateEnd();
       //*存储分页数据
       data.value?.push(...res.data.data);
-      page++;
+      params.page++;
       //当前数据大于总数
       if (data.value.length >= res.data.total) {
         return stateEnd();
@@ -80,8 +78,8 @@ export default function usePaging(
   return {
     state,
     data,
-    requset,
-    reRequset,
+    request,
+    reRequest,
     stateErr,
     stateEnd,
     stateNull,
@@ -89,7 +87,7 @@ export default function usePaging(
     stateLoading,
   };
   function isOnePage() {
-    return config?.onePage === true;
+    return config?.isOnePage === true;
   }
 
   function stateErr(message?: string) {
@@ -131,3 +129,11 @@ export interface GetListDataReturn {
 }
 
 export type StateType = "error" | "null" | "end" | "" | "loading";
+export interface RequestConfig {
+  /**是否单页列表 */
+  isOnePage?: boolean;
+}
+
+export interface RequsetParams {
+  page: number;
+}

@@ -12,6 +12,8 @@ declare module '@vue/runtime-core' {
     CfullList: typeof import('./../../src/components/common/CfullList/CfullList.vue')['default']
     ClistStatus: typeof import('./../../src/components/common/ClistStatus/ClistStatus.vue')['default']
     CpageView: typeof import('./../../src/components/common/CpageView/CpageView.vue')['default']
+    CrequestFullList: typeof import('./../../src/components/common/CrequestFullList/CrequestFullList.vue')['default']
+    CrequsetFullList: typeof import('./../../src/components/common/CrequestFullList/CrequsetFullList.vue')['default']
     Cswiper: typeof import('./../../src/components/common/Cswiper/Cswiper.vue')['default']
     Ctabs: typeof import('./../../src/components/common/Ctabs/Ctabs.vue')['default']
     CtabsFor: typeof import('./../../src/components/common/CtabsFor/CtabsFor.vue')['default']

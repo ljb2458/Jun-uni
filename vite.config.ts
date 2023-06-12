@@ -4,40 +4,27 @@
  * @FilePath: /music-client/vite.config.ts
  * 介绍:
  */
-import { defineConfig, loadEnv, UserConfig } from "vite";
+import { defineConfig, loadEnv, UserConfig, ConfigEnv } from "vite";
 import viteDevConfig from "./vite.dev.config";
 import viteProdConfig from "./vite.prod.config";
 import viteBaseConfig from "./vite.base.config";
-import Components from "unplugin-vue-components/vite";
 
 const envResolver = {
-  production: () => ({
-    ...viteBaseConfig,
-    ...viteProdConfig,
+  production: (v: ConfigEnv) => ({
+    ...viteBaseConfig(v),
+    ...viteProdConfig(v),
   }), //生产环境
-  development: () => ({
-    ...viteBaseConfig,
-    ...viteDevConfig,
+  development: (v: ConfigEnv) => ({
+    ...viteBaseConfig(v),
+    ...viteDevConfig(v),
   }), //开发环境
 };
+type EnvResolverKey = keyof typeof envResolver;
 // https://vitejs.dev/config/
 export default defineConfig((config) => {
   console.log(config);
   const option: UserConfig = {
-    ...envResolver[config.mode as keyof typeof envResolver](),
+    ...envResolver[config.mode as EnvResolverKey](config),
   };
-  //*只有serve时使用vite的自动引入，其它情况使用uniapp的easycom模式
-  if (config.command === "serve") {
-    option.plugins = option.plugins || [];
-    option.plugins.push(
-      Components({
-        dirs: ["src/components"],
-        deep: true,
-        extensions: ["vue"],
-        dts: "./types/dts/auto-importsComponents.d.ts",
-      })
-    );
-  }
-
   return option;
 });

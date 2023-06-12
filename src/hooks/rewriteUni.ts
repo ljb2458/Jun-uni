@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-04-20 18:38:28
- * @LastEditTime: 2023-04-21 23:23:15
+ * @LastEditTime: 2023-06-12 11:23:29
  * @FilePath: /music-client/src/hooks/rewriteUni.ts
  * 介绍:
  */
@@ -120,8 +120,8 @@ export function getCurrentPath(): string {
 }
 /**
  * * 获取节点信息
- * @param queryNode 节点名称 .class #id
- * @param _this 当前this，小程序兼容
+ * @param queryNode 节点标识 .class #id
+ * @param _this 传入当前this，以兼容小程序
  * @returns
  */
 export function getRect(queryNode: string, _this?: any): Promise<GetRectRes> {
@@ -139,8 +139,8 @@ export interface GetRectRes extends UniApp.NodeInfo {}
 
 /**
  * * 获取节点可见状态
- * @param queryNode 节点名称 .class #id
- * @param _this 当前this，小程序兼容
+ * @param queryNode 节点标识 .class #id
+ * @param _this 传入当前this，以兼容小程序
  * @returns
  */
 export async function isNodeVisible(queryNode: string, _this?: any) {
