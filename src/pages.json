@@ -7,6 +7,12 @@
       }
     },
     {
+      "path": "pages/home/index",
+      "style": {
+        "navigationBarTitleText": "测试"
+      }
+    },
+    {
       "path": "pages/index/index",
       "style": {
         "navigationBarTitleText": "首页"

@@ -1,9 +1,10 @@
 /*
  * @Date: 2023-06-12 20:31:38
- * @LastEditTime: 2023-06-12 21:11:39
+ * @LastEditTime: 2023-06-12 21:22:00
  * @FilePath: /music-client/generatePagesConfig/index.ts
  * 介绍:
  */
+
 import fs from "fs";
 import path from "path";
 import defaultConfig from "./pages.json";
@@ -11,6 +12,10 @@ import defaultConfig from "./pages.json";
 const src = path.join(__dirname, "../src");
 const pagesPath = path.join(src, "/pages");
 const outDir = path.join(src, "/pages.json");
+/**黑名单文件夹 */
+const blacklist = ["/components"];
+/**后缀 */
+const extname = ".vue";
 
 /**将页面配置转换为uniapp配置 */
 function getpageConfig(cfg: PageCfg) {
@@ -32,21 +37,33 @@ interface Page {
   };
 }
 
-const pageNames = fs
-  .readdirSync(pagesPath, { withFileTypes: true })
-  .filter((dirent) => dirent.isDirectory())
-  .map((dirent) => dirent.name);
+const pages: Page[] = [];
 
-const pages: Page[] = pageNames.map((name) => {
-  const pagePath = `pages/${name}/${name}`;
-  const pageFilePath = path.join(pagesPath, name, `${name}.vue`);
-  const pageContent = fs.readFileSync(pageFilePath, "utf-8");
-  const cfg = findPageCfg(pageContent);
-  return {
-    path: pagePath,
-    ...getpageConfig(cfg),
-  };
-});
+function traverseDir(dirPath: string) {
+  const files = fs.readdirSync(dirPath);
+  files.forEach((file) => {
+    const filePath = path.join(dirPath, file);
+    const name = path.basename(file, extname);
+    const pagePath = `pages/${path.relative(pagesPath, dirPath)}/${name}`;
+    if (fs.statSync(filePath).isDirectory()) {
+      if (!checkBlacklist(pagePath)) {
+        traverseDir(filePath);
+      }
+    } else if (path.extname(filePath) === extname) {
+      const pageContent = fs.readFileSync(filePath, "utf-8");
+      const cfg = findPageCfg(pageContent);
+      pages.push({
+        path: pagePath,
+        ...getpageConfig(cfg),
+      });
+    }
+  });
+}
+function checkBlacklist(path: string) {
+  return blacklist.some((v) => path.indexOf(v) + 1);
+}
+
+traverseDir(pagesPath);
 
 /**合成配置对象 */
 const pagesJson = {
