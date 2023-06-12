@@ -6,12 +6,10 @@
 -->
 
 <script setup lang="ts">
-import { apiTest400 } from "@@/api/module/apiTest";
 import { _require } from "@@/utils/tools";
 import { ref } from "vue";
 
 const title = ref("Hello");
-apiTest400();
 </script>
 <template>
   <CpageView>

@@ -6,6 +6,7 @@
 -->
 <script lang="ts" setup>
 import { CtabsForOptions } from "@@/components/common/CtabsFor";
+import { apiWithdrawCoinLogs } from "@@/api/module/list";
 const tabsForOptions = reactive<CtabsForOptions<{ name: string }>>([
   {
     name: "全部",
@@ -37,8 +38,8 @@ function api() {
     <view style="border: red solid 1rpx; height: 200rpx">6666</view>
     <CtabsFor :sticky="true" :options="tabsForOptions">
       <template #default="{ option }">
-        <CrequestList :api="api">
-        
+        <CrequestList :api="apiWithdrawCoinLogs">
+          <template #item="{ item }"> </template>
         </CrequestList>
       </template>
     </CtabsFor>
