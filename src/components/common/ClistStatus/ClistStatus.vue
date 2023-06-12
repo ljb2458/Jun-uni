@@ -40,7 +40,7 @@ function load() {
     <Rdivider
       v-show="props.type === 'next'"
       @click="load"
-      :text="props.message"
+      :text="props.message || '继续加载'"
     />
     <Rdivider v-show="props.type === 'end'" :text="props.message" />
     <Cerror

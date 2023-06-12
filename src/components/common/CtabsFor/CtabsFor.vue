@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-04-21 22:41:03
+ * @LastEditTime: 2023-06-12 16:31:42
  * @FilePath: /music-client/src/components/common/CtabsFor/CtabsFor.vue
  * 介绍:
 -->
@@ -20,20 +20,35 @@ const props = withDefaults(
     options: CtabsForOptions;
     sticky?: Boolean;
     offsetTop?: string;
+    /**懒加载 */
+    lazy?: boolean;
   }>(),
   {
     gap: "var(--gap-md)",
     offsetTop: "0",
+    lazy: true,
   }
 );
 
-const tabsList = computed<CtabsForOptions>(() =>
-  props.options.map((v, key) => ({ ...v, key: v.key || key }))
+const tabsList = computed<CtabsForOptions<{ load: boolean } & AnyObject>>(() =>
+  props.options.map((v, key) => ({
+    ...v,
+    key: v.key || key,
+    load: !props.lazy,
+  }))
 );
 
 const currentSwiper = computed(() => tabsList.value[currentIndex.value]);
 const currentIndex = ref(0);
-
+watch(
+  currentIndex,
+  (newValue) => {
+    tabsList.value[newValue].load = true;
+  },
+  {
+    immediate: true,
+  }
+);
 const contentSwiperItemStyle = reactive<CSSProperties>({
   "--CtabsFor-x": "0%",
 });
@@ -60,8 +75,6 @@ let nodeInfo: GetRectRes;
 /**更新CtabsFor节点信息 */
 function updateNodeInfo() {
   getRect(`#${CtabsForId}`).then((res) => {
-    console.log(res);
-
     nodeInfo = res;
   });
 }
@@ -225,7 +238,12 @@ const platformOffsetTop = computed(() => {
         class="CtabsFor_item"
       >
         <view class="CtabsFor_item_content">
-          <slot name="default" :option="tab" :active="currentSwiper === tab">
+          <slot
+            v-if="tab.load"
+            name="default"
+            :option="tab"
+            :active="currentSwiper === tab"
+          >
           </slot>
         </view>
       </view>

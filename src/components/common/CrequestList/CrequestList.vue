@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-04-24 10:38:17
- * @LastEditTime: 2023-06-12 15:48:13
+ * @LastEditTime: 2023-06-12 16:34:27
  * @FilePath: /music-client/src/components/common/CrequestList/CrequestList.vue
  * 介绍:自动请求分页列表
 -->
@@ -52,7 +52,13 @@ function load(e: LoadParam) {
 }
 </script>
 <template>
-  <Clist class="CrequestList" @load="load" :setup-load="props.setupLoad">
+  <Clist
+    class="CrequestList"
+    :status="state.type"
+    :message="state.message"
+    @load="load"
+    :setup-load="props.setupLoad"
+  >
     <slot>
       <slot
         v-for="(item, index) in data"
@@ -62,13 +68,6 @@ function load(e: LoadParam) {
       >
       </slot>
     </slot>
-    <ClistStatus
-      :type="state.type"
-      :message="state.message"
-      @load="request"
-      @reload="rerequest"
-    >
-    </ClistStatus>
   </Clist>
 </template>
 <style lang="less" scoped></style>
