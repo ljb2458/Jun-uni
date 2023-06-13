@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-06-12 20:31:38
- * @LastEditTime: 2023-06-12 23:34:00
+ * @LastEditTime: 2023-06-13 15:24:25
  * @FilePath: /music-client/generatePagesConfig/index.ts
  * 介绍:
  */
@@ -22,18 +22,21 @@ function getPageConfig(cfg: PageCfg) {
   return {
     style: {
       navigationBarTitleText: cfg.title,
+      enablePullDownRefresh: cfg.enablePullDownRefresh,
     },
   };
 }
 /**页面文件类型 */
 interface PageCfg {
   title?: string;
+  enablePullDownRefresh?: boolean;
 }
 /**配置项类型 */
 interface Page {
   path: string;
   style: {
     navigationBarTitleText?: string;
+    enablePullDownRefresh?: boolean;
   };
 }
 
@@ -78,14 +81,12 @@ console.log("pages.json文件已生成");
 /**找到页面中的页面配置 */
 function findPageCfg(content: string): PageCfg {
   const match = content.match(/<cfg\s+lang="json">([\s\S]*?)<\/cfg>/);
-  if (match) {
-    const jsonStr = match[1].trim();
-    try {
-      return JSON.parse(jsonStr);
-    } catch (err) {
-      console.error(`解析JSON字符串失败：${jsonStr}`);
-      return {};
-    }
+  if (!match) return {};
+  const jsonStr = match[1].trim();
+  try {
+    return JSON.parse(jsonStr);
+  } catch (err) {
+    console.error(`解析JSON字符串失败：${jsonStr}`);
+    return {};
   }
-  return {};
 }

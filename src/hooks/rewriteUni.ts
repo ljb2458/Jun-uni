@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-04-20 18:38:28
- * @LastEditTime: 2023-06-12 11:40:54
+ * @LastEditTime: 2023-06-13 15:34:30
  * @FilePath: /music-client/src/hooks/rewriteUni.ts
  * 介绍:
  */
@@ -138,7 +138,7 @@ export function getRect(queryNode: string, _this?: any): Promise<GetRectRes> {
 export interface GetRectRes extends UniApp.NodeInfo {}
 
 /**
- * * 获取节点可见状态
+ * * 通过位置获取节点可见状态
  * @param queryNode 节点标识 .class #id
  * @param _this 传入当前this，以兼容小程序
  * @returns

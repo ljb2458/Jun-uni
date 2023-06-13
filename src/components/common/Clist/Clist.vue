@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-04-21 21:21:57
- * @LastEditTime: 2023-06-12 15:29:06
- * @FilePath: /music-client/src/components/common/CList/CList.vue
+ * @LastEditTime: 2023-06-13 15:53:34
+ * @FilePath: /music-client/src/components/common/Clist/Clist.vue
  * 介绍:
 -->
 <script lang="ts" setup>
@@ -16,7 +16,8 @@ const props = withDefaults(
     message?: string;
     minHeight?: string;
     setupLoad?: boolean;
-    onReachBottom?: (callback: typeof slideLoad) => void;
+    /**上拉触底事件，一般可不传 */
+    onReachBottom?: (callback: Function) => any;
   }>(),
   {
     minHeight: "70vh",
@@ -29,17 +30,29 @@ if (props.setupLoad) load();
 const ClistId = `Clist${generateUUID()}`;
 const _this = getCurrentInstance();
 const reachBottom = props.onReachBottom || onReachBottom;
-reachBottom(slideLoad);
-
-async function slideLoad() {
-  //防止不活跃的列表加载
-  if (!(await isNodeVisible(`#${ClistId}`, _this))) return;
-  load();
-}
+reachBottom(activeLoad);
 
 const emit = defineEmits<{
   (e: "load", v: LoadParam): void;
 }>();
+
+async function activeLoad() {
+  if (!(await isVisible())) return;
+  load();
+}
+
+async function activeRelad() {
+  console.log('准备重新加载');
+  
+  if (!(await isVisible())) return;
+  console.log('重新加载');
+  reload();
+}
+
+/**判断列表是否在页面中可见 */
+function isVisible() {
+  return isNodeVisible(`#${ClistId}`, _this);
+}
 
 function load() {
   if (props.status === "next") emit("load", { reload: false });
@@ -47,6 +60,7 @@ function load() {
 function reload() {
   if (props.status !== "loading") emit("load", { reload: true });
 }
+defineExpose({ activeLoad, activeRelad, load, reload, isVisible });
 </script>
 <template>
   <view :style="{ minHeight: props.minHeight }" :id="ClistId" class="Clist">

@@ -1,12 +1,13 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-06-12 20:57:43
+ * @LastEditTime: 2023-06-13 15:21:19
  * @FilePath: /music-client/src/pages/home/home.vue
  * 介绍:
 -->
 <cfg lang="json">
 {
-  "title": "主页"
+  "title": "主页",
+  "enablePullDownRefresh": true
 }
 </cfg>
 <script lang="ts" setup>
@@ -36,6 +37,7 @@ function api() {
     }, 3000);
   });
 }
+
 </script>
 
 <template>

@@ -1,20 +1,23 @@
 <!--
  * @Date: 2023-04-24 10:38:17
- * @LastEditTime: 2023-06-12 19:20:44
+ * @LastEditTime: 2023-06-13 16:03:48
  * @FilePath: /music-client/src/components/common/CrequestList/CrequestList.vue
  * 介绍:自动请求分页列表
 -->
 <script lang="ts" setup generic="D extends any[] = any[]">
-import useRequestList, { RequsetParams } from "@@/hooks/useRequestList";
+import useRequestList, { RequsetParams, State } from "@@/hooks/useRequestList";
 import { LoadParam } from "../Clist/index";
 import { Paging, ApiRes } from "@@/api";
+import Clist from "../Clist/Clist.vue";
+import { useClistRef } from "../Clist/index";
+
+type ClistProps = InstanceType<typeof Clist>["$props"];
 
 type Res = ApiRes<Paging.Data<D> | D>;
 interface Req extends Paging.Req {
   [k: string]: any;
 }
 type Api = (data: Req) => Promise<Res> | Res;
-
 const props = withDefaults(
   defineProps<{
     api: Api;
@@ -22,11 +25,32 @@ const props = withDefaults(
     extraParams?: AnyObject;
     isOnePage?: boolean;
     setupLoad?: boolean;
+    /**上拉触底事件，一般可不传 */
+    onReachBottom?: ClistProps["onReachBottom"];
+    /**下拉刷新事件，一般可不传 */
+    onPullDownRefresh?: (callback: Function) => any;
+    /**下拉刷新完成回调，默认uni.stopPullDownRefresh(关闭页面下拉刷新) */
+    pullDownRefreshEnd?: (v?: State) => void;
   }>(),
   {
     setupLoad: true,
   }
 );
+const pullDownRefresh = props.onPullDownRefresh || onPullDownRefresh;
+const pullDownRefreshEnd = props.pullDownRefreshEnd || uni.stopPullDownRefresh;
+pullDownRefresh(pullDownRefreshRequset);
+/**下拉刷新请求 */
+async function pullDownRefreshRequset() {
+  if (!(await isVisible())) return;
+  if (state.value.type === "loading") return;
+  const res = await rerequest();
+  pullDownRefreshEnd(res);
+}
+function load(e: LoadParam) {
+  if (e.reload) return rerequest();
+  request();
+}
+
 const {
   data,
   state,
@@ -52,17 +76,34 @@ defineExpose({
   stateLoading,
   stateNull,
   stateNext,
+
+  ...{ load: _load, activeLoad, activeRelad, reload, isVisible },
 });
-function load(e: LoadParam) {
-  if (e.reload) return rerequest();
-  request();
+
+const ClistRef = useClistRef();
+function activeLoad() {
+  return ClistRef.value?.activeLoad();
+}
+function _load() {
+  return ClistRef.value?.load();
+}
+function activeRelad() {
+  return ClistRef.value?.activeRelad();
+}
+function reload() {
+  return ClistRef.value?.reload();
+}
+function isVisible() {
+  return ClistRef.value?.isVisible();
 }
 </script>
 <template>
   <Clist
     class="CrequestList"
+    ref="ClistRef"
     :status="state.type"
     :message="state.message"
+    :onReachBottom="props.onReachBottom"
     @load="load"
     :setup-load="props.setupLoad"
   >

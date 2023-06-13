@@ -12,7 +12,7 @@ export default function usePaging<D extends any[] = any[]>(
   config?: RequestConfig
 ) {
   /**api请求状态*/
-  const state = ref<GetListDataReturn>({
+  const state = ref<State>({
     type: "next",
     message: "",
   });
@@ -25,7 +25,7 @@ export default function usePaging<D extends any[] = any[]>(
     return await request();
   }
   /**请求分页接口 */
-  async function request(): Promise<GetListDataReturn> {
+  async function request(): Promise<State> {
     try {
       stateLoading();
       /**请求之前执行返回数据 */
@@ -125,7 +125,7 @@ export interface ReqData extends AnyObject {
   page: number;
 }
 /**分页状态 */
-export interface GetListDataReturn {
+export interface State {
   type: StateType;
   /**请求信息 */
   message: string;
