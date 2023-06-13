@@ -31,5 +31,6 @@ declare module '@vue/runtime-core' {
     Rtabs: typeof import('./../../src/components/rewrite/Rtabs/Rtabs.vue')['default']
     Rtag: typeof import('./../../src/components/rewrite/Rtag/Rtag.vue')['default']
     Rtext: typeof import('./../../src/components/rewrite/Rtext/Rtext.vue')['default']
+    Rtransition: typeof import('./../../src/components/rewrite/Rtransition/Rtransition.vue')['default']
   }
 }

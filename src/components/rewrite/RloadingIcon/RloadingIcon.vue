@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { TimingFunction } from "../Rtransition/idnex";
 const props = defineProps<{
   show?: boolean;
   color?: string;
@@ -8,7 +9,7 @@ const props = defineProps<{
   size?: StrNumber;
   textSize?: StrNumber;
   text?: string;
-  timingFunction?: string;
+  timingFunction?: TimingFunction;
   duration?: StrNumber;
   inactiveColor?: string;
 }>();
