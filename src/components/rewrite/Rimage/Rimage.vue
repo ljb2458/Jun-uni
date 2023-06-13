@@ -1,30 +1,17 @@
 <!--
  * @Date: 2023-02-19 21:04:28
- * @LastEditTime: 2023-06-13 17:58:48
+ * @LastEditTime: 2023-06-13 19:25:43
  * @FilePath: /music-client/src/components/rewrite/Rimage/Rimage.vue
  * 介绍:
 -->
 <script lang="ts" setup>
 import pickBy from "lodash/pickBy";
+import { Mode } from "./index";
 
 const props = withDefaults(
   defineProps<{
     src?: string;
-    mode?:
-      | "aspectFill"
-      | "scaleToFill"
-      | "aspectFit"
-      | "widthFix"
-      | "heightFix"
-      | "top"
-      | "bottom"
-      | "center"
-      | "center"
-      | "right"
-      | "top left"
-      | "top right"
-      | "bottom left"
-      | "bottom right";
+    mode?: Mode;
     width?: StrNumber;
     height?: StrNumber;
     shape?: "square" | "circle";

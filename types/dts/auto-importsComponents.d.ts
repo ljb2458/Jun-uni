@@ -28,6 +28,7 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     Rpicker: typeof import('./../../src/components/rewrite/Rpicker/Rpicker.vue')['default']
     Rsticky: typeof import('./../../src/components/rewrite/Rsticky/Rsticky.vue')['default']
+    Rswiper: typeof import('./../../src/components/rewrite/Rswiper/Rswiper.vue')['default']
     Rtabs: typeof import('./../../src/components/rewrite/Rtabs/Rtabs.vue')['default']
     Rtag: typeof import('./../../src/components/rewrite/Rtag/Rtag.vue')['default']
     Rtext: typeof import('./../../src/components/rewrite/Rtext/Rtext.vue')['default']
