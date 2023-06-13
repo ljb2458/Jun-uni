@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-02-19 18:44:54
- * @LastEditTime: 2023-03-04 16:21:00
- * @FilePath: /my-vue3-project/src/components/rewrite/Minput.vue
+ * @LastEditTime: 2023-06-13 17:29:30
+ * @FilePath: /music-client/src/components/rewrite/Rinput/Rinput.vue
  * 介绍:
 -->
 <!--
@@ -74,13 +74,13 @@ function onChangeType() {
 
 <template>
   <u-input
-  class="Rinput"
+    class="Rinput"
     v-bind="$props"
     v-model="$moduleValue"
     :placeholder="props.placeholder"
     :password="config.isPassword"
   >
-    <template #suffix>
+    <template v-if="$slots.right" #suffix>
       <slot name="right">
         <u-icon
           v-if="props.type == 'pwd'"
@@ -90,7 +90,7 @@ function onChangeType() {
         </u-icon>
       </slot>
     </template>
-    <template #prefix>
+    <template v-if="$slots.left" #prefix>
       <slot name="left"> </slot>
     </template>
   </u-input>
