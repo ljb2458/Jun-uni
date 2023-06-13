@@ -1,10 +1,12 @@
 <!--
  * @Date: 2023-02-19 21:04:28
- * @LastEditTime: 2023-02-22 22:10:54
- * @FilePath: /my-vue3-project/src/components/rewrite/MImage.vue
+ * @LastEditTime: 2023-06-13 17:58:48
+ * @FilePath: /music-client/src/components/rewrite/Rimage/Rimage.vue
  * 介绍:
 -->
 <script lang="ts" setup>
+import pickBy from "lodash/pickBy";
+
 const props = withDefaults(
   defineProps<{
     src?: string;
@@ -48,7 +50,7 @@ const emit = defineEmits<{
     class="Rimage"
     @load="emit('load')"
     @error="(e:any) => emit('error', e)"
-    v-bind="props"
+    v-bind="pickBy(props)"
   >
     <template v-slot:loading>
       <slot name="loading">

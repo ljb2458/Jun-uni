@@ -1,11 +1,13 @@
 <!--
  * @Date: 2023-06-13 16:30:49
- * @LastEditTime: 2023-06-13 16:44:26
+ * @LastEditTime: 2023-06-13 17:59:25
  * @FilePath: /music-client/src/components/rewrite/Rcalendar/Rcalendar.vue
  * 介绍:
 -->
 <script lang="ts" setup>
 import { CustomListItem } from "./index";
+import pickBy from "lodash/pickBy";
+
 const props = defineProps<{
   title?: string;
   showTitle?: boolean;
@@ -56,7 +58,7 @@ defineExpose({ setFormatter });
 <template>
   <u-calendar
     ref="calendarRef"
-    :="props"
+    :="pickBy(props)"
     @confirm="(e:any) => emit('confirm', e)"
     @close="(e:any) => emit('close', e)"
   ></u-calendar>

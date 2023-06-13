@@ -1,11 +1,12 @@
 <!--
  * @Date: 2023-06-13 16:10:45
- * @LastEditTime: 2023-06-13 16:19:39
+ * @LastEditTime: 2023-06-13 17:56:17
  * @FilePath: /music-client/src/components/rewrite/Rtag/Rtag.vue
  * 介绍:
 -->
 <script lang="ts" setup>
 import { ColorTheme } from "@@/components/types";
+import pickBy from "lodash/pickBy";
 const props = defineProps<{
   type?: ColorTheme;
   disabled?: boolean;
@@ -34,7 +35,7 @@ const emit = defineEmits<{
 </script>
 <template>
   <u-tag
-    :="props"
+    :="pickBy(props)"
     @click="(e:any) => emit('click', e)"
     @close="(e:any) => emit('close', e)"
   >

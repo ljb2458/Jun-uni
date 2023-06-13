@@ -1,12 +1,14 @@
 <!--
  * @Date: 2023-04-21 18:13:53
- * @LastEditTime: 2023-04-21 20:20:32
+ * @LastEditTime: 2023-06-13 18:00:14
  * @FilePath: /music-client/src/components/rewrite/Rtabs/Rtabs.vue
  * 介绍:
 -->
 <script lang="ts" setup>
 import { RtabsList, RtabsListItem } from "./index";
 import { StyleValue } from "vue";
+import pickBy from "lodash/pickBy";
+
 const props = withDefaults(
   defineProps<{
     list: RtabsList;
@@ -44,7 +46,7 @@ const emit = defineEmits<{
 </script>
 <template>
   <u-tabs
-    v-bind="props"
+    v-bind="pickBy(props)"
     @click="(e:any) => emit('click',e)"
     @change="(e:any) => emit('change',e)"
   >

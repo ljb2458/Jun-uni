@@ -1,10 +1,11 @@
 <!--
  * @Date: 2023-04-21 23:49:40
- * @LastEditTime: 2023-04-21 23:59:34
+ * @LastEditTime: 2023-06-13 17:59:01
  * @FilePath: /music-client/src/components/rewrite/Rempty/Rempty.vue
  * 介绍:
 -->
 <script lang="ts" setup>
+import pickBy from "lodash/pickBy";
 const props = withDefaults(
   defineProps<{
     mode?:
@@ -39,6 +40,6 @@ const props = withDefaults(
 );
 </script>
 <template>
-  <u-empty v-bind="props"><slot></slot> </u-empty>
+  <u-empty v-bind="pickBy(props)"><slot></slot> </u-empty>
 </template>
 <style lang="less" scoped></style>

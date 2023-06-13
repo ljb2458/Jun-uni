@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import pickBy from "lodash/pickBy";
+
 const props = defineProps<{
   color?: string;
   loadingMode?: "circle" | "semicircle";
@@ -12,6 +14,6 @@ const props = defineProps<{
 }>();
 </script>
 <template>
-  <u-loading-page :="props"></u-loading-page>
+  <u-loading-page :="pickBy(props)"></u-loading-page>
 </template>
 <style lang="scss" scoped></style>

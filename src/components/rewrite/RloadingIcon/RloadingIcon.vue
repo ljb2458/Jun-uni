@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import pickBy from "lodash/pickBy";
+
 import { TimingFunction } from "../Rtransition/idnex";
 const props = defineProps<{
   show?: boolean;
@@ -15,6 +17,6 @@ const props = defineProps<{
 }>();
 </script>
 <template>
-  <u-loading-icon :="props"></u-loading-icon>
+  <u-loading-icon :="pickBy(props)"></u-loading-icon>
 </template>
 <style lang="scss" scoped></style>

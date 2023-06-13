@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import pickBy from "lodash/pickBy";
+
 const props = withDefaults(
   defineProps<{
     show?: boolean;
@@ -21,6 +23,6 @@ const props = withDefaults(
 );
 </script>
 <template>
-  <u-loading-icon v-bind="props"></u-loading-icon>
+  <u-loading-icon v-bind="pickBy(props)"></u-loading-icon>
 </template>
 <style lang="scss" scoped></style>

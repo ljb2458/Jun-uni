@@ -1,10 +1,11 @@
 <!--
  * @Date: 2023-04-20 18:38:28
- * @LastEditTime: 2023-06-13 16:14:15
+ * @LastEditTime: 2023-06-13 17:56:48
  * @FilePath: /music-client/src/components/rewrite/Rtext/Rtext.vue
  * 介绍:
 -->
 <script lang="ts" setup>
+import pickBy from "lodash/pickBy";
 import type { StyleValue } from "vue";
 import { ColorTheme } from "@@/components/types";
 const props = withDefaults(
@@ -38,7 +39,7 @@ const props = withDefaults(
 </script>
 
 <template>
-  <u-text class="Rtext" v-bind="props"><slot></slot></u-text>
+  <u-text class="Rtext" v-bind="pickBy(props)"><slot></slot></u-text>
 </template>
 
 <style lang="scss" scoped></style>

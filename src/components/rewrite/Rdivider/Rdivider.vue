@@ -5,6 +5,8 @@
  * 介绍:
 -->
 <script lang="ts" setup>
+import pickBy from "lodash/pickBy";
+
 const props = defineProps<{
   /**是否虚线 */
   dashed?: boolean;
@@ -21,7 +23,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <u-divider class="Rdivider" v-bind="props"></u-divider>
+  <u-divider class="Rdivider" v-bind="pickBy(props)"></u-divider>
 </template>
 
 <style lang="scss" scoped></style>
