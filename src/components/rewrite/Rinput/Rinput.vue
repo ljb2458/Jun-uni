@@ -1,13 +1,7 @@
 <!--
  * @Date: 2023-02-19 18:44:54
- * @LastEditTime: 2023-06-13 17:29:30
+ * @LastEditTime: 2023-06-13 17:32:10
  * @FilePath: /music-client/src/components/rewrite/Rinput/Rinput.vue
- * 介绍:
--->
-<!--
- * @Date: 2023-02-19 18:44:54
- * @LastEditTime: 2023-02-19 20:45:10
- * @FilePath: /my-vue3-project/src/components/rewrite/Input/MInput.vue
  * 介绍:
 -->
 <script lang="ts" setup>
