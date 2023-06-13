@@ -1,8 +1,15 @@
+<!--
+ * @Date: 2023-04-20 18:38:28
+ * @LastEditTime: 2023-06-13 16:14:15
+ * @FilePath: /music-client/src/components/rewrite/Rtext/Rtext.vue
+ * 介绍:
+-->
 <script lang="ts" setup>
 import type { StyleValue } from "vue";
+import { ColorTheme } from "@@/components/types";
 const props = withDefaults(
   defineProps<{
-    type: "info" | "primary" | "error" | "warning" | "success";
+    type: ColorTheme;
     show: boolean;
     text: string;
     /**前置图标 */

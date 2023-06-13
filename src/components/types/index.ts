@@ -10,3 +10,4 @@
 // export type JustifyItems = Property.JustifyItems;
 // export type AlignItems = Property.AlignItems;
 import {} from "csstype";
+export type ColorTheme = "info" | "primary" | "error" | "warning" | "success";

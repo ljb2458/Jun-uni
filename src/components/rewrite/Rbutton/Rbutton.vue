@@ -1,14 +1,15 @@
 <!--
  * @Date: 2023-02-19 20:46:35
- * @LastEditTime: 2023-06-12 14:43:59
+ * @LastEditTime: 2023-06-13 16:13:20
  * @FilePath: /music-client/src/components/rewrite/Rbutton/Rbutton.vue
  * 介绍:
 -->
 <script lang="ts" setup>
 import omit from "lodash/omit";
+import { ColorTheme } from "../../types/index";
 const props = defineProps<{
   text?: string;
-  type?: "info" | "primary" | "error" | "warning" | "success";
+  type?: ColorTheme;
   /**按钮的大小 */
   size?: "normal" | "large" | "mini";
   /**按钮外观形状 */
