@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-06-13 18:01:56
- * @LastEditTime: 2023-06-13 19:43:43
+ * @LastEditTime: 2023-06-13 20:00:32
  * @FilePath: /music-client/src/components/rewrite/Rswiper/Rswiper.vue
  * 介绍:
 -->
@@ -11,41 +11,41 @@ import { ListItem } from "./index";
 import pickBy from "lodash/pickBy";
 
 const props = defineProps<{
-  indicator: boolean;
+  indicator?: boolean;
   /**指示器激活的颜色 */
-  indicatorActiveColor: string;
+  indicatorActiveColor?: string;
   /**指示器非激活颜色 */
-  indicatorInactiveColor: string;
-  indicatorStyle: StyleValue;
-  indicatorMode: "line" | "dot";
-  list: ListItem;
+  indicatorInactiveColor?: string;
+  indicatorStyle?: StyleValue;
+  indicatorMode?: "line" | "dot";
+  list?: ListItem;
   /**是否自动切换 */
-  autoplay: boolean;
+  autoplay?: boolean;
   /**current */
-  current: StrNumber;
+  current?: StrNumber;
   /**当前所在滑块的 item-id ，不能与 current 被同时指定 */
-  currentItemId: string;
-  interval: StrNumber;
-  duration: StrNumber;
-  circular: boolean;
+  currentItemId?: string;
+  interval?: StrNumber;
+  duration?: StrNumber;
+  circular?: boolean;
   /**前边距，可用于露出前一项的一小部分，nvue和支付宝不支持 */
-  previousMargin: StrNumber;
+  previousMargin?: StrNumber;
   /**后边距，可用于露出后一项的一小部分，nvue和支付宝不支持 */
-  nextMargin: StrNumber;
-  acceleration: boolean;
+  nextMargin?: StrNumber;
+  acceleration?: boolean;
   /**同时显示的滑块数量，nvue、支付宝小程序不支持 */
-  displayMultipleItems: number;
+  displayMultipleItems?: number;
   /**指定swiper切换缓动动画类型， 只对微信小程序有效 */
-  easingFunction: string;
+  easingFunction?: string;
   /**list数组中指定对象的目标属性名 */
-  keyName: string;
+  keyName?: string;
   /**图片显示模式 */
-  imgMode: Mode;
-  height: StrNumber;
-  bgColor: string;
-  radius: StrNumber;
-  loading: boolean;
-  showTitle: boolean;
+  imgMode?: Mode;
+  height?: StrNumber;
+  bgColor?: string;
+  radius?: StrNumber;
+  loading?: boolean;
+  showTitle?: boolean;
 }>();
 const emit = defineEmits<{
   (e: "click", v: number): void;

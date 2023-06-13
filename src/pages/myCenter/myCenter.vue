@@ -9,10 +9,13 @@
   "title": "个人中心"
 }
 </cfg>
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const _switch = ref(false);
+</script>
 
 <template>
-  <CpageView> 
+  <CpageView>
+    <Rswitch v-model="_switch"> </Rswitch>
   </CpageView>
 </template>
 
