@@ -1,5 +1,6 @@
 <script lang="ts" setup generic="D">
 import { Column, ConfirmParam, ChangeParam } from "./index";
+import pickBy from "lodash/pickBy";
 const props = defineProps<{
   show?: boolean;
   /**是否显示顶部的操作栏 */
@@ -12,8 +13,9 @@ const props = defineProps<{
   confirmText?: string;
   cancelColor?: string;
   confirmColor?: string;
+  /**每列中可见选项的数量 */
   visibleItemCount?: StrNumber;
-  keyName?: string;
+  keyName?: keyof D;
   closeOnClickOverlay?: boolean;
   /**[1, 3]表示第一列默认选中第2个，第二列默认选中第4个 */
   defaultIndex?: number[];
@@ -31,7 +33,7 @@ const pickerRef = ref<AnyObject | undefined>();
 function setIndexs(index: number, setLastIndex: number) {
   pickerRef.value?.setIndexs(index, setLastIndex);
 }
-function setColumnValues(columnIndex: number, values: Column) {
+function setColumnValues<_D = D>(columnIndex: number, values: Column<D>) {
   pickerRef.value?.setColumnValues(columnIndex, values);
 }
 defineExpose({ setIndexs, setColumnValues });
@@ -39,7 +41,7 @@ defineExpose({ setIndexs, setColumnValues });
 <template>
   <u-picker
     ref="pickerRef"
-    :="props"
+    :="pickBy(props)"
     @close="(e:any) => emit('close')"
     @cancel="(e:any) => emit('cancel')"
     @confirm="(e:any) => emit('confirm',e)"
