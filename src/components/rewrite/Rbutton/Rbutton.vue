@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 20:46:35
- * @LastEditTime: 2023-06-14 20:06:46
+ * @LastEditTime: 2023-06-14 20:21:16
  * @FilePath: /music-client/src/components/rewrite/Rbutton/Rbutton.vue
  * 介绍:
 -->
@@ -40,7 +40,7 @@ const $props = computed(() => filterParams(props));
     :color="props.bg"
     :style="{ color, minWidgth }"
   >
-    <slot> </slot>
+    <slot>{{ props.text }}</slot>
   </u-button>
 </template>
 
