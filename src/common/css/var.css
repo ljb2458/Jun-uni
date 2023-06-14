@@ -14,7 +14,7 @@ page {
   --T-S-xl: 48rpx;
   --T-S-xxl: 64rpx;
   /**主色*/
-  --C-M1: #36bdf7;
+  --C-M1: #3c9cff;
   --C-M2: #a33ffb;
   --C-M3: #08c8d4;
   --C-M4: #eb8bf9;
@@ -25,6 +25,7 @@ page {
   --C-fail: #d63031;
   --C-await: #3498db;
   --C-warn: #e67e22;
+  --C-info: #3498db;
   /**透明色*/
   --C-OB0: rgba(0, 0, 0, 0);
   --C-OB1: rgba(0, 0, 0, 0.1);

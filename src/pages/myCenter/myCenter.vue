@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-06-13 18:00:59
+ * @LastEditTime: 2023-06-14 16:48:06
  * @FilePath: /music-client/src/pages/myCenter/myCenter.vue
  * 介绍:
 -->
@@ -10,13 +10,12 @@
 }
 </cfg>
 <script lang="ts" setup>
-const _switch = ref(false);
+import notify from "@@/layout/notify";
+notify.primary("你好");
 </script>
 
 <template>
-  <CpageView>
-    <Rswitch v-model="_switch"> </Rswitch>
-  </CpageView>
+  <CpageView> </CpageView>
 </template>
 
 <style lang="scss" scoped></style>

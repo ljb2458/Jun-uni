@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-18 20:06:36
- * @LastEditTime: 2023-04-21 20:28:54
+ * @LastEditTime: 2023-06-14 16:18:48
  * @FilePath: /music-client/src/App.vue
  * 介绍:
 -->
@@ -21,12 +21,12 @@ onHide(() => {
 </script>
 <style lang="scss">
 @import "uview-plus/index.scss";
-@import "@@/common/effects.scss";
-@import "@@/common/text.scss";
-@import "@@/common/layout.scss";
-@import "@@/common/transition.scss";
-@import "@@/common/color.scss";
-@import "@@/common/init.css";
-@import "@@/common/var.css";
-@import "@@/common/reset.scss";
+@import "@@/common/css/effects.scss";
+@import "@@/common/css/text.scss";
+@import "@@/common/css/layout.scss";
+@import "@@/common/css/transition.scss";
+@import "@@/common/css/color.scss";
+@import "@@/common/css/init.css";
+@import "@@/common/css/var.css";
+@import "@@/common/css/reset.scss";
 </style>
