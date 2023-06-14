@@ -6,7 +6,7 @@
 -->
 <script lang="ts" setup>
 import omit from "lodash/omit";
-import pickBy from "lodash/pickBy";
+import { filterParams } from "@@/utils/tools/object";
 
 import { ColorTheme } from "../../types/index";
 const props = defineProps<{
@@ -31,7 +31,7 @@ const props = defineProps<{
   throttleTime?: string;
   minWidgth?: string;
 }>();
-const $props = computed(() => pickBy(omit(props, ["color"])));
+const $props = computed(() => filterParams(omit(props, ["color"])));
 </script>
 
 <template>

@@ -1,12 +1,11 @@
 <!--
  * @Date: 2023-06-13 19:50:26
- * @LastEditTime: 2023-06-13 20:19:38
+ * @LastEditTime: 2023-06-14 13:01:01
  * @FilePath: /music-client/src/components/rewrite/Rswitch/Rswitch.vue
  * 介绍:
 -->
 <script lang="ts" setup>
-import pickBy from "lodash/pickBy";
-import omit from "lodash/omit";
+import { filterParams } from "@@/utils/tools/object";
 
 const props = defineProps<{
   loading?: boolean;
@@ -36,7 +35,7 @@ const modelValue = computed({
     emit("update:modelValue", v || false);
   },
 });
-const $props = computed(() => pickBy(omit(props, ["modelValue"])));
+const $props = computed(() => filterParams(props));
 </script>
 <template>
   <u-switch

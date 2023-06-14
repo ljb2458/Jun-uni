@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import { TimingFunction } from "./idnex";
 import type { StyleValue } from "vue";
-import pickBy from "lodash/pickBy";
+import { filterParams } from "@@/utils/tools/object";
 const props = defineProps<{
   show: boolean;
   mode: "mode" | true;
@@ -27,7 +27,7 @@ const emit = defineEmits<{
 </script>
 <template>
   <u-transition
-    :="pickBy(props)"
+    :="filterParams(props)"
     @beforeEnter="emit('beforeEnter')"
     @enter="emit('enter')"
     @afterEnter="emit('afterEnter')"

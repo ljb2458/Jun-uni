@@ -5,7 +5,7 @@
  * 介绍:
 -->
 <script lang="ts" setup>
-import pickBy from "lodash/pickBy";
+import { filterParams } from "@@/utils/tools/object";
 import type { StyleValue } from "vue";
 import { ColorTheme } from "@@/components/types";
 const props = withDefaults(
@@ -39,7 +39,7 @@ const props = withDefaults(
 </script>
 
 <template>
-  <u-text class="Rtext" v-bind="pickBy(props)"><slot></slot></u-text>
+  <u-text class="Rtext" v-bind="filterParams(props)"><slot></slot></u-text>
 </template>
 
 <style lang="scss" scoped></style>

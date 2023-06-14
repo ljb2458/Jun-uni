@@ -1,17 +1,17 @@
 <!--
  * @Date: 2023-04-21 18:13:53
- * @LastEditTime: 2023-06-13 18:00:14
+ * @LastEditTime: 2023-06-14 13:02:02
  * @FilePath: /music-client/src/components/rewrite/Rtabs/Rtabs.vue
  * 介绍:
 -->
-<script lang="ts" setup>
-import { RtabsList, RtabsListItem } from "./index";
+<script lang="ts" setup generic="Item extends RtabsListItem">
+import { RtabsListItem } from "./index";
 import { StyleValue } from "vue";
-import pickBy from "lodash/pickBy";
+import { filterParams } from "@@/utils/tools/object";
 
 const props = withDefaults(
   defineProps<{
-    list: RtabsList;
+    list: Item;
     duration?: StrNumber;
     /**滑块颜色 */
     lineColor?: string;
@@ -30,7 +30,7 @@ const props = withDefaults(
     /**当前选中标签的索引 */
     current?: StrNumber;
     /**从list元素对象中读取的键名 */
-    keyName?: string;
+    keyName?: keyof Item;
   }>(),
   {
     lineHeight: "3rpx",
@@ -46,7 +46,7 @@ const emit = defineEmits<{
 </script>
 <template>
   <u-tabs
-    v-bind="pickBy(props)"
+    v-bind="filterParams(props)"
     @click="(e:any) => emit('click',e)"
     @change="(e:any) => emit('change',e)"
   >

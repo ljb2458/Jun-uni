@@ -6,7 +6,7 @@
 -->
 <script lang="ts" setup>
 import { CustomListItem } from "./index";
-import pickBy from "lodash/pickBy";
+import { filterParams } from "@@/utils/tools/object";
 
 const props = defineProps<{
   title?: string;
@@ -58,7 +58,7 @@ defineExpose({ setFormatter });
 <template>
   <u-calendar
     ref="calendarRef"
-    :="pickBy(props)"
+    :="filterParams(props)"
     @confirm="(e:any) => emit('confirm', e)"
     @close="(e:any) => emit('close', e)"
   ></u-calendar>

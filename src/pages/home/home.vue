@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-06-13 15:21:19
+ * @LastEditTime: 2023-06-14 12:41:48
  * @FilePath: /music-client/src/pages/home/home.vue
  * 介绍:
 -->
@@ -11,17 +11,19 @@
 }
 </cfg>
 <script lang="ts" setup>
-import { CtabsForOptions } from "@@/components/common/CtabsFor";
 import { apiWithdrawCoinLogs } from "@@/api/module/list";
-const tabsForOptions = reactive<CtabsForOptions<{ name: string }>>([
+const tabsForOptions = reactive([
   {
     name: "全部",
+    abc: "",
   },
   {
     name: "商品1",
+    abc: "",
   },
   {
     name: "商品2",
+    abc: "",
   },
 ]);
 
@@ -37,7 +39,6 @@ function api() {
     }, 3000);
   });
 }
-
 </script>
 
 <template>

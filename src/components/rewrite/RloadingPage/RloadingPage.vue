@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import pickBy from "lodash/pickBy";
+import { filterParams } from "@@/utils/tools/object";
 
 const props = defineProps<{
   color?: string;
@@ -14,6 +14,6 @@ const props = defineProps<{
 }>();
 </script>
 <template>
-  <u-loading-page :="pickBy(props)"></u-loading-page>
+  <u-loading-page :="filterParams(props)"></u-loading-page>
 </template>
 <style lang="scss" scoped></style>

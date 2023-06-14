@@ -5,7 +5,7 @@
  * 介绍:
 -->
 <script lang="ts" setup>
-import pickBy from "lodash/pickBy";
+import { filterParams } from "@@/utils/tools/object";
 import omit from "lodash/omit";
 
 const props = withDefaults(
@@ -42,7 +42,7 @@ const props = withDefaults(
     border: "bottom",
   }
 );
-const $props = computed(() => pickBy(omit(props, ["moduleValue"])));
+const $props = computed(() => filterParams(omit(props, ["moduleValue"])));
 const config = reactive({
   isPassword: props.type == "pwd",
 });

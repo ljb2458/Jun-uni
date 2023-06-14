@@ -5,7 +5,7 @@
  * 介绍:
 -->
 <script lang="ts" setup>
-import pickBy from "lodash/pickBy";
+import { filterParams } from "@@/utils/tools/object";
 import { Mode } from "./index";
 
 const props = withDefaults(
@@ -37,7 +37,7 @@ const emit = defineEmits<{
     class="Rimage"
     @load="emit('load')"
     @error="(e:any) => emit('error', e)"
-    v-bind="pickBy(props)"
+    v-bind="filterParams(props)"
   >
     <template v-slot:loading>
       <slot name="loading">

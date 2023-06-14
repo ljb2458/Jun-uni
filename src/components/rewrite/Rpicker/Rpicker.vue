@@ -1,6 +1,6 @@
 <script lang="ts" setup generic="D">
 import { Column, ConfirmParam, ChangeParam } from "./index";
-import pickBy from "lodash/pickBy";
+import { filterParams } from "@@/utils/tools/object";
 const props = defineProps<{
   show?: boolean;
   /**是否显示顶部的操作栏 */
@@ -41,7 +41,7 @@ defineExpose({ setIndexs, setColumnValues });
 <template>
   <u-picker
     ref="pickerRef"
-    :="pickBy(props)"
+    :="filterParams(props)"
     @close="(e:any) => emit('close')"
     @cancel="(e:any) => emit('cancel')"
     @confirm="(e:any) => emit('confirm',e)"

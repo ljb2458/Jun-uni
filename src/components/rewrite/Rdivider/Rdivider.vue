@@ -5,7 +5,7 @@
  * 介绍:
 -->
 <script lang="ts" setup>
-import pickBy from "lodash/pickBy";
+import { filterParams } from "@@/utils/tools/object";
 
 const props = defineProps<{
   /**是否虚线 */
@@ -23,7 +23,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <u-divider class="Rdivider" v-bind="pickBy(props)"></u-divider>
+  <u-divider class="Rdivider" v-bind="filterParams(props)"></u-divider>
 </template>
 
 <style lang="scss" scoped></style>

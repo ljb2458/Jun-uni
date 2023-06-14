@@ -1,15 +1,15 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-06-12 16:31:42
+ * @LastEditTime: 2023-06-14 12:41:23
  * @FilePath: /music-client/src/components/common/CtabsFor/CtabsFor.vue
  * 介绍:
 -->
-<script lang="ts" setup>
+<script lang="ts" setup generic="Item extends CtabsForOptionsItem">
 import { unitPercent } from "@@/utils/tools/css";
 import { getRect, GetRectRes } from "@@/hooks/rewriteUni";
 import { CSSProperties } from "vue";
 import dayjs from "dayjs";
-import { CtabsForOptions } from "./index";
+import { CtabsForOptionsItem } from "./index";
 import { generateUUID } from "@@/utils/tools/generate";
 import { getPlatform } from "@@/hooks/rewriteUni";
 
@@ -17,11 +17,12 @@ const props = withDefaults(
   defineProps<{
     /**间距 */
     gap?: string;
-    options: CtabsForOptions;
+    options: Item[];
     sticky?: Boolean;
     offsetTop?: string;
     /**懒加载 */
     lazy?: boolean;
+    titleKeyName?: keyof TabsListItem;
   }>(),
   {
     gap: "var(--gap-md)",
@@ -29,8 +30,8 @@ const props = withDefaults(
     lazy: true,
   }
 );
-
-const tabsList = computed<CtabsForOptions<{ load: boolean } & AnyObject>>(() =>
+type TabsListItem = Item & { load: boolean; key: StrNumber };
+const tabsList = computed<Array<TabsListItem>>(() =>
   props.options.map((v, key) => ({
     ...v,
     key: v.key || key,
@@ -209,7 +210,8 @@ const platformOffsetTop = computed(() => {
     >
       <slot name="title-top"></slot>
       <Rtabs
-        :list="tabsList"
+        :list="(tabsList as any)"
+        :key-name="(titleKeyName as any)"
         :current="currentIndex"
         @change="(e) => swiperToByIndex(e.index)"
       >
