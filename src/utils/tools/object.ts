@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-03-23 15:11:16
- * @LastEditTime: 2023-06-14 12:59:30
+ * @LastEditTime: 2023-06-14 14:56:51
  * @FilePath: /music-client/src/utils/tools/object.ts
  * 介绍:
  */
@@ -43,13 +43,14 @@ export function objToQuery(obj: object, noFilterEmpty?: boolean): string {
  * @param {*} obj
  * @return {*}
  */
-export function filterParams<D extends object = {}>(obj: D): Partial<D> {
+export function filterParams<D extends object = {}>(
+  obj: D,
+  omit: any[] = [undefined, null, ""]
+): Partial<D> {
   let newObj: Partial<D> = {};
   for (const key in obj) {
-    if (
-      (obj[key] === 0 || obj[key] === false || obj[key]) &&
-      obj[key]?.toString().replace(/(^\s*)|(\s*$)/g, "") !== ""
-    ) {
+    const value = obj[key];
+    if (!omit.includes(value)) {
       newObj[key] = obj[key];
     }
   }
