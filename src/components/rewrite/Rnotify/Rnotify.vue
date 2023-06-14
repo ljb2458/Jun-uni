@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-06-14 15:04:30
- * @LastEditTime: 2023-06-14 20:15:34
+ * @LastEditTime: 2023-06-14 20:59:50
  * @FilePath: /music-client/src/components/rewrite/Rnotify/Rnotify.vue
  * 介绍:
 -->
@@ -15,14 +15,17 @@ const cfg = reactive(initCfg());
 function initCfg() {
   const style: StyleValue = {};
   const type: ColorTheme = "primary";
+  const msgStyle: StyleValue = {};
   return {
     type,
     style,
+    msgStyle,
     message: "",
   };
 }
 function show(message: string, config?: ShowParam) {
   cfg.style = config?.style as any;
+  cfg.msgStyle = config?.msgStyle as any;
   cfg.message = message;
   const _cfg: ShowParam = {
     duration: defaultDuration,
@@ -59,7 +62,12 @@ function success(message: string, config?: ShowParam) {
     ref="notifyRef"
   >
     <template #icon>
-      <slot><view v-html="cfg.message"></view></slot>
+      <slot></slot>
+      <view
+        v-html="cfg.message"
+        :style="cfg.msgStyle"
+        class="Rnotify_message"
+      ></view>
     </template>
   </u-notify>
 </template>
@@ -67,12 +75,15 @@ function success(message: string, config?: ShowParam) {
 .Rnotify {
   color: var(--C-B1);
   &::v-deep .u-notify {
-    background: initial;
+    background: inherit;
     .u-notify__warpper__text {
-      font-size: initial !important;
-      color: initial !important;
+      font-size: inherit !important;
+      color: inherit !important;
     }
   }
+}
+.Rnotify_message {
+  color: var(--C-B1);
 }
 .Rnotify__info {
   background-color: var(--C-info);

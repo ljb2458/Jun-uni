@@ -4,6 +4,7 @@ import type { StyleValue } from "vue";
 
 export interface ShowParam {
   style?: StyleValue;
+  msgStyle?: StyleValue;
   top?: StrNumber;
   type?: ColorTheme;
   message?: string;

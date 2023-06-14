@@ -1,12 +1,14 @@
 /*
  * @Date: 2023-02-19 18:22:42
- * @LastEditTime: 2023-04-21 17:38:28
- * @FilePath: /music-client/src/common/init.css
+ * @LastEditTime: 2023-06-14 20:52:01
+ * @FilePath: /music-client/src/common/css/init.css
  * 介绍:
  */
 view,
 text,
-button {
+button,
+[class],
+[data] {
   padding: 0;
   margin: 0;
   box-sizing: border-box;

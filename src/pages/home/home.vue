@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-06-14 20:34:08
+ * @LastEditTime: 2023-06-14 20:40:18
  * @FilePath: /music-client/src/pages/home/home.vue
  * 介绍:
 -->
@@ -13,9 +13,6 @@
 <script lang="ts" setup>
 import { apiWithdrawCoinLogs } from "@@/api/module/list";
 import notify from "@@/layout/notify";
-setTimeout(() => {
-  notify.primary("十秒后的通知");
-}, 10000);
 
 const tabsForOptions = reactive([
   {
@@ -31,11 +28,16 @@ const tabsForOptions = reactive([
     abc: "",
   },
 ]);
+function test() {
+  notify.primary("这是一个通知", { duration: 0 });
+}
 </script>
 
 <template>
   <CpageView>
-    <view style="border: red solid 1rpx; height: 200rpx">6666</view>
+    <view @click="test" style="border: red solid 1rpx; height: 200rpx">
+      6666
+    </view>
     <CtabsFor :sticky="true" :options="tabsForOptions">
       <template #default="{ option }">
         <CrequestList :api="apiWithdrawCoinLogs">
