@@ -6,7 +6,6 @@
 -->
 <script lang="ts" setup>
 import { filterParams } from "@@/utils/tools/object";
-import omit from "lodash/omit";
 
 const props = withDefaults(
   defineProps<{
@@ -42,7 +41,7 @@ const props = withDefaults(
     border: "bottom",
   }
 );
-const $props = computed(() => filterParams(omit(props, ["moduleValue"])));
+const $props = computed(() => filterParams(props));
 const config = reactive({
   isPassword: props.type == "pwd",
 });

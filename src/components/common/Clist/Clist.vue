@@ -41,11 +41,8 @@ async function activeLoad() {
   load();
 }
 
-async function activeRelad() {
-  console.log('准备重新加载');
-  
+async function activeRelad() {  
   if (!(await isVisible())) return;
-  console.log('重新加载');
   reload();
 }
 

@@ -1,11 +1,10 @@
 <!--
  * @Date: 2023-02-19 20:46:35
- * @LastEditTime: 2023-06-13 17:59:43
+ * @LastEditTime: 2023-06-14 20:06:46
  * @FilePath: /music-client/src/components/rewrite/Rbutton/Rbutton.vue
  * 介绍:
 -->
 <script lang="ts" setup>
-import omit from "lodash/omit";
 import { filterParams } from "@@/utils/tools/object";
 
 import { ColorTheme } from "../../types/index";
@@ -31,7 +30,7 @@ const props = defineProps<{
   throttleTime?: string;
   minWidgth?: string;
 }>();
-const $props = computed(() => filterParams(omit(props, ["color"])));
+const $props = computed(() => filterParams(props));
 </script>
 
 <template>

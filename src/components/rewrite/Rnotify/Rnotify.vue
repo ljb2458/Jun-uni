@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-06-14 15:04:30
- * @LastEditTime: 2023-06-14 16:23:15
+ * @LastEditTime: 2023-06-14 20:15:34
  * @FilePath: /music-client/src/components/rewrite/Rnotify/Rnotify.vue
  * 介绍:
 -->
@@ -25,7 +25,6 @@ function show(message: string, config?: ShowParam) {
   cfg.style = config?.style as any;
   cfg.message = message;
   const _cfg: ShowParam = {
-    safeAreaInsetTop: true,
     duration: defaultDuration,
     ...config,
   };

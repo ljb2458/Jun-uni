@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-06-12 12:17:13
- * @LastEditTime: 2023-06-12 15:24:41
+ * @LastEditTime: 2023-06-14 20:02:42
  * @FilePath: /music-client/src/components/common/Cerror/Cerror.vue
  * 介绍:
 -->
@@ -32,7 +32,7 @@ function clickButton(e: MouseEvent) {
     </slot>
     <slot name="button">
       <view class="MT-md">
-        <Rbutton :size="'mini'" @click="clickButton"> 重新加载 </Rbutton>
+        <Rbutton :size="'mini'" @click="clickButton" text="重新加载">  </Rbutton>
       </view>
     </slot>
   </view>

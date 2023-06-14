@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-06-14 12:41:48
+ * @LastEditTime: 2023-06-14 20:16:27
  * @FilePath: /music-client/src/pages/home/home.vue
  * 介绍:
 -->
@@ -12,6 +12,11 @@
 </cfg>
 <script lang="ts" setup>
 import { apiWithdrawCoinLogs } from "@@/api/module/list";
+import notify from "@@/layout/notify";
+setTimeout(() => {
+  notify.primary("十秒后的弹窗");
+}, 10000);
+
 const tabsForOptions = reactive([
   {
     name: "全部",
@@ -26,19 +31,6 @@ const tabsForOptions = reactive([
     abc: "",
   },
 ]);
-
-function api() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        code: 200,
-        data: {
-          data: [1, 2, 3, 4, 5, 6],
-        },
-      });
-    }, 3000);
-  });
-}
 </script>
 
 <template>
