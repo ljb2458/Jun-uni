@@ -24,6 +24,7 @@ declare module '@vue/runtime-core' {
     Rloading: typeof import('./../../src/components/rewrite/Rloading/Rloading.vue')['default']
     RloadingIcon: typeof import('./../../src/components/rewrite/RloadingIcon/RloadingIcon.vue')['default']
     RloadingPage: typeof import('./../../src/components/rewrite/RloadingPage/RloadingPage.vue')['default']
+    Rmodal: typeof import('./../../src/components/rewrite/Rmodal/Rmodal.vue')['default']
     Rnotify: typeof import('./../../src/components/rewrite/Rnotify/Rnotify.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
