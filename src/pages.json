@@ -6,6 +6,13 @@
         "navigationBarTitleText": "主页",
         "enablePullDownRefresh": true
       }
+    },
+    {
+      "path": "pages/myCenter/myCenter",
+      "style": {
+        "navigationBarTitleText": "个人中心",
+        "enablePullDownRefresh": false
+      }
     }
   ],
   "tabBar": {
