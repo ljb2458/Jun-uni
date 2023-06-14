@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-04-21 21:21:57
- * @LastEditTime: 2023-06-13 15:53:34
+ * @LastEditTime: 2023-06-14 20:34:49
  * @FilePath: /music-client/src/components/common/Clist/Clist.vue
  * 介绍:
 -->
@@ -41,7 +41,7 @@ async function activeLoad() {
   load();
 }
 
-async function activeRelad() {  
+async function activeRelad() {
   if (!(await isVisible())) return;
   reload();
 }
@@ -63,6 +63,7 @@ defineExpose({ activeLoad, activeRelad, load, reload, isVisible });
   <view :style="{ minHeight: props.minHeight }" :id="ClistId" class="Clist">
     <slot></slot>
     <ClistStatus
+      class="MT-md"
       @load="load"
       @reload="reload"
       :type="props.status"

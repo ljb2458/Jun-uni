@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-02-19 11:25:25
- * @LastEditTime: 2023-06-12 16:43:21
+ * @LastEditTime: 2023-06-14 20:32:27
  * @FilePath: /music-client/src/api/module/list.ts
  * 介绍:
  */
@@ -11,10 +11,39 @@ import { defaHttp, ApiRes, Paging } from "../index";
 export async function apiWithdrawCoinLogs(
   data: Paging.Req
 ): Promise<ApiRes<Paging.Data<WithdrawCoinLogs.ResItem[]>>> {
-  const res = await defaHttp.post<
-    ApiRes<Paging.Data<WithdrawCoinLogs.ResItem[]>>
-  >("/money/withdraw", { limit: 20, ...data });
-  return res;
+  // const res = await defaHttp.post<
+  //   ApiRes<Paging.Data<WithdrawCoinLogs.ResItem[]>>
+  // >("/money/withdraw", data);
+  // return res;
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const res = <any>{
+        code: 200,
+        msg: "success",
+        data: {
+          total: 2000,
+          current_page: data.page,
+          data: [
+            {
+              actual_number: "actual_number",
+              coin_id: 1,
+              created_at: "created_at",
+              fee: "fee",
+              id: 2,
+              number: "number",
+              status: 3,
+              status_text: "status_text",
+              txid: "txid",
+            },
+          ],
+        },
+      };
+      for (let i = 0; i < 10; i++) {
+        res.data.data.push(res.data.data[0]);
+      }
+      resolve(res);
+    }, 2000);
+  });
 }
 
 /**提币记录 */
