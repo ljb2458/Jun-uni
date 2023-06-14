@@ -11,8 +11,10 @@ const props = defineProps<{
   size?: StrNumber;
   textSize?: StrNumber;
   text?: string;
+  /**css曲线 ease-in-out */
   timingFunction?: TimingFunction;
   duration?: StrNumber;
+  /**图标的暗边颜色, mode为circle 模式有效 */
   inactiveColor?: string;
 }>();
 </script>
