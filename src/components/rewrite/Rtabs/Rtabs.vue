@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-04-21 18:13:53
- * @LastEditTime: 2023-06-14 13:02:02
+ * @LastEditTime: 2023-06-14 20:23:58
  * @FilePath: /music-client/src/components/rewrite/Rtabs/Rtabs.vue
  * 介绍:
 -->
@@ -33,8 +33,8 @@ const props = withDefaults(
     keyName?: keyof Item;
   }>(),
   {
-    lineHeight: "3rpx",
-    lineWidth: "60rpx",
+    lineHeight: "2px",
+    lineWidth: "30px",
     scrollable: false,
   }
 );
