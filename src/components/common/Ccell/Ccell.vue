@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-04-09 21:44:48
- * @LastEditTime: 2023-06-15 17:12:33
+ * @LastEditTime: 2023-06-15 19:10:12
  * @FilePath: /music-client/src/components/common/Ccell/Ccell.vue
  * 介绍:cell单元格
 -->
@@ -45,7 +45,7 @@ const props = withDefaults(
     <slot name="left-layout">
       <view class="flex-A-C auto-ML-xs">
         <slot name="left">
-          <Ricon v-if="leftIcon" :name="leftIcon" />
+          <Cicon v-if="leftIcon" :name="leftIcon" />
           <view>{{ leftText }}</view>
         </slot>
       </view>
@@ -57,8 +57,8 @@ const props = withDefaults(
           <view class="T-S-sm C-T5">{{ rightText }}</view>
         </slot>
         <slot v-if="rightIcon !== false" name="right-icon">
-          <van-icon v-if="rightIcon === true" name="arrow" />
-          <Ricon v-else-if="rightIcon" :name="rightIcon" />
+          <u-icon v-if="rightIcon === true" name="arrow-right"></u-icon>
+          <Cicon v-else-if="rightIcon" :name="rightIcon" />
         </slot>
       </view>
     </slot>

@@ -1,12 +1,12 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-06-15 18:53:06
+ * @LastEditTime: 2023-06-15 18:59:25
  * @FilePath: /music-client/src/pages/home/home.vue
  * 介绍:
 -->
 <cfg lang="json">
 {
-  "title": "主页",
+  "title": "tabs + list演示",
   "enablePullDownRefresh": true
 }
 </cfg>

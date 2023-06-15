@@ -17,6 +17,7 @@ declare module '@vue/runtime-core' {
     Cgrid: typeof import('./../../../src/components/common/Cgrid/Cgrid.vue')['default']
     CgridCell: typeof import('./../../../src/components/common/CgridCell/CgridCell.vue')['default']
     CgridItem: typeof import('./../../../src/components/common/CgridItem/CgridItem.vue')['default']
+    Cicon: typeof import('./../../../src/components/common/Cicon/Cicon.vue')['default']
     Clist: typeof import('./../../../src/components/common/Clist/Clist.vue')['default']
     ClistStatus: typeof import('./../../../src/components/common/ClistStatus/ClistStatus.vue')['default']
     CpageView: typeof import('./../../../src/components/common/CpageView/CpageView.vue')['default']

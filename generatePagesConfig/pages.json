@@ -8,13 +8,13 @@
         "pagePath": "pages/home/home",
         "iconPath": "",
         "selectedIconPath": "",
-        "text": "主页"
+        "text": "tabs + list演示"
       },
       {
-        "pagePath": "pages/myCenter/myCenter",
+        "pagePath": "pages/componentList/componentList",
         "iconPath": "",
         "selectedIconPath": "",
-        "text": "个人中心"
+        "text": "组件目录"
       }
     ]
   },

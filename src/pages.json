@@ -1,16 +1,23 @@
 {
   "pages": [
     {
+      "path": "pages/componentList/componentList",
+      "style": {
+        "navigationBarTitleText": "组件列表",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
       "path": "pages/home/home",
       "style": {
-        "navigationBarTitleText": "主页",
+        "navigationBarTitleText": "tabs + list演示",
         "enablePullDownRefresh": true
       }
     },
     {
-      "path": "pages/myCenter/myCenter",
+      "path": "pages/_modal/_modal",
       "style": {
-        "navigationBarTitleText": "个人中心",
+        "navigationBarTitleText": "modal模态框",
         "enablePullDownRefresh": false
       }
     }
@@ -24,13 +31,13 @@
         "pagePath": "pages/home/home",
         "iconPath": "",
         "selectedIconPath": "",
-        "text": "主页"
+        "text": "tabs + list演示"
       },
       {
-        "pagePath": "pages/myCenter/myCenter",
+        "pagePath": "pages/componentList/componentList",
         "iconPath": "",
         "selectedIconPath": "",
-        "text": "个人中心"
+        "text": "组件目录"
       }
     ]
   },
