@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-02-18 20:06:36
- * @LastEditTime: 2023-02-19 11:59:45
- * @FilePath: /my-vue3-project/src/types/dts/env.d.ts
+ * @LastEditTime: 2023-06-15 18:48:44
+ * @FilePath: /music-client/types/global/env.d.ts
  * 介绍:
  */
 /// <reference types="vite/client" />
@@ -12,11 +12,11 @@ declare module "*.vue" {
   const component: DefineComponent<{}, {}, any>;
   export default component;
 }
-
-declare module "mp-storage" {
-  export type localStorage = Storage;
-  export type sessionStorage = Storage;
+interface ImportMetaEnv {
+  /** 开发环境环境变量*/
+  VITE_BASE_URL: string;
+  /**代理开关*/
+  VITE_PROXY: "0" | "1";
+  /**接口后缀 */
+  VITE_API_PREFIX: string;
 }
-
-declare module "uview-plus";
-declare module "@rollup/plugin-commonjs";
