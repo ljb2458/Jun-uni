@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-06-14 19:49:30
- * @LastEditTime: 2023-06-15 14:14:00
+ * @LastEditTime: 2023-06-15 14:18:05
  * @FilePath: /music-client/src/pages/myCenter/myCenter.vue
  * 介绍:
 -->
@@ -16,7 +16,7 @@ function test() {
   modal
     .show({
       title: "温馨提示",
-      content: "代码是写给人看的",
+      content: "富有安全感的ts支持为您的开发保驾护航",
     })
     .then(() => {
       console.log("点击了确认");
