@@ -1,12 +1,11 @@
 <!--
  * @Date: 2023-02-19 20:46:35
- * @LastEditTime: 2023-06-14 20:21:16
+ * @LastEditTime: 2023-06-15 13:55:33
  * @FilePath: /music-client/src/components/rewrite/Rbutton/Rbutton.vue
  * 介绍:
 -->
 <script lang="ts" setup>
 import { filterParams } from "@@/utils/tools/object";
-
 import { ColorTheme } from "../../types/index";
 const props = defineProps<{
   text?: string;
@@ -31,6 +30,9 @@ const props = defineProps<{
   minWidgth?: string;
 }>();
 const $props = computed(() => filterParams(props));
+const emit = defineEmits<{
+  (e: "click", v: MouseEvent): void;
+}>();
 </script>
 
 <template>
@@ -39,6 +41,7 @@ const $props = computed(() => filterParams(props));
     v-bind="$props"
     :color="props.bg"
     :style="{ color, minWidgth }"
+    @click="(e:any) => emit('click', e)"
   >
     <slot>{{ props.text }}</slot>
   </u-button>

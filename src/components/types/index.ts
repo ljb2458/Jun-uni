@@ -10,4 +10,7 @@
 // export type JustifyItems = Property.JustifyItems;
 // export type AlignItems = Property.AlignItems;
 import {} from "csstype";
+import type { DefineComponent } from "vue";
 export type ColorTheme = "info" | "primary" | "error" | "warning" | "success";
+export type GetPropsType<D extends abstract new (...args: any) => any> =
+  InstanceType<D>["$props"];

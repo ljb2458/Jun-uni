@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-04-24 10:38:17
- * @LastEditTime: 2023-06-13 16:03:48
+ * @LastEditTime: 2023-06-15 13:22:28
  * @FilePath: /music-client/src/components/common/CrequestList/CrequestList.vue
  * 介绍:自动请求分页列表
 -->
@@ -10,8 +10,9 @@ import { LoadParam } from "../Clist/index";
 import { Paging, ApiRes } from "@@/api";
 import Clist from "../Clist/Clist.vue";
 import { useClistRef } from "../Clist/index";
+import { GetPropsType } from "../../types";
 
-type ClistProps = InstanceType<typeof Clist>["$props"];
+type ClistProps = GetPropsType<typeof Clist>;
 
 type Res = ApiRes<Paging.Data<D> | D>;
 interface Req extends Paging.Req {
