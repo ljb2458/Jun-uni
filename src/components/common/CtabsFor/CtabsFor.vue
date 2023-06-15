@@ -1,17 +1,16 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-06-14 19:56:30
+ * @LastEditTime: 2023-06-15 11:17:31
  * @FilePath: /music-client/src/components/common/CtabsFor/CtabsFor.vue
  * 介绍:
 -->
 <script lang="ts" setup generic="Item extends CtabsForOptionsItem">
-import { unitPercent } from "@@/utils/tools/css";
+import { unitPercent, unitPx } from "@@/utils/tools/css";
 import { getRect, GetRectRes } from "@@/hooks/rewriteUni";
 import { CSSProperties } from "vue";
 import dayjs from "dayjs";
 import { CtabsForOptionsItem } from "./index";
 import { generateUUID } from "@@/utils/tools/generate";
-import { getPlatform } from "@@/hooks/rewriteUni";
 
 const props = withDefaults(
   defineProps<{
@@ -19,17 +18,19 @@ const props = withDefaults(
     gap?: string;
     options: Item[];
     sticky?: Boolean;
-    offsetTop?: string;
+    /**单位px，内部计算 */
+    offsetTop?: number;
     /**懒加载 */
     lazy?: boolean;
     titleKeyName?: keyof TabsListItem;
   }>(),
   {
+    offsetTop: 0,
     gap: "var(--gap-md)",
-    offsetTop: "0",
     lazy: true,
   }
 );
+
 type TabsListItem = Item & { load: boolean; key: StrNumber };
 const tabsList = computed<Array<TabsListItem>>(() =>
   props.options.map((v, key) => ({
@@ -81,7 +82,7 @@ function updateNodeInfo() {
 }
 /**节点宽度 */
 function nodeWidth() {
-  return nodeInfo.width || 750;
+  return nodeInfo.width || uni.upx2px(750);
 }
 onMounted(() => updateNodeInfo());
 /**触摸开始 */
@@ -172,9 +173,9 @@ let transitTimeout: NodeJS.Timeout;
  */
 function swiperTo(key: StrNumber = currentIndex.value) {
   if (transitTimeout) clearTimeout(transitTimeout);
-  for (let key in tabsList.value) {
-    if (tabsList.value[key].key === key) {
-      swiperToByIndex(key as unknown as number);
+  for (let k in tabsList.value) {
+    if (tabsList.value[k].key === key) {
+      swiperToByIndex(k as unknown as number);
       break;
     }
   }
@@ -195,17 +196,23 @@ function swiperToByIndex(index: number) {
 }
 defineExpose({ swiperTo, updateNodeInfo, currentIndex });
 const platformOffsetTop = computed(() => {
-  if (getPlatform() === "h5") return 88;
-  return 0;
+  let offsetTop = Number(props.offsetTop);
+  if (isNaN(offsetTop)) offsetTop = 0;
+  let res = unitPx(offsetTop);
+  // #ifdef H5
+  res = unitPx(offsetTop + 44);
+  // #endif
+  return res;
 });
 </script>
 
 <template>
-  <view :style="{ '--gap': props.gap }" :id="CtabsForId" class="CtabsFor">
+  <view :style="{ '--gap': gap }" :id="CtabsForId" class="CtabsFor">
     <Rsticky
+      bg-color="var(--C-B1)"
       class="CtabsFor_title"
-      :disabled="!props.sticky"
-      :offset-top="props.offsetTop"
+      :disabled="!sticky"
+      :offset-top="offsetTop"
       :customNavHeight="platformOffsetTop"
     >
       <slot name="title-top"></slot>
