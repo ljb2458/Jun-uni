@@ -1,13 +1,13 @@
 /*
  * @Date: 2023-02-19 11:43:32
- * @LastEditTime: 2023-02-19 12:07:28
- * @FilePath: /my-vue3-project/src/store/useSysStore.ts
+ * @LastEditTime: 2023-06-15 18:54:58
+ * @FilePath: /music-client/src/store/useSysStore.ts
  * 介绍:
  */
 import { defineStore } from "pinia";
 import { localStorage } from "mp-storage";
 
-export default defineStore("StateSys", {
+export default defineStore("SysStore", {
   //*全局仓库
   state: initState,
   //*全局函数
@@ -17,14 +17,14 @@ export default defineStore("StateSys", {
   //*仓库数据缓存
   persist: [
     {
-      key: "StateSys",
+      key: "SysStore",
       storage: localStorage, //指定储存位置
     },
   ],
 });
 /**state类型定义 */
-interface StateSys {}
+interface SysStore {}
 /**初始化pinia */
-function initState(): StateSys {
+function initState(): SysStore {
   return {};
 }

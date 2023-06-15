@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-06-15 17:36:46
+ * @LastEditTime: 2023-06-15 18:53:06
  * @FilePath: /music-client/src/pages/home/home.vue
  * 介绍:
 -->
@@ -53,13 +53,15 @@ const tabsForOptions = computed(() => [
     api: apiWithdrawCoinLogs,
   },
 ]);
-function test() {
+function showNotify() {
   notify.primary("这是一个通知");
 }
 
-const CrequestListRefs = tabsForOptions.value.map(() => useCrequestListRef());
+const listRefs = tabsForOptions.value.map(() =>
+  useCrequestListRef<WithdrawCoinLogs.ResItem[]>()
+);
 function listSetNull(index: number) {
-  const instance = CrequestListRefs[index].value;
+  const instance = listRefs[index].value;
   if (!instance) return;
   instance.data.length = 0;
 }
@@ -67,7 +69,7 @@ function listSetNull(index: number) {
 
 <template>
   <CpageView>
-    <view @click="test" style="border: red solid 1rpx; height: 200rpx">
+    <view @click="showNotify" style="border: red solid 1rpx; height: 200rpx">
       点击发起一个通知
     </view>
 
@@ -87,7 +89,7 @@ function listSetNull(index: number) {
       </template>
       <template #default="{ option }">
         <CrequestList
-          :ref="CrequestListRefs[option.index]"
+          :ref="listRefs[option.index]"
           :api="option.api"
           :key="option.key"
         >
