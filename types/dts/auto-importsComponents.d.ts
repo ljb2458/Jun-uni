@@ -21,7 +21,6 @@ declare module '@vue/runtime-core' {
     Rempty: typeof import('./../../src/components/rewrite/Rempty/Rempty.vue')['default']
     Rimage: typeof import('./../../src/components/rewrite/Rimage/Rimage.vue')['default']
     Rinput: typeof import('./../../src/components/rewrite/Rinput/Rinput.vue')['default']
-    Rloading: typeof import('./../../src/components/rewrite/Rloading/Rloading.vue')['default']
     RloadingIcon: typeof import('./../../src/components/rewrite/RloadingIcon/RloadingIcon.vue')['default']
     RloadingPage: typeof import('./../../src/components/rewrite/RloadingPage/RloadingPage.vue')['default']
     Rmodal: typeof import('./../../src/components/rewrite/Rmodal/Rmodal.vue')['default']

@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-04-21 23:27:24
- * @LastEditTime: 2023-06-12 15:00:05
+ * @LastEditTime: 2023-06-15 10:36:16
  * @FilePath: /music-client/src/components/common/ClistStatus/ClistStatus.vue
  * 介绍:
 -->
@@ -19,7 +19,6 @@ const emit = defineEmits<{
   (e: "load"): void;
   (e: "reload"): void;
 }>();
-onMounted(load);
 function reload() {
   emit("reload");
 }
@@ -29,7 +28,10 @@ function load() {
 </script>
 <template>
   <view class="ClistStatus">
-    <Rloading :show="props.type === 'loading'" :text="props.message"></Rloading>
+    <RloadingIcon
+      :show="props.type === 'loading'"
+      :text="props.message"
+    ></RloadingIcon>
     <Rempty
       :show="props.type === 'null'"
       class="Rempty"
