@@ -9,11 +9,20 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Ccard: typeof import('./../../src/components/common/Ccard/Ccard.vue')['default']
+    Ccell: typeof import('./../../src/components/common/Ccell/Ccell.vue')['default']
     Cerror: typeof import('./../../src/components/common/Cerror/Cerror.vue')['default']
+    CgcCol: typeof import('./../../src/components/common/CgcCol/CgcCol.vue')['default']
+    CgcRow: typeof import('./../../src/components/common/CgcRow/CgcRow.vue')['default']
+    Cgrid: typeof import('./../../src/components/common/Cgrid/Cgrid.vue')['default']
+    CgridCell: typeof import('./../../src/components/common/CgridCell/CgridCell.vue')['default']
+    CgridItem: typeof import('./../../src/components/common/CgridItem/CgridItem.vue')['default']
     Clist: typeof import('./../../src/components/common/Clist/Clist.vue')['default']
     ClistStatus: typeof import('./../../src/components/common/ClistStatus/ClistStatus.vue')['default']
     CpageView: typeof import('./../../src/components/common/CpageView/CpageView.vue')['default']
+    CplusMinus: typeof import('./../../src/components/common/CplusMinus/CplusMinus.vue')['default']
     CrequestList: typeof import('./../../src/components/common/CrequestList/CrequestList.vue')['default']
+    CstateTag: typeof import('./../../src/components/common/CstateTag/CstateTag.vue')['default']
     CtabsFor: typeof import('./../../src/components/common/CtabsFor/CtabsFor.vue')['default']
     Rbutton: typeof import('./../../src/components/rewrite/Rbutton/Rbutton.vue')['default']
     Rcalendar: typeof import('./../../src/components/rewrite/Rcalendar/Rcalendar.vue')['default']

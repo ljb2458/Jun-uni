@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-06-15 17:03:38
+ * @LastEditTime: 2023-06-15 17:07:48
  * @FilePath: /music-client/src/pages/home/home.vue
  * 介绍:
 -->
@@ -30,7 +30,7 @@ const tabsForOptions = computed(() => [
   },
 ]);
 function test() {
-  notify.primary("这是一个通知", { duration: 0 });
+  notify.primary("这是一个通知");
 }
 
 const CrequestListRefs = tabsForOptions.value.map(() => useCrequestListRef());
