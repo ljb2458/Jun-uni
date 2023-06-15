@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-06-15 11:17:31
+ * @LastEditTime: 2023-06-15 15:08:38
  * @FilePath: /music-client/src/components/common/CtabsFor/CtabsFor.vue
  * 介绍:
 -->
@@ -11,17 +11,22 @@ import { CSSProperties } from "vue";
 import dayjs from "dayjs";
 import { CtabsForOptionsItem } from "./index";
 import { generateUUID } from "@@/utils/tools/generate";
+import type { StyleValue } from "vue";
 
 const props = withDefaults(
   defineProps<{
     /**间距 */
     gap?: string;
     options: Item[];
+    /**开启粘性布局 */
     sticky?: Boolean;
-    /**单位px，内部计算 */
+    /**粘性组件tyle */
+    stickyStyle?: StyleValue;
+    /**单位px，内部需要对它进行计算 */
     offsetTop?: number;
     /**懒加载 */
     lazy?: boolean;
+    /**标题options中的标题键名 */
     titleKeyName?: keyof TabsListItem;
   }>(),
   {
@@ -210,6 +215,7 @@ const platformOffsetTop = computed(() => {
   <view :style="{ '--gap': gap }" :id="CtabsForId" class="CtabsFor">
     <Rsticky
       bg-color="var(--C-B1)"
+      :style="stickyStyle"
       class="CtabsFor_title"
       :disabled="!sticky"
       :offset-top="offsetTop"

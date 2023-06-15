@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-06-14 20:40:18
+ * @LastEditTime: 2023-06-15 14:44:26
  * @FilePath: /music-client/src/pages/home/home.vue
  * 介绍:
 -->
@@ -14,18 +14,18 @@
 import { apiWithdrawCoinLogs } from "@@/api/module/list";
 import notify from "@@/layout/notify";
 
-const tabsForOptions = reactive([
+const tabsForOptions = computed(() => [
   {
     name: "全部",
-    abc: "",
+    api: apiWithdrawCoinLogs,
   },
   {
     name: "商品1",
-    abc: "",
+    api: apiWithdrawCoinLogs,
   },
   {
     name: "商品2",
-    abc: "",
+    api: apiWithdrawCoinLogs,
   },
 ]);
 function test() {
@@ -40,7 +40,7 @@ function test() {
     </view>
     <CtabsFor :sticky="true" :options="tabsForOptions">
       <template #default="{ option }">
-        <CrequestList :api="apiWithdrawCoinLogs">
+        <CrequestList :api="option.api" :key="option.key">
           <template #item="{ item }">
             <view class="MT-md">
               {{ item.actual_number }}

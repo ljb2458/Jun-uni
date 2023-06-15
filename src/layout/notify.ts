@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-06-14 16:33:30
- * @LastEditTime: 2023-06-14 20:14:08
+ * @LastEditTime: 2023-06-15 15:14:33
  * @FilePath: /music-client/src/layout/notify.ts
  * 介绍:
  */
@@ -26,7 +26,9 @@ const notify = {
   success(message: string, config?: ShowParam) {
     this.show(message, { ...config, type: "success" });
   },
-  show(_message: string, config?: ShowParam) {
+  async show(_message: string, config?: ShowParam) {
+    this.close();
+    await nextTick();
     autoClose(config?.duration || defaultDuration);
     message.value = _message;
     param.value = config;

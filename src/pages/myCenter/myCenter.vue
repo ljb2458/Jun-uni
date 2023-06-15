@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-06-14 19:49:30
- * @LastEditTime: 2023-06-15 14:18:05
+ * @LastEditTime: 2023-06-15 15:13:10
  * @FilePath: /music-client/src/pages/myCenter/myCenter.vue
  * 介绍:
 -->
@@ -12,6 +12,7 @@
 </cfg>
 <script lang="ts" setup>
 import modal from "@@/layout/modal";
+import notify from "@@/layout/notify";
 function test() {
   modal
     .show({
@@ -19,10 +20,10 @@ function test() {
       content: "富有安全感的ts支持为您的开发保驾护航",
     })
     .then(() => {
-      console.log("点击了确认");
+      notify.primary("点击了确认");
     })
     .catch(() => {
-      console.log("点击了取消");
+      notify.error("点击了取消");
     });
 }
 </script>

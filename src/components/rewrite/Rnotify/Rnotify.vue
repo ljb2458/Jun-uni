@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-06-14 15:04:30
- * @LastEditTime: 2023-06-14 20:59:50
+ * @LastEditTime: 2023-06-15 15:17:14
  * @FilePath: /music-client/src/components/rewrite/Rnotify/Rnotify.vue
  * 介绍:
 -->
@@ -25,6 +25,7 @@ function initCfg() {
 }
 function show(message: string, config?: ShowParam) {
   cfg.style = config?.style as any;
+  cfg.type = config?.type as any;
   cfg.msgStyle = config?.msgStyle as any;
   cfg.message = message;
   const _cfg: ShowParam = {
@@ -92,7 +93,7 @@ function success(message: string, config?: ShowParam) {
   background-color: var(--C-success);
 }
 .Rnotify__error {
-  background-color: var(--C-error);
+  background-color: var(--C-fail);
 }
 .Rnotify__warning {
   background-color: var(--C-warn);
