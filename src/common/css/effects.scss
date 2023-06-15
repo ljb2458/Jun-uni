@@ -1,22 +1,25 @@
 /***********************效果***********************/
 //斜面立体效果
 .bevelVar--BEc {
-  --BEc: rgba(255, 255, 255, 0.2);
-  box-shadow: inset var(--BEc) 5rem 5rem 10rem, var(--BEc) 5rem 5rem 10rem;
+  --BEc: rgba(0, 0, 0, 0.2);
+  filter: drop-shadow(
+    inset var(--BEc) 3rem 3rem 6rem,
+    var(--BEc) 3rem 3rem 12rem
+  );
 }
 .shadowVar--SHc {
-  --SHc: rgba(0, 0, 0, 0.1);
-  box-shadow: var(--SHc) 5rem 5rem 10rem;
+  --SHc: rgba(0, 0, 0, 0.2);
+  filter: drop-shadow(var(--SHc) 3rem 3rem 12rem);
 }
 //点击效果
 .active:active {
-  filter: brightness(90%) invert(0.4);
+  filter: brightness(90%) invert(0.3);
 }
 //点击效果
 .activeVar--ACbg:active {
-  --ACbg: var(--C-B1);
+  --ACbg: var(--C-OB1);
   background: var(--ACbg);
-  filter: brightness(90%) invert(0.4);
+  filter: brightness(90%) invert(0.3);
 }
 .borderVar--BOc {
   --BOc: var(--C-OT3);

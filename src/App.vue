@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-18 20:06:36
- * @LastEditTime: 2023-06-14 16:18:48
+ * @LastEditTime: 2023-06-15 17:06:48
  * @FilePath: /music-client/src/App.vue
  * 介绍:
 -->
@@ -28,5 +28,5 @@ onHide(() => {
 @import "@@/common/css/color.scss";
 @import "@@/common/css/init.css";
 @import "@@/common/css/var.css";
-@import "@@/common/css/reset.scss";
+@import "@@/common/css/resetUview.scss";
 </style>

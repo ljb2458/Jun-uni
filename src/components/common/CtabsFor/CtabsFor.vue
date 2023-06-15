@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-06-15 15:08:38
+ * @LastEditTime: 2023-06-15 16:55:03
  * @FilePath: /music-client/src/components/common/CtabsFor/CtabsFor.vue
  * 介绍:
 -->
@@ -36,11 +36,12 @@ const props = withDefaults(
   }
 );
 
-type TabsListItem = Item & { load: boolean; key: StrNumber };
+type TabsListItem = Item & { load: boolean; key: StrNumber; index: number };
 const tabsList = computed<Array<TabsListItem>>(() =>
   props.options.map((v, key) => ({
     ...v,
     key: v.key || key,
+    index: key,
     load: !props.lazy,
   }))
 );

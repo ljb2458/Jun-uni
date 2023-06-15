@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-06-15 14:44:26
+ * @LastEditTime: 2023-06-15 17:03:38
  * @FilePath: /music-client/src/pages/home/home.vue
  * 介绍:
 -->
@@ -11,7 +11,8 @@
 }
 </cfg>
 <script lang="ts" setup>
-import { apiWithdrawCoinLogs } from "@@/api/module/list";
+import { apiWithdrawCoinLogs, WithdrawCoinLogs } from "@@/api/module/list";
+import { useCrequestListRef } from "@@/components/common/CrequestList";
 import notify from "@@/layout/notify";
 
 const tabsForOptions = computed(() => [
@@ -31,6 +32,13 @@ const tabsForOptions = computed(() => [
 function test() {
   notify.primary("这是一个通知", { duration: 0 });
 }
+
+const CrequestListRefs = tabsForOptions.value.map(() => useCrequestListRef());
+function listSetNull(index: number) {
+  const instance = CrequestListRefs[index].value;
+  if (!instance) return;
+  instance.data.length = 0;
+}
 </script>
 
 <template>
@@ -38,9 +46,15 @@ function test() {
     <view @click="test" style="border: red solid 1rpx; height: 200rpx">
       6666
     </view>
+
+    <Rbutton :type="'primary'" @click="listSetNull(0)">清空列表1</Rbutton>
     <CtabsFor :sticky="true" :options="tabsForOptions">
       <template #default="{ option }">
-        <CrequestList :api="option.api" :key="option.key">
+        <CrequestList
+          :ref="CrequestListRefs[option.index]"
+          :api="option.api"
+          :key="option.key"
+        >
           <template #item="{ item }">
             <view class="MT-md">
               {{ item.actual_number }}

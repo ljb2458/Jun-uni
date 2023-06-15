@@ -10,23 +10,24 @@
   display: flex;
   justify-content: space-around;
 }
-.flex-J-SE {
-  display: flex;
-  justify-content: space-evenly;
-}
-.flex-J-C {
-  display: flex;
-  justify-content: center;
-}
 .flex-A-C {
   display: flex;
   align-items: center;
   align-content: center;
 }
+.flex-J-C {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
 .flex-A-B {
   display: flex;
   align-items: baseline;
   align-content: baseline;
+}
+
+.T-A-L {
+  text-align: left;
 }
 .T-A-C {
   text-align: center;
@@ -37,86 +38,134 @@
 /***********************间距***********************/
 .auto-mtVar--P {
   & > view,
-  button + view,
-  button {
+  button,
+  [class],
+  [data] + view,
+  button,
+  [class],
+  [data] {
     margin-top: var(--P);
   }
 }
 .auto-mlVar--P {
   & > view,
-  button + view,
-  button {
+  button,
+  [class],
+  [data] + view,
+  button,
+  [class],
+  [data] {
     margin-left: var(--P);
   }
 }
 .auto-MT-xs {
   & > view,
-  button + view,
-  button {
+  button,
+  [class],
+  [data] + view,
+  button,
+  [class],
+  [data] {
     margin-top: var(--gap-xs);
   }
 }
 .auto-ML-xs {
   & > view,
-  button + view,
-  button {
+  button,
+  [class],
+  [data] + view,
+  button,
+  [class],
+  [data] {
     margin-left: var(--gap-xs);
   }
 }
 .auto-MT-sm {
   & > view,
-  button + view,
-  button {
+  button,
+  [class],
+  [data] + view,
+  button,
+  [class],
+  [data] {
     margin-top: var(--gap-sm);
   }
 }
 .auto-ML-sm {
   & > view,
-  button + view,
-  button {
+  button,
+  [class],
+  [data] + view,
+  button,
+  [class],
+  [data] {
     margin-left: var(--gap-sm);
   }
 }
 .auto-MT-md {
   & > view,
-  button + view,
-  button {
+  button,
+  [class],
+  [data] + view,
+  button,
+  [class],
+  [data] {
     margin-top: var(--gap-md);
   }
 }
 .auto-ML-md {
   & > view,
-  button + view,
-  button {
+  button,
+  [class],
+  [data] + view,
+  button,
+  [class],
+  [data] {
     margin-left: var(--gap-md);
   }
 }
 
 .auto-MT-lg {
   & > view,
-  button + view,
-  button {
+  button,
+  [class],
+  [data] + view,
+  button,
+  [class],
+  [data] {
     margin-top: var(--gap-lg);
   }
 }
 .auto-ML-lg {
   & > view,
-  button + view,
-  button {
+  button,
+  [class],
+  [data] + view,
+  button,
+  [class],
+  [data] {
     margin-left: var(--gap-lg);
   }
 }
 .auto-MT-xl {
   & > view,
-  button + view,
-  button {
+  button,
+  [class],
+  [data] + view,
+  button,
+  [class],
+  [data] {
     margin-top: var(--gap-xl);
   }
 }
 .auto-ML-xl {
   & > view,
-  button + view,
-  button {
+  button,
+  [class],
+  [data] + view,
+  button,
+  [class],
+  [data] {
     margin-left: var(--gap-xl);
   }
 }
