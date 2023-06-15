@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-06-15 17:07:48
+ * @LastEditTime: 2023-06-15 17:36:46
  * @FilePath: /music-client/src/pages/home/home.vue
  * 介绍:
 -->
@@ -28,6 +28,30 @@ const tabsForOptions = computed(() => [
     name: "商品2",
     api: apiWithdrawCoinLogs,
   },
+  {
+    name: "商品3",
+    api: apiWithdrawCoinLogs,
+  },
+  {
+    name: "商品4",
+    api: apiWithdrawCoinLogs,
+  },
+  {
+    name: "商品5",
+    api: apiWithdrawCoinLogs,
+  },
+  {
+    name: "商品6",
+    api: apiWithdrawCoinLogs,
+  },
+  {
+    name: "商品7",
+    api: apiWithdrawCoinLogs,
+  },
+  {
+    name: "商品8",
+    api: apiWithdrawCoinLogs,
+  },
 ]);
 function test() {
   notify.primary("这是一个通知");
@@ -44,11 +68,23 @@ function listSetNull(index: number) {
 <template>
   <CpageView>
     <view @click="test" style="border: red solid 1rpx; height: 200rpx">
-      6666
+      点击发起一个通知
     </view>
 
-    <Rbutton :type="'primary'" @click="listSetNull(0)">清空列表1</Rbutton>
-    <CtabsFor :sticky="true" :options="tabsForOptions">
+    <CtabsFor title-scrollable :sticky="true" :options="tabsForOptions">
+      <template #title-bottom>
+        <Cgrid class="MT-md">
+          <CgridItem v-for="(tab, index) in tabsForOptions">
+            <Rbutton
+              :type="'primary'"
+              :size="'mini'"
+              @click="listSetNull(index)"
+            >
+              清空列表"{{ tab.name }}"
+            </Rbutton>
+          </CgridItem>
+        </Cgrid>
+      </template>
       <template #default="{ option }">
         <CrequestList
           :ref="CrequestListRefs[option.index]"

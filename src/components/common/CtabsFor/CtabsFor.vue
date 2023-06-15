@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-06-15 16:55:03
+ * @LastEditTime: 2023-06-15 17:38:18
  * @FilePath: /music-client/src/components/common/CtabsFor/CtabsFor.vue
  * 介绍:
 -->
@@ -26,8 +26,24 @@ const props = withDefaults(
     offsetTop?: number;
     /**懒加载 */
     lazy?: boolean;
+    //----tabs组件开始---
     /**标题options中的标题键名 */
     titleKeyName?: keyof TabsListItem;
+    /**滑块颜色 */
+    titleLineColor?: string;
+    titleLineWidth?: StrNumber;
+    titleLineHeight?: StrNumber;
+    /**滑块背景size */
+    titleLineBgSize?: "cover" | "contain" | "percentage" | string;
+    /**菜单item的样式 */
+    titleItemStyle?: StyleValue;
+    /**菜单选中样式 */
+    titleActiveStyle?: StyleValue;
+    /**菜单非选中样式 */
+    titleInactiveStyle?: StyleValue;
+    /**菜单是否可滚动 */
+    titleScrollable?: boolean;
+    //----tabs组件结束---
   }>(),
   {
     offsetTop: 0,
@@ -222,18 +238,31 @@ const platformOffsetTop = computed(() => {
       :offset-top="offsetTop"
       :customNavHeight="platformOffsetTop"
     >
-      <slot name="title-top"></slot>
+      <view class="CtabsFor_title-top">
+        <slot name="title-top"></slot>
+      </view>
       <Rtabs
+        class="CtabsFor_title-content"
+        :current="currentIndex"
         :list="(tabsList as any)"
         :key-name="(titleKeyName as any)"
-        :current="currentIndex"
+        :lineColor="titleLineColor"
+        :lineWidth="titleLineWidth"
+        :lineHeight="titleLineHeight"
+        :lineBgSize="titleLineBgSize"
+        :itemStyle="titleItemStyle"
+        :activeStyle="titleActiveStyle"
+        :inactiveStyle="titleInactiveStyle"
+        :scrollable="titleScrollable"
         @change="(e) => swiperToByIndex(e.index)"
       >
         <template #right>
           <slot name="title-right"></slot>
         </template>
       </Rtabs>
-      <slot name="title-bottom"></slot>
+      <view class="CtabsFor_title-bottom">
+        <slot name="title-bottom"> </slot
+      ></view>
     </Rsticky>
     <!-- 内容部分 -->
     <view
@@ -270,6 +299,13 @@ const platformOffsetTop = computed(() => {
 <style lang="scss" scoped>
 .CtabsFor {
   margin: 0 calc(0px - var(--gap));
+  .CtabsFor_title {
+    padding-left: var(--gap);
+    padding-right: var(--gap);
+    // .CtabsFor_title-top,
+    // .CtabsFor_title-bottom {
+    // }
+  }
 
   .CtabsFor_item-wrap {
     overflow-x: hidden;

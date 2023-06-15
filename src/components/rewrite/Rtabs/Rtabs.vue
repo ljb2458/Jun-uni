@@ -46,7 +46,7 @@ const emit = defineEmits<{
 </script>
 <template>
   <u-tabs
-    v-bind="filterParams(props)"
+    v-bind="filterParams(props as any)"
     @click="(e:any) => emit('click',e)"
     @change="(e:any) => emit('change',e)"
   >
