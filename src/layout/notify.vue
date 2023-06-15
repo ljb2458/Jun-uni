@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-06-14 16:33:18
- * @LastEditTime: 2023-06-14 20:11:04
+ * @LastEditTime: 2023-06-15 15:42:03
  * @FilePath: /music-client/src/layout/notify.vue
  * 介绍:
 -->
@@ -10,13 +10,15 @@ import { show, message, param } from "./notify";
 const RnotifyRef = useRnotifyRef();
 onMounted(() => {
   watch(
-    () => show.value,
+    () => [show.value, message.value, param.value],
     (newValue) => {
-      if (newValue) return RnotifyRef.value?.show(message.value, param.value);
+      const show = newValue[0];
+      if (show) return RnotifyRef.value?.show(message.value, param.value);
       RnotifyRef.value?.close();
     },
     {
       immediate: true,
+      deep: true,
     }
   );
 });
