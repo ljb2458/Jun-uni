@@ -91,7 +91,7 @@ function listSetNull(index: number) {
         </Cgrid>
       </template>
       <template #default="{ option }">
-        <CrequestList :for-ref="listRefs[option.index]" :api="option.api">
+        <CrequestList :_ref="listRefs[option.index]" :api="option.api">
           <template #item="{ item }">
             <view class="MT-md">
               {{ item.actual_number }}
