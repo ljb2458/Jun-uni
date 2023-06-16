@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-02-18 20:06:36
- * @LastEditTime: 2023-06-14 16:19:45
+ * @LastEditTime: 2023-06-15 19:58:16
  * @FilePath: /music-client/src/main.ts
  * 介绍:
  */
@@ -9,7 +9,7 @@ import App from "./App.vue";
 import * as Pinia from "pinia";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import uviewPlus from "uview-plus";
-import {} from "@@/common/js/initApp";
+import "@@/common/js/initApp";
 
 export function createApp() {
   const app = createSSRApp(App);

@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-04-24 10:38:17
- * @LastEditTime: 2023-06-15 13:22:28
+ * @LastEditTime: 2023-06-16 10:08:28
  * @FilePath: /music-client/src/components/common/CrequestList/CrequestList.vue
  * 介绍:自动请求分页列表
 -->
@@ -32,6 +32,8 @@ const props = withDefaults(
     onPullDownRefresh?: (callback: Function) => any;
     /**下拉刷新完成回调，默认uni.stopPullDownRefresh(关闭页面下拉刷新) */
     pullDownRefreshEnd?: (v?: State) => void;
+    /**解决微信小程序v-for循环无法获取ref的问题 */
+    _ref?: Ref;
   }>(),
   {
     setupLoad: true,
@@ -67,8 +69,7 @@ const {
   extraParams: props.extraParams,
   isOnePage: props.isOnePage,
 });
-/**暴露分页hooks */
-defineExpose({
+const _expose = {
   rerequest,
   state,
   data,
@@ -79,6 +80,13 @@ defineExpose({
   stateNext,
 
   ...{ load: _load, activeLoad, activeRelad, reload, isVisible },
+};
+/**暴露分页hooks */
+defineExpose(_expose);
+/**解决微信小程序v-for循环无法获取ref的问题 */
+if (props._ref) props._ref.value = _expose;
+onUnmounted(() => {
+  if (props._ref) props._ref.value = null;
 });
 
 const ClistRef = useClistRef();

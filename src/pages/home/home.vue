@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-06-15 18:59:25
+ * @LastEditTime: 2023-06-16 10:07:12
  * @FilePath: /music-client/src/pages/home/home.vue
  * 介绍:
 -->
@@ -72,8 +72,11 @@ function listSetNull(index: number) {
     <view @click="showNotify" style="border: red solid 1rpx; height: 200rpx">
       点击发起一个通知
     </view>
-
-    <CtabsFor title-scrollable :sticky="true" :options="tabsForOptions">
+    <CtabsFor
+        title-scrollable
+      :sticky="true"
+      :options="tabsForOptions"
+    >
       <template #title-bottom>
         <Cgrid class="MT-md">
           <CgridItem v-for="(tab, index) in tabsForOptions">
@@ -88,11 +91,7 @@ function listSetNull(index: number) {
         </Cgrid>
       </template>
       <template #default="{ option }">
-        <CrequestList
-          :ref="listRefs[option.index]"
-          :api="option.api"
-          :key="option.key"
-        >
+        <CrequestList :_ref="listRefs[option.index]" :api="option.api">
           <template #item="{ item }">
             <view class="MT-md">
               {{ item.actual_number }}
