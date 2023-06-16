@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-04-24 10:38:17
- * @LastEditTime: 2023-06-16 10:08:28
+ * @LastEditTime: 2023-06-16 10:11:57
  * @FilePath: /music-client/src/components/common/CrequestList/CrequestList.vue
  * 介绍:自动请求分页列表
 -->
@@ -33,7 +33,7 @@ const props = withDefaults(
     /**下拉刷新完成回调，默认uni.stopPullDownRefresh(关闭页面下拉刷新) */
     pullDownRefreshEnd?: (v?: State) => void;
     /**解决微信小程序v-for循环无法获取ref的问题 */
-    _ref?: Ref;
+    forRef?: Ref;
   }>(),
   {
     setupLoad: true,
@@ -84,9 +84,9 @@ const _expose = {
 /**暴露分页hooks */
 defineExpose(_expose);
 /**解决微信小程序v-for循环无法获取ref的问题 */
-if (props._ref) props._ref.value = _expose;
+if (props.forRef) props.forRef.value = _expose;
 onUnmounted(() => {
-  if (props._ref) props._ref.value = null;
+  if (props.forRef) props.forRef.value = null;
 });
 
 const ClistRef = useClistRef();
