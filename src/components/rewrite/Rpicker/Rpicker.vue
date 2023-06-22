@@ -1,3 +1,8 @@
+<!--
+ * @Date: 2023-06-13 16:47:13
+ * @LastEditTime: 2023-06-23 00:11:04
+ * 介绍:
+-->
 <script lang="ts" setup generic="D">
 import { Column, ConfirmParam, ChangeParam } from "./index";
 import { filterParams } from "@@/utils/tools/object";
@@ -41,7 +46,7 @@ defineExpose({ setIndexs, setColumnValues });
 <template>
   <u-picker
     ref="pickerRef"
-    :="filterParams(props)"
+    :="filterParams(props as any)"
     @close="(e:any) => emit('close')"
     @cancel="(e:any) => emit('cancel')"
     @confirm="(e:any) => emit('confirm',e)"

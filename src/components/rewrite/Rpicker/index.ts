@@ -17,6 +17,7 @@ export interface ChangeParam<D = string> {
 }
 export function useRpickerRef() {
   //@ts-ignore
-  type Instance = InstanceType<typeof Rpicker>;
+  // type Instance = InstanceType<typeof Rpicker>;
+  type Instance = GenericComponentExports<typeof Rpicker>;
   return ref<Instance>();
 }

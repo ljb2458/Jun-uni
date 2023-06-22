@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-06-15 17:38:18
+ * @LastEditTime: 2023-06-23 00:09:47
  * @FilePath: /music-client/src/components/common/CtabsFor/CtabsFor.vue
  * 介绍:
 -->
@@ -216,7 +216,7 @@ function swiperToByIndex(index: number) {
     state.isStatic = true;
   }, 200);
 }
-defineExpose({ swiperTo, updateNodeInfo, currentIndex });
+defineExpose({ swiperTo, swiperToByIndex, updateNodeInfo, currentIndex });
 const platformOffsetTop = computed(() => {
   let offsetTop = Number(props.offsetTop);
   if (isNaN(offsetTop)) offsetTop = 0;

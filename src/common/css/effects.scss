@@ -2,14 +2,11 @@
 //斜面立体效果
 .bevelVar--BEc {
   --BEc: rgba(0, 0, 0, 0.2);
-  filter: drop-shadow(
-    inset var(--BEc) 3px 3px 6px,
-    var(--BEc) 3px 3px 12px
-  );
+  box-shadow: inset var(--BEc) 3px 3px 6px, var(--BEc) 3px 3px 12px;
 }
 .shadowVar--SHc {
   --SHc: rgba(0, 0, 0, 0.2);
-  filter: drop-shadow(var(--SHc) 3px 3px 12px);
+  box-shadow: var(--SHc) 3px 3px 12px;
 }
 //点击效果
 .active:active {
