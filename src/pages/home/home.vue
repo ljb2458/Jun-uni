@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-06-16 10:07:12
+ * @LastEditTime: 2023-06-23 21:26:59
  * @FilePath: /music-client/src/pages/home/home.vue
  * 介绍:
 -->
@@ -11,7 +11,7 @@
 }
 </cfg>
 <script lang="ts" setup>
-import { apiWithdrawCoinLogs, WithdrawCoinLogs } from "@@/api/module/list";
+import { apiWithdrawCoinLogs } from "@@/api/module/list";
 import { useCrequestListRef } from "@@/components/common/CrequestList";
 import notify from "@@/layout/notify";
 
@@ -58,7 +58,7 @@ function showNotify() {
 }
 
 const listRefs = tabsForOptions.value.map(() =>
-  useCrequestListRef<WithdrawCoinLogs.ResItem[]>()
+  useCrequestListRef<typeof apiWithdrawCoinLogs>()
 );
 function listSetNull(index: number) {
   const instance = listRefs[index].value;
@@ -72,11 +72,7 @@ function listSetNull(index: number) {
     <view @click="showNotify" style="border: red solid 1rpx; height: 200rpx">
       点击发起一个通知
     </view>
-    <CtabsFor
-        title-scrollable
-      :sticky="true"
-      :options="tabsForOptions"
-    >
+    <CtabsFor title-scrollable :sticky="true" :options="tabsForOptions">
       <template #title-bottom>
         <Cgrid class="MT-md">
           <CgridItem v-for="(tab, index) in tabsForOptions">

@@ -1,31 +1,30 @@
 <!--
  * @Date: 2023-04-24 10:38:17
- * @LastEditTime: 2023-06-16 10:17:13
+ * @LastEditTime: 2023-06-23 21:23:52
  * @FilePath: /music-client/src/components/common/CrequestList/CrequestList.vue
  * 介绍:自动请求分页列表
 -->
-<script lang="ts" setup generic="D extends any[] = any[]">
-import useRequestList, { RequsetParams, State } from "@@/hooks/useRequestList";
+<script lang="ts" setup generic="F extends Api">
+import useRequestList, {
+  GetRequestBefore,
+  Api,
+  GetParams,
+  State,
+} from "@@/hooks/useRequestList";
 import { LoadParam } from "../Clist/index";
-import { Paging, ApiRes } from "@@/api";
 import Clist from "../Clist/Clist.vue";
 import { useClistRef } from "../Clist/index";
 import { GetPropsType } from "../../types";
-
 type ClistProps = GetPropsType<typeof Clist>;
 
-type Res = ApiRes<Paging.Data<D> | D>;
-interface Req extends Paging.Req {
-  [k: string]: any;
-}
-type Api = (data: Req) => Promise<Res> | Res;
 const props = withDefaults(
   defineProps<{
     api: Api;
-    requestBefore?: (params: RequsetParams) => any;
-    extraParams?: AnyObject;
+    requestBefore?: GetRequestBefore<F>;
+    extraParams?: any[];
     isOnePage?: boolean;
     setupLoad?: boolean;
+    defaultParams?: GetParams<F>;
     /**上拉触底事件，一般可不传 */
     onReachBottom?: ClistProps["onReachBottom"];
     /**下拉刷新事件，一般可不传 */
@@ -55,6 +54,7 @@ function load(e: LoadParam) {
 }
 
 const {
+  res,
   data,
   state,
   request,
@@ -64,15 +64,16 @@ const {
   stateLoading,
   stateNull,
   stateNext,
-} = useRequestList<D>(props.api, {
+} = useRequestList(props.api, {
   requestBefore: props.requestBefore,
   extraParams: props.extraParams,
   isOnePage: props.isOnePage,
 });
 const _expose = {
-  rerequest,
+  res,
   state,
   data,
+  rerequest,
   stateEnd,
   stateErr,
   stateLoading,
@@ -112,9 +113,9 @@ function isVisible() {
     ref="ClistRef"
     :status="state.type"
     :message="state.message"
-    :onReachBottom="props.onReachBottom"
+    :onReachBottom="onReachBottom"
     @load="load"
-    :setup-load="props.setupLoad"
+    :setup-load="setupLoad"
   >
     <slot>
       <slot

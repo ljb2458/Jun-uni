@@ -5,9 +5,16 @@
  * 介绍:
  */
 import CrequestList from "./CrequestList.vue";
-export function useCrequestListRef<T extends any[] = any[]>() {
+import type { Api, GetApiData, GetApiRes } from "@@/hooks/useRequestList";
+
+export function useCrequestListRef<F extends Api>() {
   //@ts-ignore
   // type Instance = Omit<InstanceType<typeof CrequestList>, "data">;
   type Instance = GenericComponentExports<typeof CrequestList>;
-  return ref<Instance & { data: T }>();
+  return ref<
+    Omit<Instance, "data" | "res"> & {
+      data: GetApiData<F>;
+      res: GetApiRes<F> | undefined;
+    }
+  >();
 }

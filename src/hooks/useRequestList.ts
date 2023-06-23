@@ -1,15 +1,15 @@
 /*
  * @Date: 2023-01-16 15:49:10
- * @LastEditTime: 2023-06-12 14:50:46
- * @FilePath: /music-client/src/hooks/useRequestList.ts
+ * @LastEditTime: 2023-06-23 21:20:57
+
  * 介绍:请求分页接口hooks
  */
 import { Paging, ApiRes } from "@@/api";
 import type { Ref } from "vue";
 
-export default function usePaging<D extends any[] = any[]>(
-  api: Function,
-  config?: RequestConfig
+export default function usePaging<F extends Api>(
+  api: F,
+  config?: RequestConfig<F>
 ) {
   /**api请求状态*/
   const state = ref<State>({
@@ -18,6 +18,7 @@ export default function usePaging<D extends any[] = any[]>(
   });
   /**接口返回数据 */
   const data = ref<any[]>([]);
+  const res = ref();
   const params: RequsetParams = { page: 1 };
   /**重置分页接口 */
   async function rerequest() {
@@ -28,25 +29,29 @@ export default function usePaging<D extends any[] = any[]>(
   async function request(): Promise<State> {
     try {
       stateLoading();
+      const _params = { ...params, ...config?.defaultParams };
+      const _extraParams = config?.extraParams || [];
       /**请求之前执行返回数据 */
       let extraParams;
       const requestBefore = config?.requestBefore;
       if (typeof requestBefore === "function")
-        extraParams = await requestBefore(params);
+        extraParams = await requestBefore(_params, ..._extraParams);
       if (extraParams === false) return state.value;
-
-      const res: ApiRes<Paging.Data<any[]>> = await api({
-        ...params,
-        ...config?.extraParams,
-        ...extraParams,
-      });
-      if (res.code !== 200) {
-        return stateErr(res.msg);
+      const _res: ApiRes<Paging.Data<any[]>> = await api(
+        {
+          ..._params,
+          ...extraParams,
+        },
+        ..._extraParams
+      );
+      res.value = _res;
+      if (_res.code !== 200) {
+        return stateErr(_res.msg);
       }
       if (isOnePage()) {
         //*储存单页数据
         data.value.length = 0;
-        data.value = res.data as any;
+        data.value = _res.data as any;
         return stateEnd();
       }
       // // 服务器总数据为0
@@ -60,17 +65,17 @@ export default function usePaging<D extends any[] = any[]>(
       //   return stateEnd();
       // }
       //当前页码不等于服务器查询的页码
-      if (res.data.current_page != params.page) {
+      if (_res.data.current_page != params.page) {
         return stateNext();
       }
-      if (res.data.current_page == 1 && res.data?.data.length == 0)
+      if (_res.data.current_page == 1 && _res.data?.data.length == 0)
         return stateNull();
-      if (res.data?.data.length == 0) return stateEnd();
+      if (_res.data?.data.length == 0) return stateEnd();
       //*存储分页数据
-      data.value?.push(...res.data.data);
+      data.value?.push(..._res.data.data);
       params.page++;
       //当前数据大于总数
-      if (data.value.length >= res.data.total) {
+      if (data.value.length >= _res.data.total) {
         return stateEnd();
       }
       return stateNext();
@@ -80,7 +85,8 @@ export default function usePaging<D extends any[] = any[]>(
   }
   return {
     state,
-    data: data as Ref<D>,
+    data: data as Ref<GetApiData<F>>,
+    res: res as Ref<GetApiRes<F>>,
     request,
     rerequest,
     stateErr,
@@ -132,19 +138,36 @@ export interface State {
 }
 
 export type StateType = "error" | "null" | "end" | "next" | "loading";
-export interface RequestConfig {
-  /**是否单页列表 */
-  isOnePage?: boolean;
-  /**返回值作为请求数据，返回fase取消请求 */
-  requestBefore?: RequestBefore;
-  /**额外的请求数据 */
-  extraParams?: AnyObject;
-}
-interface _RequestBefore {
-  (params: RequsetParams): any;
-}
-export type RequestBefore = _RequestBefore | Promise<_RequestBefore>;
+
+export type RequestBefore<T = any> = T | Promise<T>;
+/**api类型 */
+export type Api<T extends ApiRes<any> = ApiRes<any>> = (
+  ...p: any[]
+) => Promise<T>;
+/**得到res数据类型 */
+export type GetApiRes<F extends Api> = UnPromise<ReturnType<F>>;
+/**获得data数据类型 */
+export type GetApiData<F extends Api> = GetApiRes<F>["data"]["data"];
+/**获得默认参数 */
+export type GetParams<F extends Api> = Partial<Parameters<F>[0]>;
 
 export interface RequsetParams {
   page: number;
+}
+
+/**获得请求前回调参数 */
+export type GetRequestBefore<F extends Api> = (
+  a: GetParams<F>,
+  ...b: any[]
+) => Promise<GetParams<F>> | GetParams<F>;
+/**请求配置 */
+export interface RequestConfig<F extends Api = any> {
+  /**是否单页列表 */
+  isOnePage?: boolean;
+  /**返回值作为默认请求数据*/
+  requestBefore?: GetRequestBefore<F>;
+  /**默认请求数据 */
+  defaultParams?: GetParams<F>;
+  /**额外的请求数据 */
+  extraParams?: any[];
 }
