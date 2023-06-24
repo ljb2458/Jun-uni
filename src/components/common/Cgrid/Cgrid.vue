@@ -1,8 +1,7 @@
 <!--
  * @Date: 2023-03-23 14:18:19
- * @LastEditTime: 2023-06-15 17:19:35
- * @FilePath: /music-client/src/components/common/Cgrid/Cgrid.vue
- * 介绍:搭配CgridCell组件使用
+ * @LastEditTime: 2023-06-24 16:58:36
+ * 介绍:
 -->
 <script lang="ts" setup>
 import { JustifyItems, AlignItems } from "@@/components/types";
@@ -50,7 +49,7 @@ const gridTemplateColumns = computed(() => {
 });
 const gridTemplateRows = computed(() => {
   const number = Number(props.row);
-  if (isNaN(number)) return number;
+  if (isNaN(number)) return props.row;
   return repeat(number, props.repeat || "auto");
 });
 
@@ -60,7 +59,7 @@ function repeat(number: number, symbol: string) {
 </script>
 
 <template>
-  <view
+  <div
     class="Cgrid"
     :style="
       filterParams({
@@ -78,10 +77,10 @@ function repeat(number: number, symbol: string) {
     "
   >
     <slot></slot>
-  </view>
+  </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .Cgrid {
   display: grid;
   gap: var(--Cgrid-gap);
