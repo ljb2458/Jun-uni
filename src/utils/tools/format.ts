@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-03-29 11:32:27
- * @LastEditTime: 2023-04-20 00:44:44
- * @FilePath: /atcoin/src/utils/tools/format.ts
+ * @LastEditTime: 2023-06-24 18:21:33
+
  * 介绍:格式化
  */
 
@@ -21,29 +21,19 @@ export function omitText(
   return res;
 }
 /**
- * * 合并数字中重复的'0'
- * @param number 数字
- * @param decimals 精度
- * @returns 
+ * * 将小数中的0折叠显示
+ * @param req 数字
+ * @param decimals 小数
+ * @returns
  */
-export function formatDecimal(
-  number: number | string | undefined | null,
-  decimals: number = 2
-) {
-  if (!number && number != 0) return "--";
-  //防止空字符
-  if (!number.toString().replace(/s+/g, "")) return "--";
-  const num = Number(number);
-  if (isNaN(num)) return "--";
-  let _number = number.toString();
-  //去除尾部所有的'0'
-  while (_number[_number.length - 1] === "0") {
-    _number = _number.slice(0, _number.length - 1);
-  }
+export function formatDecimal(req: any, decimals: number = 4) {
+  let number = toNumber(req);
+  if (isNaN(number)) return "--";
+  let _number = normalNumber(number);
   const [intStr, floatStr] = _number.split(".");
   //如果实际小数位不大于要求小数位
   if (!floatStr || floatStr.length <= decimals)
-    return formatNumber(num, decimals);
+    return formatNumber(req, decimals);
   //对重复数字进行合并
   let floatRes = "",
     count = 1;
@@ -71,19 +61,14 @@ export function formatDecimal(
  * @param decimals 保留小数位
  * @returns string 结果
  */
-export function formatNumber(
-  number: number | string | undefined | null,
-  decimals: number = 2
-): string {
-  if (!number && number != 0) return "--";
-  //防止空字符
-  if (!number.toString().replace(/s+/g, "")) return "--";
-  number = Number(number);
-  if (isNaN(number)) return "--";
-  let numberStr = (
-    Math.floor(number * Math.pow(10, decimals)) / Math.pow(10, decimals)
-  ).toFixed(decimals);
-  return numberStr;
+export function formatNumber(req: any, decimals: number = 2): string {
+  if (Number.isNaN(toNumber(req))) return "--";
+  const numStr = req.toString();
+  let [int, dec = ""] = numStr.split(".");
+  let rep = decimals - dec.length;
+  if (rep > 0) dec += "0".repeat(rep);
+  dec = dec.slice(0, decimals);
+  return `${int}.${dec}`;
 }
 /**
  * * 小数精度修正
@@ -91,14 +76,9 @@ export function formatNumber(
  * @param decimals 保留小数位
  * @returns string 结果
  */
-export function parseNumber(
-  number: number | string | undefined | null,
-  decimals: number = 6
-): string {
-  if (!number && number != 0) return "--";
-  //防止空字符
-  if (!number.toString().replace(/s+/g, "")) return "--";
-  if (isNaN(Number(number))) return "--";
+export function parseNumber(req: any, decimals: number = 8): string {
+  let number = toNumber(req);
+  if (isNaN(number)) return "--";
   let floatStr = (
     Math.round(
       (parseFloat(number.toString()) + Number.EPSILON) * Math.pow(10, decimals)
@@ -117,72 +97,28 @@ export function fixedNumber(number: number, fixed = 2): string {
   while (strNumber.length < fixed) strNumber = `0${strNumber}`;
   return strNumber;
 }
+/**
+ * * 任意数据转number，' '将不被视为0
+ * @param req 原数据
+ * @returns
+ */
+export function toNumber(req: any): number {
+  let str = String(req).replace(/\s*/g, "");
+  const num = Number(str);
+  if (!str || Number.isNaN(num)) return NaN;
+  return num;
+}
 
 /**
  * * 避免数字出现科学计数法
- * @param num_str 原数据
+ * @param num 原数据
  * @returns
  */
-export function toolNumber(num_str: StrNumber) {
-  num_str = num_str.toString();
-  if (num_str.indexOf("+") != -1) {
-    num_str = num_str.replace("+", "");
-  }
-  if (num_str.indexOf("E") != -1 || num_str.indexOf("e") != -1) {
-    let resValue = "",
-      power: StrNumber = "",
-      result = null,
-      dotIndex = 0,
-      resArr: string[] = [],
-      sym = "";
-    let numStr = num_str.toString();
-    if (numStr[0] == "-") {
-      // 如果为负数，转成正数处理，先去掉‘-’号，并保存‘-’.
-      numStr = numStr.slice(1);
-      sym = "-";
-    }
-    if (numStr.indexOf("E") != -1 || numStr.indexOf("e") != -1) {
-      let regExp = new RegExp(
-        "^(((\\d+.?\\d+)|(\\d+))[Ee]{1}((-(\\d+))|(\\d+)))$",
-        "ig"
-      );
-      result = regExp.exec(numStr);
-      if (result != null) {
-        resValue = result[2];
-        power = result[5];
-        result = null;
-      }
-      if (!resValue && !power) {
-        return false;
-      }
-      dotIndex = resValue.indexOf(".") == -1 ? 0 : resValue.indexOf(".");
-      resValue = resValue.replace(".", "");
-      resArr = resValue.split("");
-      if (Number(power) >= 0) {
-        let subres = resValue.slice(dotIndex);
-        power = Number(power);
-        //幂数大于小数点后面的数字位数时，后面加0
-        for (let i = 0; i <= power - subres.length; i++) {
-          resArr.push("0");
-        }
-        if (power - subres.length < 0) {
-          resArr.splice(dotIndex + power, 0, ".");
-        }
-      } else {
-        power = power.replace("-", "");
-        power = Number(power);
-        //幂数大于等于 小数点的index位置, 前面加0
-        for (let i = 0; i < power - dotIndex; i++) {
-          resArr.unshift("0");
-        }
-        let n = power - dotIndex >= 0 ? 1 : -(power - dotIndex);
-        resArr.splice(n, 0, ".");
-      }
-    }
-    resValue = resArr.join("");
-
-    return sym + resValue;
-  } else {
-    return num_str;
-  }
+export function normalNumber(num: StrNumber): string {
+  return String(num).replace(/(-?)(\d*)\.?(\d+)e([+-]\d+)/, (a, b, c, d, e) => {
+    if (!c) e++;
+    return e < 0
+      ? b + "0." + Array(1 - e - c.length).join("0") + c + d
+      : b + c + d + Array(e - d.length + 1).join("0");
+  });
 }

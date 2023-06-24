@@ -19,9 +19,3 @@ interface UnknownObjectDeep {
 interface UnknownObject {
   [key: string]: unknown | undefined;
 }
-/**元组类型转联合类型 */
-type TupleToUnion<T extends any[]> = keyof {
-  [Key in T[number]]: Key;
-};
-/**获取promise中的类型*/
-type UnPromise<T> = T extends Promise<infer U> ? U : never;
