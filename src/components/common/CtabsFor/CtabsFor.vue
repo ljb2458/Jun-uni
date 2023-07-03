@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-07-03 16:09:21
- * 介绍:
+ * @LastEditTime: 2023-07-03 17:26:50
+ * 介绍:tabs循环展示面板
 -->
 <script lang="ts" setup generic="Item extends CtabsForOptionsItem">
 import { unitPercent, unitPx } from "@@/utils/tools/css";

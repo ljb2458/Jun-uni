@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-06-14 15:04:30
- * @LastEditTime: 2023-06-15 15:17:14
- * 介绍:
+ * @LastEditTime: 2023-07-03 17:25:46
+ * 介绍:顶部消息提示组件
 -->
 <script lang="ts" setup>
 import { ShowParam, defaultDuration } from "./index";

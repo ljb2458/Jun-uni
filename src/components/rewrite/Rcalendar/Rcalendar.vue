@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-06-13 16:30:49
- * @LastEditTime: 2023-07-03 17:06:16
- * 介绍:
+ * @LastEditTime: 2023-07-03 17:12:52
+ * 介绍:日期选择器
 -->
 <script lang="ts" setup>
 import { CustomListItem } from "./index";
@@ -57,8 +57,8 @@ const props = withDefaults(
   }
 );
 const emit = defineEmits<{
-  (e: "confirm", v: any): void;
-  (e: "close", v: any): void;
+  (e: "confirm", v: string[]): void;
+  (e: "close"): void;
 }>();
 function setFormatter(callback: Function) {
   return calendarRef.value?.setFormatter(callback);
@@ -71,7 +71,7 @@ defineExpose({ setFormatter });
     ref="calendarRef"
     :="filterParams(props)"
     @confirm="(e:any) => emit('confirm', e)"
-    @close="(e:any) => emit('close', e)"
+    @close="(e:any) => emit('close')"
   ></u-calendar>
 </template>
 <style lang="scss" scoped></style>

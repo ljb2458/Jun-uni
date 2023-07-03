@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-06-13 16:47:13
- * @LastEditTime: 2023-06-23 00:11:04
- * 介绍:
+ * @LastEditTime: 2023-07-03 17:26:30
+ * 介绍:选择器
 -->
 <script lang="ts" setup generic="D">
 import { Column, ConfirmParam, ChangeParam } from "./index";

@@ -1,3 +1,8 @@
+<!--
+ * @Date: 2023-02-19 18:44:54
+ * @LastEditTime: 2023-07-03 17:25:20
+ * 介绍:加载页
+-->
 <script lang="ts" setup>
 import { filterParams } from "@@/utils/tools/object";
 

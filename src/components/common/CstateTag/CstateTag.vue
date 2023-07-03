@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-01-13 11:39:30
- * @LastEditTime: 2023-07-03 16:09:14
- * 介绍:CstateTag标签
+ * @LastEditTime: 2023-07-03 17:27:05
+ * 介绍:状态标签
 -->
 <script lang="ts" setup name="CstateTag">
 import type { CstateTagEmun } from "./index";

@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-04-13 15:20:52
- * @LastEditTime: 2023-07-03 16:09:05
- * 介绍:
+ * @LastEditTime: 2023-07-03 17:28:30
+ * 介绍:正负文字
 -->
 <script lang="ts" setup>
 const props = withDefaults(
@@ -17,6 +17,10 @@ const props = withDefaults(
     mode?: "bg" | "text";
     leftText?: string;
     rightText?: string;
+    /**数字为正时显示的符号 */
+    plusSymbol?: string;
+    /**数字为负时显示的符号 */
+    minusSymbol?: string;
   }>(),
   {
     value: "--",
@@ -48,7 +52,9 @@ function isText() {
 function isBg() {
   return props.mode === "bg";
 }
-const symbol = computed(() => (isMinus.value ? "-" : "+"));
+const symbol = computed(() =>
+  isMinus.value ? props.minusColor : props.plusSymbol
+);
 const $value = computed(() => {
   if (isNaN(Number(props.value)) || (!props.value && props.value !== 0))
     return "--";

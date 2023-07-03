@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-02-19 18:44:54
- * @LastEditTime: 2023-07-03 16:09:46
- * 介绍:
+ * @LastEditTime: 2023-07-03 17:24:39
+ * 介绍:输入框
 -->
 <script lang="ts" setup>
 import { filterParams } from "@@/utils/tools/object";
