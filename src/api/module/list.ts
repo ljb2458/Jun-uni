@@ -5,12 +5,12 @@
  * 介绍:
  */
 
-import { defaHttp, ApiRes, Paging } from "../index";
+import { defaHttp, ApiRes, PagingApi } from "../index";
 
 /**提币记录 */
 export async function apiWithdrawCoinLogs(
-  data: Paging.Req
-): Promise<ApiRes<Paging.Data<WithdrawCoinLogs.ResItem[]>>> {
+  data: PagingApi.Req
+): Promise<ApiRes<PagingApi.Data<WithdrawCoinLogs.ResItem[]>>> {
   // const res = await defaHttp.post<
   //   ApiRes<Paging.Data<WithdrawCoinLogs.ResItem[]>>
   // >("/money/withdraw", data);

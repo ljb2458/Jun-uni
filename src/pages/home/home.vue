@@ -56,7 +56,6 @@ const tabsForOptions = computed(() => [
 function showNotify() {
   notify.primary("这是一个通知");
 }
-
 const listRefs = tabsForOptions.value.map(() =>
   useCrequestListRef<typeof apiWithdrawCoinLogs>()
 );

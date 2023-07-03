@@ -1,12 +1,13 @@
 /*
  * @Date: 2023-01-16 15:49:10
- * @LastEditTime: 2023-06-23 21:20:57
+ * @LastEditTime: 2023-07-03 13:52:11
 
  * 介绍:请求分页接口hooks
  */
-import { Paging, ApiRes } from "@@/api";
+import { PagingApi, ApiRes } from "@@/api";
 import type { Ref } from "vue";
-
+import { apiWithdrawCoinLogs } from "@@/api/module/list";
+const { data } = usePaging(apiWithdrawCoinLogs);
 export default function usePaging<F extends Api>(
   api: F,
   config?: RequestConfig<F>
@@ -37,7 +38,7 @@ export default function usePaging<F extends Api>(
       if (typeof requestBefore === "function")
         extraParams = await requestBefore(_params, ..._extraParams);
       if (extraParams === false) return state.value;
-      const _res: ApiRes<Paging.Data<any[]>> = await api(
+      const _res: ApiRes<PagingApi.Data<any[]>> = await api(
         {
           ..._params,
           ...extraParams,
@@ -50,7 +51,6 @@ export default function usePaging<F extends Api>(
       }
       if (isOnePage()) {
         //*储存单页数据
-        data.value.length = 0;
         data.value = _res.data as any;
         return stateEnd();
       }
@@ -141,13 +141,15 @@ export type StateType = "error" | "null" | "end" | "next" | "loading";
 
 export type RequestBefore<T = any> = T | Promise<T>;
 /**api类型 */
-export type Api<T extends ApiRes<any> = ApiRes<any>> = (
+export type Api<T extends PagingApi.Res<any[]> = PagingApi.Res<any[]>> = (
   ...p: any[]
 ) => Promise<T>;
 /**得到res数据类型 */
 export type GetApiRes<F extends Api> = UnPromise<ReturnType<F>>;
 /**获得data数据类型 */
-export type GetApiData<F extends Api> = GetApiRes<F>["data"]["data"];
+export type GetApiData<F extends Api> = GetApiRes<F> extends PagingApi.Res<infer D>
+  ? D
+  : any[];
 /**获得默认参数 */
 export type GetParams<F extends Api> = Partial<Parameters<F>[0]>;
 

@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-02-18 21:05:28
- * @LastEditTime: 2023-04-21 23:39:17
+ * @LastEditTime: 2023-07-03 14:03:25
  * @FilePath: /music-client/src/api/index.ts
  * 介绍:
  */
@@ -27,35 +27,20 @@ export interface ApiRes<T> {
   status: boolean;
   data: T;
 }
-export namespace Paging {
+export namespace PagingApi {
   /**请求分页接口返res类型 */
-  export type Res<T> = ApiRes<Data<T>>;
+  export type Res<T extends any[] = any[]> = ApiRes<Data<T>>;
   /**分页data类型 */
   export interface Data<T> {
     /**当前页码数 */
     current_page: number;
     data: T;
-    /**第一页URL */
-    first_page_url: string;
-    /**首页 */
-    from: number;
+    /**第一页 */
+    first_page: string;
     /**尾页 */
     last_page: number;
-    /**尾页URL */
-    last_page_url: string;
-    links: Array<{
-      url: string | null;
-      label: string;
-      active: boolean;
-    }>;
-    /**下一页url */
-    next_page_url: string;
-    path: string;
     /**每页数据长度 */
     per_page: number;
-    prev_page_url: string;
-    /**下一页 */
-    to: number;
     /**总数 */
     total: number;
   }

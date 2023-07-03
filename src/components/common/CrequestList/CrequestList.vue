@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-04-24 10:38:17
- * @LastEditTime: 2023-06-23 21:23:52
+ * @LastEditTime: 2023-07-03 13:56:39
  * @FilePath: /music-client/src/components/common/CrequestList/CrequestList.vue
  * 介绍:自动请求分页列表
 -->
@@ -19,7 +19,7 @@ type ClistProps = GetPropsType<typeof Clist>;
 
 const props = withDefaults(
   defineProps<{
-    api: Api;
+    api: F;
     requestBefore?: GetRequestBefore<F>;
     extraParams?: any[];
     isOnePage?: boolean;
