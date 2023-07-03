@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-04-09 21:44:48
- * @LastEditTime: 2023-06-15 19:10:12
+ * @LastEditTime: 2023-07-03 15:16:07
  * @FilePath: /music-client/src/components/common/Ccell/Ccell.vue
  * 介绍:cell单元格
 -->
@@ -24,10 +24,14 @@ const props = withDefaults(
     mode: "bg",
   }
 );
+const emit = defineEmits<{
+  (e: "click", v: MouseEvent): void;
+}>();
 </script>
 
 <template>
   <view
+    @click="(e) => emit('click', e)"
     :style="{
       '--Cell-bg': bg,
       '--BOc': props.shadowColor,
@@ -82,8 +86,7 @@ const props = withDefaults(
 }
 .Ccell__active {
   &:active {
-    background: var(--Cell-bg);
-    filter: brightness(90%) invert(0.4);
+    background: var(--C-B3);
   }
 }
 </style>

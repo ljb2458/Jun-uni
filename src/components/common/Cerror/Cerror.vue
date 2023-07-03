@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-06-12 12:17:13
- * @LastEditTime: 2023-06-14 20:02:42
+ * @LastEditTime: 2023-07-03 15:16:53
  * @FilePath: /music-client/src/components/common/Cerror/Cerror.vue
  * 介绍:
 -->
@@ -28,7 +28,7 @@ function clickButton(e: MouseEvent) {
   <view class="Cerror" :style="{ marginTop }">
     <Rimage :src="_require('src/static/components/images/error.svg')"></Rimage>
     <slot>
-      <div class="C-T5 MT-xs">{{ props.message }}</div>
+      <view class="C-T5 MT-xs">{{ props.message }}</view>
     </slot>
     <slot name="button">
       <view class="MT-md">

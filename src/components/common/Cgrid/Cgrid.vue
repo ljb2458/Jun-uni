@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-03-23 14:18:19
- * @LastEditTime: 2023-06-24 16:58:36
+ * @LastEditTime: 2023-07-03 15:06:09
  * 介绍:
 -->
 <script lang="ts" setup>
@@ -59,7 +59,7 @@ function repeat(number: number, symbol: string) {
 </script>
 
 <template>
-  <div
+  <view
     class="Cgrid"
     :style="
       filterParams({
@@ -77,10 +77,10 @@ function repeat(number: number, symbol: string) {
     "
   >
     <slot></slot>
-  </div>
+  </view>
 </template>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .Cgrid {
   display: grid;
   gap: var(--Cgrid-gap);
