@@ -15,6 +15,13 @@
       }
     },
     {
+      "path": "pages/_calendar/_calendar",
+      "style": {
+        "navigationBarTitleText": "日期选择器",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
       "path": "pages/_modal/_modal",
       "style": {
         "navigationBarTitleText": "modal模态框",

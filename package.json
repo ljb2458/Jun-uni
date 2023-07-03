@@ -59,7 +59,7 @@
     "pinia-plugin-persistedstate": "^3.0.2",
     "unplugin-auto-import": "^0.14.3",
     "unplugin-vue-components": "^0.24.0",
-    "uview-plus": "^3.1.26",
+    "uview-plus": "^3.1.32",
     "vue": "^3.3.4",
     "vue-i18n": "9.2.2"
   },

@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-04-09 21:44:48
- * @LastEditTime: 2023-07-03 16:08:32
+ * @LastEditTime: 2023-07-03 16:22:22
  * 介绍:cell单元格
 -->
 <script lang="ts" setup>
@@ -15,6 +15,7 @@ const props = withDefaults(
     shadowColor?: string;
     shadow?: boolean;
     mode?: "bg" | "border" | "none";
+    class: any;
   }>(),
   {
     shadowColor: "rgba(0,0,0,0.2)",
@@ -36,13 +37,16 @@ const emit = defineEmits<{
       '--BOc': props.shadowColor,
       '--SHc': props.shadowColor,
     }"
-    :class="{
-      'shadowVar--SHc': props.mode === 'bg' && props.shadow,
-      Ccell__bg: props.mode === 'bg',
-      Ccell__active: active,
-      Ccell_border: props.mode === 'border',
-      'borderVar--BOc': props.mode === 'border',
-    }"
+    :class="[
+      props.class,
+      {
+        'shadowVar--SHc': props.mode === 'bg' && props.shadow,
+        Ccell__bg: props.mode === 'bg',
+        Ccell__active: active,
+        Ccell_border: props.mode === 'border',
+        'borderVar--BOc': props.mode === 'border',
+      },
+    ]"
     class="Ccell"
   >
     <slot name="left-layout">

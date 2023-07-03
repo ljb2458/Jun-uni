@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-02-19 18:22:42
- * @LastEditTime: 2023-06-14 20:52:01
+ * @LastEditTime: 2023-07-03 16:27:06
  * @FilePath: /music-client/src/common/css/init.css
  * 介绍:
  */
@@ -14,6 +14,10 @@ button,
   box-sizing: border-box;
   font-size: inherit;
   color: inherit;
+}
+/*选中微信小程序组件盒*/
+[is] {
+  display: block;
 }
 
 /*input提示文本样式*/

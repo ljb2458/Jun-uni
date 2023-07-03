@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-06-14 19:49:30
- * @LastEditTime: 2023-07-03 16:06:49
+ * @LastEditTime: 2023-07-03 16:28:23
  * 介绍:
 -->
 <cfg lang="json">
@@ -29,6 +29,7 @@ const cells = computed(() => [
 <template>
   <CpageView>
     <Ccell
+      class="MT-sm"
       v-for="cell in cells"
       :left-text="cell.title"
       @click="cell.onClick"
