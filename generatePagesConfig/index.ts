@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-06-12 20:31:38
- * @LastEditTime: 2023-07-03 15:51:22
+ * @LastEditTime: 2023-07-03 16:04:46
  * @FilePath: /music-client/generatePagesConfig/index.ts
  * 介绍:
  */
@@ -48,24 +48,32 @@ function traverseDir(dirPath: string) {
   const files = fs.readdirSync(dirPath);
   files.forEach((file) => {
     const filePath = path.join(dirPath, file);
-    const name = path.basename(file, extname);
-    const pagePath = `pages/${path.relative(pagesPath, dirPath)}/${name}`;
+    /**页面路径 page/home/home */
+    const pagePath = filePath
+      .replace(src, "")
+      .slice(1)
+      .replace(/\\/g, "/")
+      .replace(extname, "");
     if (fs.statSync(filePath).isDirectory()) {
       if (!checkBlacklist(pagePath)) {
         traverseDir(filePath);
       }
     } else if (path.extname(filePath) === extname) {
-      const pageContent = fs.readFileSync(filePath, "utf-8");
-      const cfg = findPageCfg(pageContent);
-      const item = {
-        path: pagePath,
-        ...getPageConfig(cfg),
-      };
-      //第一个
-      if (pagePath === first) pages.unshift(item);
-      else pages.push(item);
+      setConfig(filePath, pagePath);
     }
   });
+}
+/**设置配置项 */
+function setConfig(filePath: string, pagePath: string) {
+  const pageContent = fs.readFileSync(filePath, "utf-8");
+  const cfg = findPageCfg(pageContent);
+  const item = {
+    path: pagePath,
+    ...getPageConfig(cfg),
+  };
+  //第一个
+  if (pagePath === first) pages.unshift(item);
+  else pages.push(item);
 }
 function checkBlacklist(path: string) {
   return blacklist.some((v) => path.indexOf(v) + 1);
