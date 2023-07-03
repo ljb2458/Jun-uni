@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-06-14 15:04:30
  * @LastEditTime: 2023-06-15 15:17:14
- * @FilePath: /music-client/src/components/rewrite/Rnotify/Rnotify.vue
  * 介绍:
 -->
 <script lang="ts" setup>

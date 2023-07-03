@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-04-13 15:20:52
- * @LastEditTime: 2023-06-15 17:09:43
- * @FilePath: /music-client/src/components/common/CgridItem/CgridItem.vue
+ * @LastEditTime: 2023-07-03 16:08:50
  * 介绍:
 -->
 <script lang="ts" setup>

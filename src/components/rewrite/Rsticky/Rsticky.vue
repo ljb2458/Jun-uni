@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-04-21 19:42:31
- * @LastEditTime: 2023-07-03 15:26:57
- * @FilePath: /music-client/src/components/rewrite/Rsticky/Rsticky.vue
+ * @LastEditTime: 2023-07-03 16:10:07
  * 介绍:粘性定位吸顶组件
 -->
 <script lang="ts" setup>

@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-06-14 21:09:05
  * @LastEditTime: 2023-06-15 14:16:03
- * @FilePath: /music-client/src/components/rewrite/Rmodal/Rmodal.vue
  * 介绍:
 -->
 <script lang="ts" setup>

@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-07-03 15:39:16
- * @FilePath: /music-client/src/pages/home/home.vue
+ * @LastEditTime: 2023-07-03 16:11:04
  * 介绍:
 -->
 <cfg lang="json">

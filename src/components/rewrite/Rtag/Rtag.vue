@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-06-13 16:10:45
- * @LastEditTime: 2023-07-03 15:25:51
- * @FilePath: /music-client/src/components/rewrite/Rtag/Rtag.vue
+ * @LastEditTime: 2023-07-03 16:10:22
  * 介绍:tag组件一般用于标记和选择
 -->
 <script lang="ts" setup>

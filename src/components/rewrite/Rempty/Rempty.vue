@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-04-21 23:49:40
  * @LastEditTime: 2023-06-13 17:59:01
- * @FilePath: /music-client/src/components/rewrite/Rempty/Rempty.vue
  * 介绍:
 -->
 <script lang="ts" setup>

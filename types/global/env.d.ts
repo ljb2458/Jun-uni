@@ -1,7 +1,6 @@
 /*
  * @Date: 2023-02-18 20:06:36
  * @LastEditTime: 2023-06-15 18:48:44
- * @FilePath: /music-client/types/global/env.d.ts
  * 介绍:
  */
 /// <reference types="vite/client" />

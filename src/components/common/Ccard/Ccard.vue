@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-02-21 13:07:37
  * @LastEditTime: 2023-05-11 18:06:44
- * @FilePath: /wkw/src/components/common/Ccard/Ccard.vue
  * 介绍:
 -->
 <script lang="ts" setup>

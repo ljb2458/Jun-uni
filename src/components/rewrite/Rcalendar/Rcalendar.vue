@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-06-13 16:30:49
  * @LastEditTime: 2023-06-13 17:59:25
- * @FilePath: /music-client/src/components/rewrite/Rcalendar/Rcalendar.vue
  * 介绍:
 -->
 <script lang="ts" setup>

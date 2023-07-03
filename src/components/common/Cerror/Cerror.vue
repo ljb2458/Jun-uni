@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-06-12 12:17:13
  * @LastEditTime: 2023-07-03 15:16:53
- * @FilePath: /music-client/src/components/common/Cerror/Cerror.vue
  * 介绍:
 -->
 <script lang="ts" setup>

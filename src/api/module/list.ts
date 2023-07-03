@@ -1,7 +1,6 @@
 /*
  * @Date: 2023-02-19 11:25:25
  * @LastEditTime: 2023-06-14 20:32:27
- * @FilePath: /music-client/src/api/module/list.ts
  * 介绍:
  */
 

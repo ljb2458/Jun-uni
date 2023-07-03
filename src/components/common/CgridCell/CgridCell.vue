@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-02-23 10:18:43
  * @LastEditTime: 2023-06-15 17:20:48
- * @FilePath: /music-client/src/components/common/CgridCell/CgridCell.vue
  * 介绍:使用Grid绘制表格
 -->
 <script lang="ts" setup>

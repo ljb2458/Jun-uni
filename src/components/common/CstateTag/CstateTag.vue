@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-01-13 11:39:30
- * @LastEditTime: 2023-06-15 17:15:42
- * @FilePath: /music-client/src/components/common/CstateTag/CstateTag.vue
+ * @LastEditTime: 2023-07-03 16:09:14
  * 介绍:CstateTag标签
 -->
 <script lang="ts" setup name="CstateTag">

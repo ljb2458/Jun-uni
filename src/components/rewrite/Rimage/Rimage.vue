@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-02-19 21:04:28
- * @LastEditTime: 2023-06-13 19:25:43
- * @FilePath: /music-client/src/components/rewrite/Rimage/Rimage.vue
+ * @LastEditTime: 2023-07-03 16:09:42
  * 介绍:
 -->
 <script lang="ts" setup>

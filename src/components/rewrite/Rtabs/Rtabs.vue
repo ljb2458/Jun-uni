@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-04-21 18:13:53
- * @LastEditTime: 2023-07-03 15:26:08
- * @FilePath: /music-client/src/components/rewrite/Rtabs/Rtabs.vue
+ * @LastEditTime: 2023-07-03 16:10:18
  * 介绍:选择菜单栏
 -->
 <script lang="ts" setup generic="Item extends RtabsListItem">

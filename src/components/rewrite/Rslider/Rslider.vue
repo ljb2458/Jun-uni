@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-06-13 20:21:48
- * @LastEditTime: 2023-07-03 15:35:41
- * @FilePath: /music-client/src/components/rewrite/Rslider/Rslider.vue
+ * @LastEditTime: 2023-07-03 16:10:04
  * 介绍:滑动选择器
 -->
 <script lang="ts" setup>

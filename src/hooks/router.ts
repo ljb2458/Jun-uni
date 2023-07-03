@@ -1,7 +1,6 @@
 /*
  * @Date: 2023-02-19 13:37:05
  * @LastEditTime: 2023-04-20 18:51:58
- * @FilePath: /music-client/src/hooks/router.ts
  * 介绍:路由跳转
  */
 import { objToQuery } from "@@/utils/tools/object";

@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-06-23 00:09:47
- * @FilePath: /music-client/src/components/common/CtabsFor/CtabsFor.vue
+ * @LastEditTime: 2023-07-03 16:09:21
  * 介绍:
 -->
 <script lang="ts" setup generic="Item extends CtabsForOptionsItem">

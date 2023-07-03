@@ -1,7 +1,6 @@
 /*
  * @Date: 2023-03-29 11:23:50
  * @LastEditTime: 2023-03-29 11:23:59
- * @FilePath: /mode-startup-template/src/utils/tools/function.ts
  * 介绍:函数工具
  */
 /**

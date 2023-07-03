@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-04-24 10:38:17
- * @LastEditTime: 2023-07-03 14:58:36
- * @FilePath: /music-client/src/components/common/CrequestList/CrequestList.vue
+ * @LastEditTime: 2023-07-03 16:09:10
  * 介绍:自动请求分页列表
 -->
 <script lang="ts" setup generic="F extends Api">

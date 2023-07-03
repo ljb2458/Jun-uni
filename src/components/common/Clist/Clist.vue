@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-04-21 21:21:57
  * @LastEditTime: 2023-06-14 20:34:49
- * @FilePath: /music-client/src/components/common/Clist/Clist.vue
  * 介绍:
 -->
 <script lang="ts" setup>

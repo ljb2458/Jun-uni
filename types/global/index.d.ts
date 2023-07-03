@@ -1,7 +1,6 @@
 /*
  * @Date: 2023-04-20 18:38:28
- * @LastEditTime: 2023-06-23 21:20:43
- * @FilePath: /music-client/types/global/index.d.ts
+ * @LastEditTime: 2023-07-03 16:12:07
  * 介绍:全局ts变量
  */
 /**string类型的number数据 */

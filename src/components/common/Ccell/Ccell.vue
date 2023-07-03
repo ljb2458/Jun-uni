@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-04-09 21:44:48
- * @LastEditTime: 2023-07-03 15:16:07
- * @FilePath: /music-client/src/components/common/Ccell/Ccell.vue
+ * @LastEditTime: 2023-07-03 16:08:32
  * 介绍:cell单元格
 -->
 <script lang="ts" setup>

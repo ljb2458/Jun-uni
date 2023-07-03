@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-02-19 20:46:35
- * @LastEditTime: 2023-06-15 10:34:44
- * @FilePath: /music-client/src/components/rewrite/Rdivider/Rdivider.vue
+ * @LastEditTime: 2023-07-03 16:09:33
  * 介绍:
 -->
 <script lang="ts" setup>

@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-04-20 18:38:28
- * @LastEditTime: 2023-06-13 17:56:48
- * @FilePath: /music-client/src/components/rewrite/Rtext/Rtext.vue
+ * @LastEditTime: 2023-07-03 16:10:25
  * 介绍:集成了文本类在项目中的常用功能
 -->
 <script lang="ts" setup>

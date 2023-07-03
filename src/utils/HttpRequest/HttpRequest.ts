@@ -1,7 +1,6 @@
 /*
  * @Date: 2023-02-15 14:36:19
  * @LastEditTime: 2023-04-20 19:06:22
- * @FilePath: /music-client/src/utils/HttpRequest/HttpRequest.ts
  * 介绍:请求封装文件https://www.quanzhan.co/luch-request/guide/3.x/#example
  */
 import luchRequest, { HttpRequestConfig, HttpResponse } from "luch-request";

@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-06-13 18:01:56
- * @LastEditTime: 2023-06-13 20:00:32
- * @FilePath: /music-client/src/components/rewrite/Rswiper/Rswiper.vue
+ * @LastEditTime: 2023-07-03 16:10:10
  * 介绍:轮播图组件
 -->
 <script lang="ts" setup>

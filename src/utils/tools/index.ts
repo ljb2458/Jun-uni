@@ -1,7 +1,6 @@
 /*
  * @Date: 2023-04-20 18:49:50
  * @LastEditTime: 2023-04-20 18:50:13
- * @FilePath: /music-client/src/utils/tools/index.ts
  * 介绍:
  */
 /**
