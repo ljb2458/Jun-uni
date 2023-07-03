@@ -1,7 +1,6 @@
 /*
  * @Date: 2023-02-18 20:06:36
  * @LastEditTime: 2023-04-21 17:09:09
- * @FilePath: /music-client/vite.config.ts
  * 介绍:
  */
 import { defineConfig, loadEnv, UserConfig, ConfigEnv } from "vite";

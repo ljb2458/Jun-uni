@@ -1,7 +1,6 @@
 <!--
  * @Date: 2023-06-14 16:33:18
- * @LastEditTime: 2023-06-15 15:42:03
- * @FilePath: /music-client/src/layout/notify.vue
+ * @LastEditTime: 2023-07-03 18:29:02
  * 介绍:
 -->
 <script lang="ts" setup>

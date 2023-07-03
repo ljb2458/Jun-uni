@@ -1,7 +1,6 @@
 /*
  * @Date: 2023-06-14 16:33:30
- * @LastEditTime: 2023-06-15 15:41:00
- * @FilePath: /music-client/src/layout/notify.ts
+ * @LastEditTime: 2023-07-03 18:27:47
  * 介绍:
  */
 import { ShowParam, defaultDuration } from "@@/components/rewrite/Rnotify";

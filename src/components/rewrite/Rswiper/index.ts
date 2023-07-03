@@ -1,7 +1,6 @@
 /*
  * @Date: 2023-06-13 19:26:57
- * @LastEditTime: 2023-06-13 19:43:36
- * @FilePath: /music-client/src/components/rewrite/Rswiper/index.ts
+ * @LastEditTime: 2023-07-03 18:27:00
  * 介绍:
  */
 export interface _ListItem extends AnyObject {
