@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-02-18 21:05:28
- * @LastEditTime: 2023-07-03 14:03:25
+ * @LastEditTime: 2023-07-03 14:12:22
  * @FilePath: /music-client/src/api/index.ts
  * 介绍:
  */
@@ -31,7 +31,7 @@ export namespace PagingApi {
   /**请求分页接口返res类型 */
   export type Res<T extends any[] = any[]> = ApiRes<Data<T>>;
   /**分页data类型 */
-  export interface Data<T> {
+  export interface Data<T extends any[] = any[]> {
     /**当前页码数 */
     current_page: number;
     data: T;
