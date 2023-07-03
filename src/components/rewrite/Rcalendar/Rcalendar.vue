@@ -4,7 +4,7 @@
  * 介绍:日期选择器
 -->
 <script lang="ts" setup>
-import { CustomListItem,Mode } from "./index";
+import { CustomListItem, Mode } from "./index";
 import { filterParams } from "@@/utils/tools/object";
 
 const props = withDefaults(
@@ -26,7 +26,7 @@ const props = withDefaults(
     defaultDate?: string | Date | CustomListItem;
     maxCount?: StrNumber;
     rowHeight?: StrNumber;
-    formatter?: Function;
+    formatter?: (time: CustomListItem) => CustomListItem;
     /**是否显示农历 */
     showLunar?: boolean;
     /**是否显示月份背景色 */
