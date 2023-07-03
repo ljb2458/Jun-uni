@@ -7,7 +7,6 @@ export type Mode =
   | "top"
   | "bottom"
   | "center"
-  | "center"
   | "right"
   | "top left"
   | "top right"

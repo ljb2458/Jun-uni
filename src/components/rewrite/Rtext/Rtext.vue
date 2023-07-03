@@ -1,12 +1,13 @@
 <!--
  * @Date: 2023-04-20 18:38:28
- * @LastEditTime: 2023-07-03 16:10:25
+ * @LastEditTime: 2023-07-03 19:40:48
  * 介绍:集成了文本类在项目中的常用功能
 -->
 <script lang="ts" setup>
 import { filterParams } from "@@/utils/tools/object";
 import type { StyleValue } from "vue";
 import { ColorTheme } from "@@/components/types";
+
 const props = withDefaults(
   defineProps<{
     type: ColorTheme;

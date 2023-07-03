@@ -40,6 +40,7 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Rpicker: typeof import('./../../../src/components/rewrite/Rpicker/Rpicker.vue')['default']
+    Rpopup: typeof import('./../../../src/components/rewrite/Rpopup/Rpopup.vue')['default']
     Rradio: typeof import('./../../../src/components/rewrite/Rradio/Rradio.vue')['default']
     RradioGroup: typeof import('./../../../src/components/rewrite/RradioGroup/RradioGroup.vue')['default']
     Rslider: typeof import('./../../../src/components/rewrite/Rslider/Rslider.vue')['default']
