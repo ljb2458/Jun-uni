@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-07-03 16:07:29
- * @LastEditTime: 2023-07-03 17:22:00
+ * @LastEditTime: 2023-07-03 18:05:15
  * 介绍:
 -->
 <cfg lang="json">
@@ -10,6 +10,7 @@
 }
 </cfg>
 <script lang="ts" setup>
+import { Mode } from "@@/components/rewrite/Rcalendar";
 const show = ref(false);
 const date = reactive<string[]>([]);
 function close() {
@@ -19,12 +20,18 @@ function confirm(e: string[]) {
   show.value = false;
   date.push(...e);
 }
+const mode = ref<Mode>("multiple");
 </script>
 <template>
   <CpageView>
+    <RradioGroup v-model="mode">
+      <Rradio name="single" label="单个日期" />
+      <Rradio name="range" label="日期范围" />
+      <Rradio name="multiple" label="多个日期" />
+    </RradioGroup>
     <Rbutton @click="show = true">选择日期</Rbutton>
     <Rcalendar
-      :mode="'multiple'"
+      :mode="mode"
       :show="show"
       @close="close"
       @confirm="confirm"

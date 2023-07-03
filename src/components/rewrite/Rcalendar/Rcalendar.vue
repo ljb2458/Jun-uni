@@ -1,10 +1,10 @@
 <!--
  * @Date: 2023-06-13 16:30:49
- * @LastEditTime: 2023-07-03 17:12:52
+ * @LastEditTime: 2023-07-03 18:03:42
  * 介绍:日期选择器
 -->
 <script lang="ts" setup>
-import { CustomListItem } from "./index";
+import { CustomListItem,Mode } from "./index";
 import { filterParams } from "@@/utils/tools/object";
 
 const props = withDefaults(
@@ -14,7 +14,7 @@ const props = withDefaults(
     /**是否显示副标题 */
     showSubtitle?: boolean;
     /**multiple-可以选择多个日期，range-选择日期范围（多个月需配合monthNum属性使用） */
-    mode?: "single" | "multiple" | "range";
+    mode?: Mode;
     /**mode=range时，第一个日期底部的提示文字 */
     startText?: string;
     /**mode=range时，第一个日期底部的提示文字 */
