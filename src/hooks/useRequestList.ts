@@ -1,13 +1,12 @@
 /*
  * @Date: 2023-01-16 15:49:10
- * @LastEditTime: 2023-07-03 13:52:11
+ * @LastEditTime: 2023-07-03 14:05:59
 
  * 介绍:请求分页接口hooks
  */
 import { PagingApi, ApiRes } from "@@/api";
 import type { Ref } from "vue";
-import { apiWithdrawCoinLogs } from "@@/api/module/list";
-const { data } = usePaging(apiWithdrawCoinLogs);
+
 export default function usePaging<F extends Api>(
   api: F,
   config?: RequestConfig<F>
