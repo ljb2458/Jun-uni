@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-06-24 22:48:33
- * @LastEditTime: 2023-06-24 22:51:36
+ * @LastEditTime: 2023-07-03 12:40:31
  * 介绍:
  */
 /**元组类型转联合类型 */
@@ -8,7 +8,7 @@ type TupleToUnion<T extends any[]> = keyof {
     [Key in T[number]]: Key;
   };
   /**获取promise中的类型*/
-  type UnPromise<T> = T extends Promise<infer U> ? U : never;
+  type UnPromise<T> = T extends Promise<infer U> ? U : T;
   /**将T中的部分属性变为可选 */
   type OptionalBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
   /**将T中的部分属性变为必选 */
