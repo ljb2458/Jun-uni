@@ -1,8 +1,8 @@
 <!--
  * @Date: 2023-06-13 17:37:31
- * @LastEditTime: 2023-06-13 17:45:25
+ * @LastEditTime: 2023-07-03 15:24:49
  * @FilePath: /music-client/src/components/rewrite/Rtransition/Rtransition.vue
- * 介绍:
+ * 介绍:该组件用于组件的动画过渡效果
 -->
 <script lang="ts" setup>
 import { TimingFunction } from "./idnex";

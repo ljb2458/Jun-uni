@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-06-12 20:31:38
- * @LastEditTime: 2023-06-13 15:24:25
+ * @LastEditTime: 2023-07-03 15:51:22
  * @FilePath: /music-client/generatePagesConfig/index.ts
  * 介绍:
  */
@@ -12,6 +12,8 @@ import defaultConfig from "./pages.json";
 const src = path.join(__dirname, "../src");
 const pagesPath = path.join(src, "/pages");
 const outDir = path.join(src, "/pages.json");
+/**第一个页面 */
+const first = "pages/home/home";
 /**黑名单文件夹 */
 const blacklist = ["/components"];
 /**后缀 */
@@ -55,10 +57,13 @@ function traverseDir(dirPath: string) {
     } else if (path.extname(filePath) === extname) {
       const pageContent = fs.readFileSync(filePath, "utf-8");
       const cfg = findPageCfg(pageContent);
-      pages.push({
+      const item = {
         path: pagePath,
         ...getPageConfig(cfg),
-      });
+      };
+      //第一个
+      if (pagePath === first) pages.unshift(item);
+      else pages.push(item);
     }
   });
 }

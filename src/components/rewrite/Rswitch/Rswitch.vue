@@ -1,8 +1,8 @@
 <!--
  * @Date: 2023-06-13 19:50:26
- * @LastEditTime: 2023-06-14 15:00:59
+ * @LastEditTime: 2023-07-03 15:26:25
  * @FilePath: /music-client/src/components/rewrite/Rswitch/Rswitch.vue
- * 介绍:
+ * 介绍:开关组件
 -->
 <script lang="ts" setup>
 import { filterParams } from "@@/utils/tools/object";
