@@ -9,11 +9,11 @@ export {};
 
 declare module "@vue/runtime-core" {
   export interface GlobalComponents {
-    "u-collapse": typeof import("./components/collapse.vue")["default"];
-    "u-collapse-item": typeof import("./components/collapseItem.vue")["default"];
-    "u-radio": typeof import("./components/radio.vue")["default"];
-    "u-radio-group": typeof import("./components/radioGroup.vue")["default"];
-    "u-checkbox": typeof import("./components/checkbox.vue")["default"];
-    "u-checkbox-group": typeof import("./components/checkboxGroup.vue")["default"];
+    "u-collapse": typeof import("./components/Rcollapse/Rcollapse.vue")["default"];
+    "u-collapse-item": typeof import("./components/RcollapseItem/RcollapseItem.vue")["default"];
+    "u-radio": typeof import("./components/Rradio/Rradio.vue")["default"];
+    "u-radio-group": typeof import("./components/RradioGroup/RradioGroup.vue")["default"];
+    "u-checkbox": typeof import("./components/Rcheckbox/Rcheckbox.vue")["default"];
+    "u-checkbox-group": typeof import("./components/RcheckboxGroup/RcheckboxGroup.vue")["default"];
   }
 }
