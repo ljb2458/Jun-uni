@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-07-03 20:13:29
- * @LastEditTime: 2023-07-03 22:42:54
- * 介绍:
+ * @LastEditTime: 2023-07-04 09:34:06
+ * 介绍:折叠面板
 -->
 
 <script lang="ts" setup>
@@ -49,6 +49,7 @@ defineEmits({ init });
     @open="(e:any)=>emit('open',e)"
     @close="(e:any)=>emit('close',e)"
   >
+  <slot></slot>
   </u-collapse>
 </template>
 <style lang="scss" scoped></style>

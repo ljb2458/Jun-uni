@@ -1,7 +1,7 @@
 <!--
  * @Date: 2023-07-03 20:13:29
- * @LastEditTime: 2023-07-03 22:40:16
- * 介绍:
+ * @LastEditTime: 2023-07-04 09:51:13
+ * 介绍:折叠面板
 -->
 
 <script lang="ts" setup>
@@ -25,13 +25,46 @@ const props = defineProps<{
   align?: TextAlign;
   /**	唯一标识符，如不设置，默认用当前collapse-item的索引值 */
   name?: StrNumber;
-  /**标题左侧图片，可为绝对路径的图片或内置图标 */
+  /**标题左侧图标 */
   icon?: string;
+  rightIcon?: string;
   /**面板展开收起的过渡时间，单位ms */
   duration?: number;
 }>();
+// const slots = defineSlots<{
+//   default?: (props: {}) => any;
+//   title?: (props: {}) => any;
+//   icon?: (props: {}) => any;
+//   value?: (props: {}) => any;
+//   "right-icon"?: (props: {}) => any;
+// }>();
 </script>
 <template>
-  <u-collapse-item :="filterParams(props)"> </u-collapse-item>
+  <u-collapse-item :="filterParams(props)">
+    <slot></slot>
+    <template #title>
+      <slot name="title">
+        {{ title }}
+      </slot>
+    </template>
+    <template #icon>
+      <slot name="icon">
+        <Cicon v-if="rightIcon" :name="icon" />
+      </slot>
+    </template>
+    <template #value>
+      <slot name="value">
+        {{ value }}
+      </slot>
+    </template>
+    <template #right-icon>
+      <slot name="right-icon">
+        <Cicon v-if="rightIcon" :name="rightIcon" />
+      </slot>
+    </template>
+    <!-- <template #[key]="slotProps" v-for="(item, key) in slots">
+      <slot :name="key" :="slotProps"></slot>
+    </template> -->
+  </u-collapse-item>
 </template>
 <style lang="scss" scoped></style>
