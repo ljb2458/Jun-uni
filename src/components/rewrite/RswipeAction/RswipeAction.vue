@@ -1,12 +1,12 @@
 <!--
  * @Date: 2023-07-04 11:15:42
- * @LastEditTime: 2023-07-04 11:29:03
+ * @LastEditTime: 2023-07-04 11:50:19
  * 介绍:滑动单元格
 -->
 
 <script lang="ts" setup>
 import { filterParams } from "@@/utils/tools/object";
-import { OptionsItem } from "./index";
+import { RswipeActionOptionsItem, RswipeActionClickEvent } from "./index";
 const props = defineProps<{
   /**控制打开或者关闭 */
   show?: boolean;
@@ -18,14 +18,14 @@ const props = defineProps<{
   autoClose?: boolean;
   /**滑动距离阈值 */
   threshold?: number;
-  options?: OptionsItem[];
+  options?: RswipeActionOptionsItem[];
   /**动画过渡时间，单位ms */
   duration?: StrNumber;
   /**标识 */
   name?: StrNumber;
 }>();
 const emit = defineEmits<{
-  (e: "click", v: { name: StrNumber; index: StrNumber }): void;
+  (e: "click", v: RswipeActionClickEvent): void;
 }>();
 </script>
 <template>

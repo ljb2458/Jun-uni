@@ -4,7 +4,11 @@
  * 介绍:
  */
 import type { StyleValue } from "vue";
-export interface OptionsItem {
+export interface RswipeActionOptionsItem {
   text: string;
   style?: StyleValue;
+}
+export interface RswipeActionClickEvent {
+  name: StrNumber;
+  index: StrNumber;
 }

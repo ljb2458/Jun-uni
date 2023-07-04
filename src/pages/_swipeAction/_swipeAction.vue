@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-07-04 11:30:19
- * @LastEditTime: 2023-07-04 11:31:55
+ * @LastEditTime: 2023-07-04 11:55:30
  * 介绍:
 -->
 <cfg lang="json">
@@ -10,14 +10,26 @@
 }
 </cfg>
 <script lang="ts" setup>
-
-const options = computed(()=>[{
-
-}])
+import {
+  RswipeActionOptionsItem,
+  RswipeActionClickEvent,
+} from "@@/components/rewrite/RswipeAction/index";
+const options = computed<RswipeActionOptionsItem[]>(() => [
+  {
+    text: "取消",
+  },
+]);
+function test(e: RswipeActionClickEvent) {
+  console.log(e);
+}
 </script>
 <template>
   <CpageView>
-    <RswipeAction> 测试 </RswipeAction>
+    <u-swipe-action>
+      <RswipeAction show @click="test" :options="options"> 测试 </RswipeAction>
+      <RswipeAction @click="test" :options="options"> 测试 </RswipeAction>
+      <RswipeAction @click="test" :options="options"> 测试 </RswipeAction>
+    </u-swipe-action>
   </CpageView>
 </template>
 <style lang="scss" scoped></style>

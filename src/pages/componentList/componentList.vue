@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-06-14 19:49:30
- * @LastEditTime: 2023-07-04 11:11:34
+ * @LastEditTime: 2023-07-04 11:35:42
  * 介绍:
 -->
 <cfg lang="json">
@@ -29,6 +29,13 @@ const cells = computed(() => [
     message: "仅编写类型声明",
     onClick() {
       router.push("src/pages/_collapse/_collapse.vue");
+    },
+  },
+  {
+    title: "滑动单元格",
+    message: "仅编写类型声明",
+    onClick() {
+      router.push("src/pages/_swipeAction/_swipeAction.vue");
     },
   },
 ]);

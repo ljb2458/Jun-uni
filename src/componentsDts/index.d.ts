@@ -15,5 +15,6 @@ declare module "@vue/runtime-core" {
     "u-radio-group": typeof import("./components/RradioGroup/RradioGroup.vue")["default"];
     "u-checkbox": typeof import("./components/Rcheckbox/Rcheckbox.vue")["default"];
     "u-checkbox-group": typeof import("./components/RcheckboxGroup/RcheckboxGroup.vue")["default"];
+    "u-swipe-action": typeof import("./components/RswipeActionGroup/RswipeActionGroup.vue")["default"];
   }
 }

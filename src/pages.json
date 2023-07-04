@@ -34,6 +34,13 @@
         "navigationBarTitleText": "modal模态框",
         "enablePullDownRefresh": false
       }
+    },
+    {
+      "path": "pages/_swipeAction/_swipeAction",
+      "style": {
+        "navigationBarTitleText": "滑动单元格",
+        "enablePullDownRefresh": false
+      }
     }
   ],
   "tabBar": {
