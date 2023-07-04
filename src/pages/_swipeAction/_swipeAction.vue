@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-07-04 11:30:19
- * @LastEditTime: 2023-07-04 11:55:30
+ * @LastEditTime: 2023-07-04 11:58:30
  * 介绍:
 -->
 <cfg lang="json">
@@ -26,7 +26,7 @@ function test(e: RswipeActionClickEvent) {
 <template>
   <CpageView>
     <u-swipe-action>
-      <RswipeAction show @click="test" :options="options"> 测试 </RswipeAction>
+      <RswipeAction @click="test" :options="options"> 测试 </RswipeAction>
       <RswipeAction @click="test" :options="options"> 测试 </RswipeAction>
       <RswipeAction @click="test" :options="options"> 测试 </RswipeAction>
     </u-swipe-action>
