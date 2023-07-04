@@ -1,10 +1,10 @@
 <!--
  * @Date: 2023-07-03 17:32:03
- * @LastEditTime: 2023-07-03 18:02:29
+ * @LastEditTime: 2023-07-04 11:03:00
  * 介绍:复选框群组组件
 -->
 <script lang="ts" setup>
-import { filterParams } from "@@/utils/tools/object";
+// import { filterParams } from "@@/utils/tools/object";
 
 const props = defineProps<{
   name?: string;
@@ -35,22 +35,23 @@ const emit = defineEmits<{
   (e: "change", v: StrNumber[]): void;
   (e: "update:modelValue", v: StrNumber[] | undefined): void;
 }>();
-const $modelValue = computed({
-  get() {
-    return props.modelValue;
-  },
-  set(v) {
-    emit("update:modelValue", v);
-  },
-});
+// const $modelValue = computed({
+//   get() {
+//     return props.modelValue;
+//   },
+//   set(v) {
+//     emit("update:modelValue", v);
+//   },
+// });
 </script>
 <template>
-  <u-checkbox-group
+  <!-- <u-checkbox-group
     :="filterParams(props)"
     v-model="$modelValue"
     @change="(e:any)=>emit('change',e)"
   >
     <slot></slot>
-  </u-checkbox-group>
+  </u-checkbox-group> -->
+  <slot></slot>
 </template>
 <style lang="scss" scoped></style>

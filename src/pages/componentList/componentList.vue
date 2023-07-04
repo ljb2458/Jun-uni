@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-06-14 19:49:30
- * @LastEditTime: 2023-07-03 16:28:23
+ * @LastEditTime: 2023-07-04 09:56:29
  * 介绍:
 -->
 <cfg lang="json">
@@ -24,6 +24,13 @@ const cells = computed(() => [
       router.push("src/pages/_calendar/_calendar.vue");
     },
   },
+  {
+    title: "折叠面板",
+    message: "暂不支持小程序",
+    onClick() {
+      router.push("src/pages/_collapse/_collapse.vue");
+    },
+  },
 ]);
 </script>
 <template>
@@ -32,6 +39,7 @@ const cells = computed(() => [
       class="MT-sm"
       v-for="cell in cells"
       :left-text="cell.title"
+      :right-text="cell.message"
       @click="cell.onClick"
       active
       :right-icon="true"

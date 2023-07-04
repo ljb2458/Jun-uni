@@ -1,14 +1,12 @@
 <!--
- * @Date: 2023-07-03 17:32:03
- * @LastEditTime: 2023-07-03 17:50:19
- * 介绍:复选框组件
+ * @Date: 2023-07-03 17:47:09
+ * @LastEditTime: 2023-07-03 17:53:23
+ * 介绍:
 -->
 <script lang="ts" setup>
-import { filterParams } from '@@/utils/tools/object';
-
+// import { filterParams } from "@@/utils/tools/object";
 const props = defineProps<{
   name?: StrNumber;
-  checked?: boolean;
   /**形状，circle-圆形，square-方形 */
   shape?: "square" | "circle";
   /**是否禁用*/
@@ -28,6 +26,6 @@ const props = defineProps<{
 }>();
 </script>
 <template>
-  <u-checkbox :="filterParams(props)"></u-checkbox>
+  <!-- <u-radio :="filterParams(props)"> </u-radio> -->
 </template>
 <style lang="scss" scoped></style>

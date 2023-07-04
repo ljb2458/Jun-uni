@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-07-03 16:07:29
- * @LastEditTime: 2023-07-03 19:25:07
+ * @LastEditTime: 2023-07-04 11:08:04
  * 介绍:
 -->
 <cfg lang="json">
@@ -29,11 +29,17 @@ function formatter(day: CustomListItem) {
 </script>
 <template>
   <CpageView>
-    <RradioGroup v-model="mode">
-      <Rradio class="ML-sm" name="single" label="单个日期" />
-      <Rradio class="ML-sm" name="range" label="日期范围" />
-      <Rradio class="ML-sm" na me="multiple" label="多个日期" />
-    </RradioGroup>
+    <u-radio-group v-model="mode">
+      <view class="ML-sm">
+        <u-radio name="single" label="单个日期" />
+      </view>
+      <view class="ML-sm">
+        <u-radio class="ML-sm" name="range" label="日期范围" />
+      </view>
+      <view class="ML-sm">
+        <u-radio class="ML-sm" name="multiple" label="多个日期" />
+      </view>
+    </u-radio-group>
     <Rbutton class="MT-md" @click="show = true">选择日期</Rbutton>
 
     <Rcalendar

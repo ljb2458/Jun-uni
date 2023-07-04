@@ -1,10 +1,10 @@
 <!--
  * @Date: 2023-07-03 17:32:03
- * @LastEditTime: 2023-07-03 18:07:51
+ * @LastEditTime: 2023-07-04 10:59:52
  * 介绍:复选框群组组件
 -->
 <script lang="ts" setup>
-import { filterParams } from "@@/utils/tools/object";
+// import { filterParams } from "@@/utils/tools/object";
 type Value = string | number | boolean;
 
 const props = defineProps<{
@@ -36,22 +36,23 @@ const emit = defineEmits<{
   (e: "change", v: Value): void;
   (e: "update:modelValue", v: Value | undefined): void;
 }>();
-const $modelValue = computed({
-  get() {
-    return props.modelValue;
-  },
-  set(v) {
-    emit("update:modelValue", v);
-  },
-});
+// const $modelValue = computed({
+//   get() {
+//     return props.modelValue;
+//   },
+//   set(v) {
+//     emit("update:modelValue", v);
+//   },
+// });
 </script>
 <template>
-  <u-radio-group
+  <!-- <u-radio-group
     :="filterParams(props)"
     v-model="$modelValue"
     @change="(e:any)=>emit('change',e)"
   >
     <slot></slot>
-  </u-radio-group>
+  </u-radio-group> -->
+  <slot></slot>
 </template>
 <style lang="scss" scoped></style>

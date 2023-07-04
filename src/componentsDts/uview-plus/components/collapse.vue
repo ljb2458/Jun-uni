@@ -1,11 +1,11 @@
 <!--
  * @Date: 2023-07-03 20:13:29
- * @LastEditTime: 2023-07-04 09:34:06
- * 介绍:折叠面板
+ * @LastEditTime: 2023-07-04 10:57:18
+ * 介绍:折叠面板 二次封装会导致微信小程序出现问题，使用这种方法添加类型声明
 -->
 
 <script lang="ts" setup>
-import { filterParams } from "@@/utils/tools/object";
+// import { filterParams } from "@@/utils/tools/object";
 
 const props = withDefaults(
   defineProps<{
@@ -26,22 +26,22 @@ const emit = defineEmits<{
   (e: "close", v: StrNumber | StrNumber[]): void;
   (e: "update:modelValue", v: StrNumber | StrNumber[] | undefined): void;
 }>();
-const $modelValue = computed({
-  get() {
-    return props.modelValue;
-  },
-  set(v) {
-    emit("update:modelValue", v);
-  },
-});
+// const $modelValue = computed({
+//   get() {
+//     return props.modelValue;
+//   },
+//   set(v) {
+//     emit("update:modelValue", v);
+//   },
+// });
 function init() {
-  collapse.value?.init();
+  // collapse.value?.init();
 }
-const collapse = ref();
-defineEmits({ init });
+// const collapse = ref();
+defineExpose({ init });
 </script>
 <template>
-  <u-collapse
+  <!-- <u-collapse
     ref="collapse"
     :="filterParams(props)"
     v-model="$modelValue"
@@ -49,7 +49,8 @@ defineEmits({ init });
     @open="(e:any)=>emit('open',e)"
     @close="(e:any)=>emit('close',e)"
   >
+    <slot></slot>
+  </u-collapse> -->
   <slot></slot>
-  </u-collapse>
 </template>
 <style lang="scss" scoped></style>
