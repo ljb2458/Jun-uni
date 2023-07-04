@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-07-03 16:07:29
- * @LastEditTime: 2023-07-04 11:08:04
+ * @LastEditTime: 2023-07-04 14:43:40
  * 介绍:
 -->
 <cfg lang="json">
@@ -11,6 +11,7 @@
 </cfg>
 <script lang="ts" setup>
 import { Mode, CustomListItem } from "@@/components/rewrite/Rcalendar";
+
 const show = ref(false);
 const date = reactive<string[]>([]);
 function close() {
@@ -26,6 +27,10 @@ function formatter(day: CustomListItem) {
   if (day.week === 0) day.dot = true;
   return day;
 }
+const use = ref(true);
+// #ifdef APP-PLUS
+use.value = false;
+// #endif
 </script>
 <template>
   <CpageView>
@@ -41,8 +46,8 @@ function formatter(day: CustomListItem) {
       </view>
     </u-radio-group>
     <Rbutton class="MT-md" @click="show = true">选择日期</Rbutton>
-
     <Rcalendar
+      v-if="use"
       :formatter="formatter"
       :mode="mode"
       :show="show"

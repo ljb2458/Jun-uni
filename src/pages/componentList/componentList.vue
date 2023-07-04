@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-06-14 19:49:30
- * @LastEditTime: 2023-07-04 11:35:42
+ * @LastEditTime: 2023-07-04 14:39:52
  * 介绍:
 -->
 <cfg lang="json">
@@ -20,6 +20,7 @@ const cells = computed(() => [
   },
   {
     title: "日期选择器",
+    message: "安卓暂不可用",
     onClick() {
       router.push("src/pages/_calendar/_calendar.vue");
     },
@@ -33,7 +34,6 @@ const cells = computed(() => [
   },
   {
     title: "滑动单元格",
-    message: "仅编写类型声明",
     onClick() {
       router.push("src/pages/_swipeAction/_swipeAction.vue");
     },
