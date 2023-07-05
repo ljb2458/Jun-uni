@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-06-14 19:49:30
- * @LastEditTime: 2023-07-04 14:39:52
+ * @LastEditTime: 2023-07-05 14:41:16
  * 介绍:
 -->
 <cfg lang="json">
@@ -27,7 +27,6 @@ const cells = computed(() => [
   },
   {
     title: "折叠面板",
-    message: "仅编写类型声明",
     onClick() {
       router.push("src/pages/_collapse/_collapse.vue");
     },

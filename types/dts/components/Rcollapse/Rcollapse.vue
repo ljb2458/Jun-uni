@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-07-03 20:13:29
- * @LastEditTime: 2023-07-04 10:57:18
+ * @LastEditTime: 2023-07-05 14:50:10
  * 介绍:折叠面板 二次封装会导致微信小程序出现问题，使用这种方法添加类型声明
 -->
 
@@ -10,7 +10,7 @@
 const props = withDefaults(
   defineProps<{
     /**当前展开面板的name，非手风琴模式：[<String | Number>]，手风琴模式：String | Number */
-    modelValue?: StrNumber | StrNumber[];
+    value?: StrNumber | StrNumber[];
     /**是否手风琴模式 */
     accordion?: boolean;
     /**是否显示外边框 */
@@ -24,7 +24,6 @@ const emit = defineEmits<{
   (e: "change", v: StrNumber | StrNumber[]): void;
   (e: "open", v: StrNumber | StrNumber[]): void;
   (e: "close", v: StrNumber | StrNumber[]): void;
-  (e: "update:modelValue", v: StrNumber | StrNumber[] | undefined): void;
 }>();
 // const $modelValue = computed({
 //   get() {

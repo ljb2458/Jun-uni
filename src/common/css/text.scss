@@ -1,21 +1,18 @@
 /***********************文本***********************/
-.T-S-xs {
-  font-size: var(--T-S-xs);
-}
-.T-S-sm {
-  font-size: var(--T-S-sm);
-}
-.T-S-md {
-  font-size: var(--T-S-md);
-}
-.T-S-lg {
-  font-size: var(--T-S-lg);
-}
-.T-S-xl {
-  font-size: var(--T-S-xl);
-}
-.T-S-xxl {
-  font-size: var(--T-S-xxl);
+$sizes: (
+  xs: var(--T-S-xs),
+  sm: var(--T-S-sm),
+  md: var(--T-S-md),
+  lg: var(--T-S-lg),
+  xl: var(--T-S-xl),
+  xxl: var(--T-S-xxl),
+);
+
+// 循环生成样式
+@each $key, $value in $sizes {
+  .T-S-#{$key} {
+    font-size: $value;
+  }
 }
 
 /* 文字单行省略号 */

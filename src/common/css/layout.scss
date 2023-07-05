@@ -36,229 +36,52 @@
   text-align: right;
 }
 /***********************间距***********************/
-.auto-mtVar--P {
-  & > view,
-  button,
-  [class],
-  [data] + view,
-  button,
-  [class],
-  [data] {
-    margin-top: var(--P);
-  }
-}
-.auto-mlVar--P {
-  & > view,
-  button,
-  [class],
-  [data] + view,
-  button,
-  [class],
-  [data] {
-    margin-left: var(--P);
-  }
-}
-.auto-MT-xs {
-  & > view,
-  button,
-  [class],
-  [data] + view,
-  button,
-  [class],
-  [data] {
-    margin-top: var(--gap-xs);
-  }
-}
-.auto-ML-xs {
-  & > view,
-  button,
-  [class],
-  [data] + view,
-  button,
-  [class],
-  [data] {
-    margin-left: var(--gap-xs);
-  }
-}
-.auto-MT-sm {
-  & > view,
-  button,
-  [class],
-  [data] + view,
-  button,
-  [class],
-  [data] {
-    margin-top: var(--gap-sm);
-  }
-}
-.auto-ML-sm {
-  & > view,
-  button,
-  [class],
-  [data] + view,
-  button,
-  [class],
-  [data] {
-    margin-left: var(--gap-sm);
-  }
-}
-.auto-MT-md {
-  & > view,
-  button,
-  [class],
-  [data] + view,
-  button,
-  [class],
-  [data] {
-    margin-top: var(--gap-md);
-  }
-}
-.auto-ML-md {
-  & > view,
-  button,
-  [class],
-  [data] + view,
-  button,
-  [class],
-  [data] {
-    margin-left: var(--gap-md);
-  }
-}
+// 定义间距映射
+$gaps: (
+  xs: var(--gap-xs),
+  sm: var(--gap-sm),
+  md: var(--gap-md),
+  lg: var(--gap-lg),
+  xl: var(--gap-xl),
+  xxl: var(--gap-xxl),
+);
 
-.auto-MT-lg {
-  & > view,
-  button,
-  [class],
-  [data] + view,
-  button,
-  [class],
-  [data] {
-    margin-top: var(--gap-lg);
+// 循环生成样式
+@each $key, $value in $gaps {
+  .MT-#{$key} {
+    margin-top: $value;
   }
-}
-.auto-ML-lg {
-  & > view,
-  button,
-  [class],
-  [data] + view,
-  button,
-  [class],
-  [data] {
-    margin-left: var(--gap-lg);
+  .ML-#{$key} {
+    margin-left: $value;
   }
-}
-.auto-MT-xl {
-  & > view,
-  button,
-  [class],
-  [data] + view,
-  button,
-  [class],
-  [data] {
-    margin-top: var(--gap-xl);
+  .MR-#{$key} {
+    margin-right: $value;
   }
-}
-.auto-ML-xl {
-  & > view,
-  button,
-  [class],
-  [data] + view,
-  button,
-  [class],
-  [data] {
-    margin-left: var(--gap-xl);
+  .MB-#{$key} {
+    margin-bottom: $value;
   }
-}
-
-.MT-xs {
-  margin-top: var(--gap-xs);
-}
-.ML-xs {
-  margin-left: var(--gap-xs);
-}
-.MT-sm {
-  margin-top: var(--gap-sm);
-}
-.ML-sm {
-  margin-left: var(--gap-sm);
-}
-.MT-md {
-  margin-top: var(--gap-md);
-}
-.ML-md {
-  margin-left: var(--gap-md);
-}
-.MT-lg {
-  margin-top: var(--gap-lg);
-}
-.ML-lg {
-  margin-left: var(--gap-lg);
-}
-.MT-xl {
-  margin-top: var(--gap-xl);
-}
-.ML-xl {
-  margin-left: var(--gap-xl);
-}
-.MT-xxl {
-  margin-top: var(--gap-xxl);
-}
-.ML-xxl {
-  margin-left: var(--gap-xxl);
-}
-/* 外边距、内边距全局样式 */
-// .padl(100);
-// .padl(@n, @i: 0) when (@i =< @n) {
-//   .PL-@{i} {
-//     padding-left: 0px + @i !important;
-//   }
-//   .PR-@{i} {
-//     padding-right: 0px + @i !important;
-//   }
-//   .PT-@{i} {
-//     padding-top: 0px + @i !important;
-//   }
-//   .pb-@{i} {
-//     padding-bottom: 0px + @i !important;
-//   }
-//   .ML-@{i} {
-//     margin-left: 0px + @i !important;
-//   }
-//   .MR-@{i} {
-//     margin-right: 0px + @i !important;
-//   }
-//   .MT-@{i} {
-//     margin-top: 0px + @i !important;
-//   }
-//   .MB-@{i} {
-//     margin-bottom: 0px + @i !important;
-//   }
-//   .padl(@n, (@i+1));
-// }
-
-@for $i from 0 through 80 {
-  .MT-#{$i} {
-    margin-top: #{$i}rpx !important;
+  .auto-MT-#{$key} {
+    & > view,
+    [data] {
+      margin-top: $value;
+    }
   }
-  .MR-#{$i} {
-    margin-right: #{$i}rpx !important;
+  .auto-ML-#{$key} {
+    & > view,
+    [data] {
+      margin-left: $value;
+    }
   }
-  .MB-#{$i} {
-    margin-bottom: #{$i}rpx !important;
+  .auto-MB-#{$key} {
+    & > view,
+    [data] {
+      margin-bottom: $value;
+    }
   }
-  .ML-#{$i} {
-    margin-left: #{$i}rpx !important;
-  }
-  .PT-#{$i} {
-    padding-top: #{$i}rpx !important;
-  }
-  .PR-#{$i} {
-    padding-right: #{$i}rpx !important;
-  }
-  .pb-#{$i} {
-    padding-bottom: #{$i}rpx !important;
-  }
-  .PL-#{$i} {
-    padding-left: #{$i}rpx !important;
+  .auto-MR-#{$key} {
+    & > view,
+    [data] {
+      margin-right: $value;
+    }
   }
 }
