@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-06-14 19:49:30
- * @LastEditTime: 2023-07-05 14:41:16
+ * @LastEditTime: 2023-07-05 17:31:28
  * 介绍:
 -->
 <cfg lang="json">
@@ -35,6 +35,12 @@ const cells = computed(() => [
     title: "滑动单元格",
     onClick() {
       router.push("src/pages/_swipeAction/_swipeAction.vue");
+    },
+  },
+  {
+    title: "input 输入框",
+    onClick() {
+      router.push("src/pages/_input/_input.vue");
     },
   },
 ]);

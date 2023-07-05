@@ -29,6 +29,13 @@
       }
     },
     {
+      "path": "pages/_input/_input",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
       "path": "pages/_modal/_modal",
       "style": {
         "navigationBarTitleText": "modal模态框",
