@@ -1,17 +1,18 @@
 <!--
  * @Date: 2023-02-19 18:44:54
- * @LastEditTime: 2023-07-05 19:23:12
+ * @LastEditTime: 2023-07-05 20:25:05
  * 介绍:输入框
 -->
 <script lang="ts" setup>
 import { filterParams } from "@@/utils/tools/object";
 import { StyleValue } from "vue";
+import { ConfirmType } from "./index";
 
 const props = withDefaults(
   defineProps<{
     /**number：数字；idcard：身份证；digit：整数；pwd：密码；text：文本； */
     type?: "number" | "idcard" | "digit" | "pwd" | "text";
-    moduleValue?: StrNumber;
+    modelValue?: StrNumber;
     /**占位文字 */
     placeholder?: StrNumber;
     /**是否禁用 */
@@ -29,7 +30,7 @@ const props = withDefaults(
     /**显示输入统计 */
     showWordLimit?: boolean;
     /**键盘右下角按钮文字 */
-    confirmType?: "send" | "search" | "next" | "go" | "done";
+    confirmType?: ConfirmType;
     inputAlign?: "left" | "center" | "right";
     border?: "bottom" | "surround";
     fontSize?: StrNumber;
@@ -55,25 +56,29 @@ const props = withDefaults(
     border: "bottom",
   }
 );
+const uinput = ref();
+function setFormatter(formatter: (value: StrNumber) => StrNumber) {
+  uinput.value?.setFormatter(formatter);
+}
+defineExpose({ setFormatter });
 const $props = computed(() => filterParams(props));
 const config = reactive({
   isPassword: props.type == "pwd",
 });
 const emit = defineEmits<{
-  (e: "updat:moduleValue", v: StrNumber | undefined): void;
-  (e: "change", v: StrNumber | undefined): void;
-  (e: "input", v: StrNumber | undefined): void;
-  (e: "confirm", v: StrNumber | undefined): void;
-  (e: "blur", v: StrNumber | undefined): void;
-  (e: "focus"): void;
-  (e: "clear"): void;
+  (e: "updat:modelValue", v: StrNumber | undefined): void;
+  (e: "change", v: StrNumber): void;
+  (e: "input", v: StrNumber): void;
+  (e: "blur", v: any): void;
+  (e: "focus", v: any): void;
+  (e: "clear", v: any): void;
 }>();
-const $moduleValue = computed({
+const $modelValue = computed({
   get() {
-    return props.moduleValue;
+    return props.modelValue;
   },
   set(val) {
-    emit("updat:moduleValue", val);
+    emit("updat:modelValue", val);
   },
 });
 function onChangeType() {
@@ -82,12 +87,18 @@ function onChangeType() {
 </script>
 
 <template>
-  <u-input
+  <u--input
+    ref="uinput"
     class="Rinput"
     v-bind="$props"
-    v-model="$moduleValue"
+    v-model="$modelValue"
     :placeholder="props.placeholder"
     :password="config.isPassword"
+    @change="(e:any)=>emit('change',e)"
+    @input="(e:any)=>emit('input',e)"
+    @blur="(e:any)=>emit('blur',e)"
+    @focus="(e:any)=>emit('focus',e)"
+    @clear="(e:any)=>emit('clear',e)"
   >
     <template #prefix>
       <view class="flex-A-C">
@@ -109,7 +120,7 @@ function onChangeType() {
         </u-icon>
       </slot>
     </template>
-  </u-input>
+  </u--input>
 </template>
 
 <style lang="scss" scoped></style>
