@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-07-03 16:07:29
- * @LastEditTime: 2023-07-05 11:59:46
+ * @LastEditTime: 2023-07-05 19:31:51
  * 介绍:
 -->
 <cfg lang="json">
@@ -27,10 +27,6 @@ function formatter(day: CustomListItem) {
   if (day.week === 0) day.dot = true;
   return day;
 }
-const use = ref(true);
-// #ifdef APP-PLUS
-use.value = false;
-// #endif
 </script>
 <template>
   <CpageView>
@@ -40,14 +36,15 @@ use.value = false;
       <Rradio class="ML-sm" name="multiple" label="多个日期" />
     </u-radio-group>
     <Rbutton class="MT-md" @click="show = true">选择日期</Rbutton>
+    <!-- #ifndef APP-PLUS -->
     <Rcalendar
-      v-if="use"
       :formatter="formatter"
       :mode="mode"
       :show="show"
       @close="close"
       @confirm="confirm"
     ></Rcalendar>
+    <!-- #endif -->
     <view class="MT-md">选择的日期： {{ date.join(" , ") }}</view>
   </CpageView>
 </template>

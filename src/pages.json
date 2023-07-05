@@ -31,7 +31,7 @@
     {
       "path": "pages/_input/_input",
       "style": {
-        "navigationBarTitleText": "",
+        "navigationBarTitleText": "input输入框",
         "enablePullDownRefresh": false
       }
     },
@@ -75,7 +75,10 @@
     "navigationBarBackgroundColor": "#eeeeee",
     "backgroundColor": "#eeeeee",
     "pageOrientation": "portrait",
-    "onReachBottomDistance": 200
+    "onReachBottomDistance": 200,
+    "app-plus": {
+      "animationType": "slide-in-left"
+    }
   },
   "easycom": {
     "custom": {

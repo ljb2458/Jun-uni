@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 18:44:54
- * @LastEditTime: 2023-07-05 18:04:28
+ * @LastEditTime: 2023-07-05 19:23:12
  * 介绍:输入框
 -->
 <script lang="ts" setup>
@@ -91,7 +91,9 @@ function onChangeType() {
   >
     <template #prefix>
       <view class="flex-A-C">
-        <view> {{ label }}</view>
+        <view v-if="props.label" class="T-nowrap MR-xs">
+          {{ props.label }}
+        </view>
         <slot name="left"> </slot>
       </view>
     </template>

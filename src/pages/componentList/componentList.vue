@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-06-14 19:49:30
- * @LastEditTime: 2023-07-05 17:31:28
+ * @LastEditTime: 2023-07-05 19:28:58
  * 介绍:
 -->
 <cfg lang="json">
@@ -20,7 +20,7 @@ const cells = computed(() => [
   },
   {
     title: "日期选择器",
-    message: "安卓暂不可用",
+    message: "uview-plus 问题 安卓暂不可用",
     onClick() {
       router.push("src/pages/_calendar/_calendar.vue");
     },
