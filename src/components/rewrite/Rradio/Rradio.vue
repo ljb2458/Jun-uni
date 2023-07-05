@@ -1,10 +1,10 @@
 <!--
  * @Date: 2023-07-03 17:47:09
- * @LastEditTime: 2023-07-03 17:53:23
+ * @LastEditTime: 2023-07-05 11:59:07
  * 介绍:
 -->
 <script lang="ts" setup>
-// import { filterParams } from "@@/utils/tools/object";
+import { filterParams } from "@@/utils/tools/object";
 const props = defineProps<{
   name?: StrNumber;
   /**形状，circle-圆形，square-方形 */
@@ -26,6 +26,6 @@ const props = defineProps<{
 }>();
 </script>
 <template>
-  <!-- <u-radio :="filterParams(props)"> </u-radio> -->
+  <u-radio :="filterParams(props)"> </u-radio>
 </template>
 <style lang="scss" scoped></style>

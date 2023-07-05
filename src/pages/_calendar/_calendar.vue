@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-07-03 16:07:29
- * @LastEditTime: 2023-07-04 14:43:40
+ * @LastEditTime: 2023-07-05 11:59:46
  * 介绍:
 -->
 <cfg lang="json">
@@ -35,15 +35,9 @@ use.value = false;
 <template>
   <CpageView>
     <u-radio-group v-model="mode">
-      <view class="ML-sm">
-        <u-radio name="single" label="单个日期" />
-      </view>
-      <view class="ML-sm">
-        <u-radio class="ML-sm" name="range" label="日期范围" />
-      </view>
-      <view class="ML-sm">
-        <u-radio class="ML-sm" name="multiple" label="多个日期" />
-      </view>
+      <Rradio class="ML-sm" name="single" label="单个日期" />
+      <Rradio class="ML-sm" name="range" label="日期范围" />
+      <Rradio class="ML-sm" name="multiple" label="多个日期" />
     </u-radio-group>
     <Rbutton class="MT-md" @click="show = true">选择日期</Rbutton>
     <Rcalendar

@@ -4,7 +4,7 @@
  * 介绍:复选框组件
 -->
 <script lang="ts" setup>
-// import { filterParams } from '@@/utils/tools/object';
+import { filterParams } from '@@/utils/tools/object';
 
 const props = defineProps<{
   name?: StrNumber;
@@ -28,6 +28,6 @@ const props = defineProps<{
 }>();
 </script>
 <template>
-  <!-- <u-checkbox :="filterParams(props)"></u-checkbox> -->
+  <u-checkbox :="filterParams(props)"></u-checkbox>
 </template>
 <style lang="scss" scoped></style>

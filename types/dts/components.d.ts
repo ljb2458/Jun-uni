@@ -1,3 +1,8 @@
+/*
+ * @Date: 2023-07-04 10:38:16
+ * @LastEditTime: 2023-07-05 12:02:27
+ * 介绍:
+ */
 /* eslint-disable */
 /* prettier-ignore */
 // @ts-nocheck
@@ -11,9 +16,7 @@ declare module "@vue/runtime-core" {
   export interface GlobalComponents {
     "u-collapse": typeof import("./components/Rcollapse/Rcollapse.vue")["default"];
     "u-collapse-item": typeof import("./components/RcollapseItem/RcollapseItem.vue")["default"];
-    "u-radio": typeof import("./components/Rradio/Rradio.vue")["default"];
     "u-radio-group": typeof import("./components/RradioGroup/RradioGroup.vue")["default"];
-    "u-checkbox": typeof import("./components/Rcheckbox/Rcheckbox.vue")["default"];
     "u-checkbox-group": typeof import("./components/RcheckboxGroup/RcheckboxGroup.vue")["default"];
     "u-swipe-action": typeof import("./components/RswipeActionGroup/RswipeActionGroup.vue")["default"];
   }
