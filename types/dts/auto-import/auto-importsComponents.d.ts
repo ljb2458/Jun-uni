@@ -43,7 +43,7 @@ declare module '@vue/runtime-core' {
     Rradio: typeof import('./../../../src/components/rewrite/Rradio/Rradio.vue')['default']
     Rslider: typeof import('./../../../src/components/rewrite/Rslider/Rslider.vue')['default']
     Rsticky: typeof import('./../../../src/components/rewrite/Rsticky/Rsticky.vue')['default']
-    RswipeAction: typeof import('./../../../src/components/rewrite/RswipeAction/RswipeAction.vue')['default']
+    RswipeActionItem: typeof import('./../../../src/components/rewrite/RswipeActionItem/RswipeActionItem.vue')['default']
     Rswiper: typeof import('./../../../src/components/rewrite/Rswiper/Rswiper.vue')['default']
     Rswitch: typeof import('./../../../src/components/rewrite/Rswitch/Rswitch.vue')['default']
     Rtabs: typeof import('./../../../src/components/rewrite/Rtabs/Rtabs.vue')['default']

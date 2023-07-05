@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-07-04 11:30:19
- * @LastEditTime: 2023-07-05 17:29:28
+ * @LastEditTime: 2023-07-05 19:34:32
  * 介绍:
 -->
 <cfg lang="json">
@@ -30,15 +30,15 @@ function test(e: RswipeActionClickEvent) {
 <template>
   <CpageView>
     <u-swipe-action>
-      <RswipeAction @click="test" :options="options">
+      <RswipeActionItem @click="test" :options="options">
         按住向左滑动
-      </RswipeAction>
-      <RswipeAction @click="test" :options="options">
+      </RswipeActionItem>
+      <RswipeActionItem @click="test" :options="options">
         按住向左滑动
-      </RswipeAction>
-      <RswipeAction @click="test" :options="options">
+      </RswipeActionItem>
+      <RswipeActionItem @click="test" :options="options">
         按住向左滑动
-      </RswipeAction>
+      </RswipeActionItem>
     </u-swipe-action>
   </CpageView>
 </template>
