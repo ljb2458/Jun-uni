@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-07-05 20:00:12
- * @LastEditTime: 2023-07-05 20:25:59
+ * @LastEditTime: 2023-07-05 20:31:20
  * 介绍:文本域
 -->
 <script lang="ts" setup>
@@ -97,7 +97,7 @@ const $modelValue = computed({
 });
 </script>
 <template>
-  <u--textarea
+  <u-textarea
     ref="textarea"
     :="filterParams(props)"
     v-model="$modelValue"
@@ -108,6 +108,6 @@ const $modelValue = computed({
     @clear="(e:any)=>emit('clear',e)"
     @linechange="(e:any)=>emit('linechange',e)"
     @keyboardheightchange="(e:any)=>emit('keyboardheightchange',e)"
-  ></u--textarea>
+  ></u-textarea>
 </template>
 <style lang="scss" scoped></style>

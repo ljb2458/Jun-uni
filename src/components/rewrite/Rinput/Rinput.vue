@@ -87,7 +87,7 @@ function onChangeType() {
 </script>
 
 <template>
-  <u--input
+  <u-input
     ref="uinput"
     class="Rinput"
     v-bind="$props"
@@ -120,7 +120,7 @@ function onChangeType() {
         </u-icon>
       </slot>
     </template>
-  </u--input>
+  </u-input>
 </template>
 
 <style lang="scss" scoped></style>
