@@ -36,7 +36,6 @@ function formatter(day: CustomListItem) {
       <Rradio class="ML-sm" name="multiple" label="多个日期" />
     </u-radio-group>
     <Rbutton class="MT-md" @click="show = true">选择日期</Rbutton>
-    <!-- #ifndef APP-PLUS -->
     <Rcalendar
       :formatter="formatter"
       :mode="mode"
@@ -44,7 +43,6 @@ function formatter(day: CustomListItem) {
       @close="close"
       @confirm="confirm"
     ></Rcalendar>
-    <!-- #endif -->
     <view class="MT-md">选择的日期： {{ date.join(" , ") }}</view>
   </CpageView>
 </template>

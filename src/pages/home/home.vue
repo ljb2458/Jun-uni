@@ -35,22 +35,6 @@ const tabsForOptions = computed(() => [
     name: "商品4",
     api: apiWithdrawCoinLogs,
   },
-  {
-    name: "商品5",
-    api: apiWithdrawCoinLogs,
-  },
-  {
-    name: "商品6",
-    api: apiWithdrawCoinLogs,
-  },
-  {
-    name: "商品7",
-    api: apiWithdrawCoinLogs,
-  },
-  {
-    name: "商品8",
-    api: apiWithdrawCoinLogs,
-  },
 ]);
 function showNotify() {
   notify.primary("这是一个通知");

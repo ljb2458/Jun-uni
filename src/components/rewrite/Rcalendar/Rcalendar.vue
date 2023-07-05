@@ -67,11 +67,13 @@ const calendarRef = ref();
 defineExpose({ setFormatter });
 </script>
 <template>
+  <!-- #ifndef APP-PLUS -->
   <u-calendar
     ref="calendarRef"
     :="filterParams(props)"
     @confirm="(e:any) => emit('confirm', e)"
     @close="(e:any) => emit('close')"
   ></u-calendar>
+  <!-- #endif -->
 </template>
 <style lang="scss" scoped></style>

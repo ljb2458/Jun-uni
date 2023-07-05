@@ -26,7 +26,7 @@
     "pageOrientation": "portrait",
     "onReachBottomDistance": 200,
     "app-plus": {
-      "animationType": "slide-in-left"
+      "animationType": "slide-in-right"
     }
   },
   "easycom": {
