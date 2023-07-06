@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-06-13 16:30:49
- * @LastEditTime: 2023-07-03 18:03:42
+ * @LastEditTime: 2023-07-06 19:24:17
  * 介绍:日期选择器
 -->
 <script lang="ts" setup>
@@ -74,6 +74,6 @@ defineExpose({ setFormatter });
     @confirm="(e:any) => emit('confirm', e)"
     @close="(e:any) => emit('close')"
   ></u-calendar>
-  <!-- #endif -->
+  <!-- #endif --> 
 </template>
 <style lang="scss" scoped></style>
