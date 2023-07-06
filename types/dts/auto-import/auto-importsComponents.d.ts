@@ -25,6 +25,7 @@ declare module '@vue/runtime-core' {
     CrequestList: typeof import('./../../../src/components/common/CrequestList/CrequestList.vue')['default']
     CstateTag: typeof import('./../../../src/components/common/CstateTag/CstateTag.vue')['default']
     CtabsFor: typeof import('./../../../src/components/common/CtabsFor/CtabsFor.vue')['default']
+    RactionSheet: typeof import('./../../../src/components/rewrite/RactionSheet/RactionSheet.vue')['default']
     Rbutton: typeof import('./../../../src/components/rewrite/Rbutton/Rbutton.vue')['default']
     Rcalendar: typeof import('./../../../src/components/rewrite/Rcalendar/Rcalendar.vue')['default']
     Rcheckbox: typeof import('./../../../src/components/rewrite/Rcheckbox/Rcheckbox.vue')['default']
