@@ -1,29 +1,13 @@
 <!--
  * @Date: 2023-06-14 16:33:18
- * @LastEditTime: 2023-07-03 18:29:02
+ * @LastEditTime: 2023-07-06 14:41:45
  * 介绍:
 -->
 <script lang="ts" setup>
-import { useRnotifyRef } from "@@/components/rewrite/Rnotify";
-import { show, message, param } from "./notify";
-const RnotifyRef = useRnotifyRef();
-onMounted(() => {
-  watch(
-    () => [show.value, message.value, param.value],
-    (newValue) => {
-      const show = newValue[0];
-      if (show) return RnotifyRef.value?.show(message.value, param.value);
-      RnotifyRef.value?.close();
-    },
-    {
-      immediate: true,
-      deep: true,
-    }
-  );
-});
+import { show, param } from "./notify";
 </script>
 <template>
-  <Rnotify ref="RnotifyRef">
+  <Rnotify :="param" v-model:show="show">
     <slot></slot>
   </Rnotify>
 </template>

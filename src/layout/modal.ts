@@ -1,6 +1,5 @@
 import Rmodal from "@@/components/rewrite/Rmodal/Rmodal.vue";
-import { GetPropsType } from "@@/components/types";
-type RmodalProps = GetPropsType<typeof Rmodal>;
+type RmodalProps = ComponentPropsType<typeof Rmodal>;
 export const show = ref(false);
 export const config = ref<Cfg>({});
 let _resolve = (v?: any) => {};

@@ -1,86 +1,70 @@
 <!--
  * @Date: 2023-06-14 15:04:30
- * @LastEditTime: 2023-07-03 17:25:46
+ * @LastEditTime: 2023-07-06 15:06:59
  * 介绍:顶部消息提示组件
 -->
 <script lang="ts" setup>
-import { ShowParam, defaultDuration } from "./index";
-import type { StyleValue } from "vue";
 import { ColorTheme } from "@@/components/types";
 
-const notifyRef = ref<AnyObject | undefined>();
-const cfg = reactive(initCfg());
+const props = withDefaults(
+  defineProps<{
+    show?: boolean;
+    type?: ColorTheme;
+    duration?: number;
+    message?: string;
+    top?: StrNumber;
+  }>(),
+  {
+    // #ifdef H5
+    top: "44px",
+    // #endif
+    duration: 3000,
+  }
+);
+const emit = defineEmits<{
+  (e: "update:show", v: boolean): void;
+}>();
 
-function initCfg() {
-  const style: StyleValue = {};
-  const type: ColorTheme = "primary";
-  const msgStyle: StyleValue = {};
-  return {
-    type,
-    style,
-    msgStyle,
-    message: "",
-  };
-}
-function show(message: string, config?: ShowParam) {
-  cfg.style = config?.style as any;
-  cfg.type = config?.type as any;
-  cfg.msgStyle = config?.msgStyle as any;
-  cfg.message = message;
-  const _cfg: ShowParam = {
-    duration: defaultDuration,
-    ...config,
-  };
-  notifyRef.value?.show(_cfg);
-}
-
+watch(
+  () => props.show,
+  (newValue) => {
+    if (newValue === true) autoClose(props.duration);
+  },
+  { deep: true }
+);
 function close() {
-  notifyRef.value?.close();
+  emit("update:show", false);
 }
-defineExpose({ show, close, info, warn, error, primary, success });
-function info(message: string, config?: ShowParam) {
-  show(message, { ...config, type: "info" });
-}
-function warn(message: string, config?: ShowParam) {
-  show(message, { ...config, type: "warning" });
-}
-function error(message: string, config?: ShowParam) {
-  show(message, { ...config, type: "error" });
-}
-function primary(message: string, config?: ShowParam) {
-  show(message, { ...config, type: "primary" });
-}
-function success(message: string, config?: ShowParam) {
-  show(message, { ...config, type: "success" });
+
+let timeout: NodeJS.Timeout | void;
+function autoClose(time: StrNumber) {
+  console.log(timeout);
+  
+  if (timeout) timeout = clearTimeout(timeout);
+  const tm = Number(time);
+  if (tm <= 0) return;
+  timeout = setTimeout(close, tm);
 }
 </script>
 <template>
-  <u-notify
+  <view
+    :style="{ top: props.top || 0 }"
+    v-show="props.show"
     class="Rnotify"
-    :class="`Rnotify__${cfg.type}`"
-    :style="cfg.style"
-    ref="notifyRef"
+    :class="`Rnotify__${props.type}`"
   >
-    <template #icon>
-      <slot></slot>
-      <view
-        v-html="cfg.message"
-        :style="cfg.msgStyle"
-        class="Rnotify_message"
-      ></view>
-    </template>
-  </u-notify>
+    {{ message }}
+  </view>
 </template>
 <style lang="scss" scoped>
 .Rnotify {
+  position: fixed;
+  left: 0;
+  right: 0;
   color: var(--C-B1);
-  &::v-deep .u-notify {
-    background: inherit;
-    .u-notify__warpper__text {
-      font-size: inherit !important;
-      color: inherit !important;
-    }
-  }
+  text-align: center;
+  padding: var(--gap-xs) 0;
+  z-index: 10076;
 }
 .Rnotify_message {
   color: var(--C-B1);

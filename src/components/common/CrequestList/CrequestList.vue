@@ -13,8 +13,7 @@ import useRequestList, {
 import { LoadParam } from "../Clist/index";
 import Clist from "../Clist/Clist.vue";
 import { useClistRef } from "../Clist/index";
-import { GetPropsType } from "../../types";
-type ClistProps = GetPropsType<typeof Clist>;
+type ClistProps = ComponentPropsType<typeof Clist>;
 
 const props = withDefaults(
   defineProps<{
