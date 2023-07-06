@@ -29,6 +29,7 @@ declare module '@vue/runtime-core' {
     Rbutton: typeof import('./../../../src/components/rewrite/Rbutton/Rbutton.vue')['default']
     Rcalendar: typeof import('./../../../src/components/rewrite/Rcalendar/Rcalendar.vue')['default']
     Rcheckbox: typeof import('./../../../src/components/rewrite/Rcheckbox/Rcheckbox.vue')['default']
+    RcountTo: typeof import('./../../../src/components/rewrite/RcountTo/RcountTo.vue')['default']
     Rdivider: typeof import('./../../../src/components/rewrite/Rdivider/Rdivider.vue')['default']
     Rempty: typeof import('./../../../src/components/rewrite/Rempty/Rempty.vue')['default']
     Rimage: typeof import('./../../../src/components/rewrite/Rimage/Rimage.vue')['default']
