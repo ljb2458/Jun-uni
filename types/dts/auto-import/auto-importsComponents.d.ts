@@ -39,6 +39,7 @@ declare module '@vue/runtime-core' {
     Rmodal: typeof import('./../../../src/components/rewrite/Rmodal/Rmodal.vue')['default']
     RnoticeBar: typeof import('./../../../src/components/rewrite/RnoticeBar/RnoticeBar.vue')['default']
     Rnotify: typeof import('./../../../src/components/rewrite/Rnotify/Rnotify.vue')['default']
+    RnumberBox: typeof import('./../../../src/components/rewrite/RnumberBox/RnumberBox.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Rpicker: typeof import('./../../../src/components/rewrite/Rpicker/Rpicker.vue')['default']
