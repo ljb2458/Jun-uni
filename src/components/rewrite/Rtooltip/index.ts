@@ -1,3 +1,1 @@
-export interface RtooltipButton{
-    
-}
+export type RtooltipButton = string;
