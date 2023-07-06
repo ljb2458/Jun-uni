@@ -7,6 +7,7 @@
 type TupleToUnion<T extends any[]> = keyof {
   [Key in T[number]]: Key;
 };
+/**对象的值转联合类型 */
 type ObjectToUnion<T extends object> = keyof {
   [key in T[keyof T]]: key;
 };
