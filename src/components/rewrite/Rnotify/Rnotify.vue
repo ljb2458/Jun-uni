@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-06-14 15:04:30
- * @LastEditTime: 2023-07-06 15:06:59
+ * @LastEditTime: 2023-07-06 15:10:28
  * 介绍:顶部消息提示组件
 -->
 <script lang="ts" setup>
@@ -37,9 +37,7 @@ function close() {
 }
 
 let timeout: NodeJS.Timeout | void;
-function autoClose(time: StrNumber) {
-  console.log(timeout);
-  
+function autoClose(time: StrNumber) { 
   if (timeout) timeout = clearTimeout(timeout);
   const tm = Number(time);
   if (tm <= 0) return;
