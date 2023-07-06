@@ -33,9 +33,11 @@ declare module '@vue/runtime-core' {
     Rempty: typeof import('./../../../src/components/rewrite/Rempty/Rempty.vue')['default']
     Rimage: typeof import('./../../../src/components/rewrite/Rimage/Rimage.vue')['default']
     Rinput: typeof import('./../../../src/components/rewrite/Rinput/Rinput.vue')['default']
+    Rline: typeof import('./../../../src/components/rewrite/Rline/Rline.vue')['default']
     RloadingIcon: typeof import('./../../../src/components/rewrite/RloadingIcon/RloadingIcon.vue')['default']
     RloadingPage: typeof import('./../../../src/components/rewrite/RloadingPage/RloadingPage.vue')['default']
     Rmodal: typeof import('./../../../src/components/rewrite/Rmodal/Rmodal.vue')['default']
+    RnoticeBar: typeof import('./../../../src/components/rewrite/RnoticeBar/RnoticeBar.vue')['default']
     Rnotify: typeof import('./../../../src/components/rewrite/Rnotify/Rnotify.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
@@ -51,6 +53,7 @@ declare module '@vue/runtime-core' {
     Rtag: typeof import('./../../../src/components/rewrite/Rtag/Rtag.vue')['default']
     Rtext: typeof import('./../../../src/components/rewrite/Rtext/Rtext.vue')['default']
     Rtextarea: typeof import('./../../../src/components/rewrite/Rtextarea/Rtextarea.vue')['default']
+    Rtooltip: typeof import('./../../../src/components/rewrite/Rtooltip/Rtooltip.vue')['default']
     Rtransition: typeof import('./../../../src/components/rewrite/Rtransition/Rtransition.vue')['default']
   }
 }

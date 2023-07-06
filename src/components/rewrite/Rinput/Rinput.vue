@@ -4,7 +4,7 @@
  * 介绍:输入框
 -->
 <script lang="ts" setup>
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 import { StyleValue } from "vue";
 import { ConfirmType } from "./index";
 
@@ -61,7 +61,7 @@ function setFormatter(formatter: (value: StrNumber) => StrNumber) {
   uinput.value?.setFormatter(formatter);
 }
 defineExpose({ setFormatter });
-const $props = computed(() => filterParams(props));
+const $props = computed(() => filterObject(props));
 const config = reactive({
   isPassword: props.type == "pwd",
 });

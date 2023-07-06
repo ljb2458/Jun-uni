@@ -6,7 +6,7 @@
 <script lang="ts" setup>
 import { TimingFunction } from "./idnex";
 import type { StyleValue } from "vue";
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 const props = defineProps<{
   show: boolean;
   mode: "mode" | true;
@@ -26,7 +26,7 @@ const emit = defineEmits<{
 </script>
 <template>
   <u-transition
-    :="filterParams(props)"
+    :="filterObject(props)"
     @beforeEnter="emit('beforeEnter')"
     @enter="emit('enter')"
     @afterEnter="emit('afterEnter')"

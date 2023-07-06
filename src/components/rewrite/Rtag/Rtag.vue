@@ -5,7 +5,7 @@
 -->
 <script lang="ts" setup>
 import { ColorTheme } from "@@/components/types";
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 const props = defineProps<{
   type?: ColorTheme;
   disabled?: boolean;
@@ -34,7 +34,7 @@ const emit = defineEmits<{
 </script>
 <template>
   <u-tag
-    :="filterParams(props)"
+    :="filterObject(props)"
     @click="(e:any) => emit('click', e)"
     @close="(e:any) => emit('close', e)"
   >

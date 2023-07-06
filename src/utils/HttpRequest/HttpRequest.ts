@@ -5,7 +5,7 @@
  */
 import luchRequest, { HttpRequestConfig, HttpResponse } from "luch-request";
 import type { IncomingHttpHeaders } from "http";
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 
 export class HttpRequest {
   luch: luchRequest;
@@ -90,8 +90,8 @@ export class HttpRequest {
     if (config.mode?.includes("removeResVoid")) {
       let data: AnyObject | undefined = config.data;
       let params: AnyObject | undefined = config.params;
-      if (data) config.data = filterParams(data);
-      if (params) config.params = filterParams(params);
+      if (data) config.data = filterObject(data);
+      if (params) config.params = filterObject(params);
       config = { ...config, data, params };
     }
     delete config.mode;
@@ -108,7 +108,7 @@ export class HttpRequest {
       });
     }
     if (config?.mode?.includes("removeResVoid")) {
-      res.data = filterParams(res.data);
+      res.data = filterObject(res.data);
     }
     return res.data;
   }

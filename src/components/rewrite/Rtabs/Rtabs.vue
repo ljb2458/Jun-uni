@@ -6,7 +6,7 @@
 <script lang="ts" setup generic="Item extends RtabsListItem">
 import { RtabsListItem } from "./index";
 import { StyleValue } from "vue";
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 
 const props = withDefaults(
   defineProps<{
@@ -45,7 +45,7 @@ const emit = defineEmits<{
 </script>
 <template>
   <u-tabs
-    v-bind="filterParams(props as any)"
+    v-bind="filterObject(props as any)"
     @click="(e:any) => emit('click',e)"
     @change="(e:any) => emit('change',e)"
   >

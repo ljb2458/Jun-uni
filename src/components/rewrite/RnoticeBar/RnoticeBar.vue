@@ -4,7 +4,7 @@
  * 介绍:滚动通知
 -->
 <script lang="ts" setup>
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 const props = defineProps<{
   text: string;
   /**通告滚动模式，row-横向滚动，column-竖向滚动 */
@@ -36,7 +36,7 @@ const emit = defineEmits<{
 </script>
 <template>
   <u-notice-bar
-    :="filterParams(props)"
+    :="filterObject(props)"
     @click="(e:any) => emit('click', e)"
     @close="(e:any) => emit('close')"
   ></u-notice-bar>

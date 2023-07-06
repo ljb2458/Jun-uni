@@ -4,7 +4,7 @@
  * 介绍:加载图标
 -->
 <script lang="ts" setup>
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 
 import { TimingFunction } from "../Rtransition/idnex";
 const props = defineProps<{
@@ -24,6 +24,6 @@ const props = defineProps<{
 }>();
 </script>
 <template>
-  <u-loading-icon :="filterParams(props)"></u-loading-icon>
+  <u-loading-icon :="filterObject(props)"></u-loading-icon>
 </template>
 <style lang="scss" scoped></style>

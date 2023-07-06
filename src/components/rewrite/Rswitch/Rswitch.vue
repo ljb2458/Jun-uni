@@ -4,7 +4,7 @@
  * 介绍:开关组件
 -->
 <script lang="ts" setup>
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 
 const props = withDefaults(
   defineProps<{
@@ -39,7 +39,7 @@ const modelValue = computed({
     emit("update:modelValue", v || false);
   },
 });
-const $props = computed(() => filterParams(props));
+const $props = computed(() => filterObject(props));
 console.log($props.value);
 </script>
 <template>

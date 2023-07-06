@@ -5,7 +5,7 @@
 -->
 
 <script lang="ts" setup>
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 import { RswipeActionOptionsItem, RswipeActionClickEvent } from "./index";
 const props = defineProps<{
   /**控制打开或者关闭 */
@@ -30,7 +30,7 @@ const emit = defineEmits<{
 </script>
 <template>
   <u-swipe-action-item
-    :="filterParams(props)"
+    :="filterObject(props)"
     @click="(e:any)=>emit('click',e)"
   >
     <slot></slot>

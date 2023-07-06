@@ -4,7 +4,7 @@
  * 介绍:滑动选择器
 -->
 <script lang="ts" setup>
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 import { StyleValue } from "vue";
 
 const props = withDefaults(
@@ -53,7 +53,7 @@ const $modelValue = computed({
     @input="(e:any) => emit('input',e)"
     @changing="(e:any) => emit('changing',e)"
     @change="(e:any) => emit('change',e)"
-    :="filterParams(props)"
+    :="filterObject(props)"
     v-model="$modelValue"
   ></u-slider>
 </template>

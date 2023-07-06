@@ -4,7 +4,7 @@
  * 介绍:弹出框
 -->
 <script lang="ts" setup>
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 const props = withDefaults(
   defineProps<{
     show?: boolean;
@@ -41,7 +41,7 @@ const props = withDefaults(
     showConfirmButton: true,
   }
 );
-const $props = computed(() => filterParams(props));
+const $props = computed(() => filterObject(props));
 const emit = defineEmits<{
   (e: "confirm"): void;
   (e: "cancel"): void;

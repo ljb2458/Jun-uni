@@ -4,7 +4,7 @@
  * 介绍:分割线
 -->
 <script lang="ts" setup>
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 
 const props = defineProps<{
   /**是否虚线 */
@@ -28,7 +28,7 @@ const emit = defineEmits<{
   <u-divider
     @click="(e:any)=>emit('click',e)"
     class="Rdivider"
-    v-bind="filterParams(props)"
+    v-bind="filterObject(props)"
   ></u-divider>
 </template>
 

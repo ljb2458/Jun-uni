@@ -5,7 +5,7 @@
 -->
 
 <script lang="ts" setup>
-// import { filterParams } from "@@/utils/tools/object";
+// import { filterObject } from "@@/utils/tools/object";
 
 const props = withDefaults(
   defineProps<{
@@ -42,7 +42,7 @@ defineExpose({ init });
 <template>
   <!-- <u-collapse
     ref="collapse"
-    :="filterParams(props)"
+    :="filterObject(props)"
     v-model="$modelValue"
     @change="(e:any)=>emit('change',e)"
     @open="(e:any)=>emit('open',e)"

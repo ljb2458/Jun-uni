@@ -4,7 +4,7 @@
  * 介绍:复选框群组组件
 -->
 <script lang="ts" setup>
-// import { filterParams } from "@@/utils/tools/object";
+// import { filterObject } from "@@/utils/tools/object";
 type Value = string | number | boolean;
 
 const props = defineProps<{
@@ -47,7 +47,7 @@ const emit = defineEmits<{
 </script>
 <template>
   <!-- <u-radio-group
-    :="filterParams(props)"
+    :="filterObject(props)"
     v-model="$modelValue"
     @change="(e:any)=>emit('change',e)"
   >

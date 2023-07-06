@@ -7,6 +7,9 @@
 type TupleToUnion<T extends any[]> = keyof {
   [Key in T[number]]: Key;
 };
+type ObjectToUnion<T extends object> = keyof {
+  [key in T[keyof T]]: key;
+};
 /**获取promise中的类型*/
 type UnPromise<T> = T extends Promise<infer U> ? UnPromise<U> : T;
 /**将T中的部分属性变为可选 */

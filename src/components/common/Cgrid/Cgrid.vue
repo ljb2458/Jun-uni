@@ -5,7 +5,7 @@
 -->
 <script lang="ts" setup>
 import { JustifyItems, AlignItems } from "@@/components/types";
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 
 import { Globals } from "csstype";
 
@@ -62,7 +62,7 @@ function repeat(number: number, symbol: string) {
   <view
     class="Cgrid"
     :style="
-      filterParams({
+      filterObject({
         '--Cgrid-gap': props.gap,
         '--Cgrid-justifyItems': props.justify,
         '--Cgrid-alignItems': props.align,

@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-19 14:00:04
- * @LastEditTime: 2023-07-03 16:11:04
+ * @LastEditTime: 2023-07-06 12:26:47
  * 介绍:
 -->
 <cfg lang="json">
@@ -54,7 +54,7 @@ function listSetNull(index: number) {
     <view @click="showNotify" style="border: red solid 1rpx; height: 200rpx">
       点击发起一个通知
     </view>
-    <CtabsFor title-scrollable :sticky="true" :options="tabsForOptions">
+    <CtabsFor titleScrollable :sticky="true" :options="tabsForOptions">
       <template #title-bottom>
         <Cgrid class="MT-md">
           <CgridItem v-for="(tab, index) in tabsForOptions">

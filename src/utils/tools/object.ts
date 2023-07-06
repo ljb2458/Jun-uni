@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-03-23 15:11:16
- * @LastEditTime: 2023-06-14 14:56:51
+ * @LastEditTime: 2023-07-06 13:47:00
  * 介绍:
  */
 
@@ -32,25 +32,45 @@ export function objToQuery(obj: object, noFilterEmpty?: boolean): string {
 
   let newObj = { ...obj };
   if (!noFilterEmpty) {
-    newObj = filterParams(newObj);
+    newObj = filterObject(newObj);
   }
   return new URLSearchParams(Object.entries(newObj)).toString();
 }
 
+type Callback<D extends object = AnyObject> = (
+  value: ObjectToUnion<D>,
+  key: keyof D
+) => boolean;
 /**
- * @description: 去除对象中的空值
- * @param {*} obj
- * @return {*}
+ * * 过滤对象
+ * @param object 对象
+ * @param includes 要被过滤掉的值
  */
-export function filterParams<D extends object = {}>(
-  obj: D,
-  omit: any[] = [undefined, null, ""]
+export function filterObject<D extends object = AnyObject>(
+  object: D,
+  includes?: any[]
+): Partial<D>;
+/**
+ * * 过滤对象
+ * @param object 对象
+ * @param callback 遍历回调
+ */
+export function filterObject<D extends object = AnyObject>(
+  object: D,
+  callback?: Callback
+): Partial<D>;
+export function filterObject<D extends object = AnyObject>(
+  object: D,
+  includes: any[] | Callback = [undefined, null, ""]
 ): Partial<D> {
-  let newObj: Partial<D> = {};
-  for (const key in obj) {
-    const value = obj[key];
-    if (!omit.includes(value)) {
-      newObj[key] = obj[key];
+  let callback: Callback;
+  if (typeof includes !== "function") callback = (v) => includes.includes(v);
+  else callback = includes;
+  const newObj: Partial<D> = {};
+  for (const key in object) {
+    const value = object[key];
+    if (!callback(value, key)) {
+      newObj[key] = object[key];
     }
   }
   return newObj;

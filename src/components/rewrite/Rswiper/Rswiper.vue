@@ -7,7 +7,7 @@
 import type { StyleValue } from "vue";
 import { Mode } from "../Rimage/index";
 import { ListItem } from "./index";
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 
 const props = defineProps<{
   indicator?: boolean;
@@ -53,7 +53,7 @@ const emit = defineEmits<{
 </script>
 <template>
   <u-swiper
-    :="filterParams(props)"
+    :="filterObject(props)"
     @click="(e:any)=>emit('click',e)"
     @change="(e:any)=>emit('change',e)"
   >

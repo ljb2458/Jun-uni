@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { TextAlign } from "@@/components/types";
-// import { filterParams } from "@@/utils/tools/object";
+// import { filterObject } from "@@/utils/tools/object";
 const props = withDefaults(
   defineProps<{
     /**面板标题 */
@@ -45,7 +45,7 @@ const props = withDefaults(
 // }>();
 </script>
 <template>
-  <!-- <u-collapse-item :="filterParams(props)"> -->
+  <!-- <u-collapse-item :="filterObject(props)"> -->
   <slot></slot>
   <!-- <template #title> -->
   <slot name="title">

@@ -4,7 +4,7 @@
  * 介绍:图片
 -->
 <script lang="ts" setup>
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 import { Mode } from "./index";
 
 const props = withDefaults(
@@ -36,7 +36,7 @@ const emit = defineEmits<{
     class="Rimage"
     @load="emit('load')"
     @error="(e:any) => emit('error', e)"
-    v-bind="filterParams(props)"
+    v-bind="filterObject(props)"
   >
     <template v-slot:loading>
       <slot name="loading">

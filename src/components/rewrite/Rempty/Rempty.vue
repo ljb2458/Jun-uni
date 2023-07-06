@@ -4,7 +4,7 @@
  * 介绍:空状态
 -->
 <script lang="ts" setup>
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 const props = withDefaults(
   defineProps<{
     mode?:
@@ -39,6 +39,6 @@ const props = withDefaults(
 );
 </script>
 <template>
-  <u-empty v-bind="filterParams(props)"><slot></slot> </u-empty>
+  <u-empty v-bind="filterObject(props)"><slot></slot> </u-empty>
 </template>
 <style lang="less" scoped></style>

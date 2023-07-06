@@ -5,7 +5,7 @@
 -->
 <script lang="ts" setup>
 import { RactionSheetAction } from "./index";
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 const props = defineProps<{
   show?: boolean;
   title?: string;
@@ -64,7 +64,7 @@ const emit = defineEmits<{
 </script>
 <template>
   <u-action-sheet
-    :="filterParams(props)"
+    :="filterObject(props)"
     @select="(e:any)=>emit('select',e)"
     @close="(e:any)=>emit('close',e)"
     @getuserinfo="(e:any)=>emit('getuserinfo',e)"

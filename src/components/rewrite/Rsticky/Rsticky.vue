@@ -4,7 +4,7 @@
  * 介绍:粘性定位吸顶组件
 -->
 <script lang="ts" setup>
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 
 const props = withDefaults(
   defineProps<{
@@ -21,7 +21,7 @@ const props = withDefaults(
 );
 </script>
 <template>
-  <u-sticky v-bind="filterParams(props)">
+  <u-sticky v-bind="filterObject(props)">
     <slot></slot>
   </u-sticky>
 </template>

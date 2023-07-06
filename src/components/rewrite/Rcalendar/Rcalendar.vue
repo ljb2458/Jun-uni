@@ -5,7 +5,7 @@
 -->
 <script lang="ts" setup>
 import { CustomListItem, Mode } from "./index";
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 
 const props = withDefaults(
   defineProps<{
@@ -70,7 +70,7 @@ defineExpose({ setFormatter });
   <!-- #ifndef APP-PLUS -->
   <u-calendar
     ref="calendarRef"
-    :="filterParams(props)"
+    :="filterObject(props)"
     @confirm="(e:any) => emit('confirm', e)"
     @close="(e:any) => emit('close')"
   ></u-calendar>

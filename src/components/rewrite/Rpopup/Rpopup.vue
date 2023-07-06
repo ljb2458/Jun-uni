@@ -6,7 +6,7 @@
 <script lang="ts" setup>
 import { StyleValue } from "vue";
 import { BoxPosition } from "../../types/index";
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 
 const props = withDefaults(
   defineProps<{
@@ -53,7 +53,7 @@ const emit = defineEmits<{
 }>();
 </script>
 <template>
-  <u-popup :="filterParams(props)" @open="emit('open')" @close="emit('close')">
+  <u-popup :="filterObject(props)" @open="emit('open')" @close="emit('close')">
     <slot></slot>
   </u-popup>
 </template>

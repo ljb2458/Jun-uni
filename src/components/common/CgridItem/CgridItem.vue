@@ -5,7 +5,7 @@
 -->
 <script lang="ts" setup>
 import { JustifyItems } from "@@/components/types";
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 
 const props = defineProps<{
   /**grid-row */
@@ -35,7 +35,7 @@ const props = defineProps<{
   <view
     class="CgridItem"
     :style="
-      filterParams({
+      filterObject({
         width: props.width,
         height: props.height,
         gridArea: props.area,

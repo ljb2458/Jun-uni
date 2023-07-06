@@ -4,7 +4,7 @@
  * 介绍:按钮
 -->
 <script lang="ts" setup>
-import { filterParams } from "@@/utils/tools/object";
+import { filterObject } from "@@/utils/tools/object";
 import { ColorTheme } from "../../types/index";
 const props = defineProps<{
   text?: string;
@@ -28,7 +28,7 @@ const props = defineProps<{
   throttleTime?: string;
   minWidgth?: string;
 }>();
-const $props = computed(() => filterParams(props));
+const $props = computed(() => filterObject(props));
 const emit = defineEmits<{
   (e: "click", v: MouseEvent): void;
 }>();
