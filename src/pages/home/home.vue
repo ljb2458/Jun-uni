@@ -10,9 +10,9 @@
 }
 </cfg>
 <script lang="ts" setup>
-import { apiWithdrawCoinLogs } from "@@/api/module/list";
-import { useCrequestListRef } from "@@/components/common/CrequestList";
-import notify from "@@/layout/notify";
+import { apiWithdrawCoinLogs } from "@/api/module/list";
+import { useCrequestListRef } from "@/components/common/CrequestList";
+import notify from "@/layout/notify";
 
 const tabsForOptions = computed(() => [
   {

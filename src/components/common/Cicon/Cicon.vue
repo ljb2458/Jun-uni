@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-04-30 18:31:07
- * @LastEditTime: 2023-06-15 19:07:17
+ * @LastEditTime: 2023-09-09 10:56:57
  * 介绍:
 -->
 <script lang="ts" setup>
@@ -21,7 +21,7 @@ const props = withDefaults(
   <i
     class="Cicon"
     :class="name"
-    :style="{ '--Cicon-font-size': props.size, '--Cicon-color': props.color }"
+    :style="{ fontSize: props.size, color: props.color }"
   >
   </i>
 </template>
@@ -33,7 +33,5 @@ const props = withDefaults(
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: var(--Cicon-font-size);
-  color: var(--Cicon-color);
 }
 </style>

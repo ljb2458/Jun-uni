@@ -5,8 +5,8 @@
 }
 </cfg>
 <script lang="ts" setup>
-import modal from "@@/layout/modal";
-import notify from "@@/layout/notify";
+import modal from "@/layout/modal";
+import notify from "@/layout/notify";
 function showModal() {
   modal
     .show({

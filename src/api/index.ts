@@ -3,7 +3,7 @@
  * @LastEditTime: 2023-07-03 16:12:45
  * 介绍:
  */
-import { HttpRequest } from "@@/utils/HttpRequest/HttpRequest";
+import { HttpRequest } from "@/utils/HttpRequest/HttpRequest";
 const env = import.meta.env;
 let baseURL = "";
 if (env.VITE_PROXY == "1") {

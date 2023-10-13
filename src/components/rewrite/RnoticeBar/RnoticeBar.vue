@@ -4,7 +4,7 @@
  * 介绍:滚动通知
 -->
 <script lang="ts" setup>
-import { filterObject } from "@@/utils/tools/object";
+import { filterObject } from "@/utils/tools/object";
 const props = defineProps<{
   text: string;
   /**通告滚动模式，row-横向滚动，column-竖向滚动 */

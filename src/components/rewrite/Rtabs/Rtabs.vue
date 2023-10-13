@@ -6,7 +6,7 @@
 <script lang="ts" setup generic="Item extends RtabsListItem">
 import { RtabsListItem } from "./index";
 import { StyleValue } from "vue";
-import { filterObject } from "@@/utils/tools/object";
+import { filterObject } from "@/utils/tools/object";
 
 const props = withDefaults(
   defineProps<{

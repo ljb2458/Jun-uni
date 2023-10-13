@@ -3,7 +3,7 @@
  * @LastEditTime: 2023-04-20 18:51:58
  * 介绍:路由跳转
  */
-import { objToQuery } from "@@/utils/tools/object";
+import { objToQuery } from "@/utils/tools/object";
 
 const router = {
   /**跳转路由 */

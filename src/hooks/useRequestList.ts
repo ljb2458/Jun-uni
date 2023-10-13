@@ -3,7 +3,7 @@
  * @LastEditTime: 2023-07-03 16:10:52
  * 介绍:请求分页接口hooks
  */
-import { PagingApi, ApiRes } from "@@/api";
+import { PagingApi, ApiRes } from "@/api";
 import type { Ref } from "vue";
 
 export default function usePaging<F extends Api>(

@@ -13,8 +13,8 @@
 import {
   RswipeActionOptionsItem,
   RswipeActionClickEvent,
-} from "@@/components/rewrite/RswipeAction/index";
-import notify from "@@/layout/notify";
+} from "@/components/rewrite/RswipeAction/index";
+import notify from "@/layout/notify";
 const options = computed<RswipeActionOptionsItem[]>(() => [
   {
     text: "取消",

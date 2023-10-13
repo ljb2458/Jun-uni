@@ -4,7 +4,7 @@
  * 介绍:空状态
 -->
 <script lang="ts" setup>
-import { filterObject } from "@@/utils/tools/object";
+import { filterObject } from "@/utils/tools/object";
 const props = withDefaults(
   defineProps<{
     mode?:

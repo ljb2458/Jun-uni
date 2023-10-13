@@ -4,7 +4,7 @@
  * 介绍:顶部消息提示组件
 -->
 <script lang="ts" setup>
-import { ColorTheme } from "@@/components/types";
+import { ColorTheme } from "@/components/types";
 
 const props = withDefaults(
   defineProps<{

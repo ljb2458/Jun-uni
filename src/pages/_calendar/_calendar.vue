@@ -10,7 +10,7 @@
 }
 </cfg>
 <script lang="ts" setup>
-import { Mode, CustomListItem } from "@@/components/rewrite/Rcalendar";
+import { Mode, CustomListItem } from "@/components/rewrite/Rcalendar";
 
 const show = ref(false);
 const date = reactive<string[]>([]);

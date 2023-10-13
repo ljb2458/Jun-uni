@@ -4,7 +4,7 @@
  * 介绍:
 -->
 <script lang="ts" setup>
-import { StateType } from "@@/hooks/useRequestList";
+import { StateType } from "@/hooks/useRequestList";
 const props = withDefaults(
   defineProps<{
     type: StateType;

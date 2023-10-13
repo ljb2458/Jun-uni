@@ -1,15 +1,15 @@
 <!--
  * @Date: 2023-02-28 21:36:43
- * @LastEditTime: 2023-07-06 12:27:06
+ * @LastEditTime: 2023-09-28 20:41:39
  * 介绍:tabs循环展示面板
 -->
 <script lang="ts" setup generic="Item extends CtabsForOptionsItem">
-import { unitPercent, unitPx } from "@@/utils/tools/css";
-import { getRect, GetRectRes } from "@@/hooks/rewriteUni";
+import { unitPercent, unitPx } from "@/utils/tools/css";
+import { getRect, GetRectRes } from "@/hooks/rewriteUni";
 import { CSSProperties } from "vue";
 import dayjs from "dayjs";
 import { CtabsForOptionsItem } from "./index";
-import { generateUUID } from "@@/utils/tools/generate";
+import { generateUUID } from "@/utils/tools/generate";
 import type { StyleValue } from "vue";
 
 const props = withDefaults(
@@ -48,6 +48,7 @@ const props = withDefaults(
     offsetTop: 0,
     gap: "var(--gap-md)",
     lazy: true,
+    titleKeyName: "title",
   }
 );
 
@@ -196,7 +197,7 @@ function swiperTo(key: StrNumber = currentIndex.value) {
   if (transitTimeout) clearTimeout(transitTimeout);
   for (let k in tabsList.value) {
     if (tabsList.value[k].key === key) {
-      swiperToByIndex(k as unknown as number);
+      swiperToByIndex(Number(k));
       break;
     }
   }
@@ -230,7 +231,7 @@ const platformOffsetTop = computed(() => {
 <template>
   <view :style="{ '--gap': gap }" :id="CtabsForId" class="CtabsFor">
     <Rsticky
-      bg-color="var(--C-B1)"
+      :bg-color="sticky ? 'var(--C-B1)' : ''"
       :style="stickyStyle"
       class="CtabsFor_title"
       :disabled="!sticky"

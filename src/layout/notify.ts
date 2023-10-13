@@ -3,7 +3,7 @@
  * @LastEditTime: 2023-07-06 15:08:38
  * 介绍:
  */
-import Rnotify from "@@/components/rewrite/Rnotify/Rnotify.vue";
+import Rnotify from "@/components/rewrite/Rnotify/Rnotify.vue";
 import type { StyleValue } from "vue";
 
 type ShowParam = ComponentPropsType<typeof Rnotify> & {

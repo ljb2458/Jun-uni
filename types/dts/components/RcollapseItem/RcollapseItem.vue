@@ -5,8 +5,8 @@
 -->
 
 <script lang="ts" setup>
-import { TextAlign } from "@@/components/types";
-// import { filterObject } from "@@/utils/tools/object";
+import { TextAlign } from "@/components/types";
+// import { filterObject } from "@/utils/tools/object";
 const props = withDefaults(
   defineProps<{
     /**面板标题 */

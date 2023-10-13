@@ -4,7 +4,7 @@
  * 介绍:文本域
 -->
 <script lang="ts" setup>
-import { filterObject } from "@@/utils/tools/object";
+import { filterObject } from "@/utils/tools/object";
 import { ConfirmType } from "../Rinput";
 import { StyleValue } from "vue";
 const props = withDefaults(

@@ -1,11 +1,11 @@
 <!--
  * @Date: 2023-02-23 10:18:43
- * @LastEditTime: 2023-07-03 16:08:40
+ * @LastEditTime: 2023-09-26 22:09:36
  * 介绍:
 -->
 <script lang="ts" setup>
-import { AlignItems } from "@@/components/types";
-import { BorderStyle } from "@@/components/types";
+import { AlignItems } from "@/components/types";
+import { BorderStyle } from "@/components/types";
 const props = withDefaults(
   defineProps<{
     borderColor?: string;
@@ -16,8 +16,8 @@ const props = withDefaults(
   }>(),
   {
     borderStyle: "solid",
-    borderColor: "var(--C-OT5)",
-    borderWidth: "1rem",
+    borderColor: "var(--C-B1-O5)",
+    borderWidth: "2rpx",
     border: false,
     align: "center",
   }

@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-21 13:07:37
- * @LastEditTime: 2023-05-11 18:06:44
+ * @LastEditTime: 2023-09-28 22:44:53
  * 介绍:
 -->
 <script lang="ts" setup>
@@ -23,7 +23,7 @@ const props = withDefaults(
 <template>
   <view
     :style="{
-      '--Ccard-bg': props.bg || 'none',
+      background: props.bg || 'none',
       '--SHc': props.shadowColor,
       minHeight: props.minHeight,
     }"
@@ -37,7 +37,6 @@ const props = withDefaults(
 <style lang="scss" scoped>
 .Ccard {
   padding: var(--gap-md);
-  background: var(--Ccard-bg);
   border-radius: var(--R-md);
 }
 </style>

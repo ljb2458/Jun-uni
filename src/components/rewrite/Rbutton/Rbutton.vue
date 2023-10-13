@@ -1,10 +1,10 @@
 <!--
  * @Date: 2023-02-19 20:46:35
- * @LastEditTime: 2023-07-03 17:26:40
+ * @LastEditTime: 2023-10-07 18:56:32
  * 介绍:按钮
 -->
 <script lang="ts" setup>
-import { filterObject } from "@@/utils/tools/object";
+import { filterObject } from "@/utils/tools/object";
 import { ColorTheme } from "../../types/index";
 const props = defineProps<{
   text?: string;
@@ -46,4 +46,9 @@ const emit = defineEmits<{
   </u-button>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.Rbutton {
+  display: flex;
+  align-items: center;
+}
+</style>

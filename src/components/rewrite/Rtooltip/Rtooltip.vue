@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { filterObject } from "@@/utils/tools/object";
+import { filterObject } from "@/utils/tools/object";
 import { RtooltipButton } from "./index";
 const props = withDefaults(
   defineProps<{

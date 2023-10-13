@@ -4,9 +4,9 @@
  * 介绍:集成了文本类在项目中的常用功能
 -->
 <script lang="ts" setup>
-import { filterObject } from "@@/utils/tools/object";
+import { filterObject } from "@/utils/tools/object";
 import type { StyleValue } from "vue";
-import { ColorTheme } from "@@/components/types";
+import { ColorTheme } from "@/components/types";
 
 const props = withDefaults(
   defineProps<{

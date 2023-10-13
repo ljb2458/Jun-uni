@@ -5,7 +5,7 @@
 -->
 <script lang="ts" setup generic="D">
 import { Column, ConfirmParam, ChangeParam } from "./index";
-import { filterObject } from "@@/utils/tools/object";
+import { filterObject } from "@/utils/tools/object";
 const props = defineProps<{
   show?: boolean;
   /**是否显示顶部的操作栏 */

@@ -4,7 +4,7 @@
  * 介绍:复选框群组组件
 -->
 <script lang="ts" setup>
-// import { filterObject } from "@@/utils/tools/object";
+// import { filterObject } from "@/utils/tools/object";
 
 const props = defineProps<{
   name?: string;

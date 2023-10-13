@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-04-24 10:38:17
- * @LastEditTime: 2023-07-03 16:09:10
+ * @LastEditTime: 2023-09-28 22:54:06
  * 介绍:自动请求分页列表
 -->
 <script lang="ts" setup generic="F extends Api">
@@ -9,7 +9,7 @@ import useRequestList, {
   Api,
   GetParams,
   State,
-} from "@@/hooks/useRequestList";
+} from "@/hooks/useRequestList";
 import { LoadParam } from "../Clist/index";
 import Clist from "../Clist/Clist.vue";
 import { useClistRef } from "../Clist/index";
@@ -31,9 +31,11 @@ const props = withDefaults(
     pullDownRefreshEnd?: (v?: State) => void;
     /**解决微信小程序v-for循环无法获取ref的问题 */
     _ref?: Ref;
+    minHeight: string;
   }>(),
   {
     setupLoad: true,
+    minHeight: "70vh",
   }
 );
 const pullDownRefresh = props.onPullDownRefresh || onPullDownRefresh;
@@ -114,6 +116,7 @@ function isVisible() {
     :onReachBottom="onReachBottom"
     @load="load"
     :setup-load="setupLoad"
+    :min-height="props.minHeight"
   >
     <slot>
       <slot

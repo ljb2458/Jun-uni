@@ -6,7 +6,7 @@
 <script lang="ts" setup>
 import { StyleValue } from "vue";
 import { BoxPosition } from "../../types/index";
-import { filterObject } from "@@/utils/tools/object";
+import { filterObject } from "@/utils/tools/object";
 
 const props = withDefaults(
   defineProps<{

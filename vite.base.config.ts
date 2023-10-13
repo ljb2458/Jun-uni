@@ -15,7 +15,7 @@ export default (config: ConfigEnv) => {
     base: "/",
     resolve: {
       alias: {
-        "@@": path.join(__dirname, "src"),
+        "@": path.join(__dirname, "src"),
       },
     },
     plugins: [

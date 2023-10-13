@@ -4,7 +4,7 @@
  * 介绍:
 -->
 <script lang="ts" setup>
-import { filterObject } from "@@/utils/tools/object";
+import { filterObject } from "@/utils/tools/object";
 const props = defineProps<{
   name?: StrNumber;
   /**形状，circle-圆形，square-方形 */

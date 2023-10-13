@@ -6,7 +6,7 @@
 <script lang="ts" setup>
 import { TimingFunction } from "./idnex";
 import type { StyleValue } from "vue";
-import { filterObject } from "@@/utils/tools/object";
+import { filterObject } from "@/utils/tools/object";
 const props = defineProps<{
   show: boolean;
   mode: "mode" | true;

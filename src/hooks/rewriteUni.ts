@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-04-20 18:38:28
- * @LastEditTime: 2023-06-13 15:34:30
+ * @LastEditTime: 2023-10-13 18:47:12
  * 介绍:
  */
 /**
@@ -51,10 +51,10 @@ export function uniGetSystemInfo(): Promise<
 }
 let systemInfo: UniApp.GetSystemInfoResult;
 /**获取设备信息，缓存优化过的方法 */
-export async function getSystemInfo(config?: { force?: boolean }) {
+export function getSystemInfoCache(config?: { force?: boolean }) {
   if (systemInfo && config?.force !== true) return systemInfo;
   else {
-    const res = await uniGetSystemInfo();
+    const res = uni.getSystemInfoSync();
     return (systemInfo = res);
   }
 }
@@ -143,10 +143,9 @@ export interface GetRectRes extends UniApp.NodeInfo {}
  * @returns
  */
 export async function isNodeVisible(queryNode: string, _this?: any) {
-  const [sysInfo, nodeInfo] = await Promise.all([
-    getSystemInfo(),
-    getRect(queryNode, _this || getCurrentInstance()),
-  ]);
+  const sysInfo = getSystemInfoCache();
+  const nodeInfo = await getRect(queryNode, _this || getCurrentInstance());
+
   const left = Number(nodeInfo.left);
   const right = Number(nodeInfo.right);
   const top = Number(nodeInfo.top);
@@ -157,4 +156,53 @@ export async function isNodeVisible(queryNode: string, _this?: any) {
     bottom > 0 &&
     top < sysInfo.screenHeight
   );
+}
+
+export namespace UniPage {
+  export interface Page {
+    eventChannel: any;
+    fullPath: string;
+    id: number;
+    meta: Meta;
+    path: string;
+    route: string;
+    statusBarStyle: string;
+    openType: string;
+    options: AnyObject;
+  }
+  export interface Meta {
+    animationType: string;
+    backgroundColor: string;
+    enablePullDownRefresh: boolean;
+    id: number;
+    isEntry: boolean;
+    isNVue: boolean;
+    isQuit: boolean;
+    isTabBar: boolean;
+    navigationBar: NavigationBar;
+    onReachBottomDistance: number;
+    pageOrientation: string;
+    pullToRefresh: {};
+    route: string;
+    tabBarIndex: number;
+  }
+  export interface NavigationBar {
+    backgroundColor: string;
+    style: "custom" | "default" | undefined;
+    titleColor: string;
+    titleSize: string;
+    titleText: string;
+    type: string;
+  }
+}
+
+/**
+ * 获取当前页面信息，uni配置项
+ * @returns
+ */
+export function getCurrentPage(): UniPage.Page {
+  const pages = getCurrentPages();
+  const _page: AnyObject = pages[pages.length - 1];
+  const page: UniPage.Page = _page.$page;
+  return page;
 }

@@ -10,7 +10,7 @@
 }
 </cfg>
 <script lang="ts" setup>
-import router from "@@/hooks/router";
+import router from "@/hooks/router";
 const cells = computed(() => [
   {
     title: "全局模态框",

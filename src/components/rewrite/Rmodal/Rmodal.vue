@@ -4,7 +4,7 @@
  * 介绍:弹出框
 -->
 <script lang="ts" setup>
-import { filterObject } from "@@/utils/tools/object";
+import { filterObject } from "@/utils/tools/object";
 const props = withDefaults(
   defineProps<{
     show?: boolean;

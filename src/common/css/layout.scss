@@ -10,6 +10,10 @@
   display: flex;
   justify-content: space-around;
 }
+.flex-J-SE {
+  display: flex;
+  justify-content: space-evenly;
+}
 .flex-A-C {
   display: flex;
   align-items: center;
@@ -24,6 +28,10 @@
   display: flex;
   align-items: baseline;
   align-content: baseline;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
 }
 
 .T-A-L {
@@ -44,44 +52,39 @@ $gaps: (
   lg: var(--gap-lg),
   xl: var(--gap-xl),
   xxl: var(--gap-xxl),
+  0: 0,
 );
 
 // 循环生成样式
 @each $key, $value in $gaps {
   .MT-#{$key} {
-    margin-top: $value;
+    margin-top: $value !important;
   }
   .ML-#{$key} {
-    margin-left: $value;
+    margin-left: $value !important;
   }
   .MR-#{$key} {
-    margin-right: $value;
+    margin-right: $value !important;
   }
   .MB-#{$key} {
-    margin-bottom: $value;
+    margin-bottom: $value !important;
   }
-  .auto-MT-#{$key} {
-    & > view,
-    [data] {
-      margin-top: $value;
-    }
+  .MG-#{$key} {
+    margin: $value !important;
   }
-  .auto-ML-#{$key} {
-    & > view,
-    [data] {
-      margin-left: $value;
-    }
+  .PT-#{$key} {
+    padding-top: $value !important;
   }
-  .auto-MB-#{$key} {
-    & > view,
-    [data] {
-      margin-bottom: $value;
-    }
+  .PL-#{$key} {
+    padding-left: $value !important;
   }
-  .auto-MR-#{$key} {
-    & > view,
-    [data] {
-      margin-right: $value;
-    }
+  .PR-#{$key} {
+    padding-right: $value !important;
+  }
+  .PB-#{$key} {
+    padding-bottom: $value !important;
+  }
+  .PD-#{$key} {
+    padding: $value !important;
   }
 }

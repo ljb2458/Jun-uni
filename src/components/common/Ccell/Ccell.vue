@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-04-09 21:44:48
- * @LastEditTime: 2023-07-03 16:22:22
+ * @LastEditTime: 2023-09-28 22:45:52
  * 介绍:cell单元格
 -->
 <script lang="ts" setup>
@@ -15,13 +15,14 @@ const props = withDefaults(
     shadowColor?: string;
     shadow?: boolean;
     mode?: "bg" | "border" | "none";
-    class: any;
+    borderColor?: string;
   }>(),
   {
     shadowColor: "rgba(0,0,0,0.2)",
     shadow: true,
     bg: "var(--C-B1)",
     mode: "bg",
+    borderColor: "var(--C-B1-O2)",
   }
 );
 const emit = defineEmits<{
@@ -34,11 +35,10 @@ const emit = defineEmits<{
     @click="(e) => emit('click', e)"
     :style="{
       '--Cell-bg': bg,
-      '--BOc': props.shadowColor,
+      '--BOc': props.borderColor,
       '--SHc': props.shadowColor,
     }"
     :class="[
-      props.class,
       {
         'shadowVar--SHc': props.mode === 'bg' && props.shadow,
         Ccell__bg: props.mode === 'bg',
@@ -61,7 +61,7 @@ const emit = defineEmits<{
     <slot name="right-layout">
       <view class="flex-A-C auto-ML-xs">
         <slot name="right">
-          <view class="T-S-sm C-T5">{{ rightText }}</view>
+          <view class="T-S-sm">{{ rightText }}</view>
         </slot>
         <slot v-if="rightIcon !== false" name="right-icon">
           <u-icon v-if="rightIcon === true" name="arrow-right"></u-icon>

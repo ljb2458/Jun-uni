@@ -4,8 +4,8 @@
  * 介绍:
 -->
 <script lang="ts" setup>
-import { JustifyItems, AlignItems } from "@@/components/types";
-import { filterObject } from "@@/utils/tools/object";
+import { JustifyItems, AlignItems } from "@/components/types";
+import { filterObject } from "@/utils/tools/object";
 
 import { Globals } from "csstype";
 

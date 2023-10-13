@@ -4,7 +4,7 @@
  * @FilePath: /music-client/src/components/common/CtabsFor/index.ts
  * 介绍:
  */
-import { RtabsListItem } from "@@/components/rewrite/Rtabs";
+import { RtabsListItem } from "@/components/rewrite/Rtabs";
 import CtabsForVue from "./CtabsFor.vue";
 export default "./CtabsFor.vue";
 export interface CtabsForOptionsItem extends RtabsListItem {

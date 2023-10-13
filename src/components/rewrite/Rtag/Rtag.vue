@@ -4,8 +4,8 @@
  * 介绍:tag组件一般用于标记和选择
 -->
 <script lang="ts" setup>
-import { ColorTheme } from "@@/components/types";
-import { filterObject } from "@@/utils/tools/object";
+import { ColorTheme } from "@/components/types";
+import { filterObject } from "@/utils/tools/object";
 const props = defineProps<{
   type?: ColorTheme;
   disabled?: boolean;

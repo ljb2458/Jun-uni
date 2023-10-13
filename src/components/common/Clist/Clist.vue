@@ -4,9 +4,9 @@
  * 介绍:
 -->
 <script lang="ts" setup>
-import { generateUUID } from "@@/utils/tools/generate";
-import { isNodeVisible } from "@@/hooks/rewriteUni";
-import { StateType } from "@@/hooks/useRequestList";
+import { generateUUID } from "@/utils/tools/generate";
+import { isNodeVisible } from "@/hooks/rewriteUni";
+import { StateType } from "@/hooks/useRequestList";
 import { LoadParam } from "./index";
 const props = withDefaults(
   defineProps<{

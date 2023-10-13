@@ -1,10 +1,10 @@
 <!--
  * @Date: 2023-02-19 18:44:54
- * @LastEditTime: 2023-07-05 20:25:05
+ * @LastEditTime: 2023-09-28 20:28:24
  * 介绍:输入框
 -->
 <script lang="ts" setup>
-import { filterObject } from "@@/utils/tools/object";
+import { filterObject } from "@/utils/tools/object";
 import { StyleValue } from "vue";
 import { ConfirmType } from "./index";
 
@@ -32,7 +32,7 @@ const props = withDefaults(
     /**键盘右下角按钮文字 */
     confirmType?: ConfirmType;
     inputAlign?: "left" | "center" | "right";
-    border?: "bottom" | "surround";
+    border?: "bottom" | "surround" | boolean | string;
     fontSize?: StrNumber;
     /**是否只读 */
     readonly?: boolean;
@@ -115,7 +115,7 @@ function onChangeType() {
           :color="color"
           v-if="props.type == 'pwd'"
           @click="onChangeType"
-          :name="config.isPassword ? `eye-fill` : `eye-off`"
+          :name="config.isPassword ? `eye-off` : `eye-fill`"
         >
         </u-icon>
       </slot>

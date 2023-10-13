@@ -5,7 +5,7 @@
  * 介绍:
  */
 import CrequestList from "./CrequestList.vue";
-import type { Api, GetApiData, GetApiRes } from "@@/hooks/useRequestList";
+import type { Api, GetApiData, GetApiRes } from "@/hooks/useRequestList";
 
 export function useCrequestListRef<F extends Api>() {
   //@ts-ignore

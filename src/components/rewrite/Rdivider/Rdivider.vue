@@ -4,7 +4,7 @@
  * 介绍:分割线
 -->
 <script lang="ts" setup>
-import { filterObject } from "@@/utils/tools/object";
+import { filterObject } from "@/utils/tools/object";
 
 const props = defineProps<{
   /**是否虚线 */

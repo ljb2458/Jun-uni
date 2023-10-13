@@ -1,4 +1,4 @@
-import Rmodal from "@@/components/rewrite/Rmodal/Rmodal.vue";
+import Rmodal from "@/components/rewrite/Rmodal/Rmodal.vue";
 type RmodalProps = ComponentPropsType<typeof Rmodal>;
 export const show = ref(false);
 export const config = ref<Cfg>({});

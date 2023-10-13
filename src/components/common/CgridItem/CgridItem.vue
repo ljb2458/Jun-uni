@@ -4,8 +4,8 @@
  * 介绍:
 -->
 <script lang="ts" setup>
-import { JustifyItems } from "@@/components/types";
-import { filterObject } from "@@/utils/tools/object";
+import { JustifyItems } from "@/components/types";
+import { filterObject } from "@/utils/tools/object";
 
 const props = defineProps<{
   /**grid-row */

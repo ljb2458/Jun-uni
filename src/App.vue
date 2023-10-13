@@ -1,6 +1,6 @@
 <!--
  * @Date: 2023-02-18 20:06:36
- * @LastEditTime: 2023-06-15 17:06:48
+ * @LastEditTime: 2023-10-13 18:47:51
  * 介绍:
 -->
 <script setup lang="ts">
@@ -20,12 +20,12 @@ onHide(() => {
 </script>
 <style lang="scss">
 @import "uview-plus/index.scss";
-@import "@@/common/css/effects.scss";
-@import "@@/common/css/text.scss";
-@import "@@/common/css/layout.scss";
-@import "@@/common/css/transition.scss";
-@import "@@/common/css/color.scss";
-@import "@@/common/css/init.css";
-@import "@@/common/css/var.css";
-@import "@@/common/css/resetUview.scss";
+@import "@/common/css/effects.scss";
+@import "@/common/css/text.scss";
+@import "@/common/css/layout.scss";
+@import "@/common/css/transition.scss";
+@import "@/common/css/color.scss";
+@import "@/common/css/init.scss";
+@import "@/common/css/var.scss";
+@import "@/common/css/resetUview.scss";
 </style>

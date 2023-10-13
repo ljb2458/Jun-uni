@@ -1,8 +1,9 @@
 /*
  * @Date: 2023-03-29 11:32:27
- * @LastEditTime: 2023-06-24 18:21:33
+ * @LastEditTime: 2023-10-13 18:49:56
  * 介绍:格式化
  */
+import { toNumber } from "./number";
 
 /**
  * * 省略文本
@@ -14,6 +15,7 @@ export function omitText(
   config: [number, string, number] = [5, "...", 5]
 ) {
   if (!text) return "----";
+  if (text.length <= config[0] + config[2]) return text;
   let res = text.slice(0, config[0]);
   res += config[1];
   res += text.slice(text.length - config[2]);
@@ -25,14 +27,14 @@ export function omitText(
  * @param decimals 小数
  * @returns
  */
-export function formatDecimal(req: any, decimals: number = 4) {
+export function formatDecimal(req: any, decimals: number = 4): string {
   let number = toNumber(req);
   if (isNaN(number)) return "--";
   let _number = normalNumber(number);
   const [intStr, floatStr] = _number.split(".");
   //如果实际小数位不大于要求小数位
   if (!floatStr || floatStr.length <= decimals)
-    return formatNumber(req, decimals);
+    return fixedDecimals(req, decimals);
   //对重复数字进行合并
   let floatRes = "",
     count = 1;
@@ -55,35 +57,33 @@ export function formatDecimal(req: any, decimals: number = 4) {
 }
 
 /**
- * * 格式化数字
- * @param number 要格式化的小数
- * @param decimals 保留小数位
- * @returns string 结果
+ * * 固定数字小数
+ * @param num 可能是数字的数据
+ * @param decimals 保留小数位数
+ * @param makeUp 是否用'0'补全小数位
+ * @param nanPlaceholder 出现nan时返回的占位符
+ * @returns
  */
-export function formatNumber(req: any, decimals: number = 2): string {
-  if (Number.isNaN(toNumber(req))) return "--";
-  const numStr = req.toString();
-  let [int, dec = ""] = numStr.split(".");
+export function fixedDecimals(
+  num: any,
+  decimals: number = 2,
+  makeUp: boolean = true,
+  nanPlaceholder: string = "--"
+): string {
+  if (Number.isNaN(toNumber(num))) return nanPlaceholder;
+  const numStr: string = num.toString();
+  let tokenIndex = numStr.lastIndexOf(".");
+  if (tokenIndex === -1) {
+    //如果没有小数点,而且不需要自动补全小数
+    if (!makeUp) return numStr;
+    tokenIndex = numStr.length;
+  }
+  let int = numStr.slice(0, tokenIndex).replace(/^0*/, "") || "0";
+  let dec = numStr.slice(tokenIndex + 1);
   let rep = decimals - dec.length;
-  if (rep > 0) dec += "0".repeat(rep);
+  if (rep > 0 && makeUp) dec += "0".repeat(rep);
   dec = dec.slice(0, decimals);
-  return `${int}.${dec}`;
-}
-/**
- * * 小数精度修正
- * @param number 要修正的小数
- * @param decimals 保留小数位
- * @returns string 结果
- */
-export function parseNumber(req: any, decimals: number = 8): string {
-  let number = toNumber(req);
-  if (isNaN(number)) return "--";
-  let floatStr = (
-    Math.round(
-      (parseFloat(number.toString()) + Number.EPSILON) * Math.pow(10, decimals)
-    ) / Math.pow(10, decimals)
-  ).toFixed(decimals);
-  return floatStr;
+  return int + "." + dec;
 }
 /**
  * * 固定小数位
@@ -95,17 +95,6 @@ export function fixedNumber(number: number, fixed = 2): string {
   let strNumber = number.toString();
   while (strNumber.length < fixed) strNumber = `0${strNumber}`;
   return strNumber;
-}
-/**
- * * 任意数据转number，' '将不被视为0
- * @param req 原数据
- * @returns
- */
-export function toNumber(req: any): number {
-  let str = String(req).replace(/\s*/g, "");
-  const num = Number(str);
-  if (!str || Number.isNaN(num)) return NaN;
-  return num;
 }
 
 /**

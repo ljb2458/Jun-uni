@@ -1,10 +1,10 @@
 <!--
  * @Date: 2023-02-19 21:04:28
- * @LastEditTime: 2023-07-03 17:24:35
+ * @LastEditTime: 2023-09-28 22:51:36
  * 介绍:图片
 -->
 <script lang="ts" setup>
-import { filterObject } from "@@/utils/tools/object";
+import { filterObject } from "@/utils/tools/object";
 import { Mode } from "./index";
 
 const props = withDefaults(
@@ -22,6 +22,7 @@ const props = withDefaults(
     duration?: StrNumber;
   }>(),
   {
+    width: "100%",
     mode: "aspectFit",
   }
 );
@@ -32,13 +33,15 @@ const emit = defineEmits<{
 </script>
 
 <template>
+  <!-- <image :style="{ width: props.width, height: props.height }" :src="props.src" :mode="props.mode" class="Rimage"> -->
   <u-image
+    :style="{ width: props.width, height: props.height }"
     class="Rimage"
     @load="emit('load')"
     @error="(e:any) => emit('error', e)"
     v-bind="filterObject(props)"
   >
-    <template v-slot:loading>
+    <template #loading>
       <slot name="loading">
         <u-loading-icon></u-loading-icon>
       </slot>
@@ -47,6 +50,7 @@ const emit = defineEmits<{
       <slot name="error"></slot>
     </template>
   </u-image>
+  <!-- </image> -->
 </template>
 
 <style lang="scss" scoped></style>

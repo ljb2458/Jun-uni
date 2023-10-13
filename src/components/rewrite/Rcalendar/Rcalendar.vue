@@ -5,7 +5,7 @@
 -->
 <script lang="ts" setup>
 import { CustomListItem, Mode } from "./index";
-import { filterObject } from "@@/utils/tools/object";
+import { filterObject } from "@/utils/tools/object";
 
 const props = withDefaults(
   defineProps<{

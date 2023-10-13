@@ -5,7 +5,7 @@
 -->
 
 <script lang="ts" setup>
-import { filterObject } from "@@/utils/tools/object";
+import { filterObject } from "@/utils/tools/object";
 import { RswipeActionOptionsItem, RswipeActionClickEvent } from "./index";
 const props = defineProps<{
   /**控制打开或者关闭 */

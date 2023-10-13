@@ -4,7 +4,7 @@
  * 介绍:加载图标
 -->
 <script lang="ts" setup>
-import { filterObject } from "@@/utils/tools/object";
+import { filterObject } from "@/utils/tools/object";
 
 import { TimingFunction } from "../Rtransition/idnex";
 const props = defineProps<{
