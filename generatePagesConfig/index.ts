@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-06-12 20:31:38
- * @LastEditTime: 2023-07-03 16:04:46
+ * @LastEditTime: 2023-10-13 18:40:04
  * @FilePath: /music-client/generatePagesConfig/index.ts
  * 介绍:
  */
@@ -15,69 +15,11 @@ const outDir = path.join(src, "/pages.json");
 /**第一个页面 */
 const first = "pages/home/home";
 /**黑名单文件夹 */
-const blacklist = ["/components"];
+const blacklist = [/.?\/components/];
 /**后缀 */
-const extname = ".vue";
+const includeExtname = [".vue", ".nvue"];
 
-/**将页面配置转换为uniapp配置 */
-function getPageConfig(cfg: PageCfg) {
-  return {
-    style: {
-      navigationBarTitleText: cfg.title,
-      enablePullDownRefresh: cfg.enablePullDownRefresh,
-    },
-  };
-}
-/**页面文件类型 */
-interface PageCfg {
-  title?: string;
-  enablePullDownRefresh?: boolean;
-}
-/**配置项类型 */
-interface Page {
-  path: string;
-  style: {
-    navigationBarTitleText?: string;
-    enablePullDownRefresh?: boolean;
-  };
-}
-
-const pages: Page[] = [];
-
-function traverseDir(dirPath: string) {
-  const files = fs.readdirSync(dirPath);
-  files.forEach((file) => {
-    const filePath = path.join(dirPath, file);
-    /**页面路径 page/home/home */
-    const pagePath = filePath
-      .replace(src, "")
-      .slice(1)
-      .replace(/\\/g, "/")
-      .replace(extname, "");
-    if (fs.statSync(filePath).isDirectory()) {
-      if (!checkBlacklist(pagePath)) {
-        traverseDir(filePath);
-      }
-    } else if (path.extname(filePath) === extname) {
-      setConfig(filePath, pagePath);
-    }
-  });
-}
-/**设置配置项 */
-function setConfig(filePath: string, pagePath: string) {
-  const pageContent = fs.readFileSync(filePath, "utf-8");
-  const cfg = findPageCfg(pageContent);
-  const item = {
-    path: pagePath,
-    ...getPageConfig(cfg),
-  };
-  //第一个
-  if (pagePath === first) pages.unshift(item);
-  else pages.push(item);
-}
-function checkBlacklist(path: string) {
-  return blacklist.some((v) => path.indexOf(v) + 1);
-}
+const pages: PageConfig.Cfg[] = [];
 
 traverseDir(pagesPath);
 
@@ -86,20 +28,98 @@ const pagesJson = {
   pages,
   ...defaultConfig,
 };
-
 fs.writeFileSync(outDir, JSON.stringify(pagesJson, null, 2));
-
 console.log("pages.json文件已生成");
 
-/**找到页面中的页面配置 */
-function findPageCfg(content: string): PageCfg {
-  const match = content.match(/<cfg\s+lang="json">([\s\S]*?)<\/cfg>/);
+/**
+ * 遍历项目目录
+ * @param dirPath
+ * @param dirName
+ */
+function traverseDir(dirPath: string, dirName?: string) {
+  const files = fs.readdirSync(dirPath);
+  files.forEach((name) => {
+    const _filePath = path.join(dirPath, name);
+    const filePath = _filePath.replace(/\\/g, "/");
+    /**黑名单过滤 */
+    if (inBlacklist(filePath)) return;
+    //如果是目录
+    if (fs.statSync(_filePath).isDirectory()) {
+      traverseDir(_filePath, name);
+    } else {
+      const extname = path.extname(_filePath);
+      if (!includeExtname.includes(extname)) return;
+      const fileName = path.basename(_filePath, extname);
+      const pagePath = filePath.slice(
+        src.length + 1,
+        filePath.length - extname.length
+      );
+      try {
+        setConfig(_filePath, pagePath);
+      } catch (error) {
+        console.error(
+          "配置文件解析错误",
+          { _filePath, filePath, fileName },
+          error
+        );
+      }
+    }
+  });
+}
+/**
+ * 路径是否在黑名单中
+ * @param path 路径
+ * @returns
+ */
+function inBlacklist(path: string) {
+  for (const reg of blacklist) {
+    if (reg.test(path) === true) return true;
+  }
+  return false;
+}
+/**
+ * 生成配置对象
+ * @param _filePath
+ * @param pagePath
+ */
+function setConfig(_filePath: string, pagePath: string) {
+  const pageContent = fs.readFileSync(_filePath, "utf-8");
+  const cfg = parsePageCfg(pageContent);
+  const item = {
+    path: pagePath,
+    style: cfg,
+  };
+  //第一个
+  if (pagePath === first) pages.unshift(item);
+  else pages.push(item);
+}
+
+/**
+ * 解析页面配置
+ * @param content
+ * @returns
+ */
+function parsePageCfg(content: string): PageConfig.UserCfg {
+  const match = content.match(/<cfg([\s\S]*)?>([\s\S]*?)<\/cfg>/);
   if (!match) return {};
-  const jsonStr = match[1].trim();
+  const jsonStr = match[2].trim();
   try {
     return JSON.parse(jsonStr);
-  } catch (err) {
-    console.error(`解析JSON字符串失败：${jsonStr}`);
-    return {};
+  } catch (error) {
+    throw {
+      error,
+      jsonStr,
+    };
+  }
+}
+namespace PageConfig {
+  export interface UserCfg {
+    navigationBarTitleText?: string;
+    enablePullDownRefresh?: boolean;
+    navigationStyle?: "custom" | "default";
+  }
+  export interface Cfg {
+    path: string;
+    style: UserCfg;
   }
 }
