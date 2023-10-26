@@ -5,7 +5,7 @@
  */
 import luchRequest, { HttpRequestConfig, HttpResponse } from "luch-request";
 import type { IncomingHttpHeaders } from "http";
-import { filterObject } from "@@/utils/tools/object";
+import { filterObject } from "@/utils/tools/object";
 
 export interface IsSuccess<D = any> {
   (res: D): boolean;

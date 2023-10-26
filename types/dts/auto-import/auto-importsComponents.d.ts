@@ -9,6 +9,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    CautoSquare: typeof import('./../../../src/components/common/CautoSquare/CautoSquare.vue')['default']
     Ccard: typeof import('./../../../src/components/common/Ccard/Ccard.vue')['default']
     Ccell: typeof import('./../../../src/components/common/Ccell/Ccell.vue')['default']
     Cerror: typeof import('./../../../src/components/common/Cerror/Cerror.vue')['default']
