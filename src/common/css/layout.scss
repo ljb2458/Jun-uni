@@ -2,6 +2,10 @@
 .flex {
   display: flex;
 }
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
 .flex-J-SB {
   display: flex;
   justify-content: space-between;
@@ -14,10 +18,19 @@
   display: flex;
   justify-content: space-evenly;
 }
+
 .flex-A-C {
   display: flex;
   align-items: center;
   align-content: center;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
 }
 .flex-J-C {
   display: flex;
@@ -29,11 +42,14 @@
   align-items: baseline;
   align-content: baseline;
 }
-.flex-col {
-  display: flex;
-  flex-direction: column;
+.inline-flex {
+  display: inline-flex;
 }
-
+@for $i from 0 through 30 {
+  .flex-#{$i} {
+    flex: $i;
+  }
+}
 .T-A-L {
   text-align: left;
 }
@@ -46,45 +62,84 @@
 /***********************间距***********************/
 // 定义间距映射
 $gaps: (
-  xs: var(--gap-xs),
-  sm: var(--gap-sm),
-  md: var(--gap-md),
-  lg: var(--gap-lg),
-  xl: var(--gap-xl),
-  xxl: var(--gap-xxl),
-  0: 0,
+  "xxs": 6rpx,
+  "xs": 12rpx,
+  "sm": 22rpx,
+  "md": 32rpx,
+  "lg": 40rpx,
+  "xl": 48rpx,
+  "xxl": 56rpx,
+  "auto": auto,
+  "0": 0,
 );
 
 // 循环生成样式
 @each $key, $value in $gaps {
+  .PD-#{$key} {
+    padding: var(--gap-#{$key}) !important;
+  }
+  .PROW-#{$key} {
+    padding-left: var(--gap-#{$key}) !important;
+    padding-right: var(--gap-#{$key}) !important;
+  }
+  .PCOL-#{$key} {
+    padding-top: var(--gap-#{$key}) !important;
+    padding-bottom: var(--gap-#{$key}) !important;
+  }
   .MT-#{$key} {
-    margin-top: $value !important;
+    margin-top: var(--gap-#{$key}) !important;
   }
   .ML-#{$key} {
-    margin-left: $value !important;
+    margin-left: var(--gap-#{$key}) !important;
   }
   .MR-#{$key} {
-    margin-right: $value !important;
+    margin-right: var(--gap-#{$key}) !important;
   }
   .MB-#{$key} {
-    margin-bottom: $value !important;
+    margin-bottom: var(--gap-#{$key}) !important;
   }
   .MG-#{$key} {
-    margin: $value !important;
+    margin: var(--gap-#{$key}) !important;
   }
   .PT-#{$key} {
-    padding-top: $value !important;
+    padding-top: var(--gap-#{$key}) !important;
   }
   .PL-#{$key} {
-    padding-left: $value !important;
+    padding-left: var(--gap-#{$key}) !important;
   }
   .PR-#{$key} {
-    padding-right: $value !important;
+    padding-right: var(--gap-#{$key}) !important;
   }
   .PB-#{$key} {
-    padding-bottom: $value !important;
+    padding-bottom: var(--gap-#{$key}) !important;
   }
-  .PD-#{$key} {
-    padding: $value !important;
+
+  .gap-#{$key} {
+    gap: var(--gap-#{$key}) !important;
+  }
+  .auto-MT-#{$key} {
+    & > * + * {
+      margin-top: var(--gap-#{$key});
+    }
+  }
+  .auto-ML-#{$key} {
+    & > * + * {
+      margin-left: var(--gap-#{$key});
+    }
+  }
+  .auto-MB-#{$key} {
+    & > * + * {
+      margin-bottom: var(--gap-#{$key});
+    }
+  }
+  .auto-MR-#{$key} {
+    & > * + * {
+      margin-right: var(--gap-#{$key});
+    }
+  }
+}
+page {
+  @each $key, $value in $gaps {
+    --gap-#{$key}: #{$value};
   }
 }

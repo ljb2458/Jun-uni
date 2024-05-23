@@ -40,11 +40,11 @@ const emit = defineEmits<{
     }"
     :class="[
       {
-        'shadowVar--SHc': props.mode === 'bg' && props.shadow,
+        'shadow': props.mode === 'bg' && props.shadow,
         Ccell__bg: props.mode === 'bg',
         Ccell__active: active,
         Ccell_border: props.mode === 'border',
-        'borderVar--BOc': props.mode === 'border',
+        'border-B': props.mode === 'border',
       },
     ]"
     class="Ccell"

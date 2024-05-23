@@ -28,7 +28,7 @@ const props = withDefaults(
       minHeight: props.minHeight,
     }"
     class="Ccard"
-    :class="{ 'shadowVar--SHc': shadow }"
+    :class="{ 'shadow': shadow }"
   >
     <slot></slot>
   </view>

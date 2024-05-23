@@ -23,9 +23,7 @@ onHide(() => {
 @import "@/common/css/effects.scss";
 @import "@/common/css/text.scss";
 @import "@/common/css/layout.scss";
-@import "@/common/css/transition.scss";
 @import "@/common/css/color.scss";
 @import "@/common/css/init.scss";
-@import "@/common/css/var.scss";
 @import "@/common/css/resetUview.scss";
 </style>

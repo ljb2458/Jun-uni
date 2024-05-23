@@ -1,25 +1,43 @@
 /***********************效果***********************/
 //斜面立体效果
-.bevelVar--BEc {
+.bevel {
   --BEc: rgba(0, 0, 0, 0.2);
-  box-shadow: inset var(--BEc) 3px 3px 6px, var(--BEc) 3px 3px 12px;
+  filter: drop-shadow(
+    inset var(--BEc) 3rem 3rem 6rem,
+    var(--BEc) 3rem 3rem 12rem
+  );
 }
-.shadowVar--SHc {
+.shadow {
   --SHc: rgba(0, 0, 0, 0.2);
-  box-shadow: var(--SHc) 3px 3px 12px;
+  filter: drop-shadow(var(--SHc) 3rem 3rem 12rem);
 }
 //点击效果
 .active:active {
-  background: var(--C-B3) !important;
-  opacity: 0.8;
+  filter: brightness(90%) invert(0.3);
 }
-//点击效果
-.activeVar--ACbg:active {
-  --ACbg: var(--C-T1-O1);
-  background: var(--ACbg);
-  opacity: 0.8;
+.border-B {
+  --BOc: var(--C-T1-O1);
+  border-bottom: solid 1rem var(--BOc);
 }
-.borderVar--BOc {
-  --BOc: var(--C-B1-O3);
-  border-bottom: solid 1px var(--BOc);
+.border-T {
+  --BOc: var(--C-T1-O1);
+  border-top: solid 1rem var(--BOc);
+}
+.border-L {
+  --BOc: var(--C-T1-O1);
+  border-left: solid 1rem var(--BOc);
+}
+.border-R {
+  --BOc: var(--C-T1-O1);
+  border-right: solid 1rem var(--BOc);
+}
+.border-all {
+  --BOc: var(--C-T1-O1);
+  border: solid 1rem var(--BOc);
+}
+.B-img {
+  background-image: var(--B-img);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }

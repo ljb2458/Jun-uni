@@ -1,20 +1,25 @@
 /***********************文本***********************/
 $sizes: (
-  xs: var(--T-S-xs),
-  sm: var(--T-S-sm),
-  md: var(--T-S-md),
-  lg: var(--T-S-lg),
-  xl: var(--T-S-xl),
-  xxl: var(--T-S-xxl),
+  "xxs": 16rpx,
+  "xs": 20rpx,
+  "sm": 26rpx,
+  "md": 32rpx,
+  "lg": 40rpx,
+  "xl": 48rpx,
+  "xxl": 64rpx,
 );
 
 // 循环生成样式
 @each $key, $value in $sizes {
   .T-S-#{$key} {
-    font-size: $value;
+    font-size: var(--T-S-#{$key}) !important;
   }
 }
-
+:root {
+  @each $key, $value in $sizes {
+    --T-S-#{$key}: #{$value};
+  }
+}
 /* 文字单行省略号 */
 .T-omit {
   overflow: hidden;
@@ -23,11 +28,12 @@ $sizes: (
 }
 
 /* 文字多行省略号 */
-.T-omitVar--OMn {
+.T-omit-n {
+  --T-n: 3;
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: var(--n);
+  -webkit-line-clamp: var(--T-n);
   word-break: break-all;
 }
 
@@ -39,6 +45,12 @@ $sizes: (
 .T-nowrap {
   white-space: nowrap;
 }
+
 .T-strong {
   font-weight: 600;
+}
+.T-content {
+  white-space: pre-wrap;
+  word-break: break-all;
+  word-wrap: break-word;
 }
