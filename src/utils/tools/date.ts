@@ -4,7 +4,7 @@
 
  * 介绍:时间工具
  */
-import { fixedNumber } from "./format";
+import { fixedNumber } from "./number";
 import dayjs, { Dayjs } from "dayjs";
 /**
  * * 获取倒计时

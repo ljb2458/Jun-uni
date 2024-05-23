@@ -12,6 +12,8 @@ dist
 dist-test
 dist-ssr
 *.local
+package-lock.json
+pnpm-lock.yaml
 
 # Editor directories and files
 .vscode/*
