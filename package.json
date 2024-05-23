@@ -55,7 +55,7 @@
     "lodash": "^4.17.21",
     "luch-request": "^3.0.8",
     "mp-storage": "^1.0.3",
-    "pinia": "^2.0.30",
+    "pinia": "2.0.35",
     "pinia-plugin-persistedstate": "^3.0.2",
     "unplugin-auto-import": "^0.14.3",
     "unplugin-vue-components": "^0.24.0",

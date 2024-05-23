@@ -1,8 +1,3 @@
-/*
- * @Date: 2023-02-19 11:43:32
- * @LastEditTime: 2023-07-03 16:11:10
- * 介绍:
- */
 import { defineStore } from "pinia";
 import { localStorage } from "mp-storage";
 
