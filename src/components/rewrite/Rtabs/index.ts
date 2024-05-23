@@ -5,10 +5,11 @@
  * 介绍:
  */
 export default "./Rtabs.vue";
-export interface RtabsListItem  {
+export interface RtabsListItem {
   name?: string;
   badge?: Badge;
   disabled?: boolean;
+  [k: string]: any;
 }
 export interface Badge {
   isDot?: boolean;

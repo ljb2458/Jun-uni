@@ -31,7 +31,7 @@ const props = withDefaults(
     pullDownRefreshEnd?: (v?: State) => void;
     /**解决微信小程序v-for循环无法获取ref的问题 */
     _ref?: Ref;
-    minHeight: string;
+    minHeight?: string;
   }>(),
   {
     setupLoad: true,

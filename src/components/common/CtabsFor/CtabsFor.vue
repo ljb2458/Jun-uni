@@ -48,7 +48,7 @@ const props = withDefaults(
     offsetTop: 0,
     gap: "var(--gap-md)",
     lazy: true,
-    titleKeyName: "title",
+    titleKeyName: "name",
   }
 );
 
