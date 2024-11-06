@@ -1,7 +1,4 @@
 /*
- * @Date: 2023-04-03 18:59:36
- * @LastEditTime: 2023-09-14 18:23:27
-
  * 介绍:时间工具
  */
 import { fixedNumber } from "./number";

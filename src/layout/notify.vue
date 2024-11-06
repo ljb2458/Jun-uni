@@ -4,10 +4,10 @@
  * 介绍:
 -->
 <script lang="ts" setup>
-import { show, param } from "./setNotify";
+import { showNotify, notifyProps } from "./setNotify";
 </script>
 <template>
-  <CoNotify :="param" v-model:show="show">
+  <CoNotify :="notifyProps" v-model:show="showNotify">
     <slot></slot>
   </CoNotify>
 </template>

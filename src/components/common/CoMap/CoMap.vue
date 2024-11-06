@@ -132,30 +132,30 @@ const rightIconList = computed<IconItem[]>(() => {
     iconArray.push(
       {
         class: ["_MB-0"],
-        iconPath: _require("src/static/components/images/plus.png"),
+        iconPath: _require("src/static/components/imgs/plus.png"),
         tap: () => changeScale(mapData.scale + 1),
       },
       {
         class: ["_MT-0"],
-        iconPath: _require("src/static/components/images/reduce.png"),
+        iconPath: _require("src/static/components/imgs/reduce.png"),
         tap: () => changeScale(mapData.scale - 1),
       },
       {
         class: ["_MT-auto"],
-        iconPath: _require("src/static/components/images/local.png"),
+        iconPath: _require("src/static/components/imgs/local.png"),
         tap: () => moveToLocal(),
       },
       {
         iconPath: mapData.fill
-          ? _require("src/static/components/images/fullScreenExit.png")
-          : _require("src/static/components/images/fullScreen.png"),
+          ? _require("src/static/components/imgs/fullScreenExit.png")
+          : _require("src/static/components/imgs/fullScreen.png"),
         tap: () => changeFill(),
         class: ["_MT-auto"],
       }
     );
   }
   if (mapData.fill && props.mapHidIcon) {
-    let iconPath = _require("src/static/components/images/menu.png");
+    let iconPath = _require("src/static/components/imgs/menu.png");
     if (typeof props.mapHidIcon !== "boolean") iconPath = props.mapHidIcon;
     iconArray.unshift({
       iconPath,

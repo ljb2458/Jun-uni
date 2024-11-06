@@ -1,8 +1,4 @@
-/*
- * @Date: 2023-03-23 15:11:16
- * @LastEditTime: 2023-04-20 20:11:28
- * 介绍:
- */
+
 export function unitPx(pixel: string | undefined | number): string {
   return (pixel || 0) + "px";
 }

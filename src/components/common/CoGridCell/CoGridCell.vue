@@ -13,12 +13,12 @@ const props = withDefaults(
   }>(),
   {
     borderStyle: "solid",
-    borderColor: "var(--C-B1-O-5)",
+    borderColor: "var(--C-B1-O5)",
     borderWidth: "2rpx",
     border: true,
     separate: "all",
     separateStyle: "solid",
-    separateColor: "var(--C-B1-O-5)",
+    separateColor: "var(--C-B1-O5)",
     separateWidth: "2rpx",
   }
 );

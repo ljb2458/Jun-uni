@@ -22,7 +22,7 @@ function clickButton(e: MouseEvent) {
     <image
       width="100%"
       :mode="'aspectFit'"
-      :src="_require('src/static/components/images/error.svg')"
+      :src="_require('src/static/components/imgs/error.svg')"
     ></image>
     <slot>
       <view class="C-T5 MT-xs">{{ props.message }}</view>

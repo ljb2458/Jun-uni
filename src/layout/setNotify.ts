@@ -5,10 +5,10 @@ type ShowParam = ComponentPropsType<typeof CNotify> & {
   style?: StyleValue;
 };
 
-export const show = ref(false);
-export const param = ref<ShowParam>();
+export const showNotify = ref(false);
+export const notifyProps = ref<ShowParam>();
 
-const notify = {
+const setNotify = {
   info(message: string, config?: ShowParam) {
     this.show(message, { ...config, type: "info" });
   },
@@ -27,11 +27,11 @@ const notify = {
   async show(message: string, config?: ShowParam) {
     this.close();
     await nextTick();
-    param.value = { ...config, message };
-    show.value = true;
+    notifyProps.value = { ...config, message };
+    showNotify.value = true;
   },
   close() {
-    show.value = false;
+    showNotify.value = false;
   },
 };
-export default notify;
+export default setNotify;

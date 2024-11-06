@@ -8,19 +8,19 @@ import { createHttpRequest } from "@/utils/HttpRequest";
 const env = import.meta.env;
 let baseURL = "";
 if (env.VITE_PROXY == "1") {
-  baseURL = env.VITE_API_PREFIX || ''; //配置默认请求地址--跨域代理
+  baseURL = env.VITE_API_PREFIX || ""; //配置默认请求地址--跨域代理
 } else {
-  baseURL = env.VITE_API_URL + env.VITE_API_PREFIX || ''; //配置默认请求地址--无代理
+  baseURL = env.VITE_API_URL + env.VITE_API_PREFIX || ""; //配置默认请求地址--无代理
 }
 export const defaHttp = createHttpRequest(
   {
     isSuccess(res) {
       return res?.data?.code === 200;
     },
-    returnMsg(res) {
+    giveMsg(res) {
       return res?.data?.message;
     },
-    returnErrMsg(error) {
+    giveErrMsg(error) {
       return error?.errMsg;
     },
   },
@@ -37,8 +37,10 @@ defaHttp.interceptors.request.use((config) => {
   return config;
 });
 defaHttp.interceptors.response.use(
-  (res) => {
-    return res.data;
+  (result) => {
+    if (result.config.method === "DOWNLOAD") return result;
+
+    return result.data;
   },
   (error) => {
     return Promise.resolve({

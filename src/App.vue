@@ -13,6 +13,7 @@ onHide(() => {
 });
 </script>
 <style lang="scss">
-@import "@/styles/atomization/index.scss";
 @import "@climblee/uv-ui/index.scss";
+@import "@/styles/atomization/index.scss";
+@import "@/styles/uv-ui-reset/css.scss";
 </style>

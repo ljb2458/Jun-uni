@@ -1,6 +1,14 @@
 import { pages, tabBar, subPackages } from "@/pages.json";
 import { cloneDeep } from "lodash";
+import { name } from "@/manifest.json";
 
+export const appCfg = {
+  icon: "",
+  name: name,
+};
+// #ifdef MP-WEIXIN
+appCfg.icon = __wxConfig.accountInfo.icon;
+// #endif
 /**
  * 提取 uni-app 的 options 形式方法中 success 回调的参数类型
  */
@@ -191,7 +199,7 @@ export async function isNodeVisible(queryNode: string, _this?: any) {
     top < sysInfo.screenHeight
   );
 }
-/**数组类型转联合类型 */
+
 export type RouteInfo = ArrayToUnion<typeof pages> & {
   tabbar: ArrayToUnion<typeof tabBar.list> | undefined;
 };
@@ -204,7 +212,6 @@ export function getCurrentRouteInfo(): RouteInfo | undefined {
   const pagesInfo = getCurrentPages();
   const currentPage: AnyObject = pagesInfo[pagesInfo.length - 1];
   const routePath: string = currentPage.route;
-  console.log("routePath", routePath);
   return getRouteInfo(routePath);
 }
 /**

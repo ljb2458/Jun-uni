@@ -23,7 +23,7 @@ const userAuthEnum: StateEnum = [
   {
     state: 1,
     label: "管理员",
-    class: "C-M1 B-M1-O-3 R-max P-row-xs F-S-xs ML-xs",
+    class: "C-M1 B-M1-O3 R-max P-row-xs F-S-xs ML-xs",
   },
 ];
 const layoutInfo = reactive({

@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import notify from "@/layout/notify.vue";
 import customNavbar from "@/layout/customNavbar.vue";
+import actionSheet from "@/layout/actionSheet.vue";
+import modal from "@/layout/modal.vue";
+
 import { onPageScroll } from "@dcloudio/uni-app";
 import { defaultStyle } from "@/layout/setCustomNavbar";
 import { getCurrentRouteInfo } from "@/utils/rewriteUni";
@@ -16,14 +19,16 @@ const props = withDefaults(
     useSafetyTop?: boolean;
     useCustomNavbar?: boolean;
     useSafetyBottom?: boolean;
+    useActionSheet?: boolean;
     onPageScroll?: typeof onPageScroll;
     bgImg?: string;
+    fixedBottomHeight?: string;
   }>(),
   {
     useSafetyTop: true,
     useCustomNavbar: true,
-    useNotify: true,
     useSafetyBottom: true,
+    fixedBottomHeight: "76px",
   }
 );
 const layoutInfo = reactive({
@@ -42,8 +47,8 @@ if (props.onPageScroll)
       '--layout-navbar-height': useCustomNavbar
         ? `calc(var(--status-bar-height) + ${
             defaultStyle.height || '0px'
-          } + var(--gap-xs))`
-        : 0,
+          } + var(--gap-xs)`
+        : '0px',
     }"
   >
     <uv-image
@@ -65,15 +70,38 @@ if (props.onPageScroll)
         {{ routeInfo?.style?.navigationBarTitleText }}
       </view>
     </customNavbar>
+    <actionSheet v-if="useActionSheet"></actionSheet>
     <notify v-if="useNotify">
       <slot name="notify"></slot>
     </notify>
-
+    <modal v-if="useModal">
+      <slot name="modal"></slot>
+    </modal>
     <slot></slot>
     <view
+      class="safetyBottom"
       v-if="props.useSafetyBottom"
       style="height: var(--window-bottom)"
+    >
+    </view>
+    <view
+      class="CoPageView_bottom_placeholder"
+      :style="{ height: fixedBottomHeight }"
+      v-if="$slots.fixedBottom"
     ></view>
+    <view
+      class="CoPageView_bottom border-T B-B1"
+      :style="{ height: fixedBottomHeight }"
+      v-if="$slots.fixedBottom"
+    >
+      <slot name="fixedBottom"></slot>
+      <view
+        class="safetyBottom"
+        v-if="props.useSafetyBottom"
+        style="height: var(--window-bottom)"
+      >
+      </view>
+    </view>
   </view>
 </template>
 
@@ -85,12 +113,18 @@ if (props.onPageScroll)
   min-height: calc(100vh - var(--window-top));
   position: relative;
   .CoPageView__bgImg {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     width: 100%;
     z-index: -1;
+  }
+  .CoPageView_bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 }
 .customNavbar__fixed {

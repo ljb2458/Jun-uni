@@ -13,11 +13,11 @@ import { filterObject } from "@/utils/tools/object";
 export namespace CreateHttpRequest {
   export interface MyConfig {
     isSuccess: IsSuccess;
-    returnMsg: ReturnMsg;
-    returnErrMsg: ReturnErrMsg;
+    giveMsg: ReturnMsg;
+    giveErrMsg: ReturnErrMsg;
   }
   export interface Config<D = any> extends HttpRequestConfig<D> {
-    custom?: Mode;
+    custom?: Custom;
   }
   export interface IsSuccess<D = HttpResponse> {
     (res: D): boolean;
@@ -49,7 +49,7 @@ export namespace CreateHttpRequest {
     trace: NotGetRequest;
     config: Config;
   }
-  export interface Mode {
+  export interface Custom {
     failMessage?: string | boolean;
     successMessage?: string | boolean;
     loadingMessage?: string | boolean;
@@ -81,38 +81,38 @@ export function createHttpRequest(
         showLoading,
         showSuccessMsg,
         successText,
-      } = helper(custom);
+      } = customHelper(custom);
       if (showLoading) uni.hideLoading();
-      const message = myConfig.returnMsg(res);
+      const message = myConfig.giveMsg(res);
       const isSuccess = myConfig.isSuccess(res);
       if (res.data) res.data.isSuccess = isSuccess;
       if (isSuccess) {
         if (showSuccessMsg) {
           uni.showToast({
-            title: message || successText,
+            title: successText || message || "success",
             icon: "success",
           });
         }
       } else {
         if (showFailMsg) {
-          uni.showToast({ title: message || failText, icon: "fail" });
+          uni.showToast({ title: failText || message || "fail" });
         }
       }
       return res;
     },
     (error) => {
       const custom = error.config.custom;
-      const message = myConfig.returnErrMsg(error);
-      const { showErrorMsg, errorText, showLoading } = helper(custom);
+      const message = myConfig.giveErrMsg(error);
+      const { showErrorMsg, errorText, showLoading } = customHelper(custom);
       if (showLoading) uni.hideLoading();
       if (showErrorMsg) {
-        uni.showToast({ title: message || errorText, icon: "error" });
+        uni.showToast({ title: errorText || message || "error" });
       }
     }
   );
   return httpRequest;
 }
-function helper(mode: CreateHttpRequest.Mode | undefined) {
+function customHelper(mode: CreateHttpRequest.Custom | undefined) {
   const loadingMessage = mode?.loadingMessage;
   const showLoading =
     loadingMessage === true || typeof loadingMessage === "string";

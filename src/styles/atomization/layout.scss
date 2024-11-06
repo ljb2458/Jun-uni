@@ -77,6 +77,27 @@
 .inline-flex {
   display: inline-flex;
 }
+.block {
+  display: block;
+}
+.inline-block {
+  display: inline-block;
+}
+.inline {
+  display: inline;
+}
+._flex {
+  display: flex !important;
+}
+._block {
+  display: block !important;
+}
+._inline-block {
+  display: inline-block !important;
+}
+._inline {
+  display: inline !important;
+}
 @for $i from 0 through 30 {
   .flex-#{$i} {
     flex: $i;

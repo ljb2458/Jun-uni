@@ -135,7 +135,7 @@ function submit() {
             :key="option.value"
             class="CoCascader_option P-col-xs M-col-xxs P-row-sm flex-A-C flex-J-SB"
             :class="{
-              'C-M1 B-M1-O-1': Object.is(modelValue[index], option.value),
+              'C-M1 B-M1-O1': Object.is(modelValue[index], option.value),
             }"
           >
             <view class="CoCascader_option_label">{{ option.label }}</view>

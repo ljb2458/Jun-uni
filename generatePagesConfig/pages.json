@@ -37,7 +37,6 @@
   },
   "easycom": {
     "custom": {
-      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue",
       "^Re(.*)": "@/components/rewrite/Re$1/Re$1.vue",
       "^Gr(.*)": "@/components/group/Gr$1/Gr$1.vue",
       "^Co(.*)": "@/components/common/Co$1/Co$1.vue",

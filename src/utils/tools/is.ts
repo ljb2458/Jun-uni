@@ -1,6 +1,4 @@
 /*
- * @Date: 2023-06-23 22:00:33
- * @LastEditTime: 2023-10-13 18:49:25
  * 介绍:
  */
 export function isPhone(phone: string) {

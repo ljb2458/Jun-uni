@@ -6,7 +6,7 @@ const props = withDefaults(
     bg?: string;
   }>(),
   {
-    bg: "var(--C-T1-O-3)",
+    bg: "var(--C-T1-O3)",
     height: "1px",
     width: "100%",
   }
