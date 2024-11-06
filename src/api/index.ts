@@ -11,24 +11,40 @@ if (env.VITE_PROXY == "1") {
 } else {
   baseURL = env.VITE_BASE_URL + env.VITE_API_PREFIX; //配置默认请求地址--无代理
 }
-const defaHttp = new HttpRequest({
-  baseURL,
-});
+export const defaHttp = new HttpRequest(
+  {
+    baseURL,
+  },
+  {
+    isSuccess: (res) => res?.data?.code === 200,
+    returnFailMsg: (res) => res?.data?.msg,
+    returnSuccessMsg: (res) => res?.data?.msg,
+  }
+);
 
-export { defaHttp };
-
-export type ApiReturn<T> = Promise<ApiRes<T>>;
+export const launchHttp = new HttpRequest(
+  {
+    baseURL: env.VITE_LAUNCH_URL,
+  },
+  {
+    isSuccess: (res) => !!res,
+    returnFailMsg: (res) => res?.errMsg,
+    returnSuccessMsg: (res) => res?.data,
+  }
+);
 
 /**请求res类型 */
-export interface ApiRes<T> {
-  code: 200;
-  msg: string;
-  status: boolean;
-  data: T;
+export namespace Api {
+  export interface Res<T> {
+    code: number;
+    msg: string;
+    status: boolean;
+    data: T;
+  }
 }
 export namespace PagingApi {
   /**请求分页接口返res类型 */
-  export type Res<T extends any[] = any[]> = ApiRes<Data<T>>;
+  export type Res<T extends any[] = any[]> = Api.Res<Data<T>>;
   /**分页data类型 */
   export interface Data<T extends any[] = any[]> {
     /**当前页码数 */

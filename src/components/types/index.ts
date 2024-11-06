@@ -4,16 +4,11 @@
  * @FilePath: /music-client/src/components/types/index.ts
  * 介绍:
  */
-import {
-  BorderStyleProperty,
-  JustifyItemsProperty,
-  AlignItemsProperty,
-  TextAlignProperty,
-} from "csstype";
+import { Property } from "csstype";
 
 export type ColorTheme = "info" | "primary" | "error" | "warning" | "success";
-export type BorderStyle = BorderStyleProperty;
-export type JustifyItems = JustifyItemsProperty;
-export type AlignItems = AlignItemsProperty;
+export type BorderStyle = Property.BorderStyle;
+export type JustifyItems = Property.JustifyItems;
+export type AlignItems = Property.AlignItems;
 export type BoxPosition = "left" | "right" | "top" | "bottom" | "center";
-export type TextAlign = TextAlignProperty;
+export type TextAlign = Property.TextAlign;

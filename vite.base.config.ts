@@ -16,6 +16,7 @@ export default (config: ConfigEnv) => {
     resolve: {
       alias: {
         "@": path.join(__dirname, "src"),
+        "#": path.join(__dirname, "types"),
       },
     },
     plugins: [
@@ -35,6 +36,7 @@ export default (config: ConfigEnv) => {
   if (config.command === "serve") {
     option.plugins!.push(
       Components({
+        exclude: ["RouterLink", "RouterView"],
         dirs: ["src/components"],
         deep: true,
         extensions: ["vue"],

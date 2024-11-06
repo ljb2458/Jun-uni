@@ -40,14 +40,14 @@ $uni-border-color: var(--C-O1);
 /* 尺寸变量 */
 
 /* 文字尺寸 */
-$uni-font-size-sm: var(--T-S-sm);
-$uni-font-size-base: var(--T-S-md);
-$uni-font-size-lg: var(--T-S-lg);
+$uni-font-size-sm: var(--F-S-sm);
+$uni-font-size-base: var(--F-S-md);
+$uni-font-size-lg: var(--F-S-lg);
 
 /* 图片尺寸 */
-$uni-img-size-sm: calc(var(--T-S-sm) * 4);
-$uni-img-size-base: calc(var(--T-S-md) * 4);
-$uni-img-size-lg: calc(var(--T-S-lg) * 4);
+$uni-img-size-sm: calc(var(--F-S-sm) * 4);
+$uni-img-size-base: calc(var(--F-S-md) * 4);
+$uni-img-size-lg: calc(var(--F-S-lg) * 4);
 
 /* Border Radius */
 $uni-border-radius-sm: var(--R-sm);

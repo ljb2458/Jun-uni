@@ -1,19 +1,17 @@
 /*
- * @Date: 2023-02-15 14:36:19
- * @LastEditTime: 2023-08-10 18:09:25
  * 介绍:请求封装文件https://www.quanzhan.co/luch-request/guide/3.x/#example
  */
 import luchRequest, { HttpRequestConfig, HttpResponse } from "luch-request";
 import type { IncomingHttpHeaders } from "http";
 import { filterObject } from "@/utils/tools/object";
 
-export interface IsSuccess<D = any> {
+export interface IsSuccess<D = HttpResponse> {
   (res: D): boolean;
 }
-export interface ReturnMsg<D = any> {
+export interface ReturnMsg<D = HttpResponse> {
   (res: D): string;
 }
-export interface MyCongfig<D = any> {
+export interface MyCongfig<D = HttpResponse> {
   isSuccess: IsSuccess<D>;
   returnSuccessMsg: ReturnMsg<D>;
   returnFailMsg: ReturnMsg<D>;

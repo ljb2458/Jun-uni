@@ -54,14 +54,17 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "wx43317249c889ad31",
+        "appid" : "wxf6d74a8200e1fe2d",
         "setting" : {
             "urlCheck" : false
         },
-        "usingComponents" : true
+        "usingComponents" : true,
+        "mergeVirtualHostAttributes":true
     },
     "mp-alipay" : {
-        "usingComponents" : true
+        "usingComponents" : true,
+        "mergeVirtualHostAttributes":true
+
     },
     "mp-baidu" : {
         "usingComponents" : true

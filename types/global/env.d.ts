@@ -4,13 +4,6 @@
  * 介绍:
  */
 /// <reference types="vite/client" />
-
-declare module "*.vue" {
-  import { DefineComponent } from "vue";
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
-  const component: DefineComponent<{}, {}, any>;
-  export default component;
-}
 interface ImportMetaEnv {
   /** 开发环境环境变量*/
   VITE_BASE_URL: string;
@@ -18,4 +11,6 @@ interface ImportMetaEnv {
   VITE_PROXY: "0" | "1";
   /**接口后缀 */
   VITE_API_PREFIX: string;
+  /**项目启动接口地址 */
+  VITE_LAUNCH_URL: string;
 }

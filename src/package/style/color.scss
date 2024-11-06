@@ -1,0 +1,86 @@
+$colors: (
+  //适合作文字的颜色
+  "T5": #ccc,
+  "T4": #999,
+  "T3": #666,
+  "T2": #333,
+  "T1": #1e1e1e,
+  //适合作为背景的颜色
+  "B1": #fff,
+  "B2": #f3f3f3,
+  "B3": #e3e3e3,
+  "B4": #888,
+  "B5": #666,
+  //主色
+  "M1": #FF6100,
+  //渐变色
+  "LG1": linear-gradient(90deg, var(--C-M1), var(--C-M1-O6)),
+  //功能色
+  "success": #02b985,
+  "fail": #d63031,
+  "await": #3498db,
+  "warn": #ee7844,
+
+  "white": #fff,
+  "white1": #f3f3f3,
+  "white2": #eee,
+  "white3": #ccc,
+  "white4": #aaa,
+  "white5": #888,
+
+  "black": #000,
+  "black1": #1e1e1e,
+  "black2": #333,
+  "black3": #666,
+  "black4": #999,
+  "black5": #ccc,
+  "none": "transparent"
+);
+// 添加不同透明度的颜色
+$colorsOpacityKey: (
+  "M1",
+  "T1",
+  "B1",
+  "success",
+  "fail",
+  "await",
+  "warn",
+  "white",
+  "black"
+);
+$colorsDarkLightKey: ("M1");
+
+@each $key in $colorsDarkLightKey {
+  @for $i from 0 through 3 {
+    $colors: map-merge(
+      $colors,
+      (
+        #{$key}-dark#{$i}: darken(map-get($colors, $key), $i * 10%),
+        #{$key}-light#{$i}: lighten(map-get($colors, $key), $i * 10%)
+      )
+    );
+  }
+}
+
+@each $key in $colorsOpacityKey {
+  @for $i from 0 through 9 {
+    $colors: map-merge(
+      $colors,
+      (#{$key}-O#{$i}: rgba(map-get($colors, $key), $i * 0.1))
+    );
+  }
+}
+page {
+  @each $key, $value in $colors {
+    --C-#{$key}: #{$value};
+  }
+}
+// 循环生成样式
+@each $key, $value in $colors {
+  .C-#{$key} {
+    color: var(--C-#{$key});
+  }
+  .B-#{$key} {
+    background-color: var(--C-#{$key});
+  }
+}

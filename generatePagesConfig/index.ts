@@ -1,10 +1,3 @@
-/*
- * @Date: 2023-06-12 20:31:38
- * @LastEditTime: 2023-10-13 18:40:04
- * @FilePath: /music-client/generatePagesConfig/index.ts
- * 介绍:
- */
-
 import fs from "fs";
 import path from "path";
 import defaultConfig from "./pages.json";
@@ -13,7 +6,7 @@ const src = path.join(__dirname, "../src");
 const pagesPath = path.join(src, "/pages");
 const outDir = path.join(src, "/pages.json");
 /**第一个页面 */
-const first = "pages/home/home";
+const first = "pages/tabbar/home/home";
 /**黑名单文件夹 */
 const blacklist = [/.?\/components/];
 /**后缀 */

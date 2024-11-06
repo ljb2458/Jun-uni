@@ -10,11 +10,13 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "types": ["@dcloudio/types"],
+    "types": ["@dcloudio/types", "uview-plus/types"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@": ["src"]
+      "@": ["src"],
+      "#/*": ["types/*"],
+      "#": ["types"],
     }
   },
   "include": [

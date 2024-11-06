@@ -1,0 +1,37 @@
+/***********************效果***********************/
+//斜面立体效果
+.bevel {
+  --bevel-C: rgba(0, 0, 0, 0.2);
+  filter: drop-shadow(
+    inset var(--bevel-C) 3px 3px 6px,
+    var(--bevel-C) 3px 3px 12px
+  );
+}
+.shadow {
+  --shadow-C: rgba(0, 0, 0, 0.2);
+  filter: drop-shadow(var(--shadow-C) 3px 3px 12px);
+}
+//点击效果
+.active:active {
+  filter: brightness(90%) invert(0.3);
+}
+.border-B {
+  --border-C: var(--C-T1-O1);
+  border-bottom: solid 1px var(--border-C);
+}
+.border-T {
+  --border-C: var(--C-T1-O1);
+  border-top: solid 1px var(--border-C);
+}
+.border-L {
+  --border-C: var(--C-T1-O1);
+  border-left: solid 1px var(--border-C);
+}
+.border-R {
+  --border-C: var(--C-T1-O1);
+  border-right: solid 1px var(--border-C);
+}
+.border-all {
+  --border-C: var(--C-T1-O1);
+  border: solid 1px var(--border-C);
+}

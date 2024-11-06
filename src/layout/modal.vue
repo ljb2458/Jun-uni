@@ -1,16 +1,9 @@
 <script lang="ts" setup>
-import { show, config } from "./modal";
-import { onReject, onResovle } from "./modal";
+import { show, config, onReject, onResovle } from "./setModal";
 </script>
 <template>
-  <Rmodal
-    :="config"
-    v-model:show="show"
-    @confirm="onResovle"
-    @cancel="onReject"
-    @close="onReject"
-  >
+  <u-modal :="config" v-model:show="show" @confirm="onResovle" @cancel="onReject" @close="onReject">
     <slot></slot>
-  </Rmodal>
+  </u-modal>
 </template>
 <style lang="scss" scoped></style>

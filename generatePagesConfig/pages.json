@@ -1,28 +1,34 @@
 {
   "tabBar": {
     "color": "#1e1e1e",
-    "selectedColor": "#3498db",
-    "backgroundColor": "#eeeeee",
+    "selectedColor": "#FF6100",
+    "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/home/home",
-        "iconPath": "",
-        "selectedIconPath": "",
-        "text": "tabs + list演示"
+        "pagePath": "pages/tabbar/home/home",
+        "iconPath": "static/imgs/tabbar/home.png",
+        "selectedIconPath": "static/imgs/tabbar/home_active.png",
+        "text": "首页"
       },
       {
-        "pagePath": "pages/componentList/componentList",
-        "iconPath": "",
-        "selectedIconPath": "",
-        "text": "组件目录"
+        "pagePath": "pages/tabbar/help/help",
+        "iconPath": "static/imgs/tabbar/help.png",
+        "selectedIconPath": "static/imgs/tabbar/help_active.png",
+        "text": "帮助"
+      },
+      {
+        "pagePath": "pages/tabbar/me/me",
+        "iconPath": "static/imgs/tabbar/me.png",
+        "selectedIconPath": "static/imgs/tabbar/me_active.png",
+        "text": "我的"
       }
     ]
   },
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#eeeeee",
-    "backgroundColor": "#eeeeee",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#ffffff",
     "pageOrientation": "portrait",
     "onReachBottomDistance": 200,
     "app-plus": {
@@ -31,10 +37,12 @@
   },
   "easycom": {
     "custom": {
+      "^u--(.*)": "uview-plus/components/u--$1/u--$1.vue",
+      "^up-(.*)": "uview-plus/components/u-$1/u-$1.vue",
       "^u-(.*)": "uview-plus/components/u-$1/u-$1.vue",
       "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue",
-      "^R(.*)": "@/components/rewrite/R$1/R$1.vue",
-      "^C(.*)": "@/components/common/C$1/C$1.vue"
+      "^Re(.*)": "@/components/rewrite/Re$1/Re$1.vue",
+      "^Co(.*)": "@/components/common/Co$1/Co$1.vue"
     }
   }
 }

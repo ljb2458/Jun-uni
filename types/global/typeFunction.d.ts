@@ -1,14 +1,9 @@
-/*
- * @Date: 2023-06-24 22:48:33
- * @LastEditTime: 2023-07-03 12:40:31
- * 介绍:
- */
-/**元组类型转联合类型 */
-type TupleToUnion<T extends any[]> = keyof {
+/**数组(元组)类型转联合类型 */
+type ArrayToUnion<T extends any[]> = keyof {
   [Key in T[number]]: Key;
 };
 /**对象的值转联合类型 */
-type ObjectToUnion<T extends object> = keyof {
+type ObjectToUnion<T extends AnyObject> = keyof {
   [key in T[keyof T]]: key;
 };
 /**获取promise中的类型*/

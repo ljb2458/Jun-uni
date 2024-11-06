@@ -4,11 +4,11 @@
  * 介绍:
 -->
 <script lang="ts" setup>
-import { show, param } from "./notify";
+import { show, param } from "./setNotify";
 </script>
 <template>
-  <Rnotify :="param" v-model:show="show">
+  <CNotify :="param" v-model:show="show">
     <slot></slot>
-  </Rnotify>
+  </CNotify>
 </template>
 <style lang="less" scoped></style>
