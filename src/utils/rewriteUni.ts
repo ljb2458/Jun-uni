@@ -154,18 +154,20 @@ export function getCurrentPath(): string {
  * @param _this 传入当前this，以兼容小程序
  * @returns
  */
-export function getRect(queryNode: string, _this?: any): Promise<GetRectRes> {
+export function getRect(
+  queryNode: string,
+  _this?: any
+): Promise<UniNamespace.NodeInfo> {
   return new Promise((resolve) => {
     const query = uni.createSelectorQuery().in(_this || getCurrentInstance());
     query
       .select(queryNode)
       .boundingClientRect((data) => {
-        resolve(data as any);
+        resolve(data as UniNamespace.NodeInfo);
       })
       .exec();
   });
 }
-export interface GetRectRes extends UniApp.NodeInfo {}
 
 /**
  * * 通过位置获取节点可见状态

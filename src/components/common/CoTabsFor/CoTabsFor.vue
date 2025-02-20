@@ -8,7 +8,7 @@ import uvTabs from "@climblee/uv-ui/components/uv-tabs/uv-tabs.vue";
 //@ts-ignore
 import uvSticky from "@climblee/uv-ui/components/uv-sticky/uv-sticky.vue";
 import { unitPercent, unitPx } from "@/utils/tools/css";
-import { getRect, GetRectRes } from "@/utils/rewriteUni";
+import { getRect } from "@/utils/rewriteUni";
 import { CSSProperties } from "vue";
 import dayjs from "dayjs";
 import { generateUUID } from "@/utils/tools/generate";
@@ -101,7 +101,7 @@ let startTime = 0;
 let abandon = false;
 let CoTabsForId = `CoTabsFor${generateUUID()}`;
 /**swiper节点信息 */
-let nodeInfo: GetRectRes;
+let nodeInfo: UniNamespace.NodeInfo;
 /**更新CoTabsFor节点信息 */
 function updateNodeInfo() {
   getRect(`#${CoTabsForId}`).then((res) => {

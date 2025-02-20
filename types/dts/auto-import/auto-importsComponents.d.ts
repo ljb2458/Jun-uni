@@ -29,6 +29,9 @@ declare module 'vue' {
     CoStateTag: typeof import('./../../../src/components/common/CoStateTag/CoStateTag.vue')['default']
     CoStepLine: typeof import('./../../../src/components/common/CoStepLine/CoStepLine.vue')['default']
     CoTabsFor: typeof import('./../../../src/components/common/CoTabsFor/CoTabsFor.vue')['default']
+    CoVideo: typeof import('./../../../src/components/common/CoVideo/CoVideo.vue')['default']
+    EnvCoverImage: typeof import('./../../../src/components/common/CoMap/envCoverImage.vue')['default']
+    EnvCoverView: typeof import('./../../../src/components/common/CoMap/envCoverView.vue')['default']
     GrFilterSearch: typeof import('./../../../src/components/group/GrFilterSearch/GrFilterSearch.vue')['default']
   }
 }

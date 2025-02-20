@@ -8,13 +8,15 @@ import type {
   MapOnRegionchangeEvent,
 } from "@uni-helper/uni-app-types";
 import { useVModel } from "@/hooks/toolsHooks";
+import envCoverView from "./envCoverView.vue";
+import envCoverImage from "./envCoverImage.vue";
 
 const MIN_SCALE = 3;
 const MAX_SCALE = 20;
 const SCALE = 16;
 const LATITUDE = 39.909;
 const LONGITUDE = 116.39742;
-const MAP_ID = `map-${generateUUID().slice(0, 30)}`;
+const MAP_ID = `map-${generateUUID().slice(0, 60)}`;
 const props = withDefaults(
   defineProps<{
     showMap?: boolean;
@@ -46,53 +48,52 @@ const layoutInfo = computed(() => {
   if (!mapData.fill) topHeight = bottomHeight = "0px";
   return { topHeight, bottomHeight };
 });
-
+const $mapProps = computed(() => ({
+  latitude: LATITUDE,
+  longitude: LONGITUDE,
+  minScale: MIN_SCALE,
+  maxScale: MAX_SCALE,
+  scale: SCALE,
+  layerStyle: 1,
+  enable3D: true,
+  enableZoom: true,
+  enableScroll: true,
+  enablePoi: true,
+  enableBuilding: true,
+  enableIndoorMap: true,
+  ...props.mapProps,
+}));
 const latitude = useVModel(props.mapProps, "latitude", undefined, {
   defaultValue: LATITUDE,
 });
 const longitude = useVModel(props.mapProps, "longitude", undefined, {
   defaultValue: LONGITUDE,
 });
-const maxScale = computed(() =>
-  mapPropsDef(props.mapProps.maxScale, MAX_SCALE)
-);
-const minScale = computed(() =>
-  mapPropsDef(props.mapProps.minScale, MIN_SCALE)
-);
 
-/**
- * 定义mapProps默认值
- */
-function mapPropsDef<T>(value: T | undefined): T | undefined;
-function mapPropsDef<T>(value: T | undefined, defaultValue: T): T;
-function mapPropsDef<T>(value: T | undefined, defaultValue?: T): T | undefined {
-  return Object.is(value, undefined) ? defaultValue : value;
-}
-
-let mapCtx: UniNamespace.MapContext;
 onMounted(() => {
-  mapCtx = uni.createMapContext(MAP_ID, getCurrentInstance());
+  mapData.mapCtx = uni.createMapContext(MAP_ID, getCurrentInstance());
 });
 /**map地图相关数据 */
 const mapData = reactive({
   fill: false,
-  scale: mapPropsDef(props.mapProps.scale, SCALE),
+  scale: $mapProps.value.scale,
+  mapCtx: defineType<UniNamespace.MapContext>()!,
 });
 function changeFill(value: boolean = !mapData.fill) {
   mapData.fill = value;
 }
 async function changeScale(value: number) {
-  const minScale = mapPropsDef(props.mapProps.minScale, MIN_SCALE);
-  const maxScale = mapPropsDef(props.mapProps.maxScale, MAX_SCALE);
+  const minScale = $mapProps.value.minScale;
+  const maxScale = $mapProps.value.maxScale;
   if (value > maxScale) value = maxScale;
   if (value < minScale) value = minScale;
-  const res = await uniApiToPromise(mapCtx.getCenterLocation);
+  const res = await uniApiToPromise(mapData.mapCtx.getCenterLocation);
   latitude.value = res.latitude;
   longitude.value = res.longitude;
   mapData.scale = value;
 }
 function moveToLocal() {
-  mapCtx.moveToLocation({
+  mapData.mapCtx.moveToLocation({
     latitude: latitude.value,
     longitude: longitude.value,
   });
@@ -102,7 +103,7 @@ async function onRegionchange(e: MapOnRegionchangeEvent) {
   if (typeof props.mapProps.onRegionchange == "function")
     props.mapProps.onRegionchange(e);
   if (e.causedBy !== "scale") return;
-  const res = await uniApiToPromise(mapCtx.getScale);
+  const res = await uniApiToPromise(mapData.mapCtx.getScale);
   changeScale(res.scale);
 }
 
@@ -176,117 +177,100 @@ const rightIconList = computed<IconItem[]>(() => {
 <template>
   <view class="CoMap" :class="{ CoMap__fill: mapData.fill }">
     <slot></slot>
-    <!-- #ifdef APP -->
-    <cover-view
-      class="controls__top"
-      v-show="mapData.fill"
-      :style="{ height: layoutInfo.topHeight }"
-    >
-      <slot name="top"></slot>
-    </cover-view>
-    <cover-view
-      class="controls__bottom"
-      v-show="mapData.fill"
-      :style="{ height: layoutInfo.bottomHeight }"
-    >
-      <slot name="bottom"></slot>
-    </cover-view>
-    <!-- #endif -->
-    <!-- #ifndef APP -->
-    <view
-      class="controls__top"
-      v-show="mapData.fill && $slots.top"
-      :style="{ height: layoutInfo.topHeight }"
-    >
-      <slot name="top"></slot>
-    </view>
-    <view
-      class="controls__bottom"
-      v-show="mapData.fill"
-      :style="{ height: layoutInfo.bottomHeight }"
-    >
-      <slot name="bottom"></slot>
-    </view>
-    <!-- #endif -->
 
-    <cover-view
+    <envCoverView
+      class="controls__top"
+      :show="mapData.fill"
+      :style="{ height: layoutInfo.topHeight }"
+    >
+      <slot name="top"></slot>
+    </envCoverView>
+    <envCoverView
+      class="controls__bottom"
+      :show="mapData.fill"
+      :style="{ height: layoutInfo.bottomHeight }"
+    >
+      <slot name="bottom"></slot>
+    </envCoverView>
+
+    <envCoverView
       class="controls__left"
       :style="{
         top: layoutInfo.topHeight,
         bottom: layoutInfo.bottomHeight,
       }"
     >
-      <cover-view
+      <envCoverView
         v-for="(item, index) in leftIconList"
         :key="index"
         class="controls_iconBox"
         :class="item.class"
         :style="[item.style]"
       >
-        <cover-image
+        <envCoverImage
           @tap="item.tap"
           class="controls_iconImg"
           :src="item.iconPath"
-        ></cover-image>
-      </cover-view>
-    </cover-view>
-    <cover-view
+        ></envCoverImage>
+      </envCoverView>
+    </envCoverView>
+    <envCoverView
       class="controls__right"
       :style="{
         top: layoutInfo.topHeight,
         bottom: layoutInfo.bottomHeight,
       }"
     >
-      <cover-view
+      <envCoverView
         v-for="(item, index) in rightIconList"
         :key="index"
         class="controls_iconBox"
         :class="item.class"
         :style="[item.style]"
       >
-        <cover-image
+        <envCoverImage
           @tap="item.tap"
           class="controls_iconImg"
           :src="item.iconPath"
-        ></cover-image>
-      </cover-view>
-    </cover-view>
+        ></envCoverImage>
+      </envCoverView>
+    </envCoverView>
     <map
       v-show="showMap"
       :id="MAP_ID"
       :latitude="latitude"
       :longitude="longitude"
       :scale="mapData.scale"
-      :theme="mapPropsDef(mapProps.theme)"
-      :min-scale="minScale"
-      :max-scale="maxScale"
-      :layer-style="mapPropsDef(mapProps.layerStyle, 1)"
-      :markers="mapPropsDef(mapProps.markers)"
-      :polyline="mapPropsDef(mapProps.polyline)"
-      :circles="mapPropsDef(mapProps.circles)"
-      :polygons="mapPropsDef(mapProps.polygons)"
-      :controls="mapPropsDef(mapProps.controls)"
-      :include-points="mapPropsDef(mapProps.includePoints)"
-      :enable-3d="mapPropsDef(mapProps.enable3D, true)"
-      :show-compass="mapPropsDef(mapProps.showCompass, false)"
-      :enable-zoom="mapPropsDef(mapProps.enableZoom, true)"
-      :enable-scroll="mapPropsDef(mapProps.enableScroll, true)"
-      :enable-rotate="mapPropsDef(mapProps.enableRotate, false)"
-      :enable-overlooking="mapPropsDef(mapProps.enableOverlooking, false)"
-      :enable-satellite="mapPropsDef(mapProps.enableSatellite, false)"
-      :enable-traffic="mapPropsDef(mapProps.enableTraffic, false)"
-      :enable-poi="mapPropsDef(mapProps.enablePoi, true)"
-      :enable-building="mapPropsDef(mapProps.enableBuilding, true)"
-      :show-location="mapPropsDef(mapProps.showLocation, false)"
-      :enable-indoor-map="mapPropsDef(mapProps.enableIndoorMap, true)"
-      :onMarkertap="mapProps.onMarkertap"
-      :onLabeltap="mapProps.onLabeltap"
-      :onCallouttap="mapProps.onCallouttap"
-      :onControltap="mapProps.onControltap"
-      :onTap="mapProps.onTap"
-      :onUpdated="mapProps.onUpdated"
-      :onAnchorpointtap="mapProps.onAnchorpointtap"
-      :onPoitap="mapProps.onPoitap"
+      :theme="$mapProps.theme"
+      :min-scale="$mapProps.minScale"
+      :max-scale="$mapProps.maxScale"
+      :layer-style="$mapProps.layerStyle"
+      :markers="$mapProps.markers"
+      :polyline="$mapProps.polyline"
+      :circles="$mapProps.circles"
+      :polygons="$mapProps.polygons"
+      :controls="$mapProps.controls"
+      :include-points="$mapProps.includePoints"
+      :enable-3d="$mapProps.enable3D"
+      :show-compass="$mapProps.showCompass"
+      :enable-zoom="$mapProps.enableZoom"
+      :enable-scroll="$mapProps.enableScroll"
+      :enable-rotate="$mapProps.enableRotate"
+      :enable-overlooking="$mapProps.enableOverlooking"
+      :enable-satellite="$mapProps.enableSatellite"
+      :enable-traffic="$mapProps.enableTraffic"
+      :enable-poi="$mapProps.enablePoi"
+      :enable-building="$mapProps.enableBuilding"
+      :show-location="$mapProps.showLocation"
+      :enable-indoor-map="$mapProps.enableIndoorMap"
+      @onMarkertap="$mapProps.onMarkertap"
+      @onLabeltap="$mapProps.onLabeltap"
+      @onCallouttap="$mapProps.onCallouttap"
+      @onControltap="$mapProps.onControltap"
+      @onTap="$mapProps.onTap"
+      @onUpdated="$mapProps.onUpdated"
+      @onAnchorpointtap="$mapProps.onAnchorpointtap"
+      @onPoitap="$mapProps.onPoitap"
       @regionchange="onRegionchange"
     >
     </map>
@@ -339,7 +323,6 @@ const rightIconList = computed<IconItem[]>(() => {
   .controls__left,
   .controls__right {
     display: flex;
-    gap: 12px;
     align-content: center;
     align-items: center;
     justify-content: center;
