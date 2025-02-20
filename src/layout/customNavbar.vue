@@ -25,12 +25,13 @@ const isCustomNavbar = computed(
       style="height: var(--status-bar-height)"
     ></view>
     <view :style="{ ...defaultStyle }" class="navbar flex-A-C">
-      <uv-icon
+      <CoIcon
+        class="customNavbar_backIcon MR-xs"
         color="inherit"
         size="1em"
         v-if="!routeInfo?.tabbar"
-        @click="router.back()"
-        name="arrow-left"
+        @tap="router.back()"
+        name="cicon-fanhui"
       />
       <view>
         <!-- #ifdef MP-WEIXIN -->
@@ -56,5 +57,8 @@ const isCustomNavbar = computed(
   transition: all 0.3s;
   background-image: var(--C-LG1);
   box-sizing: border-box;
+  .customNavbar_backIcon{
+    display: block;
+  }
 }
 </style>
