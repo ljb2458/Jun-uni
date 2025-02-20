@@ -1,9 +1,3 @@
-<script lang="ts">
-import mpMixin from '@/components/libs/mixin/mpMixin';
-export default {
-  mixins: [mpMixin],
-}
-</script>
 <script lang="ts" setup>
 import { BorderStyle } from "@/components/types";
 const props = withDefaults(
@@ -19,12 +13,12 @@ const props = withDefaults(
   }>(),
   {
     borderStyle: "solid",
-    borderColor: "var(--C-B1-O5)",
+    borderColor: "var(--C-B1-O-5)",
     borderWidth: "2rpx",
     border: true,
     separate: "all",
     separateStyle: "solid",
-    separateColor: "var(--C-B1-O5)",
+    separateColor: "var(--C-B1-O-5)",
     separateWidth: "2rpx",
   }
 );
@@ -74,3 +68,9 @@ const props = withDefaults(
   }
 }
 </style>
+<script lang="ts">
+import mpMixin from "@/components/libs/mixin/mpMixin";
+export default {
+  mixins: [mpMixin],
+};
+</script>

@@ -1,0 +1,84 @@
+{
+  "id": "zui-progress-circle",
+  "displayName": "环形进度条、弧形进度条。可设置弧和进度方向。非 canvas 实现，简单体积小",
+  "version": "0.1.13",
+  "description": "一款高度自定义的环形（弧形）进度条组件，可自由设置弧形和起始位置，可设置进度条动画方向，可设置图片纹理增强进度条表现能力。",
+  "keywords": [
+    "进度条",
+    "环形",
+    "圆形"
+],
+  "repository": "",
+  "engines": {
+    "HBuilderX": "^3.4.15"
+  },
+  "dcloudext": {
+    "type": "component-vue",
+    "sale": {
+      "regular": {
+        "price": "0.00"
+      },
+      "sourcecode": {
+        "price": "0.00"
+      }
+    },
+    "contact": {
+      "qq": ""
+    },
+    "declaration": {
+      "ads": "无",
+      "data": "无",
+      "permissions": "无"
+    },
+    "npmurl": ""
+  },
+  "uni_modules": {
+    "dependencies": [],
+    "encrypt": [],
+    "platforms": {
+      "cloud": {
+        "tcb": "y",
+        "aliyun": "y",
+        "alipay": "n"
+      },
+      "client": {
+        "Vue": {
+          "vue2": "y",
+          "vue3": "y"
+        },
+        "App": {
+          "app-vue": "y",
+          "app-nvue": "n"
+        },
+        "H5-mobile": {
+          "Safari": "y",
+          "Android Browser": "y",
+          "微信浏览器(Android)": "y",
+          "QQ浏览器(Android)": "y"
+        },
+        "H5-pc": {
+          "Chrome": "y",
+          "IE": "n",
+          "Edge": "y",
+          "Firefox": "y",
+          "Safari": "y"
+        },
+        "小程序": {
+          "微信": "y",
+          "阿里": "y",
+          "百度": "u",
+          "字节跳动": "u",
+          "QQ": "y",
+          "钉钉": "u",
+          "快手": "u",
+          "飞书": "y",
+          "京东": "u"
+        },
+        "快应用": {
+          "华为": "u",
+          "联盟": "u"
+        }
+      }
+    }
+  }
+}

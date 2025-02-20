@@ -16,8 +16,8 @@ export function compareArrays<T1 extends any[], T2 extends any[]>(
   arr1: T1,
   arr2: T2,
   callback?: (
-    a: { value: TupleToUnion<T1>; index: number; array: T1 },
-    b: { value: TupleToUnion<T2>; index: number; array: T2 }
+    a: { value: ArrayToUnion<T1>; index: number; array: T1 },
+    b: { value: ArrayToUnion<T2>; index: number; array: T2 }
   ) => boolean,
   sort = true
 ) {

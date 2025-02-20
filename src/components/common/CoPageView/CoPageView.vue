@@ -1,15 +1,11 @@
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>
 <script lang="ts" setup>
 import notify from "@/layout/notify.vue";
-import modal from "@/layout/modal.vue";
-import { config } from "@/layout/setModal";
 import customNavbar from "@/layout/customNavbar.vue";
 import { onPageScroll } from "@dcloudio/uni-app";
+import { defaultStyle } from "@/layout/setCustomNavbar";
+import { getCurrentRouteInfo } from "@/utils/rewriteUni";
+
+const routeInfo = getCurrentRouteInfo();
 
 const props = withDefaults(
   defineProps<{
@@ -40,8 +36,17 @@ if (props.onPageScroll)
 </script>
 
 <template>
-  <view class="CoPageView">
-    <ReImage
+  <view
+    class="CoPageView"
+    :style="{
+      '--layout-navbar-height':
+        useCustomNavbar &&
+        `calc(var(--status-bar-height) + ${
+          defaultStyle.height || 0
+        } + var(--gap-xs))`,
+    }"
+  >
+    <uv-image
       class="CoPageView__bgImg"
       v-if="bgImg"
       :src="bgImg"
@@ -55,16 +60,15 @@ if (props.onPageScroll)
       :useCustomNavbar="useCustomNavbar"
       :useSafetyTop="useSafetyTop"
     >
-      <template v-if="$slots.customNavbar" #default="{ slotProps }">
-        <slot :slotProps="slotProps" name="customNavbar"></slot>
-      </template>
+      <slot :slotProps="routeInfo!" name="customNavbar"></slot>
+      <view v-if="!$slots.customNavbar" class="flex-1">
+        {{ routeInfo?.style?.navigationBarTitleText }}
+      </view>
     </customNavbar>
     <notify v-if="useNotify">
       <slot name="notify"></slot>
     </notify>
-    <modal v-if="useModal">
-      <slot name="modal">{{ config.content }}</slot>
-    </modal>
+
     <slot></slot>
     <view
       v-if="props.useSafetyBottom"
@@ -91,3 +95,9 @@ if (props.onPageScroll)
   color: var(--C-T1);
 }
 </style>
+<script lang="ts">
+import mpMixin from "@/components/libs/mixin/mpMixin";
+export default {
+  mixins: [mpMixin],
+};
+</script>

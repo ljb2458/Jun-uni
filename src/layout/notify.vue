@@ -7,8 +7,8 @@
 import { show, param } from "./setNotify";
 </script>
 <template>
-  <CNotify :="param" v-model:show="show">
+  <CoNotify :="param" v-model:show="show">
     <slot></slot>
-  </CNotify>
+  </CoNotify>
 </template>
 <style lang="less" scoped></style>

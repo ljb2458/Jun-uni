@@ -1,9 +1,3 @@
-<script lang="ts">
-import mpMixin from '@/components/libs/mixin/mpMixin';
-export default {
-  mixins: [mpMixin],
-}
-</script>
 <script lang="ts" setup>
 const props = withDefaults(
   defineProps<{
@@ -19,12 +13,12 @@ const props = withDefaults(
 </script>
 
 <template>
-  <i
+  <view
     class="CIcon"
     :class="name"
     :style="{ fontSize: props.size, color: props.color }"
   >
-  </i>
+  </view>
 </template>
 
 <style lang="scss" scoped>
@@ -36,3 +30,9 @@ const props = withDefaults(
   -moz-osx-font-smoothing: grayscale;
 }
 </style>
+<script lang="ts">
+import mpMixin from "@/components/libs/mixin/mpMixin";
+export default {
+  mixins: [mpMixin],
+};
+</script>

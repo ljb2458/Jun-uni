@@ -1,4 +1,4 @@
-import { getSystemInfoCache } from "@/package/js/rewriteUni";
+import { getSystemInfoCache } from "@/utils/rewriteUni";
 import type { CSSProperties } from "vue";
 import { unitPx } from "@/utils/tools/css";
 export const defaultStyle = reactive<CSSProperties>({});
@@ -9,7 +9,7 @@ export function computedDefaultStyle() {
   const info = uni.getMenuButtonBoundingClientRect();
   const top = info.top / 2;
   defaultStyle.paddingTop = unitPx(top);
-  defaultStyle.height = defaultStyle.lineHeight = unitPx(info.height + top);
+  defaultStyle.height = unitPx(info.height + top);
   if (screenWidth) defaultStyle.paddingRight = unitPx(screenWidth - info.left);
   else defaultStyle.paddingRight = unitPx(info.width);
   //#endif

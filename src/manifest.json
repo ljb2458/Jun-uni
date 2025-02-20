@@ -1,5 +1,5 @@
 {
-    "name" : "test",
+    "name" : "房屋安全服务",
     "appid" : "__UNI__2AFAB5C",
     "description" : "",
     "versionName" : "1.0.0",
@@ -54,17 +54,23 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "wxf6d74a8200e1fe2d",
+        "appid" : "wx43317249c889ad31",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : false,
+            "minified" : true
         },
         "usingComponents" : true,
-        "mergeVirtualHostAttributes":true
+        "mergeVirtualHostAttributes" : true,
+        "permission" : {
+            "scope.userLocation" : {
+                "desc" : "获取您的位置以便更好的为您提供服务"
+            }
+        },
+        "requiredPrivateInfos" : [ "getLocation", "chooseLocation" ]
     },
     "mp-alipay" : {
         "usingComponents" : true,
-        "mergeVirtualHostAttributes":true
-
+        "mergeVirtualHostAttributes" : true
     },
     "mp-baidu" : {
         "usingComponents" : true

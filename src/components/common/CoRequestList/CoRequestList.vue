@@ -1,67 +1,52 @@
-<script lang="ts">
-import mpMixin from '@/components/libs/mixin/mpMixin';
-export default {
-  mixins: [mpMixin],
-}
-</script>
-<script lang="ts" setup generic="F extends Api">
-import useRequestList, {
-  GetRequestBefore,
-  Api,
-  GetParams,
-  State,
-  GetApiData, GetApiRes
+<script lang="ts" setup generic="F extends RequestList.Api">
+import {
+  useRequestList,
+  RequestList,
 } from "@/components/common/CoRequestList/useRequestList";
-import CList from "../CList/CList.vue";
-import { useCListRef, LoadParam } from "../CoList/CoList.vue";
+import CoList from "../CoList/CoList.vue";
+import { Instance as CoListInstance, LoadParam } from "../CoList/CoList.vue";
 import CRequestList from "./CoRequestList.vue";
-
-type CListProps = ComponentPropsType<typeof CList>;
-type InstanceTemp = GenericComponentExports<typeof CRequestList>;
-
-export type Instance<F extends Api> = Omit<InstanceTemp, "data" | "res"> & {
-  data: GetApiData<F>;
-  res: GetApiRes<F> | undefined;
+export type Instance<F extends RequestList.Api> = Omit<
+  GenericComponentExports<typeof CRequestList>,
+  "data" | "res"
+> & {
+  data: RequestList.ApiData<F>;
+  res: RequestList.ApiRes<F> | undefined;
 };
-
-const props = withDefaults(
-  defineProps<{
-    api: F;
-    requestBefore?: GetRequestBefore<F>;
-    extraParams?: any[];
-    isOnePage?: boolean;
-    setupLoad?: boolean;
-    defaultParams?: GetParams<F>;
-    /**上拉触底事件，一般可不传 */
-    onReachBottom?: CListProps["onReachBottom"];
-    /**下拉刷新事件，一般可不传 */
-    onPullDownRefresh?: (callback: Function) => any;
-    /**下拉刷新完成回调，默认uni.stopPullDownRefresh(关闭页面下拉刷新) */
-    pullDownRefreshEnd?: (v?: State) => void;
-    /**解决微信小程序v-for循环无法获取ref的问题 */
-    _ref?: Ref;
-    minHeight?: string;
-  }>(),
-  {
-    setupLoad: true,
-    minHeight: "70vh",
-  }
-);
-const pullDownRefresh = props.onPullDownRefresh || onPullDownRefresh;
-const pullDownRefreshEnd = props.pullDownRefreshEnd || uni.stopPullDownRefresh;
-pullDownRefresh(pullDownRefreshRequset);
+type CoListProps = ComponentPropsType<typeof CoList>;
+interface Props {
+  api: F;
+  requestBefore?: RequestList.RequestBefore<F>;
+  extraParams?: any[];
+  isOnePage?: boolean;
+  setupLoad?: boolean;
+  params?: RequestList.ApiParams<F>;
+  /**上拉触底事件，一般可不传 */
+  onReachBottom?: CoListProps["onReachBottom"];
+  /**下拉刷新事件，一般可不传 */
+  onPullDownRefresh?: (callback: Fun) => any;
+  /**下拉刷新完成回调，默认uni.stopPullDownRefresh(关闭页面下拉刷新) */
+  pullDownRefreshEnd?: (v?: RequestList.State) => void;
+  /**解决微信小程序v-for循环无法获取ref的问题 */
+  _ref?: any;
+  minHeight?: string;
+}
+const props = withDefaults(defineProps<Props>(), {
+  minHeight: "70vh",
+  setupLoad: true,
+});
+(props.onPullDownRefresh || onPullDownRefresh)(pullDownRefreshRequset);
 /**下拉刷新请求 */
 async function pullDownRefreshRequset() {
   if (!(await isVisible())) return;
   if (state.value.type === "loading") return;
   const res = await rerequest();
-  pullDownRefreshEnd(res);
+  (props.pullDownRefreshEnd || uni.stopPullDownRefresh)(res);
 }
 function load(e: LoadParam) {
   if (e.reload) return rerequest();
   request();
 }
-
 const {
   res,
   data,
@@ -73,10 +58,10 @@ const {
   stateLoading,
   stateNull,
   stateNext,
-} = useRequestList(props.api, {
+} = useRequestList(props.api, props.isOnePage, {
   requestBefore: props.requestBefore,
-  extraParams: props.extraParams,
-  isOnePage: props.isOnePage,
+  returnExtraParams: () => props.extraParams || [],
+  returnReq: () => props.params || {},
 });
 const _expose = {
   res,
@@ -99,7 +84,7 @@ onUnmounted(() => {
   if (props._ref) props._ref.value = null;
 });
 
-const CListRef = useCListRef();
+const CListRef = ref<CoListInstance>();
 function activeLoad() {
   return CListRef.value?.activeLoad();
 }
@@ -117,12 +102,31 @@ function isVisible() {
 }
 </script>
 <template>
-  <CList class="CRequestList" ref="CListRef" :status="state.type" :message="state.message"
-    :onReachBottom="onReachBottom" @load="load" :setup-load="setupLoad" :min-height="props.minHeight">
-    <slot>
-      <slot v-for="(item, index) in data" :item="item" :index="index" name="item">
+  <CoList
+    class="CRequestList"
+    ref="CListRef"
+    :status="state.type"
+    :message="state.message"
+    :onReachBottom="onReachBottom"
+    @load="load"
+    :setup-load="setupLoad"
+    :min-height="props.minHeight"
+  >
+    <slot :data="data" :res="res">
+      <slot
+        v-for="(item, index) in data"
+        :item="item"
+        :index="index"
+        name="item"
+      >
       </slot>
     </slot>
-  </CList>
+  </CoList>
 </template>
 <style lang="scss" scoped></style>
+<script lang="ts">
+import mpMixin from "@/components/libs/mixin/mpMixin";
+export default {
+  mixins: [mpMixin],
+};
+</script>

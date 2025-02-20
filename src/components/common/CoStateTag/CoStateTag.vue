@@ -1,70 +1,50 @@
-<!--
- * 介绍:状态标签
--->
-<script lang="ts">
-import mpMixin from '@/components/libs/mixin/mpMixin';
-export default {
-  mixins: [mpMixin],
-}
-</script>
-<script lang="ts" setup>
+<script setup lang="ts">
 import type { StyleValue } from "vue";
+import { isStateByBin } from "@/utils/tools";
 
-const className = {
-  bg: "CStateTag__bg",
-  text: "CStateTag__text",
-};
-
-const props = withDefaults(
-  defineProps<{
-    enum?: CStateTagEmun;
-    value?: string | number;
-    mode?: keyof typeof className;
-  }>(),
-  {
-    mode: "bg",
-  }
-);
-const current = computed(() => {
-  return props.enum?.filter((val) => val.value == props.value)[0];
-});
-export interface CStateTagEmunItem {
-  /**渲染文本 */
-  text: string | number;
-  /**类名 */
-  class?: string;
-  /**对应的值 */
-  value: string | number;
-  /**样式 */
+export interface StateEnumItem extends AnyObject {
+  state: StrNumber;
+  label?: any;
+  class?: any;
   style?: StyleValue;
 }
-
-export type CStateTagEmun = Array<CStateTagEmunItem>;
-
+export interface StateEnum extends Array<StateEnumItem> {}
+const props = defineProps<{
+  state: StrNumber;
+  stateEnum: StateEnum;
+  defaultIndex?: StrNumber;
+  isFun?: Fun<[StrNumber, StrNumber], boolean>;
+}>();
+const current = computed<StateEnumItem | undefined>(() => {
+  const item = props.stateEnum.find((item) =>
+    (props.isFun || isStateByBin)(props.state, item.state)
+  );
+  if (!item) {
+    return props.stateEnum.at(Number(props.defaultIndex));
+  }
+  return item;
+});
 </script>
 
 <template>
-  <text :style="(current?.style as any)" :class="[className[props.mode || 'bg'], current?.class]" class="CStateTag">
-    <slot :="{ ...current }"> {{ current?.text }} </slot>
-  </text>
+  <view
+    class="CoStateTag"
+    :class="current?.class"
+    :style="(current?.style as any)"
+  >
+    <slot :slotProps="current">{{ current?.label }}</slot>
+  </view>
 </template>
 
-<style lang="less" scoped>
-.CStateTag {
+<style lang="scss" scoped>
+.CoStateTag {
   display: inline-block;
-  vertical-align: middle;
-  font-size: var(--F-S-sm);
-  padding: 0.3em 1em;
-}
-
-.CStateTag__bg {
-  color: var(--C-B1);
-  border-radius: 999rem;
-  text-align: center;
-  background-color: var(--C-M1);
-}
-
-.CStateTag__text {
-  text-align: center;
 }
 </style>
+<script lang="ts">
+import mpMixin from "@/components/libs/mixin/mpMixin";
+import { extend } from "lodash";
+export default {
+  mixins: [mpMixin],
+};
+</script>

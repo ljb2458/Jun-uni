@@ -22,21 +22,43 @@ export function queryToObj(url: string) {
   return obj;
 }
 /**
- * @description: 对象转query串
- * @param {*} obj
- * @param {*} noFilterEmpty 默认false 去除空值再拼接字符串
- * @return {*}
+ * 过滤对象中的空值（null、undefined、空字符串）
+ * @param obj 需要过滤的对象
+ * @returns 过滤后的对象
  */
-export function objToQuery(obj: object, noFilterEmpty?: boolean): string {
-  if (!obj) return "";
-
-  let newObj = { ...obj };
-  if (!noFilterEmpty) {
-    newObj = filterObject(newObj);
-  }
-  return new URLSearchParams(Object.entries(newObj)).toString();
+export function filterEmptyValues(
+  obj: Record<string, any>
+): Record<string, any> {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([_, value]) => {
+      return value !== null && value !== undefined && value !== "";
+    })
+  );
 }
 
+/**
+ * 将对象转换为查询字符串
+ * @param obj 需要转换的对象
+ * @param noFilterEmpty 是否保留空值，默认 false（去除空值）
+ * @returns 转换后的查询字符串
+ */
+export function objToQuery(
+  obj: Record<string, any>,
+  noFilterEmpty: boolean = false
+): string {
+  if (!obj || typeof obj !== "object") {
+    return "";
+  }
+
+  // 如果需要过滤空值
+  const filteredObj = noFilterEmpty ? obj : filterEmptyValues(obj);
+
+  return Object.entries(filteredObj)
+    .map(([key, value]) => {
+      return `${key}=${value}`;
+    })
+    .join("&");
+}
 type Callback<D extends object = AnyObject> = (
   value: ObjectToUnion<D>,
   key: keyof D

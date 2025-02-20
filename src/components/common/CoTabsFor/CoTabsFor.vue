@@ -1,21 +1,21 @@
 <!--
  * 介绍:tabs循环展示面板
 -->
-<script lang="ts">
-import mpMixin from '@/components/libs/mixin/mpMixin';
-export default {
-  mixins: [mpMixin],
-}
-</script>
-<script lang="ts" setup generic="Item extends CTabsForOptionsItem">
+
+<script lang="ts" setup generic="Item extends CoTabsForOptionsItem">
+//@ts-ignore
+import uvTabs from "@climblee/uv-ui/components/uv-tabs/uv-tabs.vue";
+//@ts-ignore
+import uvSticky from "@climblee/uv-ui/components/uv-sticky/uv-sticky.vue";
 import { unitPercent, unitPx } from "@/utils/tools/css";
-import { getRect, GetRectRes } from "@/package/js/rewriteUni";
+import { getRect, GetRectRes } from "@/utils/rewriteUni";
 import { CSSProperties } from "vue";
 import dayjs from "dayjs";
-import { CTabsForOptionsItem } from "./index";
 import { generateUUID } from "@/utils/tools/generate";
 import type { StyleValue } from "vue";
-
+import type CoTabsFor from "./CoTabsFor.vue";
+export interface CoTabsForOptionsItem extends AnyObject {}
+export type Instance = GenericComponentExports<typeof CoTabsFor>;
 
 const props = withDefaults(
   defineProps<{
@@ -32,7 +32,7 @@ const props = withDefaults(
     lazy?: boolean;
     //----tabs组件开始---
     /**标题options中的标题键名 */
-    titleKeyName?: keyof TabsListItem;
+    titleKeyName?: string;
     /**滑块颜色 */
     titleLineColor?: string;
     titleLineWidth?: StrNumber;
@@ -54,15 +54,16 @@ const props = withDefaults(
     gap: "var(--gap-md)",
     lazy: true,
     titleKeyName: "name",
+    titleScrollable: false,
   }
 );
 
-type TabsListItem = Item & { load: boolean; key: StrNumber; index: number };
+type TabsListItem = Item & { load: boolean; slotName: string; index: number };
 const tabsList = computed<Array<TabsListItem>>(() =>
-  props.options.map((v, key) => ({
+  props.options.map((v, index) => ({
     ...v,
-    key: v.key || key,
-    index: key,
+    slotName: v.slotName || `index-${index}`,
+    index,
     load: !props.lazy,
   }))
 );
@@ -79,10 +80,10 @@ watch(
   }
 );
 const contentSwiperItemStyle = reactive<CSSProperties>({
-  "--CTabsFor-x": "0%",
+  "--CoTabsFor-x": "0%",
 });
 const contentItemClass = reactive({
-  CTabsFor_item__transit: false,
+  CoTabsFor_item__transit: false,
 });
 const state = reactive({
   /**是否静止中 */
@@ -98,12 +99,12 @@ let skewingY = 0;
 let startTime = 0;
 /**取消本次滑动? */
 let abandon = false;
-let CTabsForId = `CTabsFor${generateUUID()}`;
+let CoTabsForId = `CoTabsFor${generateUUID()}`;
 /**swiper节点信息 */
 let nodeInfo: GetRectRes;
-/**更新CTabsFor节点信息 */
+/**更新CoTabsFor节点信息 */
 function updateNodeInfo() {
-  getRect(`#${CTabsForId}`).then((res) => {
+  getRect(`#${CoTabsForId}`).then((res) => {
     nodeInfo = res;
   });
 }
@@ -139,7 +140,7 @@ function onTouchmove(e: TouchEvent) {
   //*右滑边界限制
   if (isRightTo() && !(currentIndex.value + 1 < props.options.length)) return;
   state.isStatic = false;
-  contentSwiperItemStyle["--CTabsFor-x"] = unitPercent(percent);
+  contentSwiperItemStyle["--CoTabsFor-x"] = unitPercent(percent);
 }
 /**触摸中断 */
 function onTouchcancel(e: TouchEvent) {
@@ -196,12 +197,12 @@ function isLeftTo() {
 let transitTimeout: NodeJS.Timeout;
 /**
  * * 前往swiper页
- * @param key 当前key
+ * @param key 当前Title
  */
-function swiperTo(key: StrNumber = currentIndex.value) {
+function swiperToByTitle(title: StrNumber = currentIndex.value) {
   if (transitTimeout) clearTimeout(transitTimeout);
   for (let k in tabsList.value) {
-    if (tabsList.value[k].key === key) {
+    if (tabsList.value[k][props.titleKeyName] === title) {
       swiperToByIndex(Number(k));
       break;
     }
@@ -209,19 +210,24 @@ function swiperTo(key: StrNumber = currentIndex.value) {
 }
 function swiperToByIndex(index: number) {
   currentIndex.value = index;
-  contentItemClass.CTabsFor_item__transit = true;
+  contentItemClass.CoTabsFor_item__transit = true;
   skewingX = 0;
   skewingY = 0;
   startX = 0;
   startY = 0;
-  contentSwiperItemStyle["--CTabsFor-x"] = unitPercent(0 - index);
+  contentSwiperItemStyle["--CoTabsFor-x"] = unitPercent(0 - index);
   //*定时清除过渡
   transitTimeout = setTimeout(() => {
-    contentItemClass.CTabsFor_item__transit = false;
+    contentItemClass.CoTabsFor_item__transit = false;
     state.isStatic = true;
   }, 200);
 }
-defineExpose({ swiperTo, swiperToByIndex, updateNodeInfo, currentIndex });
+defineExpose({
+  swiperToByTitle,
+  swiperToByIndex,
+  updateNodeInfo,
+  currentIndex,
+});
 const platformOffsetTop = computed(() => {
   let offsetTop = Number(props.offsetTop);
   if (isNaN(offsetTop)) offsetTop = 0;
@@ -234,60 +240,60 @@ const platformOffsetTop = computed(() => {
 </script>
 
 <template>
-  <view :style="{ '--gap': gap }" :id="CTabsForId" class="CTabsFor">
-    <Rsticky
+  <view :style="{ '--gap': gap }" :id="CoTabsForId" class="CoTabsFor">
+    <uv-sticky
       :bg-color="sticky ? 'var(--C-B1)' : ''"
       :style="stickyStyle"
-      class="CTabsFor_title"
+      class="CoTabsFor_title"
       :disabled="!sticky"
       :offset-top="offsetTop"
       :customNavHeight="platformOffsetTop"
     >
-      <view class="CTabsFor_title-top">
+      <view class="CoTabsFor_title-top">
         <slot name="title-top"></slot>
       </view>
-      <Rtabs
-        class="CTabsFor_title-content"
+      <uv-tabs
+        class="CoTabsFor_title-content"
         :current="currentIndex"
-        :list="(tabsList as any)"
+        :list="tabsList"
         :keyName="(titleKeyName as any)"
         :lineColor="titleLineColor"
         :lineWidth="titleLineWidth"
         :lineHeight="titleLineHeight"
         :lineBgSize="titleLineBgSize"
-        :itemStyle="titleItemStyle"
-        :activeStyle="titleActiveStyle"
-        :inactiveStyle="titleInactiveStyle"
+        :itemStyle="(titleItemStyle as any)"
+        :activeStyle="(titleActiveStyle as any)"
+        :inactiveStyle="(titleInactiveStyle as any)"
         :scrollable="titleScrollable"
         @change="(e:any) => swiperToByIndex(e.index)"
       >
         <template #right>
           <slot name="title-right"></slot>
         </template>
-      </Rtabs>
-      <view class="CTabsFor_title-bottom">
-        <slot name="title-bottom"> </slot
-      ></view>
-    </Rsticky>
+      </uv-tabs>
+      <view class="CoTabsFor_title-bottom">
+        <slot name="title-bottom"> </slot>
+      </view>
+    </uv-sticky>
     <!-- 内容部分 -->
     <view
       @touchmove="onTouchmove"
       @touchcancel="onTouchcancel"
       @touchend="onTouchend"
       @touchstart="onTouchstart"
-      class="CTabsFor_item-wrap"
+      class="CoTabsFor_item-wrap"
     >
       <view
         :class="{
           ...contentItemClass,
-          CTabsFor_item__hiddle: currentSwiper !== tab && state.isStatic,
+          CoTabsFor_item__hiddle: currentSwiper !== tab && state.isStatic,
         }"
         :style="{ ...contentSwiperItemStyle }"
         v-for="tab in tabsList"
         :key="tab.key"
-        class="CTabsFor_item"
+        class="CoTabsFor_item"
       >
-        <view class="CTabsFor_item_content">
+        <view class="CoTabsFor_item_content">
           <slot
             v-if="tab.load"
             name="default"
@@ -302,35 +308,41 @@ const platformOffsetTop = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-.CTabsFor {
+.CoTabsFor {
   margin: 0 calc(0px - var(--gap));
-  .CTabsFor_title {
+  .CoTabsFor_title {
     padding-left: var(--gap);
     padding-right: var(--gap);
-    // .CTabsFor_title-top,
-    // .CTabsFor_title-bottom {
+    // .CoTabsFor_title-top,
+    // .CoTabsFor_title-bottom {
     // }
   }
 
-  .CTabsFor_item-wrap {
+  .CoTabsFor_item-wrap {
     overflow-x: hidden;
     display: flex;
     width: 100%;
-    .CTabsFor_item {
-      transform: translateX(var(--CTabsFor-x));
+    .CoTabsFor_item {
+      transform: translateX(var(--CoTabsFor-x));
       flex: 0 0 100%;
       width: 100%;
-      .CTabsFor_item_content {
+      .CoTabsFor_item_content {
         margin: 0 var(--gap);
       }
     }
   }
-  .CTabsFor_item__transit {
+  .CoTabsFor_item__transit {
     transition: all 200ms linear;
     overflow: hidden;
   }
-  .CTabsFor_item__hiddle {
+  .CoTabsFor_item__hiddle {
     height: 0;
   }
 }
 </style>
+<script lang="ts">
+import mpMixin from "@/components/libs/mixin/mpMixin";
+export default {
+  mixins: [mpMixin],
+};
+</script>

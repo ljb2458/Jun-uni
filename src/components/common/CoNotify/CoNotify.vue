@@ -1,12 +1,7 @@
 <!--
  * 介绍:顶部消息提示组件
 -->
-<script lang="ts">
-import mpMixin from '@/components/libs/mixin/mpMixin';
-export default {
-  mixins: [mpMixin],
-}
-</script>
+
 <script lang="ts" setup>
 import { ColorTheme } from "@/components/types";
 
@@ -41,7 +36,7 @@ function close() {
 }
 
 let timeout: NodeJS.Timeout | void;
-function autoClose(time: StrNumber) { 
+function autoClose(time: StrNumber) {
   if (timeout) timeout = clearTimeout(timeout);
   const tm = Number(time);
   if (tm <= 0) return;
@@ -87,3 +82,9 @@ function autoClose(time: StrNumber) {
   background-color: var(--C-M1);
 }
 </style>
+<script lang="ts">
+import mpMixin from "@/components/libs/mixin/mpMixin";
+export default {
+  mixins: [mpMixin],
+};
+</script>

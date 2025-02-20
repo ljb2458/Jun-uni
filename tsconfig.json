@@ -3,21 +3,32 @@
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "strict": true,
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "types": ["@dcloudio/types", "uview-plus/types"],
+    "types": [
+      "@dcloudio/types",
+      // wx API 相关的 TypeScript 类型，需要安装 miniprogram-api-typings
+      "miniprogram-api-typings",
+      // 为 uni-ui 组件提供 TypeScript 类型，需要安装 @uni-helper/uni-ui-types
+      "@uni-helper/uni-ui-types",
+      "@ttou/uv-typings/v3"
+    ],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
       "@": ["src"],
       "#/*": ["types/*"],
-      "#": ["types"],
+      "#": ["types"]
     }
+  },
+  "vueCompilerOptions": {
+    // 调整 Volar（Vue 语言服务工具）解析行为，用于为 uni-app 组件提供 TypeScript 类型
+    "plugins": ["@uni-helper/uni-app-types/volar-plugin"]
   },
   "include": [
     "src/**/*.ts",

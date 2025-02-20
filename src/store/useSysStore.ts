@@ -1,10 +1,6 @@
 import { defineStore } from "pinia";
 import { localStorage } from "mp-storage";
-import { apiLaunch } from "@/api/sys";
-import {
-  getSystemInfoCache,
-  getAccountInfoCache,
-} from "@/package/js/rewriteUni";
+import { apiLogin, ApiLogin } from "@/api/sys";
 
 const env = import.meta.env;
 export default defineStore("SysStore", {
@@ -12,26 +8,13 @@ export default defineStore("SysStore", {
   state: initState,
   //*全局函数
   actions: {
-    async launch() {
-      const appId = "wxf6d74a8200e1fe2d";
-      const envVersion = env.DEV ? "develop" : "production";
-      const miniProgram = getAccountInfoCache().miniProgram;
-      const systemInfo = getSystemInfoCache();
-      const appVersion = "3.3.129";
-      const query = "";
-      const referrerInfo = uni.getLaunchOptionsSync().referrerInfo;
-      const path = "pages/home/launcher";
-      const scene = 1001;
-
-      const res = await apiLaunch({
-        appVersion,
-        miniProgram,
-        systemInfo,
-        referrerInfo,
-        query,
-        path,
-        scene,
-      });
+    async login() {
+      const params = {
+        UserName: "123",
+        Password: "123",
+      };
+      const res = await apiLogin(params);
+      return (this.defaHttpHeader = res.data);
     },
   },
   //*计算属性
@@ -45,8 +28,14 @@ export default defineStore("SysStore", {
   ],
 });
 /**state类型定义 */
-interface SysStore {}
+export namespace SysStore {
+  export interface Data {
+    defaHttpHeader: ApiLogin.Res | undefined;
+  }
+}
 /**初始化pinia */
-function initState(): SysStore {
-  return {};
+function initState(): SysStore.Data {
+  return {
+    defaHttpHeader: undefined,
+  };
 }

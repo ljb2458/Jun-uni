@@ -3,7 +3,8 @@
  * @LastEditTime: 2023-07-03 16:12:45
  * 介绍:
  */
-import { HttpRequest } from "@/utils/HttpRequest/HttpRequest";
+import useSysStore from "@/store/useSysStore";
+import { createHttpRequest } from "@/utils/HttpRequest";
 const env = import.meta.env;
 let baseURL = "";
 if (env.VITE_PROXY == "1") {
@@ -11,34 +12,48 @@ if (env.VITE_PROXY == "1") {
 } else {
   baseURL = env.VITE_BASE_URL + env.VITE_API_PREFIX; //配置默认请求地址--无代理
 }
-export const defaHttp = new HttpRequest(
+export const defaHttp = createHttpRequest(
+  {
+    isSuccess(res) {
+      return res?.data?.code === 200;
+    },
+    returnMsg(res) {
+      return res?.data?.message;
+    },
+    returnErrMsg(error) {
+      return error?.errMsg;
+    },
+  },
   {
     baseURL,
-  },
-  {
-    isSuccess: (res) => res?.data?.code === 200,
-    returnFailMsg: (res) => res?.data?.msg,
-    returnSuccessMsg: (res) => res?.data?.msg,
   }
 );
-
-export const launchHttp = new HttpRequest(
-  {
-    baseURL: env.VITE_LAUNCH_URL,
+defaHttp.interceptors.request.use((config) => {
+  const sysStore = useSysStore();
+  config.header = {
+    ...config.header,
+    ...sysStore.defaHttpHeader,
+  };
+  return config;
+});
+defaHttp.interceptors.response.use(
+  (res) => {
+    return res.data;
   },
-  {
-    isSuccess: (res) => !!res,
-    returnFailMsg: (res) => res?.errMsg,
-    returnSuccessMsg: (res) => res?.data,
+  (error) => {
+    return Promise.resolve({
+      code: error.statusCode,
+      message: error.errMsg,
+      isSuccess: false,
+    });
   }
 );
-
 /**请求res类型 */
 export namespace Api {
   export interface Res<T> {
     code: number;
-    msg: string;
-    status: boolean;
+    message: string;
+    isSuccess: boolean;
     data: T;
   }
 }

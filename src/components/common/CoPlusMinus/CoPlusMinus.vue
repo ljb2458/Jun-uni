@@ -1,12 +1,7 @@
 <!--
  * 介绍:正负文字
 -->
-<script lang="ts">
-import mpMixin from '@/components/libs/mixin/mpMixin';
-export default {
-  mixins: [mpMixin],
-}
-</script>
+
 <script lang="ts" setup>
 const props = withDefaults(
   defineProps<{
@@ -86,3 +81,9 @@ const $value = computed(() => {
   padding: 0 0.4em;
 }
 </style>
+<script lang="ts">
+import mpMixin from "@/components/libs/mixin/mpMixin";
+export default {
+  mixins: [mpMixin],
+};
+</script>

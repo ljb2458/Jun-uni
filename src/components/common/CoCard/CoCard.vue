@@ -1,15 +1,8 @@
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>
 <script lang="ts" setup>
 import type { Property } from "csstype";
 const props = withDefaults(
   defineProps<{
     /**背景颜色 */
-    bg?: string | false;
     bgImg?: string;
     shadowColor?: string;
     shadow?: boolean;
@@ -20,7 +13,6 @@ const props = withDefaults(
   {
     shadowColor: "rgba(0,0,0,0.2)",
     shadow: false,
-    bg: "var(--C-B1)",
     bgRepeat: "no-repeat",
     bgSize: "cover",
   }
@@ -30,7 +22,7 @@ const props = withDefaults(
 <template>
   <view
     :style="{
-      background: bgImg ? 'none' : props.bg || 'none',
+      background: bgImg || false,
       '--SHc': props.shadowColor,
       backgroundRepeat: props.bgRepeat,
       backgroundSize: props.bgSize,
@@ -39,7 +31,7 @@ const props = withDefaults(
     class="CoCard"
     :class="{ shadow: shadow }"
   >
-    <ReImage
+    <uv-image
       class="CoCard_bgImg"
       v-if="bgImg"
       :src="bgImg"
@@ -64,3 +56,9 @@ const props = withDefaults(
   }
 }
 </style>
+<script lang="ts">
+import mpMixin from "@/components/libs/mixin/mpMixin";
+export default {
+  mixins: [mpMixin],
+};
+</script>

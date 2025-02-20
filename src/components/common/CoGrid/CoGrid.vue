@@ -1,9 +1,3 @@
-<script lang="ts">
-import mpMixin from '@/components/libs/mixin/mpMixin';
-export default {
-  mixins: [mpMixin],
-}
-</script>
 <script lang="ts" setup>
 import { JustifyItems, AlignItems } from "@/components/types";
 import { filterObject } from "@/utils/tools/object";
@@ -60,19 +54,23 @@ function repeat(number: number, symbol: string) {
 </script>
 
 <template>
-  <view class="CoGrid" :style="filterObject({
-    '--CoGrid-gap': props.gap,
-    '--CoGrid-justifyItems': props.justify,
-    '--CoGrid-alignItems': props.align,
-    '--CoGrid-gridAutoColumns': props.autoCol,
-    '--CoGrid-gridAutoRows': props.autoRow,
-    '--CoGrid-gridAutoFlow': props.autoFlow,
-    columnGap: props.colGap,
-    rowGap: props.rowGap,
-    gridTemplateColumns,
-    gridTemplateRows,
-  })
-    ">
+  <view
+    class="CoGrid"
+    :style="
+      filterObject({
+        '--CoGrid-gap': props.gap,
+        '--CoGrid-justifyItems': props.justify,
+        '--CoGrid-alignItems': props.align,
+        '--CoGrid-gridAutoColumns': props.autoCol,
+        '--CoGrid-gridAutoRows': props.autoRow,
+        '--CoGrid-gridAutoFlow': props.autoFlow,
+        columnGap: props.colGap,
+        rowGap: props.rowGap,
+        gridTemplateColumns,
+        gridTemplateRows,
+      })
+    "
+  >
     <slot></slot>
   </view>
 </template>
@@ -88,3 +86,9 @@ function repeat(number: number, symbol: string) {
   grid-auto-flow: var(--CoGrid-gridAutoFlow);
 }
 </style>
+<script lang="ts">
+import mpMixin from "@/components/libs/mixin/mpMixin";
+export default {
+  mixins: [mpMixin],
+};
+</script>

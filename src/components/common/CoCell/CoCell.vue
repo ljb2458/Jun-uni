@@ -1,9 +1,3 @@
-<script lang="ts">
-import mpMixin from '@/components/libs/mixin/mpMixin';
-export default {
-  mixins: [mpMixin],
-}
-</script>
 <script lang="ts" setup>
 const props = withDefaults(
   defineProps<{
@@ -23,7 +17,7 @@ const props = withDefaults(
     shadow: true,
     bg: "var(--C-B1)",
     mode: "bg",
-    borderColor: "var(--C-B1-O2)",
+    borderColor: "var(--C-B1-O-2)",
   }
 );
 const emit = defineEmits<{
@@ -33,7 +27,7 @@ const emit = defineEmits<{
 
 <template>
   <view
-    @click="(e) => emit('click', e)"
+    @click="(e:any) => emit('click', e)"
     :style="{
       '--Cell-bg': bg,
       '--BOc': props.borderColor,
@@ -41,7 +35,7 @@ const emit = defineEmits<{
     }"
     :class="[
       {
-        'shadow': props.mode === 'bg' && props.shadow,
+        shadow: props.mode === 'bg' && props.shadow,
         CCell__bg: props.mode === 'bg',
         CCell__active: active,
         CCell_border: props.mode === 'border',
@@ -94,3 +88,9 @@ const emit = defineEmits<{
   }
 }
 </style>
+<script lang="ts">
+import mpMixin from "@/components/libs/mixin/mpMixin";
+export default {
+  mixins: [mpMixin],
+};
+</script>

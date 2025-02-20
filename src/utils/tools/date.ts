@@ -7,11 +7,11 @@
 import { fixedNumber } from "./number";
 import dayjs, { Dayjs } from "dayjs";
 /**
- * * 获取倒计时
+ * * 统计时间
  * @param day 当前时间
  * @param timeLimit 期限
  */
-export function getCountdown(
+export function timeStatistics(
   day: string | Date | Dayjs,
   timeLimit: string | Date | Dayjs
 ) {

@@ -1,14 +1,8 @@
-<script lang="ts">
-import mpMixin from '@/components/libs/mixin/mpMixin';
-export default {
-  mixins: [mpMixin],
-}
-</script>
 <script lang="ts" setup>
-import { StateType } from "@/components/common/CoRequestList/useRequestList";
+export type StateType = "next" | "loading" | "end" | "error" | "null";
 const props = withDefaults(
   defineProps<{
-    type: StateType;
+    type?: StateType;
     message?: string;
   }>(),
   {
@@ -27,31 +21,37 @@ function load() {
 }
 </script>
 <template>
-  <view class="CListStatus">
-    <RloadingIcon
+  <view class="CoListStatus">
+    <up-loading-icon
       :show="props.type === 'loading'"
       :text="props.message"
-    ></RloadingIcon>
-    <Rempty
+    ></up-loading-icon>
+    <up-empty
       :show="props.type === 'null'"
-      class="Rempty"
-      margin-top="80px"
+      class="Rempty PT-xl PB-xl"
       :text="props.message"
     >
-    </Rempty>
-    <Rdivider
-      v-show="props.type === 'next'"
-      @click="load"
-      :text="props.message || '继续加载'"
-    />
-    <Rdivider v-show="props.type === 'end'" :text="props.message" />
-    <Cerror
-      v-show="props.type === 'error'"
-      margin-top="80px"
-      :message="props.message"
-      @click-button="reload"
-    >
-    </Cerror>
+    </up-empty>
+    <view v-show="props.type === 'next'">
+      <up-divider @click="load" :text="props.message || '继续加载'" />
+    </view>
+    <view v-show="props.type === 'end'">
+      <up-divider :text="props.message || '没有更多了'" />
+    </view>
+    <view v-show="props.type === 'error'">
+      <CoError
+        class="PT-xl PB-xl"
+        :message="props.message || '出错了！'"
+        @click-button="reload"
+      >
+      </CoError>
+    </view>
   </view>
 </template>
 <style lang="scss" scoped></style>
+<script lang="ts">
+import mpMixin from "@/components/libs/mixin/mpMixin";
+export default {
+  mixins: [mpMixin],
+};
+</script>

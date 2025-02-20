@@ -1,25 +1,13 @@
-<script lang="ts">
-import mpMixin from '@/components/libs/mixin/mpMixin';
-export default {
-  mixins: [mpMixin],
-}
-</script>
 <script lang="ts" setup>
 import { generateUUID } from "@/utils/tools/generate";
-import { isNodeVisible } from "@/package/js/rewriteUni";
-import { StateType } from "@/components/common/CoRequestList/useRequestList";
-import CList from "./CList.vue";
+import { isNodeVisible } from "@/utils/rewriteUni";
+import type CoList from "./CoList.vue";
+import { StateType } from "@/components/common/CoListStatus/CoListStatus.vue";
 
 export interface LoadParam {
   reload: boolean;
 }
-export type Instance = InstanceType<typeof CList>
-
-export function useCListRef() {
-  return ref<Instance>();
-}
-
-
+export type Instance = InstanceType<typeof CoList>;
 const props = withDefaults(
   defineProps<{
     /**列表状态 */
@@ -73,7 +61,19 @@ defineExpose({ activeLoad, activeRelad, load, reload, isVisible });
 <template>
   <view :style="{ minHeight: props.minHeight }" :id="CListId" class="CList">
     <slot></slot>
-    <CListStatus class="MT-md" @load="load" @reload="reload" :type="props.status" :message="props.message" />
+    <CoListStatus
+      class="MT-md"
+      @load="load"
+      @reload="reload"
+      :type="props.status"
+      :message="props.message"
+    />
   </view>
 </template>
 <style lang="scss" scoped></style>
+<script lang="ts">
+import mpMixin from "@/components/libs/mixin/mpMixin";
+export default {
+  mixins: [mpMixin],
+};
+</script>

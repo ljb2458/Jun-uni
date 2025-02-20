@@ -1,9 +1,3 @@
-<script lang="ts">
-import mpMixin from '@/components/libs/mixin/mpMixin';
-export default {
-  mixins: [mpMixin],
-}
-</script>
 <script lang="ts" setup>
 import { _require } from "@/utils/tools";
 
@@ -11,7 +5,6 @@ const props = withDefaults(
   defineProps<{
     message?: string;
     showButton?: boolean;
-    marginTop?: string;
   }>(),
   {
     showButton: true,
@@ -25,12 +18,12 @@ function clickButton(e: MouseEvent) {
 }
 </script>
 <template>
-  <view class="CError" :style="{ marginTop }">
-    <Rimage
+  <view class="CoError">
+    <image
       width="100%"
       :mode="'aspectFit'"
       :src="_require('src/static/components/images/error.svg')"
-    ></Rimage>
+    ></image>
     <slot>
       <view class="C-T5 MT-xs">{{ props.message }}</view>
     </slot>
@@ -42,9 +35,15 @@ function clickButton(e: MouseEvent) {
   </view>
 </template>
 <style lang="scss" scoped>
-.CError {
+.CoError {
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 </style>
+<script lang="ts">
+import mpMixin from "@/components/libs/mixin/mpMixin";
+export default {
+  mixins: [mpMixin],
+};
+</script>
