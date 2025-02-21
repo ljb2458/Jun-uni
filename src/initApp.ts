@@ -10,6 +10,9 @@ uni.addInterceptor("showToast", {
     args.duration ??= 3000;
   },
 });
+// #ifdef APP-PLUS
+plus.screen.lockOrientation("portrait-primary");
+// #endif
 /**
  * * 传入什么类型就返回什么类型，方便在对象中定义类型
  */

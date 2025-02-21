@@ -12,13 +12,16 @@ import { getRect } from "@/utils/rewriteUni";
 import { CSSProperties } from "vue";
 import dayjs from "dayjs";
 import { generateUUID } from "@/utils/tools/generate";
+import { useVModel } from "@/hooks/toolsHooks";
 import type { StyleValue } from "vue";
 import type CoTabsFor from "./CoTabsFor.vue";
+
 export interface CoTabsForOptionsItem extends AnyObject {}
-export type Instance = GenericComponentExports<typeof CoTabsFor>;
+export type CoTabsForInstance = GenericComponentExports<typeof CoTabsFor>;
 
 const props = withDefaults(
   defineProps<{
+    modelValue?: StrNumber;
     /**间距 */
     gap?: string;
     options: Item[];
@@ -50,6 +53,7 @@ const props = withDefaults(
     //----tabs组件结束---
   }>(),
   {
+    modelValue: 0,
     offsetTop: 0,
     gap: "var(--gap-md)",
     lazy: true,
@@ -57,6 +61,10 @@ const props = withDefaults(
     titleScrollable: false,
   }
 );
+
+const emit = defineEmits<{
+  "update:modelValue": [v: StrNumber];
+}>();
 
 type TabsListItem = Item & { load: boolean; slotName: string; index: number };
 const tabsList = computed<Array<TabsListItem>>(() =>
@@ -68,12 +76,12 @@ const tabsList = computed<Array<TabsListItem>>(() =>
   }))
 );
 
-const currentSwiper = computed(() => tabsList.value[currentIndex.value]);
-const currentIndex = ref(0);
+const currentSwiper = computed(() => tabsList.value[+currentIndex.value]);
+const currentIndex = useVModel(props, "modelValue", emit);
 watch(
   currentIndex,
   (newValue) => {
-    tabsList.value[newValue].load = true;
+    tabsList.value[+newValue].load = true; 
   },
   {
     immediate: true,
@@ -130,15 +138,15 @@ function onTouchmove(e: TouchEvent) {
   const currTime = getTouchTime();
   if (!(Math.abs(skewingY) < Math.abs(skewingX)) && currTime < 100) {
     abandon = true;
-    swiperToByIndex(currentIndex.value);
+    swiperToByIndex(+currentIndex.value);
     return;
   }
   if (abandon) return;
-  const percent = skewingX / nodeWidth() - currentIndex.value;
+  const percent = skewingX / nodeWidth() - +currentIndex.value;
   //*左滑边界限制
   if (skewingX > 0 && currentIndex.value == 0) return;
   //*右滑边界限制
-  if (isRightTo() && !(currentIndex.value + 1 < props.options.length)) return;
+  if (isRightTo() && !(+currentIndex.value + 1 < props.options.length)) return;
   state.isStatic = false;
   contentSwiperItemStyle["--CoTabsFor-x"] = unitPercent(percent);
 }
@@ -148,7 +156,7 @@ function onTouchcancel(e: TouchEvent) {
   /**最后一根手指的信息 */
   // const touchPosition = e.changedTouches[0];
   abandon = false;
-  swiperToByIndex(currentIndex.value);
+  swiperToByIndex(+currentIndex.value);
 }
 /**触摸结束 */
 function onTouchend(e: TouchEvent) {
@@ -159,9 +167,9 @@ function onTouchend(e: TouchEvent) {
   if (skewingX > 0 && currentIndex.value == 0)
     return swiperToByIndex(currentIndex.value);
   //*右滑边界限制
-  if (isRightTo() && !(currentIndex.value + 1 < props.options.length)) {
+  if (isRightTo() && !(+currentIndex.value + 1 < props.options.length)) {
     abandon = false;
-    return swiperToByIndex(currentIndex.value);
+    return swiperToByIndex(+currentIndex.value);
   }
   if (
     (getTouchTime() < 500 && isRightTo() && skewingX < -nodeWidth() * 0.15) ||
@@ -169,17 +177,19 @@ function onTouchend(e: TouchEvent) {
   ) {
     //* 右滑满足
     abandon = false;
-    swiperToByIndex(++currentIndex.value);
+    currentIndex.value = +currentIndex.value + 1;
+    swiperToByIndex(currentIndex.value);
   } else if (
     (getTouchTime() < 200 && isLeftTo() && skewingX > nodeWidth() * 0.15) ||
     (isLeftTo() && skewingX > nodeWidth() * 0.4)
   ) {
     //*左滑满足
     abandon = false;
-    swiperToByIndex(--currentIndex.value);
+    currentIndex.value = +currentIndex.value - 1;
+    swiperToByIndex(currentIndex.value);
   } else {
     abandon = false;
-    swiperToByIndex(currentIndex.value);
+    swiperToByIndex(+currentIndex.value);
   }
 }
 /**给出滑动时间 */

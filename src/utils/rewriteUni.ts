@@ -1,5 +1,6 @@
 import { pages, tabBar, subPackages } from "@/pages.json";
 import { cloneDeep } from "lodash";
+
 /**
  * 提取 uni-app 的 options 形式方法中 success 回调的参数类型
  */
@@ -238,4 +239,21 @@ while (subPackagesPages.length) {
     isSubPackages: true,
   }));
   routersArray.push(...pages);
+}
+/**
+ * 预览图片
+ * @param urls
+ * @param current
+ */
+export function previewImage(
+  urls: string | string[],
+  current: StrNumber = 0,
+  options?: UniNamespace.PreviewImageOptions
+) {
+  if (typeof urls === "string") urls = [urls];
+  uni.previewImage({
+    ...options,
+    urls,
+    current,
+  });
 }
