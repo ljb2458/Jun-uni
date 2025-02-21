@@ -38,3 +38,21 @@
   --border-C: var(--C-T1-O-3);
   border: solid 1px var(--border-C);
 }
+@keyframes option {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes rightToLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(10vw);
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

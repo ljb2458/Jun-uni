@@ -179,21 +179,6 @@ const rightIconList = computed<IconItem[]>(() => {
     <slot></slot>
 
     <envCoverView
-      class="controls__top"
-      :show="mapData.fill"
-      :style="{ height: layoutInfo.topHeight }"
-    >
-      <slot name="top"></slot>
-    </envCoverView>
-    <envCoverView
-      class="controls__bottom"
-      :show="mapData.fill"
-      :style="{ height: layoutInfo.bottomHeight }"
-    >
-      <slot name="bottom"></slot>
-    </envCoverView>
-
-    <envCoverView
       class="controls__left"
       :style="{
         top: layoutInfo.topHeight,
@@ -234,6 +219,20 @@ const rightIconList = computed<IconItem[]>(() => {
           :src="item.iconPath"
         ></envCoverImage>
       </envCoverView>
+    </envCoverView>
+    <envCoverView
+      class="controls__top"
+      :show="mapData.fill"
+      :style="{ height: layoutInfo.topHeight }"
+    >
+      <slot name="top"></slot>
+    </envCoverView>
+    <envCoverView
+      class="controls__bottom"
+      :show="mapData.fill"
+      :style="{ height: layoutInfo.bottomHeight }"
+    >
+      <slot name="bottom"></slot>
     </envCoverView>
     <map
       v-show="showMap"

@@ -1,9 +1,3 @@
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>
 <script lang="ts" setup>
 import router from "@/utils/router";
 import { defaultStyle } from "./setCustomNavbar";
@@ -57,8 +51,14 @@ const isCustomNavbar = computed(
   transition: all 0.3s;
   background-image: var(--C-LG1);
   box-sizing: border-box;
-  .customNavbar_backIcon{
+  .customNavbar_backIcon {
     display: block;
   }
 }
 </style>
+<script lang="ts">
+import mpMixin from "@/components/libs/mixin/mpMixin";
+export default {
+  mixins: [mpMixin],
+};
+</script>

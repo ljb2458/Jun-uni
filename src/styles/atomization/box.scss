@@ -18,6 +18,26 @@
   min-width: 100%;
   min-height: 100%;
 }
+._size-fill {
+  width: 100% !important;
+  height: 100% !important;
+}
+._min-W-fill {
+  min-width: 100% !important;
+}
+._min-H-fill {
+  min-height: 100% !important;
+}
+._W-fill {
+  width: 100% !important;
+}
+._H-fill {
+  height: 100% !important;
+}
+._min-size-fill {
+  min-width: 100% !important;
+  min-height: 100% !important;
+}
 .block {
   display: block;
 }

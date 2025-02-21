@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     CoAutoSquare: typeof import('./../../../src/components/common/CoAutoSquare/CoAutoSquare.vue')['default']
     CoCard: typeof import('./../../../src/components/common/CoCard/CoCard.vue')['default']
+    CoCascader: typeof import('./../../../src/components/common/CoCascader/CoCascader.vue')['default']
     CoCell: typeof import('./../../../src/components/common/CoCell/CoCell.vue')['default']
     CoCheckBoxBtn: typeof import('./../../../src/components/common/CoCheckBoxBtn/CoCheckBoxBtn.vue')['default']
     CoCollapse: typeof import('./../../../src/components/common/CoCollapse/CoCollapse.vue')['default']

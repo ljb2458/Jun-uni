@@ -47,30 +47,32 @@ function tapSelection(selection: S) {
 
 <template>
   <view class="GrFilterSearch flex-A-C gap-xs B-B1 P-col-xs P-row-sm">
-    <CoDropdown
-      v-model:show="showCoDropdown"
-      v-if="selections?.length"
-      width="150px"
-      class="flex-A-C B-B2 R-xs P-row-sm self-A-STR"
-      :style="{ background: bg }"
-    >
-      <template #text>{{
-        selectionItem?.[props.labelKey] || "请选择"
-      }}</template>
-      <view class="MG-sm">
-        <view
-          @tap="tapSelection(selection)"
-          class="border-B PB-xxs MB-xxs flex-A-C flex-J-SB active"
-          v-for="selection in selections"
-          :key="selection.value"
-        >
-          <view>{{ selection[props.labelKey] }}</view>
-          <view v-show="Object.is(selection[props.valueKey], selectValue)">
-            <uv-icon name="checkmark" />
+    <slot name="selections">
+      <CoDropdown
+        v-model:show="showCoDropdown"
+        v-if="selections?.length"
+        width="150px"
+        class="flex-A-C B-B2 R-xs P-row-sm self-A-STR"
+        :style="{ background: bg }"
+      >
+        <template #text>{{
+          selectionItem?.[props.labelKey] || "请选择"
+        }}</template>
+        <view class="MG-sm">
+          <view
+            @tap="tapSelection(selection)"
+            class="border-B PB-xxs MB-xxs flex-A-C flex-J-SB active"
+            v-for="selection in selections"
+            :key="selection.value"
+          >
+            <view>{{ selection[props.labelKey] }}</view>
+            <view v-show="Object.is(selection[props.valueKey], selectValue)">
+              <uv-icon name="checkmark" />
+            </view>
           </view>
         </view>
-      </view>
-    </CoDropdown>
+      </CoDropdown>
+    </slot>
     <uv-search
       shape="square"
       input-align="left"
@@ -98,7 +100,6 @@ function tapSelection(selection: S) {
               />
             </view>
           </customNavbarPlaceholder>
-          <GrFilterSearch :="props" class="B-none PD-0" />
           <slot name="popup"> </slot>
           <slot name="popup-bottom">
             <view class="flex gap-md MT-auto">
