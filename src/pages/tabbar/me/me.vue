@@ -12,7 +12,12 @@ import { onPageScroll } from "@dcloudio/uni-app";
 import taskStatistics from "./components/taskStatistics.vue";
 import loopCheck from "./components/loopCheck.vue";
 import { StateEnum } from "@/components/common/CoStateTag/CoStateTag.vue";
-import router from "@/utils/router";
+import {
+  ButtonOnChooseaddressEvent,
+  ButtonOnGetphonenumberEvent,
+} from "@uni-helper/uni-app-types";
+import { uniApiToPromise } from "@/utils/rewriteUni";
+import useUserinfoStore from "@/store/useUserinfoStore";
 
 const userAuthEnum: StateEnum = [
   {
@@ -21,58 +26,67 @@ const userAuthEnum: StateEnum = [
     class: "C-M1 B-M1-O-3 R-max P-row-xs F-S-xs ML-xs",
   },
 ];
-
-function toCorpApplyAudit(query: AnyObject) {
-  router.push("src/pages/corp/applyAudit.vue", { query });
-}
-
-const rapidLinks = [
-  {
-    icon: "icon-qiye",
-    text: "公司成员：21人",
-    iconColor: "var(--C-M1)",
-    tap() {
-      toCorpApplyAudit({
-        tabIndex: 3,
-      });
-    },
-  },
-  {
-    icon: "icon-dairuzhi",
-    text: "待审核：3人",
-    iconColor: "var(--C-M1)",
-    tap() {
-      toCorpApplyAudit({
-        tabIndex: 1,
-      });
-    },
-  },
-];
-
 const layoutInfo = reactive({
   scrollTop: 0,
 });
 onPageScroll((e) => {
   layoutInfo.scrollTop = e.scrollTop;
 });
+
+const userinfoStore = useUserinfoStore();
+
+async function getPhoneNumber(e: ButtonOnGetphonenumberEvent) {
+  console.log("getPhoneNumber:", e);
+  const { code } = await uniApiToPromise(uni.login);
+  console.log("code", code);
+  const { encryptedData, iv } = e.detail;
+  if (!encryptedData || !iv) return;
+}
+function chooseavatar(e: ButtonOnChooseaddressEvent) {
+  console.log("chooseavatar:", e);
+  uploadAvater(e.detail.avatarUrl);
+}
+
+function uploadAvater(url: string) {
+  userinfoStore.userinfo = {
+    ...userinfoStore.userinfo,
+    avatarUrl: url,
+  };
+}
 </script>
 <template>
   <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
     <view class="flex-A-C MG-md gap-sm F-S-sm">
-      <uv-image
-        radius="var(--R-sm)"
-        height="58px"
-        width="58px"
-        :src="_require('src/static/imgs/bg/home.png')"
-        :mode="'aspectFill'"
-      ></uv-image>
+      <button
+        :open-type="'chooseAvatar'"
+        @chooseavatar="chooseavatar"
+        class="PD-0 B-B0"
+      >
+        <uv-image
+          radius="var(--R-sm)"
+          height="58px"
+          width="58px"
+          :src="
+            userinfoStore.userinfo?.avatarUrl ||
+            _require('src/static/imgs/icon/avatar__logout.jpg')
+          "
+          :mode="'aspectFill'"
+        ></uv-image>
+      </button>
       <view>
         <view class="flex-A-C">
           <view class="F-S-md T-strong">张三</view>
+          <!-- <button
+              open-type="getPhoneNumber"
+              @getphonenumber="getPhoneNumber"
+              class="PD-0 B-none F-S-md T-strong"
+            >
+              点击登录
+            </button> -->
           <CoStateTag :stateEnum="userAuthEnum" :state="1" />
         </view>
         <view class="C-T3">18888888888</view>
-        <view>这个是个公司</view>
+        <view>某某企业</view>
       </view>
     </view>
 
