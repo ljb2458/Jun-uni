@@ -1,9 +1,15 @@
 <script lang="ts" setup>
 import type { Property } from "csstype";
+import { StyleValue } from "vue";
 const props = withDefaults(
   defineProps<{
-    /**背景颜色 */
+    /**背景图片 */
     bgImg?: string;
+    /**背景盒子样式 */
+    bgboxStyle?: StyleValue;
+    /**背景盒子模糊 */
+    bgboxBlur?: string;
+    bgboxClass?: any;
     shadowColor?: string;
     shadow?: boolean;
     bgRepeat?: Property.BackgroundRepeat;
@@ -11,6 +17,7 @@ const props = withDefaults(
     bgPosition?: Property.BackgroundPosition;
   }>(),
   {
+    bgboxBlur: "2px",
     shadowColor: "rgba(0,0,0,0.2)",
     shadow: false,
     bgRepeat: "no-repeat",
@@ -23,7 +30,7 @@ const props = withDefaults(
   <view
     :style="{
       background: bgImg || false,
-      '--SHc': props.shadowColor,
+      '--shadow-c': props.shadowColor,
       backgroundRepeat: props.bgRepeat,
       backgroundSize: props.bgSize,
       backgroundPosition: props.bgPosition,
@@ -31,13 +38,26 @@ const props = withDefaults(
     class="CoCard"
     :class="{ shadow: shadow }"
   >
-    <uv-image
-      class="CoCard_bgImg"
-      v-if="bgImg"
-      :src="bgImg"
-      width="100%"
-      :mode="'widthFix'"
-    />
+    <view
+      class="CoCard_bgbox"
+      :class="bgboxClass"
+      :style="[
+        bgboxStyle,
+        {
+          filter: `blur(${bgboxBlur})`,
+        },
+      ]"
+    >
+      <slot name="bgbox">
+        <uv-image
+          class="CoCard_bgImg"
+          v-if="bgImg"
+          :src="bgImg"
+          width="100%"
+          :mode="'widthFix'"
+        />
+      </slot>
+    </view>
     <slot></slot>
   </view>
 </template>
@@ -46,13 +66,14 @@ const props = withDefaults(
 .CoCard {
   position: relative;
   border-radius: var(--R-sm);
-  .CoCard_bgImg {
+  .CoCard_bgbox {
+    overflow: hidden;
+    pointer-events: none;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: -1;
   }
 }
 </style>

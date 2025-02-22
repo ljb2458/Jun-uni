@@ -39,11 +39,11 @@ if (props.onPageScroll)
   <view
     class="CoPageView"
     :style="{
-      '--layout-navbar-height':
-        useCustomNavbar &&
-        `calc(var(--status-bar-height) + ${
-          defaultStyle.height || 0
-        } + var(--gap-xs))`,
+      '--layout-navbar-height': useCustomNavbar
+        ? `calc(var(--status-bar-height) + ${
+            defaultStyle.height || '0px'
+          } + var(--gap-xs))`
+        : 0,
     }"
   >
     <uv-image
@@ -79,6 +79,9 @@ if (props.onPageScroll)
 
 <style lang="scss" scoped>
 .CoPageView {
+  --layout-page-height: calc(
+    100vh - var(--window-top) - var(--layout-navbar-height)
+  );
   min-height: calc(100vh - var(--window-top));
   position: relative;
   .CoPageView__bgImg {

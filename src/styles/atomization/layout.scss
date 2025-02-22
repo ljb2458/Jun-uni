@@ -81,6 +81,10 @@
   .flex-#{$i} {
     flex: $i;
   }
+  .z-I-#{$i} {
+    position: relative;
+    z-index: $i;
+  }
 }
 .T-A-L {
   text-align: left;

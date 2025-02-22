@@ -1,15 +1,12 @@
 /***********************效果***********************/
 //斜面立体效果
 .bevel {
-  --bevel-C: rgba(0, 0, 0, 0.2);
-  filter: drop-shadow(
-    inset var(--bevel-C) 3px 3px 6px,
-    var(--bevel-C) 3px 3px 12px
-  );
+  --bevel-c: rgba(0, 0, 0, 0.2);
+  box-shadow: inset var(--bevel-c) 3px 3px 6px, var(--bevel-c) 3px 3px 12px;
 }
 .shadow {
-  --shadow-C: rgba(0, 0, 0, 0.2);
-  filter: drop-shadow(var(--shadow-C) 3px 3px 12px);
+  --shadow-c: rgba(0, 0, 0, 0.2);
+  filter: drop-shadow(var(--shadow-c) 3px 3px 12px);
 }
 //点击效果
 .active:active {
@@ -19,24 +16,24 @@
   filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
 }
 .border-B {
-  --border-C: var(--C-T1-O-3);
-  border-bottom: solid 1px var(--border-C);
+  --border-c: var(--C-T1-O-3);
+  border-bottom: solid 1px var(--border-c);
 }
 .border-T {
-  --border-C: var(--C-T1-O-3);
-  border-top: solid 1px var(--border-C);
+  --border-c: var(--C-T1-O-3);
+  border-top: solid 1px var(--border-c);
 }
 .border-L {
-  --border-C: var(--C-T1-O-3);
-  border-left: solid 1px var(--border-C);
+  --border-c: var(--C-T1-O-3);
+  border-left: solid 1px var(--border-c);
 }
 .border-R {
-  --border-C: var(--C-T1-O-3);
-  border-right: solid 1px var(--border-C);
+  --border-c: var(--C-T1-O-3);
+  border-right: solid 1px var(--border-c);
 }
 .border-all {
-  --border-C: var(--C-T1-O-3);
-  border: solid 1px var(--border-C);
+  --border-c: var(--C-T1-O-3);
+  border: solid 1px var(--border-c);
 }
 @keyframes option {
   0% {

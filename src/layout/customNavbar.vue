@@ -1,3 +1,9 @@
+<script lang="ts">
+import mpMixin from "@/components/libs/mixin/mpMixin";
+export default {
+  mixins: [mpMixin],
+};
+</script>
 <script lang="ts" setup>
 import router from "@/utils/router";
 import { defaultStyle } from "./setCustomNavbar";
@@ -5,6 +11,7 @@ import { getCurrentRouteInfo } from "@/utils/rewriteUni";
 
 const props = defineProps<{
   useSafetyTop?: boolean;
+  useCustomNavbar?: boolean;
 }>();
 
 const routeInfo = getCurrentRouteInfo();
@@ -13,32 +20,38 @@ const isCustomNavbar = computed(
 );
 </script>
 <template>
-  <view class="customNavbar border-B" v-if="isCustomNavbar">
+  <view
+    class="customNavbar border-B"
+    :class="{ customNavbar__hid: !useCustomNavbar }"
+    v-if="isCustomNavbar"
+  >
     <view
       v-if="props.useSafetyTop"
       style="height: var(--status-bar-height)"
     ></view>
-    <view :style="{ ...defaultStyle }" class="navbar flex-A-C">
-      <CoIcon
-        class="customNavbar_backIcon MR-xs"
-        color="inherit"
-        size="1em"
-        v-if="!routeInfo?.tabbar"
-        @tap="router.back()"
-        name="cicon-fanhui"
-      />
-      <view>
-        <!-- #ifdef MP-WEIXIN -->
-        <slot>{{ routeInfo?.style.navigationBarTitleText }} </slot>
-        <!-- #endif -->
-        <!-- #ifndef MP-WEIXIN -->
-        <slot :slotProps="{ ...routeInfo! }">{{
-          routeInfo?.style.navigationBarTitleText
-        }}</slot>
-        <!-- #endif -->
+    <block v-if="useCustomNavbar">
+      <view :style="{ ...defaultStyle }" class="navbar flex-A-C">
+        <CoIcon
+          class="customNavbar_backIcon MR-xs"
+          color="inherit"
+          size="1em"
+          v-if="!routeInfo?.tabbar"
+          @tap="router.back()"
+          name="cicon-fanhui"
+        />
+        <view>
+          <!-- #ifdef MP-WEIXIN -->
+          <slot>{{ routeInfo?.style.navigationBarTitleText }} </slot>
+          <!-- #endif -->
+          <!-- #ifndef MP-WEIXIN -->
+          <slot :slotProps="{ ...routeInfo! }">{{
+            routeInfo?.style.navigationBarTitleText
+          }}</slot>
+          <!-- #endif -->
+        </view>
       </view>
-    </view>
-    <view class="PB-xs"></view>
+      <view class="PB-xs"></view>
+    </block>
   </view>
 </template>
 <style lang="scss" scoped>
@@ -55,10 +68,8 @@ const isCustomNavbar = computed(
     display: block;
   }
 }
+.customNavbar__hid {
+  opacity: 0;
+  visibility: hidden;
+}
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>
