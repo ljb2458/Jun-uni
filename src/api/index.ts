@@ -10,7 +10,7 @@ let baseURL = "";
 if (env.VITE_PROXY == "1") {
   baseURL = env.VITE_API_PREFIX; //配置默认请求地址--跨域代理
 } else {
-  baseURL = env.VITE_BASE_URL + env.VITE_API_PREFIX; //配置默认请求地址--无代理
+  baseURL = env.VITE_API_URL + env.VITE_API_PREFIX; //配置默认请求地址--无代理
 }
 export const defaHttp = createHttpRequest(
   {

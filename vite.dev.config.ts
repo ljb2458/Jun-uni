@@ -14,7 +14,7 @@ export default (config: ConfigEnv) => {
       proxy: {
         [env.VITE_API_PREFIX]: {
           changeOrigin: env.VITE_PROXY == "1", //改变源头开关
-          target: env.VITE_BASE_URL,
+          target: env.VITE_API_URL,
         },
       },
     },
