@@ -4,7 +4,7 @@
  * @returns
  */
 export function _require(path: string) {
-  return path.replace(/^src/, "");
+  return path.replace(/(?:^src|^\/src|^@)/, "");
 }
 export function setType<D>(): D | undefined;
 export function setType<D>(d: D): D;
