@@ -52,7 +52,7 @@ function tapSelection(selection: S) {
         v-model:show="showCoDropdown"
         v-if="selections?.length"
         width="150px"
-        class="flex-A-C B-B2 R-xs P-row-sm self-A-STR"
+        class="flex-A-C B-B2 R-xs P-row-sm self-A-STR _flex"
         :style="{ background: bg }"
       >
         <template #text>{{
