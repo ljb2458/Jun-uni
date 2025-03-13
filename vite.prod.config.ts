@@ -8,5 +8,14 @@ import path from "path";
 const mode = "production";
 const env = loadEnv(mode, process.cwd(), "VITE_");
 export default (config: ConfigEnv) => {
-  return defineConfig({});
+  return defineConfig({
+    build: {
+      terserOptions: {
+        compress: {
+          drop_console: true, // 生产环境移除console
+          drop_debugger: true, // 生产环境移除debugger
+        },
+      },
+    },
+  });
 };

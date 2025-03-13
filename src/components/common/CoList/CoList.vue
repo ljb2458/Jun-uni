@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { generateUUID } from "@/utils/tools/generate";
+import { randomUUID } from "@/utils/tools/generate";
 import { isNodeVisible } from "@/utils/rewriteUni";
 import type CoList from "./CoList.vue";
 import { StateType } from "@/components/common/CoListStatus/CoListStatus.vue";
@@ -7,26 +7,24 @@ import { StateType } from "@/components/common/CoListStatus/CoListStatus.vue";
 export interface LoadParam {
   reload: boolean;
 }
-export type Instance = InstanceType<typeof CoList>;
-const props = withDefaults(
-  defineProps<{
-    /**列表状态 */
-    status?: StateType;
-    message?: string;
-    minHeight?: string;
-    setupLoad?: boolean;
-    /**上拉触底事件，一般可不传 */
-    onReachBottom?: (callback: Function) => any;
-  }>(),
-  {
-    minHeight: "70vh",
-    setupLoad: true,
-  }
-);
+export type CoListInstance = InstanceType<typeof CoList>;
+export interface CoListProps {
+  /**列表状态 */
+  status?: StateType;
+  message?: string;
+  minHeight?: string;
+  setupLoad?: boolean;
+  /**上拉触底事件，一般可不传 */
+  onReachBottom?: (callback: Function) => any;
+}
+const props = withDefaults(defineProps<CoListProps>(), {
+  minHeight: "70vh",
+  setupLoad: true,
+});
 
 if (props.setupLoad) load();
 
-const CListId = `CList${generateUUID()}`;
+const CListId = `CList${randomUUID()}`;
 const _this = getCurrentInstance();
 const reachBottom = props.onReachBottom || onReachBottom;
 reachBottom(activeLoad);

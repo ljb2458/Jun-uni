@@ -4,7 +4,7 @@ import customNavbar from "@/layout/customNavbar.vue";
 import actionSheet from "@/layout/actionSheet.vue";
 import modal from "@/layout/modal.vue";
 
-import { onPageScroll } from "@dcloudio/uni-app";
+import type { onPageScroll } from "@dcloudio/uni-app";
 import { defaultStyle } from "@/layout/setCustomNavbar";
 import { getCurrentRouteInfo } from "@/utils/rewriteUni";
 
@@ -34,21 +34,32 @@ const props = withDefaults(
 const layoutInfo = reactive({
   scrollTop: 0,
 });
-if (props.onPageScroll)
+if (props.onPageScroll) {
   props.onPageScroll((e) => {
     layoutInfo.scrollTop = e.scrollTop;
   });
+}
+
+const navbarHeightCssVar = computed(() => {
+  if (routeInfo?.style.navigationStyle === "custom") {
+    if (props.useCustomNavbar) {
+      return `calc(var(--status-bar-height) + ${
+        defaultStyle.height || "0px"
+      } + var(--gap-xs))`;
+    }
+    return `calc(var(--window-top) + var(--status-bar-height))`;
+  }
+  if (props.useSafetyTop) {
+    return `var(--status-bar-height)`;
+  }
+});
 </script>
 
 <template>
   <view
     class="CoPageView"
     :style="{
-      '--layout-navbar-height': useCustomNavbar
-        ? `calc(var(--status-bar-height) + ${
-            defaultStyle.height || '0px'
-          } + var(--gap-xs)`
-        : '0px',
+      '--layout-navbar-height': navbarHeightCssVar,
     }"
   >
     <uv-image
@@ -65,10 +76,11 @@ if (props.onPageScroll)
       :useCustomNavbar="useCustomNavbar"
       :useSafetyTop="useSafetyTop"
     >
-      <slot :slotProps="routeInfo!" name="customNavbar"></slot>
-      <view v-if="!$slots.customNavbar" class="flex-1">
-        {{ routeInfo?.style?.navigationBarTitleText }}
-      </view>
+      <template #default="{ slotProps }">
+        <slot :slotProps="routeInfo!" name="customNavbar">{{
+          slotProps.style.navigationBarTitleText
+        }}</slot>
+      </template>
     </customNavbar>
     <actionSheet v-if="useActionSheet"></actionSheet>
     <notify v-if="useNotify">
@@ -107,24 +119,25 @@ if (props.onPageScroll)
 
 <style lang="scss" scoped>
 .CoPageView {
-  --layout-page-height: calc(
-    100vh - var(--window-top) - var(--layout-navbar-height)
-  );
+  --layout-page-height: calc(100vh - var(--layout-navbar-height));
   min-height: calc(100vh - var(--window-top));
   position: relative;
   .CoPageView__bgImg {
+    object-fit: none;
+
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     width: 100%;
-    z-index: -1;
+    z-index: -10;
   }
   .CoPageView_bottom {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 100;
   }
 }
 .customNavbar__fixed {

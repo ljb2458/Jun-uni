@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { _require } from "@/utils/tools";
+import { _import } from "@/utils/tools/import";
 
 const props = withDefaults(
   defineProps<{
@@ -22,7 +22,7 @@ function clickButton(e: MouseEvent) {
     <image
       width="100%"
       :mode="'aspectFit'"
-      :src="_require('src/static/components/imgs/error.svg')"
+      :src="_import('src/static/components/imgs/error.svg')"
     ></image>
     <slot>
       <view class="C-T5 MT-xs">{{ props.message }}</view>

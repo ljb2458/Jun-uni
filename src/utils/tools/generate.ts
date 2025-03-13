@@ -1,12 +1,8 @@
-/*
- * 介绍:生成
- */
-
 /**
  * * 生成唯一uuid
  * @return uuid
  */
-export function generateUUID(): string {
+export function randomUUID(): string {
   if (typeof crypto === "object") {
     if (typeof crypto.randomUUID === "function") {
       return crypto.randomUUID();
@@ -46,11 +42,11 @@ export function generateUUID(): string {
 
 /**
  * *  生成随机数
- * @param {Number} min 最小值
- * @param {Number} max 最大值
+ * @param min 最小值
+ * @param max 最大值
  * @return 随机数
  */
-export function randomNum(min: number, max: number): number {
+export function randomNumber(min: number, max: number): number {
   let num = Math.floor(Math.random() * (min - max) + max);
   return num;
 }

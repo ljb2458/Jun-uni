@@ -1,26 +1,32 @@
 <script setup lang="ts">
 import type { StyleValue } from "vue";
-import { isStateByBin } from "@/utils/tools";
+import { bitsAuth } from "@/utils/tools/bits";
 
-export interface StateEnumItem extends AnyObject {
-  state: StrNumber;
-  label?: any;
+export interface CoStateOrmItem extends AnyObject {
+  value: StrNumber;
+  label: any;
   class?: any;
   style?: StyleValue;
 }
-export interface StateEnum extends Array<StateEnumItem> {}
-const props = defineProps<{
-  state: StrNumber;
-  stateEnum: StateEnum;
-  defaultIndex?: StrNumber;
-  isFun?: Fun<[StrNumber, StrNumber], boolean>;
-}>();
-const current = computed<StateEnumItem | undefined>(() => {
-  const item = props.stateEnum.find((item) =>
-    (props.isFun || isStateByBin)(props.state, item.state)
+export interface CoStateOrm extends Array<CoStateOrmItem> {}
+const props = withDefaults(
+  defineProps<{
+    value?: StrNumber;
+    stateOrm?: CoStateOrm;
+    defaultIndex?: StrNumber;
+    isFun?: Fun<[StrNumber, StrNumber], boolean>;
+  }>(),
+  {
+    isFun: () => (a: any, b: any) => a == b,
+  }
+);
+const current = computed<CoStateOrmItem | undefined>(() => {
+  if (!props.stateOrm) return;
+  const item = props.stateOrm.find((item) =>
+    (props.isFun || bitsAuth)(props.value!, item.value)
   );
   if (!item) {
-    return props.stateEnum.at(Number(props.defaultIndex));
+    return props.stateOrm.at(Number(props.defaultIndex));
   }
   return item;
 });
@@ -43,7 +49,6 @@ const current = computed<StateEnumItem | undefined>(() => {
 </style>
 <script lang="ts">
 import mpMixin from "@/components/libs/mixin/mpMixin";
-import { extend } from "lodash";
 export default {
   mixins: [mpMixin],
 };

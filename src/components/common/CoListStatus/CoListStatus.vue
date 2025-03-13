@@ -22,21 +22,21 @@ function load() {
 </script>
 <template>
   <view class="CoListStatus">
-    <up-loading-icon
+    <uv-loading-icon
       :show="props.type === 'loading'"
       :text="props.message"
-    ></up-loading-icon>
-    <up-empty
+    ></uv-loading-icon>
+    <uv-empty
       :show="props.type === 'null'"
       class="Rempty PT-xl PB-xl"
       :text="props.message"
     >
-    </up-empty>
+    </uv-empty>
     <view v-show="props.type === 'next'">
-      <up-divider @click="load" :text="props.message || '继续加载'" />
+      <uv-divider @click="load" :text="props.message || '继续加载'" />
     </view>
     <view v-show="props.type === 'end'">
-      <up-divider :text="props.message || '没有更多了'" />
+      <uv-divider :text="props.message || '没有更多了'" />
     </view>
     <view v-show="props.type === 'error'">
       <CoError

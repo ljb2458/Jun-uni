@@ -2,16 +2,13 @@
  * 介绍:时间工具
  */
 import { fixedNumber } from "./number";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs, { Dayjs, ConfigType } from "dayjs";
 /**
  * * 统计时间
  * @param day 当前时间
  * @param timeLimit 期限
  */
-export function timeStatistics(
-  day: string | Date | Dayjs,
-  timeLimit: string | Date | Dayjs
-) {
+export function timeStatistics(day: ConfigType, timeLimit: ConfigType) {
   day = dayjs(day);
   timeLimit = dayjs(timeLimit);
   /**相差时间 */

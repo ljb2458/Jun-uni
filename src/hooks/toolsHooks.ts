@@ -92,7 +92,7 @@ export function useVModel<
 >(
   props: T,
   key: K,
-  emit?: (name: `update:${K}`, value: T[K]) => void,
+  emit?: Fun,
   options: O = {} as O
 ): Ref<T[K]> {
   type UK = `update:${K}`;
@@ -104,7 +104,6 @@ export function useVModel<
   watch(
     () => props[key],
     (newValue) => {
-      if (Object.is(newValue, innerRef.value)) return;
       innerRef.value = newValue;
     },
     { deep }
@@ -113,7 +112,6 @@ export function useVModel<
     watch(
       innerRef,
       (newValue: T[K]) => {
-        if (Object.is(newValue, props[key])) return;
         emit(event, newValue);
       },
       { deep }
@@ -121,4 +119,34 @@ export function useVModel<
   }
 
   return innerRef;
+}
+
+/**
+ * 使用 uni.$on 订阅
+ * @returns
+ */
+export function useUniOn() {
+  const pubsubObj: AnyObject<Fun[]> = {};
+  function $on(message: string, fun: Fun) {
+    uni.$on(message, fun);
+    const old = pubsubObj[message] || [];
+    pubsubObj[message] = old.concat(fun);
+    return () => {
+      uni.$off(message, fun);
+    };
+  }
+  function $off(message: string, fun: Fun) {
+    uni.$off(message, fun);
+    const index = pubsubObj[message]?.findIndex((val) => Object.is(val, fun));
+    if (index >= 0) pubsubObj[message].splice(index, 1);
+  }
+  function $offAll() {
+    for (const key in pubsubObj) {
+      const funList = pubsubObj[key];
+      funList.forEach((v) => uni.$off(key, v));
+      funList.length = 0;
+    }
+  }
+  onBeforeUnmount($offAll);
+  return { $on, $off, $offAll };
 }

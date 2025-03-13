@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import { onPageScroll } from "@dcloudio/uni-app";
-import { _require } from "@/utils/tools";
+import { _import } from "@/utils/tools/import";
 
 const tabsList = reactive([
   {

@@ -7,8 +7,11 @@ import luchRequest, {
   HttpError,
   HttpData,
   HttpRequestTask,
+  HttpUploadTask,
 } from "luch-request";
 import { filterObject } from "@/utils/tools/object";
+import router from "./router";
+const env = import.meta.env;
 
 export namespace CreateHttpRequest {
   export interface MyConfig {
@@ -38,8 +41,12 @@ export namespace CreateHttpRequest {
   export interface GetRequest {
     <R = any, D = HttpRequestTask>(url: string, config?: Config<D>): Promise<R>;
   }
+  export interface UploadRequest {
+    <R = any, D = HttpUploadTask>(url: string, config?: Config<D>): Promise<R>;
+  }
   export interface Instance extends luchRequest {
     get: GetRequest;
+    upload: UploadRequest;
     post: NotGetRequest;
     delete: NotGetRequest;
     head: NotGetRequest;
@@ -55,6 +62,8 @@ export namespace CreateHttpRequest {
     loadingMessage?: string | boolean;
     filterReq?: boolean;
     errorMessage?: string | boolean;
+    /**请求成功后路由返回 */
+    routerBack?: boolean;
     [k: string]: any;
   }
 }
@@ -65,6 +74,7 @@ export function createHttpRequest(
   const httpRequest: CreateHttpRequest.Instance = new luchRequest(config);
 
   httpRequest.interceptors.request.use((config) => {
+    if (env.VITE_API_LOG === "1") console.info(config);
     const custom = config.custom;
     if (custom?.filterReq) {
       if (config.data) config.data = filterObject(config.data);
@@ -74,6 +84,7 @@ export function createHttpRequest(
   });
   httpRequest.interceptors.response.use(
     (res) => {
+      if (env.VITE_API_LOG === "1") console.info(res);
       const custom = res.config.custom;
       const {
         showFailMsg,
@@ -87,6 +98,9 @@ export function createHttpRequest(
       const isSuccess = myConfig.isSuccess(res);
       if (res.data) res.data.isSuccess = isSuccess;
       if (isSuccess) {
+        if (custom?.routerBack === true) {
+          router.back();
+        }
         if (showSuccessMsg) {
           uni.showToast({
             title: successText || message || "success",

@@ -8,6 +8,9 @@ export const appCfg = {
 };
 // #ifdef MP-WEIXIN
 appCfg.icon = __wxConfig.accountInfo.icon;
+declare global {
+  const __wxConfig: AnyObject;
+}
 // #endif
 /**
  * 提取 uni-app 的 options 形式方法中 success 回调的参数类型
@@ -187,17 +190,16 @@ export function getRect(
 export async function isNodeVisible(queryNode: string, _this?: any) {
   const sysInfo = getSystemInfoCache();
   const nodeInfo = await getRect(queryNode, _this || getCurrentInstance());
-
   const left = Number(nodeInfo.left);
   const right = Number(nodeInfo.right);
   const top = Number(nodeInfo.top);
   const bottom = Number(nodeInfo.bottom);
-  return (
-    left > 0 &&
-    right < sysInfo.screenWidth &&
-    bottom > 0 &&
-    top < sysInfo.screenHeight
-  );
+  const verify =
+    left >= 0 &&
+    right <= sysInfo.screenWidth &&
+    bottom >= 0 &&
+    top <= sysInfo.screenHeight;
+  return verify;
 }
 
 export type RouteInfo = ArrayToUnion<typeof pages> & {
@@ -208,11 +210,14 @@ export type RouteInfo = ArrayToUnion<typeof pages> & {
  * 获取当前页面信息，uni配置项
  * @returns
  */
-export function getCurrentRouteInfo(): RouteInfo | undefined {
+export function getCurrentRouteInfo() {
   const pagesInfo = getCurrentPages();
   const currentPage: AnyObject = pagesInfo[pagesInfo.length - 1];
   const routePath: string = currentPage.route;
-  return getRouteInfo(routePath);
+  return {
+    ...getRouteInfo(routePath),
+    pages: pagesInfo,
+  };
 }
 /**
  * 获取当前页面路由配置
@@ -263,4 +268,59 @@ export function previewImage(
     urls,
     current,
   });
+}
+
+export type Media = PartialFlipBy<
+  UniApp.MediaFile,
+  "tempFilePath" | "size" | "fileType"
+>;
+
+/**
+ * 选取图片或视频
+ */
+export async function uniChooseMedia(
+  type: "image" | "video",
+  options?: UniNamespace.ChooseImageOptions &
+    UniNamespace.ChooseMediaOption &
+    UniNamespace.ChooseVideoOptions
+): Promise<Media[]> {
+  // #ifndef APP || MP-WEIXIN || MP-DOUYIN || MP-FEISHU || MP-JD || MP-XIAOHONGSHU
+  // 不支持 uni.chooseMedia 的平台，使用备用方案
+  if (type === "image") {
+    let { tempFilePaths, tempFiles } = await uniApiToPromise(
+      uni.chooseImage,
+      options
+    );
+    if (!Array.isArray(tempFilePaths)) tempFilePaths = [tempFilePaths];
+    if (!Array.isArray(tempFiles)) tempFiles = [tempFiles as any];
+    return tempFilePaths.map((v, i) => ({
+      fileType: "image",
+      tempFilePath: v,
+      size: tempFiles[i].size,
+    }));
+  }
+  if (type === "video") {
+    let { duration, height, size, tempFilePath, width } = await uniApiToPromise(
+      uni.chooseVideo,
+      options
+    );
+    return [
+      {
+        size,
+        tempFilePath,
+        duration,
+        fileType: "video",
+        height,
+        width,
+      },
+    ];
+  }
+  // #endif
+  // #ifdef APP || MP-WEIXIN || MP-DOUYIN || MP-FEISHU || MP-JD || MP-XIAOHONGSHU
+  const media = await uniApiToPromise(uni.chooseMedia, {
+    ...options,
+    mediaType: [type],
+  });
+  return media.tempFiles;
+  // #endif
 }

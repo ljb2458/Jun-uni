@@ -1,8 +1,3 @@
-/*
- * @FilePath: /music-client/vite.base.config.ts
- * 介绍:无论哪个环境都会执行的配置项
- */
-
 import uni from "@dcloudio/vite-plugin-uni";
 import AutoImport from "unplugin-auto-import/vite";
 import commonjs from "@rollup/plugin-commonjs";

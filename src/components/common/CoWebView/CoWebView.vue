@@ -35,7 +35,7 @@ function onMessage(e: WebViewOnMessageEvent) {
 
 <script lang="ts">
 import mpMixin from "@/components/libs/mixin/mpMixin";
-import { _require } from "@/utils/tools";
+import { _import } from "@/utils/tools/import";
 export default {
   mixins: [mpMixin],
 };

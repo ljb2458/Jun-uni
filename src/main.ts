@@ -3,7 +3,7 @@ import App from "./App.vue";
 import * as Pinia from "pinia";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import $uv from "@climblee/uv-ui";
-import "@/initApp";
+import '@/init'
 
 declare global {
   interface Uni {

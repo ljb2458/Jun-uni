@@ -16,12 +16,12 @@ const props = defineProps<{
 
 const routeInfo = getCurrentRouteInfo();
 const isCustomNavbar = computed(
-  () => routeInfo?.style.navigationStyle === "custom"
+  () => routeInfo?.style?.navigationStyle === "custom"
 );
 </script>
 <template>
   <view
-    class="customNavbar border-B"
+    class="customNavbar"
     :class="{ customNavbar__hid: !useCustomNavbar }"
     v-if="isCustomNavbar"
   >
@@ -40,17 +40,12 @@ const isCustomNavbar = computed(
           name="cicon-fanhui"
         />
         <view>
-          <!-- #ifdef MP-WEIXIN -->
-          <slot>{{ routeInfo?.style.navigationBarTitleText }} </slot>
-          <!-- #endif -->
-          <!-- #ifndef MP-WEIXIN -->
-          <slot :slotProps="{ ...routeInfo! }">{{
-            routeInfo?.style.navigationBarTitleText
-          }}</slot>
-          <!-- #endif -->
+          <slot :slotProps="{ ...routeInfo! }">
+            {{ routeInfo?.style?.navigationBarTitleText }}
+          </slot>
         </view>
       </view>
-      <view class="PB-xs"></view>
+      <view class="customNavbar_bottom PB-xs border-B"></view>
     </block>
   </view>
 </template>

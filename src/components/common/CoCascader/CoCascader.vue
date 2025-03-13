@@ -11,12 +11,15 @@ export interface CoCascaderOptionsItem {
 
 const props = withDefaults(
   defineProps<{
+    /**是否可取消选择；默认为：true */
+    deselectable?: boolean;
     modelValue?: CoCascaderOptionsItem["value"][];
     options?: CoCascaderOptionsItem[];
     height?: string;
     show?: boolean;
   }>(),
   {
+    deselectable: true,
     modelValue: [] as any,
     options: cnRegionsTree as any,
     height: "50vh",
@@ -81,9 +84,19 @@ const optionsArray = computed(() => {
 });
 
 function selectItem(option: CoCascaderOptionsItem, index: number) {
-  const oldOption = modelValue.value.slice(0, index) || [];
-  oldOption[index] = option.value;
+  const oldOption = modelValue.value.slice(0, index + 1) || [];
+  if (
+    props.deselectable &&
+    Object.is(oldOption[index], option.value) &&
+    Object.is(oldOption.length, modelValue.value.length)
+  ) {
+    //点击相同的最后一项取消选择
+    oldOption.pop();
+  } else {
+    oldOption[index] = option.value;
+  }
   modelValue.value = oldOption;
+  console.log("modelValue.value", modelValue.value);
   emit("selectItem", option, index);
 }
 

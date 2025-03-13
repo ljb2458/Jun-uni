@@ -27,12 +27,18 @@ declare module 'vue' {
     CoPageView: typeof import('./../../../src/components/common/CoPageView/CoPageView.vue')['default']
     CoPlusMinus: typeof import('./../../../src/components/common/CoPlusMinus/CoPlusMinus.vue')['default']
     CoRequestList: typeof import('./../../../src/components/common/CoRequestList/CoRequestList.vue')['default']
+    CoSelect: typeof import('./../../../src/components/common/CoSelect/CoSelect.vue')['default']
+    CoSortControl: typeof import('./../../../src/components/common/CoSortControl/CoSortControl.vue')['default']
     CoStateTag: typeof import('./../../../src/components/common/CoStateTag/CoStateTag.vue')['default']
     CoStepLine: typeof import('./../../../src/components/common/CoStepLine/CoStepLine.vue')['default']
     CoTabsFor: typeof import('./../../../src/components/common/CoTabsFor/CoTabsFor.vue')['default']
     CoVideo: typeof import('./../../../src/components/common/CoVideo/CoVideo.vue')['default']
+    CoWebView: typeof import('./../../../src/components/common/CoWebView/CoWebView.vue')['default']
     EnvCoverImage: typeof import('./../../../src/components/common/CoMap/envCoverImage.vue')['default']
     EnvCoverView: typeof import('./../../../src/components/common/CoMap/envCoverView.vue')['default']
     GrFilterSearch: typeof import('./../../../src/components/group/GrFilterSearch/GrFilterSearch.vue')['default']
+    NaUpload: typeof import('./../../../src/components/native/NaUpload/NaUpload.vue')['default']
+    NaVideo: typeof import('./../../../src/components/native/NaVideo/NaVideo.vue')['default']
+    ReUpload: typeof import('./../../../src/components/rewrite/ReUpload/ReUpload.vue')['default']
   }
 }

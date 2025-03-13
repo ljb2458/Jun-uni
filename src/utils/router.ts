@@ -1,5 +1,9 @@
 import { objToQuery } from "@/utils/tools/object";
-import useSysStore from "@/store/useSysStore";
+import {
+  routersArray,
+  getRouteInfo,
+  getCurrentRouteInfo,
+} from "@/utils/rewriteUni";
 
 const router = {
   /**跳转路由 */
@@ -8,7 +12,6 @@ const router = {
       let queryStr = "";
       if (config?.query) queryStr = `${objToQuery(config.query, false)}`;
       delete config?.query;
-      console.log("queryStr", `${replaceUrl(url)}?${queryStr}`);
       uni.navigateTo({
         ...config,
         url: `${replaceUrl(url)}?${queryStr}`,
@@ -52,6 +55,23 @@ const router = {
       });
     });
   },
+  backOrHome(delta: number = 1, config?: Partial<UniApp.NavigateBackOptions>) {
+    const page = getCurrentRouteInfo();
+    if (page?.tabbar || page.pages.length == 1) {
+      return router.home();
+    } else {
+      return router.back(delta, config);
+    }
+  },
+  home() {
+    const path = routersArray[0].path;
+    const homeInfo = getRouteInfo(path);
+    if (homeInfo?.tabbar) {
+      return router.tabbar(`/${path}`);
+    } else {
+      return router.push(`/${path}`);
+    }
+  },
   /**关闭所有页面并跳转 */
   replaceAll(url: string, config?: RouterToOption) {
     return new Promise<UniApp.NavigateToSuccessOptions>((resolve, reject) => {
@@ -67,50 +87,10 @@ const router = {
     });
   },
 };
-function replaceUrl(url: string) {
+export function replaceUrl(url: string) {
   return url.replace(/(?:^src|^\/src|^@)/, "").replace(/.vue$/, "");
 }
 export default router;
 interface RouterToOption extends Partial<UniApp.NavigateToOptions> {
   query?: AnyObject;
 }
-
-// export const LOGIN_WHITE_LIST = [/^\/pages\/tabbar/, /^\/pages\/system/];
-// const LOGIN_PATH = "@/pages/system/login.vue";
-
-// export function useRouterInterceptor() {
-//   const interceptorRouterList = [
-//     "navigateTo",
-//     "redirectTo",
-//     "reLaunch",
-//     "switchTab",
-//   ];
-//   interceptorRouterList.forEach((key) => {
-//     uni.addInterceptor(key, {
-//       invoke(args: UniNamespace.NavigateToOptions) {
-//         const env = import.meta.env;
-//         if (env.VITE_REQUIRED_LOGIN === "0") return;
-//         const { url } = args;
-//         if (Object.is(url, replaceUrl(LOGIN_PATH))) {
-//           //是登录页
-//           return;
-//         }
-//         if (LOGIN_WHITE_LIST.some((regexp) => regexp.test(url as string))) {
-//           //在白名单中
-//           return;
-//         }
-//         const sysStore = useSysStore();
-//         if (sysStore.defaHttpHeader) {
-//           //已登录
-//           return;
-//         }
-//         router.push(LOGIN_PATH, {
-//           query: { replace: url },
-//         });
-//         uni.showToast({ title: "请先登录小程序" });
-//         console.warn(`未登录且 url:“${url}” 不在登录白名单中，已跳转登录`);
-//         return false;
-//       },
-//     });
-//   });
-// }

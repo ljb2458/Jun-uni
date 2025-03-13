@@ -4,36 +4,36 @@ import {
   RequestList,
 } from "@/components/common/CoRequestList/useRequestList";
 import CoList from "../CoList/CoList.vue";
-import { Instance as CoListInstance, LoadParam } from "../CoList/CoList.vue";
+import { CoListInstance, LoadParam } from "../CoList/CoList.vue";
 import CRequestList from "./CoRequestList.vue";
-export type Instance<F extends RequestList.Api> = Omit<
+export type CoRequestListInstance<F extends RequestList.Api> = Omit<
   GenericComponentExports<typeof CRequestList>,
-  "data" | "res"
+  "list" | "result"
 > & {
-  data: RequestList.ApiData<F>;
-  res: RequestList.ApiRes<F> | undefined;
+  list: RequestList.GetList<F>;
+  result: RequestList.GetRes<F> | undefined;
 };
 type CoListProps = ComponentPropsType<typeof CoList>;
 interface Props {
   api: F;
-  requestBefore?: RequestList.RequestBefore<F>;
   extraParams?: any[];
-  isOnePage?: boolean;
   setupLoad?: boolean;
-  params?: RequestList.ApiParams<F>;
+  defPageNo?: number;
+  giveReq?: (req: RequestList.Req) => RequestList.GetParams<F>[0];
+  param?: Partial<RequestList.GetParams<F>[0]>;
   /**上拉触底事件，一般可不传 */
   onReachBottom?: CoListProps["onReachBottom"];
   /**下拉刷新事件，一般可不传 */
   onPullDownRefresh?: (callback: Fun) => any;
   /**下拉刷新完成回调，默认uni.stopPullDownRefresh(关闭页面下拉刷新) */
   pullDownRefreshEnd?: (v?: RequestList.State) => void;
-  /**解决微信小程序v-for循环无法获取ref的问题 */
-  _ref?: any;
   minHeight?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
+  defPageNo: 1,
   minHeight: "70vh",
   setupLoad: true,
+  giveReq: () => (req: RequestList.Req) => req,
 });
 (props.onPullDownRefresh || onPullDownRefresh)(pullDownRefreshRequset);
 /**下拉刷新请求 */
@@ -48,8 +48,8 @@ function load(e: LoadParam) {
   request();
 }
 const {
-  res,
-  data,
+  result,
+  list,
   state,
   request,
   rerequest,
@@ -58,15 +58,17 @@ const {
   stateLoading,
   stateNull,
   stateNext,
-} = useRequestList(props.api, props.isOnePage, {
-  requestBefore: props.requestBefore,
-  returnExtraParams: () => props.extraParams || [],
-  returnReq: () => props.params || {},
+} = useRequestList(props.api, {
+  giveExtraParams: () => props.extraParams || [],
+  giveReq(req) {
+    return { ...props.param, ...props.giveReq(req) };
+  },
+  defPageNo: props.defPageNo,
 });
 const _expose = {
-  res,
+  result,
   state,
-  data,
+  list,
   rerequest,
   stateEnd,
   stateErr,
@@ -78,11 +80,6 @@ const _expose = {
 };
 /**暴露分页hooks */
 defineExpose(_expose);
-/**解决微信小程序v-for循环无法获取ref的问题 */
-if (props._ref) props._ref.value = _expose;
-onUnmounted(() => {
-  if (props._ref) props._ref.value = null;
-});
 
 const CListRef = ref<CoListInstance>();
 function activeLoad() {
@@ -112,14 +109,17 @@ function isVisible() {
     :setup-load="setupLoad"
     :min-height="props.minHeight"
   >
-    <slot :data="data" :res="res">
-      <slot
-        v-for="(item, index) in data"
-        :item="item"
-        :index="index"
-        name="item"
-      >
-      </slot>
+    <slot :list="list" :result="result">
+      <block v-for="(item, index) in list" :key="index">
+        <slot
+          :item="item"
+          :index="index"
+          :list="list"
+          :result="result"
+          name="item"
+        >
+        </slot>
+      </block>
     </slot>
   </CoList>
 </template>

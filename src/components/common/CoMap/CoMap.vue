@@ -1,31 +1,44 @@
 <script setup lang="ts">
 import { StyleValue } from "vue";
 import { uniApiToPromise } from "@/utils/rewriteUni";
-import { generateUUID } from "@/utils/tools/generate";
-import { _require } from "@/utils/tools";
+import { randomUUID } from "@/utils/tools/generate";
+import { _import } from "@/utils/tools/import";
 import type {
   MapProps,
+  MapMarker,
+  MapCallout,
   MapOnRegionchangeEvent,
 } from "@uni-helper/uni-app-types";
 import { useVModel } from "@/hooks/toolsHooks";
 import envCoverView from "./envCoverView.vue";
 import envCoverImage from "./envCoverImage.vue";
 
+export interface CoMapMarker extends MapMarker {
+  iconPath?: string;
+  callout?: CoMapCallout;
+}
+export interface CoMapCallout extends Partial<MapCallout> {}
+export interface CoMapMapProps extends MapProps {
+  markers?: CoMapMarker[];
+}
+
 const MIN_SCALE = 3;
 const MAX_SCALE = 20;
-const SCALE = 16;
 const LATITUDE = 39.909;
 const LONGITUDE = 116.39742;
-const MAP_ID = `map-${generateUUID().slice(0, 60)}`;
+const MAP_ID = `map-${randomUUID().slice(0, 60)}`;
 const props = withDefaults(
   defineProps<{
     showMap?: boolean;
     mapHidIcon?: boolean | string;
-    mapProps?: MapProps;
+    mapProps?: CoMapMapProps;
     topHeight?: string;
     bottomHeight?: string;
     leftIcons?: IconItem[];
     rightIcons?: IconItem[];
+    fill?: boolean;
+    showFill?: boolean;
+    scale?: number;
   }>(),
   {
     mapProps: () => ({}),
@@ -34,26 +47,17 @@ const props = withDefaults(
     topHeight: "100px",
     bottomHeight: "0px",
     showMap: true,
+    scale: 16,
+    showFill: true,
   }
 );
-
-const emit = defineEmits<{
-  "update:showMap": [v: boolean];
-}>();
-
-const showMap = useVModel(props, "showMap", emit);
-
-const layoutInfo = computed(() => {
-  let { topHeight, bottomHeight } = props;
-  if (!mapData.fill) topHeight = bottomHeight = "0px";
-  return { topHeight, bottomHeight };
-});
+const SCALE = props.scale;
 const $mapProps = computed(() => ({
   latitude: LATITUDE,
   longitude: LONGITUDE,
   minScale: MIN_SCALE,
   maxScale: MAX_SCALE,
-  scale: SCALE,
+
   layerStyle: 1,
   enable3D: true,
   enableZoom: true,
@@ -63,6 +67,22 @@ const $mapProps = computed(() => ({
   enableIndoorMap: true,
   ...props.mapProps,
 }));
+
+const emit = defineEmits<{
+  "update:showMap": [v: boolean];
+  "update:fill": [v: boolean];
+}>();
+
+const showMap = useVModel(props, "showMap", emit);
+const fill = useVModel(props, "fill", emit);
+const scale = useVModel(props, "scale", emit)!;
+
+const layoutInfo = computed(() => {
+  let { topHeight, bottomHeight } = props;
+  if (!fill.value) topHeight = bottomHeight = "0px";
+  return { topHeight, bottomHeight };
+});
+
 const latitude = useVModel(props.mapProps, "latitude", undefined, {
   defaultValue: LATITUDE,
 });
@@ -71,29 +91,25 @@ const longitude = useVModel(props.mapProps, "longitude", undefined, {
 });
 
 onMounted(() => {
-  mapData.mapCtx = uni.createMapContext(MAP_ID, getCurrentInstance());
+  mapCtx = uni.createMapContext(MAP_ID, getCurrentInstance());
 });
-/**map地图相关数据 */
-const mapData = reactive({
-  fill: false,
-  scale: $mapProps.value.scale,
-  mapCtx: defineType<UniNamespace.MapContext>()!,
-});
-function changeFill(value: boolean = !mapData.fill) {
-  mapData.fill = value;
+let mapCtx: UniNamespace.MapContext;
+
+function changeFill(value: boolean = !fill.value) {
+  fill.value = value;
 }
 async function changeScale(value: number) {
   const minScale = $mapProps.value.minScale;
   const maxScale = $mapProps.value.maxScale;
   if (value > maxScale) value = maxScale;
   if (value < minScale) value = minScale;
-  const res = await uniApiToPromise(mapData.mapCtx.getCenterLocation);
+  const res = await uniApiToPromise(mapCtx.getCenterLocation);
   latitude.value = res.latitude;
   longitude.value = res.longitude;
-  mapData.scale = value;
+  scale.value = value;
 }
 function moveToLocal() {
-  mapData.mapCtx.moveToLocation({
+  mapCtx.moveToLocation({
     latitude: latitude.value,
     longitude: longitude.value,
   });
@@ -103,7 +119,7 @@ async function onRegionchange(e: MapOnRegionchangeEvent) {
   if (typeof props.mapProps.onRegionchange == "function")
     props.mapProps.onRegionchange(e);
   if (e.causedBy !== "scale") return;
-  const res = await uniApiToPromise(mapData.mapCtx.getScale);
+  const res = await uniApiToPromise(mapCtx.getScale);
   changeScale(res.scale);
 }
 
@@ -131,31 +147,33 @@ const rightIconList = computed<IconItem[]>(() => {
   if (showMap.value) {
     iconArray.push(
       {
-        class: ["_MB-0"],
-        iconPath: _require("src/static/components/imgs/plus.png"),
-        tap: () => changeScale(mapData.scale + 1),
+        class: ["_MB-0 _MT-auto"],
+        iconPath: _import("src/static/components/imgs/plus.png"),
+        tap: () => changeScale(scale.value + 1),
       },
       {
         class: ["_MT-0"],
-        iconPath: _require("src/static/components/imgs/reduce.png"),
-        tap: () => changeScale(mapData.scale - 1),
+        iconPath: _import("src/static/components/imgs/reduce.png"),
+        tap: () => changeScale(scale.value - 1),
       },
       {
         class: ["_MT-auto"],
-        iconPath: _require("src/static/components/imgs/local.png"),
+        iconPath: _import("src/static/components/imgs/local.png"),
         tap: () => moveToLocal(),
-      },
-      {
-        iconPath: mapData.fill
-          ? _require("src/static/components/imgs/fullScreenExit.png")
-          : _require("src/static/components/imgs/fullScreen.png"),
-        tap: () => changeFill(),
-        class: ["_MT-auto"],
       }
     );
   }
-  if (mapData.fill && props.mapHidIcon) {
-    let iconPath = _require("src/static/components/imgs/menu.png");
+  if (props.showFill) {
+    iconArray.push({
+      iconPath: fill.value
+        ? _import("src/static/components/imgs/fullScreenExit.png")
+        : _import("src/static/components/imgs/fullScreen.png"),
+      tap: () => changeFill(),
+      class: ["_MT-auto"],
+    });
+  }
+  if (fill.value && props.mapHidIcon) {
+    let iconPath = _import("src/static/components/imgs/menu.png");
     if (typeof props.mapHidIcon !== "boolean") iconPath = props.mapHidIcon;
     iconArray.unshift({
       iconPath,
@@ -175,9 +193,8 @@ const rightIconList = computed<IconItem[]>(() => {
 </script>
 
 <template>
-  <view class="CoMap" :class="{ CoMap__fill: mapData.fill }">
+  <view class="CoMap" :class="{ CoMap__fill: fill }">
     <slot></slot>
-
     <envCoverView
       class="controls__left"
       :style="{
@@ -222,14 +239,14 @@ const rightIconList = computed<IconItem[]>(() => {
     </envCoverView>
     <envCoverView
       class="controls__top"
-      :show="mapData.fill"
+      :show="fill"
       :style="{ height: layoutInfo.topHeight }"
     >
       <slot name="top"></slot>
     </envCoverView>
     <envCoverView
       class="controls__bottom"
-      :show="mapData.fill"
+      :show="fill"
       :style="{ height: layoutInfo.bottomHeight }"
     >
       <slot name="bottom"></slot>
@@ -239,7 +256,7 @@ const rightIconList = computed<IconItem[]>(() => {
       :id="MAP_ID"
       :latitude="latitude"
       :longitude="longitude"
-      :scale="mapData.scale"
+      :scale="scale"
       :theme="$mapProps.theme"
       :min-scale="$mapProps.minScale"
       :max-scale="$mapProps.maxScale"
@@ -262,14 +279,14 @@ const rightIconList = computed<IconItem[]>(() => {
       :enable-building="$mapProps.enableBuilding"
       :show-location="$mapProps.showLocation"
       :enable-indoor-map="$mapProps.enableIndoorMap"
-      @onMarkertap="$mapProps.onMarkertap"
-      @onLabeltap="$mapProps.onLabeltap"
-      @onCallouttap="$mapProps.onCallouttap"
-      @onControltap="$mapProps.onControltap"
-      @onTap="$mapProps.onTap"
-      @onUpdated="$mapProps.onUpdated"
-      @onAnchorpointtap="$mapProps.onAnchorpointtap"
-      @onPoitap="$mapProps.onPoitap"
+      @markertap="$mapProps.onMarkertap"
+      @labeltap="$mapProps.onLabeltap"
+      @callouttap="$mapProps.onCallouttap"
+      @controltap="$mapProps.onControltap"
+      @tap="$mapProps.onTap"
+      @updated="$mapProps.onUpdated"
+      @anchorpointtap="$mapProps.onAnchorpointtap"
+      @poitap="$mapProps.onPoitap"
       @regionchange="onRegionchange"
     >
     </map>
@@ -291,7 +308,7 @@ const rightIconList = computed<IconItem[]>(() => {
   .controls__left,
   .controls__right {
     position: absolute;
-    z-index: 2;
+    z-index: 9;
     // border: solid red 1px;
   }
   .controls_iconBox {
@@ -355,6 +372,7 @@ const rightIconList = computed<IconItem[]>(() => {
 </style>
 <script lang="ts">
 import mpMixin from "@/components/libs/mixin/mpMixin";
+import { extend } from "lodash";
 export default {
   mixins: [mpMixin],
 };

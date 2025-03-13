@@ -39,11 +39,12 @@ input:-ms-input-placeholder {
 }
 /* 滚动条 */
 ::-webkit-scrollbar {
-  width: 1px;
-  height: 1px;
+  display: block !important;
+  width: 1px !important;
+  height: 1px !important;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: var(--C-T1);
+  background-color: var(--C-T1-O5);
   border-radius: 999px;
 }
 input {

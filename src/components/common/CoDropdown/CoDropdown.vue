@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { useVModel } from "@/hooks/toolsHooks";
-export interface Props {
+export interface CoDropdownProps {
   show?: boolean;
   text?: string;
   width?: string;
   height?: string;
 }
-const props = defineProps<Props>();
+const props = defineProps<CoDropdownProps>();
 const emit = defineEmits<{
   "update:show": [v: boolean];
 }>();
@@ -28,11 +28,13 @@ const show = useVModel(props, "show", emit);
       </slot>
     </view>
     <view @tap.stop="show = false" class="CoDropdown_masking"></view>
-    <view class="CoDropdown_content" @tap.stop :style="{ width, height }">
-      <view class="CoDropdown_indicate"></view>
-      <slot>
-        <view style="height: 58px"></view>
-      </slot>
+    <view class="CoDropdown_popup" @tap.stop :style="{ width, height }">
+      <view class="CoDropdown_popup_indicate"></view>
+      <view class="CoDropdown_popup_content">
+        <slot>
+          <view style="height: 58px"></view>
+        </slot>
+      </view>
     </view>
   </view>
 </template>
@@ -51,12 +53,12 @@ const show = useVModel(props, "show", emit);
     transition: all linear 150ms;
     transform: rotate(0);
   }
-  > .CoDropdown_content {
+  > .CoDropdown_popup {
     position: absolute;
     top: calc(100% + $indicate-size);
     left: 0;
     right: 0;
-    z-index: 2;
+    z-index: 9;
 
     background-color: #fff;
     visibility: hidden;
@@ -65,7 +67,7 @@ const show = useVModel(props, "show", emit);
 
     filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
 
-    .CoDropdown_indicate {
+    .CoDropdown_popup_indicate {
       position: absolute;
       left: 1em;
       top: 0;
@@ -74,6 +76,12 @@ const show = useVModel(props, "show", emit);
       background-color: #fff;
       transform: rotate(45deg) translateY(-50%);
       z-index: -1;
+    }
+    .CoDropdown_popup_content{
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: var(--R-sm);
     }
   }
   > .CoDropdown_masking {
@@ -84,14 +92,14 @@ const show = useVModel(props, "show", emit);
     left: 0;
     right: 0;
     opacity: 0;
-    z-index: 2;
+    z-index: 9;
   }
 }
 .CoDropdown__show {
   > .CoDropdown_icon {
     transform: rotate(180deg);
   }
-  > .CoDropdown_content {
+  > .CoDropdown_popup {
     transition-timing-function: ease-in;
     visibility: initial;
     max-height: 200vh;

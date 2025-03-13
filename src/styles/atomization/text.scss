@@ -34,13 +34,16 @@ page {
 }
 
 /* 文字多行省略号 */
-.T-omit-n {
-  --T-n: 3;
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  line-clamp: var(--T-n);
-  word-break: break-all;
+@for $i from 1 through 5 {
+  .T-omit-#{$i} {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $i;
+    line-clamp: $i;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+  }
 }
 
 /* 文字多了自動換行 */

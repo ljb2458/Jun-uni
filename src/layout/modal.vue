@@ -2,9 +2,15 @@
 import { ModalRef } from "@ttou/uv-typings/types/modal";
 import { showModal, modalProps, onReject, onResovle } from "./setModal";
 const modalRef = ref<ModalRef>();
-watch(showModal, (newValue) => {
-  if (newValue) modalRef.value?.open();
-  else modalRef.value?.close();
+onMounted(() => {
+  watch(
+    showModal,
+    (newValue) => {
+      if (newValue) modalRef.value?.open();
+      else modalRef.value?.close();
+    },
+    { immediate: true }
+  );
 });
 </script>
 <template>

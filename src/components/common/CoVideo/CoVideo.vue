@@ -5,33 +5,38 @@ import {
   VideoOnFullscreenchangeEvent,
   VideoOnControlstoggleEvent,
 } from "@uni-helper/uni-app-types";
-import { generateUUID } from "@/utils/tools/generate";
+import { randomUUID } from "@/utils/tools/generate";
 import envCoverView from "../CoMap/envCoverView.vue";
-const VIDEO_ID = `video-${generateUUID().slice(0, 59)}`;
+export interface CoVideoProps {
+  videoProps?: VideoProps;
+  height?: string;
+  width?: string;
+}
+
+const VIDEO_ID = `video-${randomUUID().slice(0, 59)}`;
 
 // 定义组件的 props
-const props = withDefaults(
-  defineProps<{
-    videoProps?: VideoProps;
-  }>(),
-  { videoProps: () => ({}) }
-);
+const props = withDefaults(defineProps<CoVideoProps>(), {
+  videoProps: () => ({}),
+  height: "300px",
+  width: "100%",
+});
 
 // 合并 props 并提供默认值
 const $videoProps = computed<VideoProps>(() => ({
   direction: 90,
   controls: true,
-  showProgress: !nodeInfo.width || nodeInfo.width > 240,
+  showProgress: !nodeInfo.width || nodeInfo.width > 240 || videoData.fullscreen,
   showFullscreenBtn: true,
   showPlayBtn: true,
   showCenterPlayBtn: true,
   showLoading: true,
   enableProgressGesture: true,
-  pageGesture: true,
-  vslideGesture: true,
+  pageGesture: false,
+  vslideGesture: false,
   showMuteBtn: true,
   objectFit: "contain",
-  playBtnPosition: "bottom",
+  playBtnPosition: "center",
   mobilenetHintType: 1,
   autoPauseIfNavigate: true,
   autoPauseIfOpenNative: true,
@@ -96,7 +101,7 @@ function changeSpeed(item: ArrayToUnion<typeof selectSpeed>) {
 </script>
 
 <template>
-  <view class="CoVideo">
+  <view class="CoVideo" :style="{ height, width }">
     <video
       :id="VIDEO_ID"
       :src="$videoProps.src"
@@ -151,11 +156,13 @@ function changeSpeed(item: ArrayToUnion<typeof selectSpeed>) {
       @controlstoggle="onControlstoggle"
     >
       <envCoverView
-        :show="videoData.controls"
+        :show="
+          (Number(nodeInfo.height) > 250 || videoData.fullscreen) &&
+          videoData.controls
+        "
         class="CoVideo_selectSpeed flex-col flex-A-C flex-J-C PD-xs"
       >
         <envCoverView
-          :show="+nodeInfo.height! > 250 || videoData.fullscreen"
           class="CoVideo_selectSpeedItem"
           :class="{
             CoVideo_selectSpeedItem__active: Object.is(
@@ -176,16 +183,13 @@ function changeSpeed(item: ArrayToUnion<typeof selectSpeed>) {
 
 <style lang="scss" scoped>
 .CoVideo {
-  width: 100%;
-  height: 300px;
-
   .CoVideo_selectSpeed {
     $gap: 40px;
     position: absolute;
     left: 0;
     bottom: $gap;
     top: $gap;
-    z-index: 2;
+    z-index: 9;
     margin: auto;
     padding: 0 4px;
 
@@ -214,7 +218,7 @@ function changeSpeed(item: ArrayToUnion<typeof selectSpeed>) {
 
 <script lang="ts">
 import mpMixin from "@/components/libs/mixin/mpMixin";
-import { _require } from "@/utils/tools";
+import { _import } from "@/utils/tools/import";
 export default {
   mixins: [mpMixin],
 };

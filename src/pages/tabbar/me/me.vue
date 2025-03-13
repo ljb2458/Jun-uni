@@ -1,17 +1,17 @@
 <cfg lang="json">
 {
   "navigationBarTitleText": "我的",
-  "enablePullDownRefresh": false,
+  "enablePullDownRefresh": true,
   "navigationStyle": "custom",
   "navigationBarTextStyle": "white"
 }
 </cfg>
 <script lang="ts" setup>
-import { _require } from "@/utils/tools";
+import { _import } from "@/utils/tools/import";
 import { onPageScroll } from "@dcloudio/uni-app";
 import taskStatistics from "./components/taskStatistics.vue";
 import loopCheck from "./components/loopCheck.vue";
-import { StateEnum } from "@/components/common/CoStateTag/CoStateTag.vue";
+import { CoStateOrm } from "@/components/common/CoStateTag/CoStateTag.vue";
 import {
   ButtonOnChooseaddressEvent,
   ButtonOnGetphonenumberEvent,
@@ -19,9 +19,9 @@ import {
 import { uniApiToPromise } from "@/utils/rewriteUni";
 import useUserinfoStore from "@/store/useUserinfoStore";
 
-const userAuthEnum: StateEnum = [
+const userAuthEnum: CoStateOrm = [
   {
-    state: 1,
+    value: 1,
     label: "管理员",
     class: "C-M1 B-M1-O3 R-max P-row-xs F-S-xs ML-xs",
   },
@@ -50,7 +50,7 @@ function chooseavatar(e: ButtonOnChooseaddressEvent) {
 function uploadAvater(url: string) {
   userinfoStore.userinfo = {
     ...userinfoStore.userinfo,
-    avatarUrl: url,
+    avatar: url,
   };
 }
 </script>
@@ -67,8 +67,8 @@ function uploadAvater(url: string) {
           height="58px"
           width="58px"
           :src="
-            userinfoStore.userinfo?.avatarUrl ||
-            _require('src/static/imgs/icon/avatar__logout.jpg')
+            userinfoStore.userinfo?.avatar ||
+            _import('src/static/imgs/icon/avatar__logout.jpg')
           "
           :mode="'aspectFill'"
         ></uv-image>
@@ -83,7 +83,7 @@ function uploadAvater(url: string) {
             >
               点击登录
             </button> -->
-          <CoStateTag :stateEnum="userAuthEnum" :state="1" />
+          <CoStateTag :state-orm="userAuthEnum" :value="1" />
         </view>
         <view class="C-T3">18888888888</view>
         <view>某某企业</view>

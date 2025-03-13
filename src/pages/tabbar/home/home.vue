@@ -8,13 +8,13 @@
 </cfg>
 
 <script setup lang="ts">
-import { _require } from "@/utils/tools";
+import { _import } from "@/utils/tools/import";
 import { onPageScroll } from "@dcloudio/uni-app";
 
 const swiperArray = [
-  _require("src/static/imgs/bg/home_card_1.png"),
-  _require("src/static/imgs/bg/home_card_2.png"),
-  _require("src/static/imgs/bg/home_card_3.png"),
+  _import("src/static/imgs/bg/home_card_1.png"),
+  _import("src/static/imgs/bg/home_card_2.png"),
+  _import("src/static/imgs/bg/home_card_3.png"),
 ];
 </script>
 

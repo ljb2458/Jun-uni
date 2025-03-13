@@ -11,7 +11,7 @@ import { unitPercent, unitPx } from "@/utils/tools/css";
 import { getRect } from "@/utils/rewriteUni";
 import { CSSProperties } from "vue";
 import dayjs from "dayjs";
-import { generateUUID } from "@/utils/tools/generate";
+import { randomUUID } from "@/utils/tools/generate";
 import { useVModel } from "@/hooks/toolsHooks";
 import type { StyleValue } from "vue";
 import type CoTabsFor from "./CoTabsFor.vue";
@@ -107,7 +107,7 @@ let skewingY = 0;
 let startTime = 0;
 /**取消本次滑动? */
 let abandon = false;
-let CoTabsForId = `CoTabsFor${generateUUID()}`;
+let CoTabsForId = `CoTabsFor${randomUUID()}`;
 /**swiper节点信息 */
 let nodeInfo: UniNamespace.NodeInfo;
 /**更新CoTabsFor节点信息 */

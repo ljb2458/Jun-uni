@@ -16,24 +16,24 @@
   filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
 }
 .border-B {
-  --border-c: var(--C-T1-O3);
-  border-bottom: solid 1px var(--border-c);
+  --border-c: #dadbde;
+  border-bottom: solid 0.5px var(--border-c);
 }
 .border-T {
-  --border-c: var(--C-T1-O3);
-  border-top: solid 1px var(--border-c);
+  --border-c: #dadbde;
+  border-top: solid 0.5px var(--border-c);
 }
 .border-L {
-  --border-c: var(--C-T1-O3);
-  border-left: solid 1px var(--border-c);
+  --border-c: #dadbde;
+  border-left: solid 0.5px var(--border-c);
 }
 .border-R {
-  --border-c: var(--C-T1-O3);
-  border-right: solid 1px var(--border-c);
+  --border-c: #dadbde;
+  border-right: solid 0.5px var(--border-c);
 }
 .border-all {
-  --border-c: var(--C-T1-O3);
-  border: solid 1px var(--border-c);
+  --border-c: #dadbde;
+  border: solid 0.5px var(--border-c);
 }
 @keyframes option {
   0% {

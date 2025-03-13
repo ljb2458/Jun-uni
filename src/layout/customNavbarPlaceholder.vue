@@ -10,7 +10,7 @@ import { getCurrentRouteInfo } from "@/utils/rewriteUni";
 
 const routeInfo = getCurrentRouteInfo();
 const isCustomNavbar = computed(
-  () => routeInfo?.style.navigationStyle === "custom"
+  () => routeInfo?.style?.navigationStyle === "custom"
 );
 </script>
 <template>
