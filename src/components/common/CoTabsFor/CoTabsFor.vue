@@ -67,21 +67,22 @@ const emit = defineEmits<{
 }>();
 
 type TabsListItem = Item & { load: boolean; slotName: string; index: number };
-const tabsList = computed<Array<TabsListItem>>(() =>
-  props.options.map((v, index) => ({
+
+const currentIndex = useVModel(props, "modelValue", emit);
+const tabsList = computed<Array<TabsListItem>>(() => {
+  return props.options.map((v, index) => ({
     ...v,
     slotName: v.slotName || `index-${index}`,
     index,
-    load: !props.lazy,
-  }))
-);
-
+    load: !props.lazy || index === currentIndex.value,
+  }));
+});
 const currentSwiper = computed(() => tabsList.value[+currentIndex.value]);
-const currentIndex = useVModel(props, "modelValue", emit);
+
 watch(
   currentIndex,
   (newValue) => {
-    tabsList.value[+newValue].load = true; 
+    tabsList.value[+newValue].load = true;
   },
   {
     immediate: true,
