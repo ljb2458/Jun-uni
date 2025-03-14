@@ -75,7 +75,22 @@ const emit = defineEmits<{
 
 const showMap = useVModel(props, "showMap", emit);
 const fill = useVModel(props, "fill", emit);
-const scale = useVModel(props, "scale", emit)!;
+const externalScale = useVModel(props, "scale", emit)!;
+/**
+ * 双指滑动后，得到的缩放倍率，防止缩放倍率相互干扰，增加该字段
+ */
+const realScale = ref<number | undefined>(externalScale.value);
+
+const scale = computed({
+  get() {
+    if (Object.is(realScale.value, undefined)) return externalScale.value;
+    return realScale.value || SCALE;
+  },
+  set(v) {
+    externalScale.value = v;
+    realScale.value = undefined;
+  },
+});
 
 const layoutInfo = computed(() => {
   let { topHeight, bottomHeight } = props;
@@ -98,6 +113,7 @@ let mapCtx: UniNamespace.MapContext;
 function changeFill(value: boolean = !fill.value) {
   fill.value = value;
 }
+
 async function changeScale(value: number) {
   const minScale = $mapProps.value.minScale;
   const maxScale = $mapProps.value.maxScale;
@@ -108,7 +124,10 @@ async function changeScale(value: number) {
   longitude.value = res.longitude;
   scale.value = value;
 }
-function moveToLocal() {
+async function moveToLocal() {
+  const res = await uniApiToPromise(uni.getLocation);
+  latitude.value = res.latitude;
+  longitude.value = res.longitude;
   mapCtx.moveToLocation({
     latitude: latitude.value,
     longitude: longitude.value,
@@ -120,7 +139,7 @@ async function onRegionchange(e: MapOnRegionchangeEvent) {
     props.mapProps.onRegionchange(e);
   if (e.causedBy !== "scale") return;
   const res = await uniApiToPromise(mapCtx.getScale);
-  changeScale(res.scale);
+  realScale.value = res.scale;
 }
 
 interface IconItem {
@@ -256,7 +275,7 @@ const rightIconList = computed<IconItem[]>(() => {
       :id="MAP_ID"
       :latitude="latitude"
       :longitude="longitude"
-      :scale="scale"
+      :scale="externalScale"
       :theme="$mapProps.theme"
       :min-scale="$mapProps.minScale"
       :max-scale="$mapProps.maxScale"
