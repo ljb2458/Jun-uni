@@ -39,7 +39,7 @@ const isCustomNavbar = computed(
           @tap="router.back()"
           name="cicon-fanhui"
         />
-        <view>
+        <view class="flex-1">
           <slot :slotProps="{ ...routeInfo! }">
             {{ routeInfo?.style?.navigationBarTitleText }}
           </slot>

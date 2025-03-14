@@ -41,7 +41,7 @@ if (props.onPageScroll) {
 }
 
 const navbarHeightCssVar = computed(() => {
-  if (routeInfo?.style.navigationStyle === "custom") {
+  if (routeInfo?.style?.navigationStyle === "custom") {
     if (props.useCustomNavbar) {
       return `calc(var(--status-bar-height) + ${
         defaultStyle.height || "0px"
@@ -78,7 +78,7 @@ const navbarHeightCssVar = computed(() => {
     >
       <template #default="{ slotProps }">
         <slot :slotProps="routeInfo!" name="customNavbar">{{
-          slotProps.style.navigationBarTitleText
+          slotProps.style?.navigationBarTitleText
         }}</slot>
       </template>
     </customNavbar>
