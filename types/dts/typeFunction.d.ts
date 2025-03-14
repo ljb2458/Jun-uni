@@ -9,7 +9,7 @@ type ObjectToUnion<T extends AnyObject> = keyof {
 /**获取promise中的类型*/
 type UnPromise<T> = T extends Promise<infer U> ? UnPromise<U> : T;
 /**将T中的部分属性变为可选 */
-type OptionalBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 /**将T中的部分属性变为必选 */
 type RequiredBy<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
 

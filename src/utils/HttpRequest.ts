@@ -115,6 +115,7 @@ export function createHttpRequest(
       return res;
     },
     (error) => {
+      console.error(error);
       const custom = error.config.custom;
       const message = myConfig.giveErrMsg(error);
       const { showErrorMsg, errorText, showLoading } = customHelper(custom);
@@ -122,6 +123,7 @@ export function createHttpRequest(
       if (showErrorMsg) {
         uni.showToast({ title: errorText || message || "error" });
       }
+      return error;
     }
   );
   return httpRequest;
