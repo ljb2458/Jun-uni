@@ -38,7 +38,7 @@ uni.addInterceptor("showToast", {
     return args;
   },
 });
-// #ifdef APP-PLUS
+// #ifdef APP
 plus.screen.lockOrientation("portrait-primary");
 // #endif
 /**
