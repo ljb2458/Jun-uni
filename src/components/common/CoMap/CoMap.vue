@@ -105,9 +105,25 @@ const longitude = useVModel(props.mapProps, "longitude", undefined, {
   defaultValue: LONGITUDE,
 });
 
-onMounted(() => {
+onMounted(async () => {
   mapCtx = uni.createMapContext(MAP_ID, getCurrentInstance());
+  watch(
+    () => props.mapProps.includePoints,
+    () => {
+      updateMapScale();
+    },
+    { immediate: true }
+  );
 });
+async function updateMapScale() {
+  const res = await uniApiToPromise(mapCtx.getScale);
+  realScale.value = res.scale;
+}
+function onRegionchange(e: MapOnRegionchangeEvent) {
+  if (typeof props.mapProps.onRegionchange == "function")
+    props.mapProps.onRegionchange(e);
+  updateMapScale();
+}
 let mapCtx: UniNamespace.MapContext;
 
 function changeFill(value: boolean = !fill.value) {
@@ -133,13 +149,6 @@ async function moveToLocal() {
     longitude: longitude.value,
   });
   changeScale(SCALE);
-}
-async function onRegionchange(e: MapOnRegionchangeEvent) {
-  if (typeof props.mapProps.onRegionchange == "function")
-    props.mapProps.onRegionchange(e);
-  if (e.causedBy !== "scale") return;
-  const res = await uniApiToPromise(mapCtx.getScale);
-  realScale.value = res.scale;
 }
 
 interface IconItem {
