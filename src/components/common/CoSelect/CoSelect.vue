@@ -1,5 +1,6 @@
 <script setup lang="ts" generic="O extends CoSelectionsItem">
 import { CoDropdownProps } from "@/components/common/CoDropdown/CoDropdown.vue";
+import { useVModel } from "@/hooks/toolsHooks";
 
 export type CoSelections = CoSelectionsItem[];
 export interface CoSelectionsItem extends AnyObject {
@@ -49,19 +50,26 @@ const selectedOption = computed(() =>
       <view class="MG-sm">
         <view
           @tap="select(selection)"
-          class="selection P-col-xs border-B P-row-sm flex-A-C flex-J-SB active"
+          class="selection gap-sm P-col-xs border-B P-row-sm flex-A-C flex-J-SB active"
           :class="{
             selection__selected: Object.is(selection[valueName], modelValue),
           }"
           v-for="(selection, index) in props.selections"
           :key="selection[valueName]"
         >
-          <slot name="label" :index="index" :selection="selection">
-            <view>{{ selection[labelName] }}</view>
-          </slot>
+          <view class="flex-1">
+            <slot name="label" :index="index" :selection="selection">
+              <view>{{ selection[labelName] }}</view>
+            </slot>
+          </view>
           <view
             class="selection_icon C-M1"
-            v-show="Object.is(selection[valueName], modelValue)"
+            :class="{
+              selection_icon__active: Object.is(
+                selection[valueName],
+                modelValue
+              ),
+            }"
           >
             <uv-icon name="checkmark" color="inherit" size="inherit" />
           </view>
@@ -75,12 +83,17 @@ const selectedOption = computed(() =>
 .CoSelect {
   .selection {
     background-color: var(--C-B1);
+    .selection_icon {
+      visibility: hidden;
+    }
+    .selection_icon__active {
+      visibility: initial;
+    }
   }
 }
 </style>
 <script lang="ts">
 import mpMixin from "@/components/libs/mixin/mpMixin";
-import { useVModel } from "@/hooks/toolsHooks";
 export default {
   mixins: [mpMixin],
 };
