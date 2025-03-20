@@ -9,18 +9,23 @@ import type {
   MapCallout,
   MapOnRegionchangeEvent,
   MapLabel,
+  MapCustomCallout,
 } from "@uni-helper/uni-app-types";
 import { useVModel } from "@/hooks/toolsHooks";
 import envCoverView from "./envCoverView.vue";
 import envCoverImage from "./envCoverImage.vue";
 
-export interface CoMapMarker extends MapMarker {
+export interface CoMapMarker extends MapMarker, AnyObject {
   iconPath?: string;
   callout?: CoMapCallout;
   label?: CoMapLabel;
+  customCallout?: CoMapCustomCallout;
 }
-export interface CoMapLabel extends Partial<MapLabel> {}
-export interface CoMapCallout extends Partial<MapCallout> {}
+export interface CoMapCustomCallout
+  extends Partial<MapCustomCallout>,
+    AnyObject {}
+export interface CoMapLabel extends Partial<MapLabel>, AnyObject {}
+export interface CoMapCallout extends Partial<MapCallout>, AnyObject {}
 export interface CoMapMapProps extends MapProps {
   markers?: CoMapMarker[];
 }
@@ -362,6 +367,16 @@ const rightIconList = computed<IconItem[]>(() => {
       @poitap="$mapProps.onPoitap"
       @regionchange="onRegionchange"
     >
+      <template #callout v-if="$slots.calloutItem">
+        <cover-view
+          style="max-width: 100%"
+          v-for="item in mapProps.markers?.filter((v) => v.customCallout)"
+          :key="item.id"
+          :marker-id="item.id"
+        >
+          <slot name="calloutItem" :item="item"></slot>
+        </cover-view>
+      </template>
     </map>
   </view>
 </template>
