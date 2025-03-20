@@ -8,6 +8,7 @@ import type {
   MapMarker,
   MapCallout,
   MapOnRegionchangeEvent,
+  MapLabel,
 } from "@uni-helper/uni-app-types";
 import { useVModel } from "@/hooks/toolsHooks";
 import envCoverView from "./envCoverView.vue";
@@ -16,10 +17,20 @@ import envCoverImage from "./envCoverImage.vue";
 export interface CoMapMarker extends MapMarker {
   iconPath?: string;
   callout?: CoMapCallout;
+  label?: CoMapLabel;
 }
+export interface CoMapLabel extends Partial<MapLabel> {}
 export interface CoMapCallout extends Partial<MapCallout> {}
 export interface CoMapMapProps extends MapProps {
   markers?: CoMapMarker[];
+}
+export type CoMapControl = "scale" | "local";
+export interface GetLocationRes {
+  latitude: number;
+  longitude: number;
+}
+export interface GetLocation {
+  (): GetLocationRes | Promise<GetLocationRes>;
 }
 
 const MIN_SCALE = 3;
@@ -37,8 +48,14 @@ const props = withDefaults(
     leftIcons?: IconItem[];
     rightIcons?: IconItem[];
     fill?: boolean;
+    /**是否显示全屏控件 */
     showFill?: boolean;
+    /**全屏时不展示的控件 */
+    fillExcludeCotrol?: CoMapControl[];
+    /**非全屏时不展示的控件 */
+    normalExcludeCotrol?: CoMapControl[];
     scale?: number;
+    getLocation?: GetLocation;
   }>(),
   {
     mapProps: () => ({}),
@@ -49,6 +66,8 @@ const props = withDefaults(
     showMap: true,
     scale: 16,
     showFill: true,
+    showScale: true,
+    getLocation: () => uniApiToPromise(uni.getLocation),
   }
 );
 const SCALE = props.scale;
@@ -71,6 +90,7 @@ const $mapProps = computed(() => ({
 const emit = defineEmits<{
   "update:showMap": [v: boolean];
   "update:fill": [v: boolean];
+  "update:scale": [v: number];
 }>();
 
 const showMap = useVModel(props, "showMap", emit);
@@ -122,6 +142,7 @@ async function updateMapScale() {
 function onRegionchange(e: MapOnRegionchangeEvent) {
   if (typeof props.mapProps.onRegionchange == "function")
     props.mapProps.onRegionchange(e);
+  if (e.causedBy === "update") return;
   updateMapScale();
 }
 let mapCtx: UniNamespace.MapContext;
@@ -141,7 +162,7 @@ async function changeScale(value: number) {
   scale.value = value;
 }
 async function moveToLocal() {
-  const res = await uniApiToPromise(uni.getLocation);
+  const res = await props.getLocation();
   latitude.value = res.latitude;
   longitude.value = res.longitude;
   mapCtx.moveToLocation({
@@ -156,41 +177,47 @@ interface IconItem {
   iconPath?: string;
   tap?: Fun;
   style?: StyleValue;
+  orderNo?: number;
 }
 
 const leftIconList = computed<IconItem[]>(() => {
   const iconArray = [...props.leftIcons];
-
+  if (!showMap.value) return iconArray;
   iconArray.unshift({
     class: ["_MT-auto", "_B-none"],
+    orderNo: -999999999999999,
   });
   iconArray.push({
     class: ["_MB-auto", "_B-none"],
+    orderNo: 999999999999999,
   });
-  return iconArray;
+  return iconArray.toSorted((a, b) => Number(a.orderNo) - Number(b.orderNo));
 });
 
 const rightIconList = computed<IconItem[]>(() => {
   const iconArray = [...props.rightIcons];
-  if (showMap.value) {
-    iconArray.push(
-      {
-        class: ["_MB-0 _MT-auto"],
-        iconPath: _import("src/static/components/imgs/plus.png"),
-        tap: () => changeScale(scale.value + 1),
-      },
-      {
-        class: ["_MT-0"],
-        iconPath: _import("src/static/components/imgs/reduce.png"),
-        tap: () => changeScale(scale.value - 1),
-      },
-      {
-        class: ["_MT-auto"],
-        iconPath: _import("src/static/components/imgs/local.png"),
-        tap: () => moveToLocal(),
-      }
-    );
+  if (!showMap.value) return iconArray;
+
+  if (fill.value) {
+    if (!props.fillExcludeCotrol?.includes("scale")) addScaleCotrol();
+    if (!props.fillExcludeCotrol?.includes("local")) addLocalCotrol();
+    //点击此icon时隐藏地图，此时，地图默认slot中的内容会显现出来
+    if (props.mapHidIcon) {
+      let iconPath = _import("src/static/components/imgs/menu.png");
+      if (typeof props.mapHidIcon !== "boolean") iconPath = props.mapHidIcon;
+      iconArray.unshift({
+        iconPath,
+        tap: () => {
+          showMap.value = !showMap.value;
+        },
+        orderNo: 1,
+      });
+    }
+  } else {
+    if (!props.normalExcludeCotrol?.includes("scale")) addScaleCotrol();
+    if (!props.normalExcludeCotrol?.includes("local")) addLocalCotrol();
   }
+
   if (props.showFill) {
     iconArray.push({
       iconPath: fill.value
@@ -198,25 +225,43 @@ const rightIconList = computed<IconItem[]>(() => {
         : _import("src/static/components/imgs/fullScreen.png"),
       tap: () => changeFill(),
       class: ["_MT-auto"],
+      orderNo: 31,
     });
   }
-  if (fill.value && props.mapHidIcon) {
-    let iconPath = _import("src/static/components/imgs/menu.png");
-    if (typeof props.mapHidIcon !== "boolean") iconPath = props.mapHidIcon;
-    iconArray.unshift({
-      iconPath,
-      tap: () => {
-        showMap.value = !showMap.value;
-      },
-    });
-  }
+
   iconArray.unshift({
     class: ["_MT-auto", "_B-none"],
+    orderNo: -999999999999999,
   });
   iconArray.push({
     class: ["_MB-auto", "_B-none"],
+    orderNo: 999999999999999,
   });
-  return iconArray;
+  return iconArray.toSorted((a, b) => Number(a.orderNo) - Number(b.orderNo));
+  function addLocalCotrol() {
+    iconArray.push({
+      class: ["_MT-auto"],
+      iconPath: _import("src/static/components/imgs/local.png"),
+      tap: () => moveToLocal(),
+      orderNo: 21,
+    });
+  }
+  function addScaleCotrol() {
+    iconArray.push(
+      {
+        class: ["_MB-0 _MT-auto"],
+        iconPath: _import("src/static/components/imgs/plus.png"),
+        tap: () => changeScale(scale.value + 1),
+        orderNo: 11,
+      },
+      {
+        class: ["_MT-0"],
+        iconPath: _import("src/static/components/imgs/reduce.png"),
+        tap: () => changeScale(scale.value - 1),
+        orderNo: 12,
+      }
+    );
+  }
 });
 </script>
 
@@ -400,7 +445,6 @@ const rightIconList = computed<IconItem[]>(() => {
 </style>
 <script lang="ts">
 import mpMixin from "@/components/libs/mixin/mpMixin";
-import { extend } from "lodash";
 export default {
   mixins: [mpMixin],
 };

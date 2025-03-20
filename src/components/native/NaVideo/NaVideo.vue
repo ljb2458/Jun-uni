@@ -21,7 +21,7 @@ const load = ref(!autoplay);
     <view v-else class="fakeVideo B-black size-fill flex-A-C flex-J-C">
       <uv-icon
         class="fakeVideo_play"
-        @tap="load = true"
+        @tap.stop="load = true"
         name="play-right-fill"
         size="72px"
         color="#ffffff88"
