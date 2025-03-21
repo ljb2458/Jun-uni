@@ -1,12 +1,16 @@
 view,
 text,
 button,
+cover-view,
 scroll-view {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-size: inherit;
   color: inherit;
+}
+cover-view {
+  white-space: pre-wrap;
 }
 button {
   line-height: 1;
@@ -40,12 +44,15 @@ input:-ms-input-placeholder {
 /* 滚动条 */
 ::-webkit-scrollbar {
   display: block !important;
-  width: 1px !important;
-  height: 1px !important;
+  width: 4px !important;
+  background: none;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: var(--C-T1-O5);
+  background-color: var(--C-T1-O2);
   border-radius: 999px;
+  &:active {
+    background-color: var(--C-T1-O5);
+  }
 }
 input {
   border: none;
