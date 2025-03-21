@@ -74,7 +74,7 @@ const props = withDefaults(
     scale: 16,
     showFill: true,
     showScale: true,
-    getLocation: () => uniApiToPromise(uni.getLocation),
+    getLocation: () => () => uniApiToPromise(uni.getLocation),
   }
 );
 const SCALE = props.scale;
