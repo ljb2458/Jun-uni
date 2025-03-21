@@ -10,10 +10,12 @@ import type {
   MapOnRegionchangeEvent,
   MapLabel,
   MapCustomCallout,
+  MapOnUpdatedEvent,
 } from "@uni-helper/uni-app-types";
 import { useVModel } from "@/hooks/toolsHooks";
 import envCoverView from "./envCoverView.vue";
 import envCoverImage from "./envCoverImage.vue";
+import { debounce } from "lodash";
 
 export interface CoMapMarker extends MapMarker, AnyObject {
   iconPath?: string;
@@ -100,7 +102,7 @@ const emit = defineEmits<{
 
 const showMap = useVModel(props, "showMap", emit);
 const fill = useVModel(props, "fill", emit);
-const externalScale = useVModel(props, "scale", emit)!;
+const externalScale = useVModel(props, "scale", emit);
 /**
  * 双指滑动后，得到的缩放倍率，防止缩放倍率相互干扰，增加该字段
  */
@@ -130,19 +132,27 @@ const longitude = useVModel(props.mapProps, "longitude", undefined, {
   defaultValue: LONGITUDE,
 });
 
-onMounted(async () => {
+onMounted(() => {
   mapCtx = uni.createMapContext(MAP_ID, getCurrentInstance());
   watch(
     () => props.mapProps.includePoints,
     () => {
       updateMapScale();
-    },
-    { immediate: true }
+    }
   );
 });
-async function updateMapScale() {
-  const res = await uniApiToPromise(mapCtx.getScale);
-  realScale.value = res.scale;
+const updateMapScale = debounce(
+  async () => {
+    const res = await uniApiToPromise(mapCtx.getScale);
+    realScale.value = res.scale;
+  },
+  300,
+  { leading: true, trailing: true }
+);
+function onUpdated(e: MapOnUpdatedEvent) {
+  if (typeof props.mapProps.onUpdated == "function")
+    props.mapProps.onUpdated(e);
+  updateMapScale();
 }
 function onRegionchange(e: MapOnRegionchangeEvent) {
   if (typeof props.mapProps.onRegionchange == "function")
@@ -256,13 +266,17 @@ const rightIconList = computed<IconItem[]>(() => {
       {
         class: ["_MB-0 _MT-auto"],
         iconPath: _import("src/static/components/imgs/plus.png"),
-        tap: () => changeScale(scale.value + 1),
+        tap() {
+          changeScale(scale.value + 1);
+        },
         orderNo: 11,
       },
       {
         class: ["_MT-0"],
         iconPath: _import("src/static/components/imgs/reduce.png"),
-        tap: () => changeScale(scale.value - 1),
+        tap() {
+          changeScale(scale.value - 1);
+        },
         orderNo: 12,
       }
     );
@@ -362,20 +376,16 @@ const rightIconList = computed<IconItem[]>(() => {
       @callouttap="$mapProps.onCallouttap"
       @controltap="$mapProps.onControltap"
       @tap="$mapProps.onTap"
-      @updated="$mapProps.onUpdated"
       @anchorpointtap="$mapProps.onAnchorpointtap"
       @poitap="$mapProps.onPoitap"
       @regionchange="onRegionchange"
+      @updated="onUpdated"
     >
-      <template #callout v-if="$slots.calloutItem">
-        <cover-view
-          style="max-width: 100%"
-          v-for="item in mapProps.markers?.filter((v) => v.customCallout)"
-          :key="item.id"
-          :marker-id="item.id"
-        >
-          <slot name="calloutItem" :item="item"></slot>
-        </cover-view>
+      <template #callout>
+        <slot
+          name="callout"
+          :markers="$mapProps.markers?.filter((v) => v.customCallout)"
+        ></slot>
       </template>
     </map>
   </view>
