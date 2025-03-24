@@ -83,20 +83,37 @@ export function getAccountInfoCache(config?: { force?: boolean }) {
 }
 /**
  * * 获取节点信息
- * @param queryNode 节点标识 .class #id
+ * @param selector 节点标识 .class #id
  * @param _this 传入当前this，以兼容小程序
  * @returns
  */
-export function getRect(
-  queryNode: string,
+export function queryRect(
+  selector: string,
   _this?: any
 ): Promise<UniNamespace.NodeInfo> {
   return new Promise((resolve) => {
     const query = uni.createSelectorQuery().in(_this || getCurrentInstance());
     query
-      .select(queryNode)
+      .select(selector)
       .boundingClientRect((data) => {
         resolve(data as UniNamespace.NodeInfo);
+      })
+      .exec();
+  });
+}
+/**
+ * * 获取节点
+ * @param selector 节点标识 .class #id
+ * @param _this 传入当前this，以兼容小程序
+ * @returns
+ */
+export function queryNode(selector: string, _this?: any): Promise<any> {
+  return new Promise((resolve) => {
+    const query = uni.createSelectorQuery().in(_this || getCurrentInstance());
+    query
+      .select(selector)
+      .node((data) => {
+        resolve(data);
       })
       .exec();
   });
@@ -104,13 +121,13 @@ export function getRect(
 
 /**
  * * 通过位置获取节点可见状态
- * @param queryNode 节点标识 .class #id
+ * @param selector 节点标识 .class #id
  * @param _this 传入当前this，以兼容小程序
  * @returns
  */
-export async function isNodeVisible(queryNode: string, _this?: any) {
+export async function isNodeVisible(selector: string, _this?: any) {
   const sysInfo = getSystemInfoCache();
-  const nodeInfo = await getRect(queryNode, _this || getCurrentInstance());
+  const nodeInfo = await queryRect(selector, _this || getCurrentInstance());
   const left = Number(nodeInfo.left);
   const right = Number(nodeInfo.right);
   const top = Number(nodeInfo.top);
