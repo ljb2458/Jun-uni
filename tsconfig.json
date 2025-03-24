@@ -38,10 +38,6 @@
     "types/**/*.tsx",
     "types/**/*.vue",
     "vite.config.ts",
-    "vite.dev.config.ts",
-    "vite.base.config.ts",
-    "vite.prod.config.ts",
-    "vite.test.config.ts",
     "env.d.ts"
   ]
 }

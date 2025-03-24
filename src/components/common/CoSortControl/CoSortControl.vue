@@ -111,6 +111,7 @@ function changeSort() {
 <style lang="scss" scoped>
 .CoSortControl {
   .CoSortControl_marker {
+    transform: scaleY(0.7);
     .uv-icon {
       border: none !important;
     }

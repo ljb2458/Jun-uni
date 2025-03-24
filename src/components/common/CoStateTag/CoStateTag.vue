@@ -2,13 +2,13 @@
 import type { StyleValue } from "vue";
 import { bitsAuth } from "@/utils/tools/bits";
 
-export interface CoStateOrmItem extends AnyObject {
+export interface StateOrmItem extends AnyObject {
   value: StrNumber;
   label: any;
   class?: any;
   style?: StyleValue;
 }
-export interface CoStateOrm extends Array<CoStateOrmItem> {}
+export interface CoStateOrm extends Array<StateOrmItem> {}
 const props = withDefaults(
   defineProps<{
     value?: StrNumber;
@@ -20,7 +20,7 @@ const props = withDefaults(
     isFun: () => (a: any, b: any) => a == b,
   }
 );
-const current = computed<CoStateOrmItem | undefined>(() => {
+const current = computed<StateOrmItem | undefined>(() => {
   if (!props.stateOrm) return;
   const item = props.stateOrm.find((item) =>
     (props.isFun || bitsAuth)(props.value!, item.value)

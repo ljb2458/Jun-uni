@@ -58,7 +58,7 @@ const selectedOption = computed(() =>
           :key="selection[valueName]"
         >
           <view class="flex-1">
-            <slot name="label" :index="index" :selection="selection">
+            <slot name="selection" :index="index" :selection="selection">
               <view>{{ selection[labelName] }}</view>
             </slot>
           </view>
@@ -74,6 +74,9 @@ const selectedOption = computed(() =>
             <uv-icon name="checkmark" color="inherit" size="inherit" />
           </view>
         </view>
+        <slot name="extraSelection">
+          <uv-loading-icon v-if="!props.selections?.length"></uv-loading-icon>
+        </slot>
       </view>
     </scroll-view>
   </CoDropdown>
@@ -84,10 +87,10 @@ const selectedOption = computed(() =>
   .selection {
     background-color: var(--C-B1);
     .selection_icon {
-      visibility: hidden;
+      opacity: 0;
     }
     .selection_icon__active {
-      visibility: initial;
+      opacity: 1;
     }
   }
 }

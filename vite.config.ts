@@ -1,29 +1,80 @@
-/*
- * @Date: 2023-02-18 20:06:36
- * @LastEditTime: 2023-04-21 17:09:09
- * 介绍:
- */
 import { defineConfig, loadEnv, UserConfig, ConfigEnv } from "vite";
-import viteDevConfig from "./vite.dev.config";
-import viteProdConfig from "./vite.prod.config";
-import viteBaseConfig from "./vite.base.config";
+import uni from "@dcloudio/vite-plugin-uni";
+import AutoImport from "unplugin-auto-import/vite";
+import commonjs from "@rollup/plugin-commonjs";
+import path from "path";
+import Components from "unplugin-vue-components/vite";
 
-const envResolver = {
-  production: (v: ConfigEnv) => ({
-    ...viteBaseConfig(v),
-    ...viteProdConfig(v),
-  }), //生产环境
-  development: (v: ConfigEnv) => ({
-    ...viteBaseConfig(v),
-    ...viteDevConfig(v),
-  }), //开发环境
-};
-type EnvResolverKey = keyof typeof envResolver;
-// https://vitejs.dev/config/
 export default defineConfig((config) => {
-  console.log(config);
-  const option: UserConfig = {
-    ...envResolver[config.mode as EnvResolverKey](config),
-  };
+  const env = loadEnv(config.mode, process.cwd(), "VITE_");
+  const option = <UserConfig>defineConfig({
+    base: "/",
+    resolve: {
+      alias: {
+        "@": path.join(__dirname, "src"),
+        "#": path.join(__dirname, "types"),
+      },
+    },
+
+    server: {
+      host: true,
+      port: 5173,
+      proxy: {
+        [env.VITE_API_PREFIX]: {
+          changeOrigin: env.VITE_PROXY == "1", //改变源头开关
+          target: env.VITE_API_URL,
+        },
+      },
+    },
+
+    build: {
+      terserOptions: {
+        compress: {
+          drop_console: true, // 生产环境移除console
+          drop_debugger: true, // 生产环境移除debugger
+        },
+      },
+      rollupOptions: {
+        output: {
+          format: "es",
+          sourcemap: true, // 生成 sourcemap，方便调试
+        },
+      },
+    },
+
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: "modern-compiler", // 修改api调用方式
+        },
+      },
+    },
+
+    plugins: [
+      uni(),
+      commonjs(),
+      AutoImport({
+        // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
+        imports: ["vue", "uni-app"],
+        dts: "./types/dts/auto-import/auto-importsVue.d.ts",
+      }),
+    ],
+    //@ts-ignore
+    transpileDependencies: ["uview-plus", "luch-request"],
+  });
+
+  //*只有serve时使用vite的自动引入生成全局ts类型支持，其它情况使用uniapp的easycom模式
+  if (config.command === "serve") {
+    option.plugins!.push(
+      Components({
+        exclude: ["RouterLink", "RouterView"],
+        dirs: ["src/components"],
+        deep: true,
+        extensions: ["vue"],
+        dts: "./types/dts/auto-import/auto-importsComponents.d.ts",
+      })
+    );
+  }
+
   return option;
 });

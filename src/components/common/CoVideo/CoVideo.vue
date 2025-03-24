@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getRect } from "@/utils/rewriteUni";
+import { queryRect } from "@/utils/rewriteUni";
 import {
   VideoProps,
   VideoOnFullscreenchangeEvent,
@@ -56,7 +56,7 @@ const videoData = reactive({
 onMounted(async () => {
   videoData.videoCtx = uni.createVideoContext(VIDEO_ID, getCurrentInstance());
 
-  const res = await getRect(`#${VIDEO_ID}`, getCurrentInstance());
+  const res = await queryRect(`#${VIDEO_ID}`, getCurrentInstance());
   Object.assign(nodeInfo, res);
 });
 

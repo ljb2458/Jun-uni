@@ -120,7 +120,7 @@ export function usePagingAdapter<
     ...params: Parameters<F>
   ): Promise<RequestList.Res<UnPromise<ReturnType<F>>["data"]>> => {
     const req = params.shift();
-    const result = await api({ ...req, page: req.PageNo }, ...params);
+    const result = await api({ ...req, page: req.pageNo }, ...params);
     return {
       isSuccess: result.isSuccess,
       list: result.data || [],

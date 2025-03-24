@@ -43,56 +43,62 @@ const maxCount = computed(() => +props.maxCount - (fileList.value.length || 0));
 
 function upload() {
   const msgKey = props.type === "video" ? "视频" : "图片";
+
+  const actions = [
+    {
+      name: "从手机相册上传",
+      tap() {
+        chooseMedia("album");
+      },
+    },
+    {
+      name: `手机摄像头拍摄${msgKey}`,
+      tap() {
+        chooseMedia("camera");
+      },
+    },
+  ];
+  if (
+    HouseAdminCode.some((v) => userinfoStore.userinfo?.roleInfo?.code === v)
+  ) {
+    actions.push({
+      name: `智能安全帽本地${msgKey}`,
+      async tap() {
+        await router.push("@/pages/helmet/photoAlbum.vue", {
+          query: {
+            fileType: props.type,
+            maxCount: maxCount.value,
+          },
+        });
+        uni.$emit(
+          PhotoAlbum.SetFilePicked,
+          fileList.value.filter((v) => v.helmetFile).map((v) => v.helmetFile)
+        );
+        uni.$once(
+          PhotoAlbum.OnFilePick,
+          (helmetFiles: ApiFileList.ResItem[] | undefined) => {
+            if (!helmetFiles) return;
+            const list = fileList.value.filter((v) => !v.helmetFile);
+            helmetFiles.forEach((helmetFile) => {
+              const url = apiDeviceFileDownload({
+                fileId: helmetFile.fileID,
+                puid: userinfoStore.helmetId!,
+              });
+              list.push({
+                status: "success",
+                url,
+                helmetFile,
+              });
+            });
+            fileList.value = list;
+          }
+        );
+      },
+    });
+  }
   setActionSheet.open({
     title: "请选择上传方式",
-    actions: [
-      {
-        name: "从手机相册上传",
-        tap() {
-          chooseMedia("album");
-        },
-      },
-      {
-        name: `手机摄像头拍摄${msgKey}`,
-        tap() {
-          chooseMedia("camera");
-        },
-      },
-      {
-        name: `智能安全帽本地${msgKey}`,
-        async tap() {
-          await router.push("@/pages/helmet/photoAlbum.vue", {
-            query: {
-              fileType: props.type,
-              maxCount: maxCount.value,
-            },
-          });
-          uni.$emit(
-            PhotoAlbum.SetFilePicked,
-            fileList.value.filter((v) => v.helmetFile).map((v) => v.helmetFile)
-          );
-          uni.$once(
-            PhotoAlbum.OnFilePick,
-            (helmetFiles: ApiFileList.ResItem[] | undefined) => {
-              if (!helmetFiles) return;
-              const list = fileList.value.filter((v) => !v.helmetFile);
-              helmetFiles.forEach((helmetFile) => {
-                const url = apiDeviceFileDownload({
-                  fileId: helmetFile.fileID,
-                  puid: userinfoStore.helmetId!,
-                });
-                list.push({
-                  status: "success",
-                  url,
-                  helmetFile,
-                });
-              });
-              fileList.value = list;
-            }
-          );
-        },
-      },
-    ],
+    actions,
   });
 }
 
@@ -178,6 +184,7 @@ function delMedia(e: { index: number; name: string; file: FileListItem }) {
 <script lang="ts">
 import mpMixin from "@/components/libs/mixin/mpMixin";
 import { useVModel } from "@/hooks/toolsHooks";
+import { HouseAdminCode } from "../../../enum/auth";
 export default {
   mixins: [mpMixin],
 };

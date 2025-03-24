@@ -19,7 +19,7 @@ export namespace RequestList {
     [k: string]: any;
   }
   export interface Req {
-    PageNo: number;
+    pageNo: number;
   }
   /**分页api方法类型限制 */
   export type Api<D extends Res = Res, P extends any[] = any[]> = (
@@ -70,7 +70,7 @@ export function useRequestList<F extends RequestList.Api>(
   config = { ...config };
   if (typeof config.defPageNo !== "number") config.defPageNo = 1;
   const apiParam1: RequestList.Req & AnyObject = {
-    PageNo: config.defPageNo,
+    pageNo: config.defPageNo,
   };
   /**api请求状态*/
   const state = ref<RequestList.State>({
@@ -82,7 +82,7 @@ export function useRequestList<F extends RequestList.Api>(
   const result = ref<RequestList.GetRes<F>>();
   /**重置分页接口 */
   async function rerequest() {
-    apiParam1.PageNo = config!.defPageNo!;
+    apiParam1.pageNo = config!.defPageNo!;
     stateNext();
     return await request();
   }
@@ -106,9 +106,9 @@ export function useRequestList<F extends RequestList.Api>(
       if (!result.value?.isSuccess) {
         return stateErr(result.value?.message);
       }
-      if (Object.is(apiParam1.PageNo, config!.defPageNo)) list.value = [];
+      if (Object.is(apiParam1.pageNo, config!.defPageNo)) list.value = [];
       list.value = list.value.concat(result.value.list);
-      apiParam1.PageNo++;
+      apiParam1.pageNo++;
       if (result.value.isEnd) {
         if (!list.value.length) return stateNull();
         return stateEnd();

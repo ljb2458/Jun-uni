@@ -32,6 +32,7 @@ declare module 'vue' {
     CoStateTag: typeof import('./../../../src/components/common/CoStateTag/CoStateTag.vue')['default']
     CoStepLine: typeof import('./../../../src/components/common/CoStepLine/CoStepLine.vue')['default']
     CoTabsFor: typeof import('./../../../src/components/common/CoTabsFor/CoTabsFor.vue')['default']
+    CoThreeJs: typeof import('./../../../src/components/common/CoThreeJs/CoThreeJs.vue')['default']
     CoVideo: typeof import('./../../../src/components/common/CoVideo/CoVideo.vue')['default']
     CoWebView: typeof import('./../../../src/components/common/CoWebView/CoWebView.vue')['default']
     EnvCoverImage: typeof import('./../../../src/components/common/CoMap/envCoverImage.vue')['default']

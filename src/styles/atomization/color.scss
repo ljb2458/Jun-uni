@@ -1,3 +1,5 @@
+@use "sass:color";
+@use "sass:map";
 $colors: (
   //适合作文字的颜色
   "T5": #e1dfdd,
@@ -62,11 +64,11 @@ $colorsDarkLightKey: ("M1");
 
 @each $key in $colorsDarkLightKey {
   @for $i from 0 through 5 {
-    $colors: map-merge(
+    $colors: map.merge(
       $colors,
       (
-        #{$key}-dark#{$i}: darken(map-get($colors, $key), $i * 10%),
-        #{$key}-light#{$i}: lighten(map-get($colors, $key), $i * 10%)
+        #{$key}-dark#{$i}: color.adjust(map.get($colors, $key), $lightness: -($i * 10%)),
+        #{$key}-light#{$i}: color.adjust(map.get($colors, $key), $lightness: $i * 10%)
       )
     );
   }
@@ -74,9 +76,9 @@ $colorsDarkLightKey: ("M1");
 
 @each $key, $value in $colorsOpacityKey {
   @for $i from 0 through 9 {
-    $colors: map-merge(
+    $colors: map.merge(
       $colors,
-      (#{$key}-O#{$i}: rgba(map-get($colors, $key), $i * 0.1))
+      (#{$key}-O#{$i}: rgba(map.get($colors, $key), $i * 0.1))
     );
   }
 }

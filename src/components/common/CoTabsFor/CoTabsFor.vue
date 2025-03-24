@@ -8,7 +8,7 @@ import uvTabs from "@climblee/uv-ui/components/uv-tabs/uv-tabs.vue";
 //@ts-ignore
 import uvSticky from "@climblee/uv-ui/components/uv-sticky/uv-sticky.vue";
 import { unitPercent, unitPx } from "@/utils/tools/css";
-import { getRect } from "@/utils/rewriteUni";
+import { queryRect } from "@/utils/rewriteUni";
 import { CSSProperties } from "vue";
 import dayjs from "dayjs";
 import { randomUUID } from "@/utils/tools/generate";
@@ -113,7 +113,7 @@ let CoTabsForId = `CoTabsFor${randomUUID()}`;
 let nodeInfo: UniNamespace.NodeInfo;
 /**更新CoTabsFor节点信息 */
 function updateNodeInfo() {
-  getRect(`#${CoTabsForId}`).then((res) => {
+  queryRect(`#${CoTabsForId}`).then((res) => {
     nodeInfo = res;
   });
 }
