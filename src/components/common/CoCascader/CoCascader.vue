@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { useVModel } from "@/hooks/toolsHooks";
-import cnRegionsTree from "./cnRegionsTree.json";
 import { PopupRef } from "@ttou/uv-typings/types/popup";
 
-export interface CoCascaderOptionsItem {
-  value: StrNumber | symbol;
+export interface CoCascaderOptionsItem extends AnyObject {
+  value: StrNumber;
   label: any;
-  children?: CoCascaderOptionsItem[];
+  /**子选项，如果为null则表示没有下一项了 */
+  children?: CoCascaderOptionsItem[] | undefined | null;
+}
+export interface CoCascaderLoadChildrenEnvet {
+  item: CoCascaderOptionsItem | undefined;
+  level: number;
 }
 
 const props = withDefaults(
@@ -14,30 +18,44 @@ const props = withDefaults(
     /**是否可取消选择；默认为：true */
     deselectable?: boolean;
     modelValue?: CoCascaderOptionsItem["value"][];
-    options?: CoCascaderOptionsItem[];
+    options?: CoCascaderOptionsItem[] | null;
     height?: string;
     show?: boolean;
+    loadChildren?: Fun<
+      [event: CoCascaderLoadChildrenEnvet],
+      | (CoCascaderOptionsItem[] | undefined | null)
+      | Promise<CoCascaderOptionsItem[] | undefined | null>
+    >;
+    loading?: boolean;
   }>(),
   {
     deselectable: true,
     modelValue: [] as any,
-    options: cnRegionsTree as any,
     height: "50vh",
   }
 );
+
 const emit = defineEmits<{
+  "update:options": [v: CoCascaderOptionsItem[]];
   "update:modelValue": [v: CoCascaderOptionsItem["value"][]];
   "update:show": [v: boolean];
-  selectItem: [v: CoCascaderOptionsItem, index: number];
+  "update:loading": [v: boolean];
+  selectItem: [v: CoCascaderOptionsItem | undefined, index: number];
   changeSelectedOptions: [v: CoCascaderOptionsItem[]];
   submit: [v: CoCascaderOptionsItem[]];
 }>();
+
+const options = useVModel(props, "options", emit);
+const modelValue = useVModel(props, "modelValue", emit);
+const loading = useVModel(props, "loading", emit);
+
 const popupRef = ref<PopupRef & { showPopup: boolean }>();
 const showPopup = computed({
   get() {
     return props.show;
   },
   async set(v) {
+    if (v && !options.value) loadChildren({ item: undefined, level: 0 });
     emit("update:show", v);
     if (!popupRef.value) await nextTick();
     if (v) popupRef.value!.open();
@@ -52,8 +70,6 @@ watch(
   }
 );
 
-const modelValue = useVModel(props, "modelValue", emit);
-
 const selectedOptions = computed<CoCascaderOptionsItem[]>(() => {
   const result: CoCascaderOptionsItem[] = [];
   const valueArray = modelValue.value;
@@ -62,7 +78,8 @@ const selectedOptions = computed<CoCascaderOptionsItem[]>(() => {
     return result;
   }
   valueArray.forEach((value, index) => {
-    let parentLevel = props.options;
+    let parentLevel = options.value;
+    if (!parentLevel?.length) return;
     if (index !== 0) {
       parentLevel = result[index - 1]?.children || [];
     }
@@ -74,35 +91,63 @@ const selectedOptions = computed<CoCascaderOptionsItem[]>(() => {
   return result;
 });
 
+async function init() {
+  for (let level in modelValue.value) {
+    const item = selectedOptions.value[level];
+    const preItem = selectedOptions.value[+level - 1];
+    if (!item) await loadChildren({ item: preItem, level: +level });
+  }
+}
+init();
+
 const optionsArray = computed(() => {
-  const result = [props.options];
+  const result = [options.value];
   selectedOptions.value.forEach((item) => {
-    if (!item.children) return;
-    result.push(item.children);
+    result.push(item.children || []);
   });
   return result;
 });
 
-function selectItem(option: CoCascaderOptionsItem, index: number) {
-  const oldOption = modelValue.value.slice(0, index + 1) || [];
-  if (
+function selectItem(option: CoCascaderOptionsItem, level: number) {
+  const oldOption = modelValue.value.slice(0, level + 1) || [];
+  const isCancel =
     props.deselectable &&
-    Object.is(oldOption[index], option.value) &&
-    Object.is(oldOption.length, modelValue.value.length)
-  ) {
+    Object.is(oldOption[level], option.value) &&
+    Object.is(oldOption.length, modelValue.value.length);
+
+  if (isCancel) {
     //点击相同的最后一项取消选择
     oldOption.pop();
+    emit("selectItem", undefined, level);
   } else {
-    oldOption[index] = option.value;
+    oldOption[level] = option.value;
+    emit("selectItem", option, level);
+    const { children } = option;
+    if (!children?.length && !Object.is(children, null)) {
+      loadChildren({ level, item: option });
+    }
   }
   modelValue.value = oldOption;
-  console.log("modelValue.value", modelValue.value);
-  emit("selectItem", option, index);
 }
-
 function submit() {
   emit("submit", selectedOptions.value);
   showPopup.value = false;
+}
+
+async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
+  if (!props.loadChildren) return;
+  loading.value = true;
+  let result = await props.loadChildren(event);
+  loading.value = false;
+
+  if (!event.item) {
+    return (options.value = result || null);
+  }
+  if (!result?.length) {
+    event.item.children = null;
+    return;
+  }
+  event.item.children = result;
 }
 </script>
 
@@ -139,26 +184,34 @@ function submit() {
         <scroll-view
           class="CoCascader_options H-fill B-B1 R-sm"
           scroll-y
-          v-for="(options, index) in optionsArray"
-          :key="modelValue[index - 1] || `i-${index}`"
+          v-for="(options, level) in optionsArray"
+          :key="modelValue[level - 1] || `i-${level}`"
+          :scroll-into-view="`item-${modelValue[level]}`"
         >
           <view
-            @tap="selectItem(option, index)"
+            @tap="selectItem(option, level)"
             v-for="option in options"
             :key="option.value"
+            :id="`item-${option.value}`"
             class="CoCascader_option P-col-xs M-col-xxs P-row-sm flex-A-C flex-J-SB"
             :class="{
-              'C-M1 B-M1-O1': Object.is(modelValue[index], option.value),
+              'C-M1 B-M1-O1': Object.is(modelValue[level], option.value),
             }"
           >
             <view class="CoCascader_option_label">{{ option.label }}</view>
             <view
               class="CoCascader_option_selectedIcon"
-              v-show="Object.is(modelValue[index], option.value)"
+              v-show="Object.is(modelValue[level], option.value)"
             >
               <uv-icon size="1em" color="inherit" name="checkmark" />
             </view>
           </view>
+          <CoListStatus
+            class="MT-md"
+            v-if="!options?.length"
+            :type="loading ? 'loading' : 'null'"
+            :message="loading ? '加载中...' : '没有更多选项了！'"
+          />
         </scroll-view>
       </view>
       <slot name="bottom">

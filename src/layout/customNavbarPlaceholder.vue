@@ -17,12 +17,7 @@ const isCustomNavbar = computed(
   <view class="customNavbar" v-if="isCustomNavbar">
     <view style="height: var(--status-bar-height)"></view>
     <view :style="{ ...defaultStyle }" class="navbar flex-A-C">
-      <!-- #ifdef MP-WEIXIN -->
-      <slot> </slot>
-      <!-- #endif -->
-      <!-- #ifndef MP-WEIXIN -->
       <slot :slotProps="{ ...routeInfo! }"> </slot>
-      <!-- #endif -->
     </view>
     <view class="PB-xs"></view>
   </view>
