@@ -23,8 +23,9 @@ const emit = defineEmits<{
   selected: [v: O];
 }>();
 const show = useVModel(props, "show", emit);
-function select(selection: O) {
+async function select(selection: O) {
   emit("update:modelValue", selection[valueName.value]);
+  await nextTick();
   emit("selected", selectedOption.value!);
   show.value = false;
 }
