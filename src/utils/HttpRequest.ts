@@ -85,34 +85,41 @@ export function createHttpRequest(
   httpRequest.interceptors.response.use(
     (res) => {
       if (env.VITE_API_LOG === "1") console.info(res);
-      const custom = res.config.custom;
-      const {
-        showFailMsg,
-        failText,
-        showLoading,
-        showSuccessMsg,
-        successText,
-      } = customHelper(custom);
-      if (showLoading) uni.hideLoading();
-      const message = myConfig.giveMsg(res);
-      const isSuccess = myConfig.isSuccess(res);
-      if (res.data) res.data.isSuccess = isSuccess;
-      if (isSuccess) {
-        if (custom?.routerBack === true) {
-          router.back();
-        }
-        if (showSuccessMsg) {
-          uni.showToast({
-            title: successText || message || "success",
-            icon: "success",
-          });
-        }
-      } else {
-        if (showFailMsg) {
-          uni.showToast({ title: failText || message || "fail" });
+      handleAfter();
+      return res;
+      async function handleAfter() {
+        const custom = res.config.custom;
+        const {
+          showFailMsg,
+          failText,
+          showLoading,
+          showSuccessMsg,
+          successText,
+        } = customHelper(custom);
+        if (showLoading) uni.hideLoading();
+        const message = myConfig.giveMsg(res);
+        const isSuccess = myConfig.isSuccess(res);
+        if (res.data) res.data.isSuccess = isSuccess;
+        if (isSuccess) {
+          if (custom?.routerBack === true) {
+            try {
+              await router.back();
+            } catch (error) {
+              console.error(error);
+            }
+          }
+          if (showSuccessMsg) {
+            uni.showToast({
+              title: successText || message || "成功！",
+              icon: "success",
+            });
+          }
+        } else {
+          if (showFailMsg) {
+            uni.showToast({ title: failText || message || "网络请求失败！" });
+          }
         }
       }
-      return res;
     },
     (error) => {
       console.error(error);
@@ -121,7 +128,7 @@ export function createHttpRequest(
       const { showErrorMsg, errorText, showLoading } = customHelper(custom);
       if (showLoading) uni.hideLoading();
       if (showErrorMsg) {
-        uni.showToast({ title: errorText || message || "error" });
+        uni.showToast({ title: errorText || message || "服务器错误！" });
       }
       return error;
     }
