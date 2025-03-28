@@ -1,6 +1,6 @@
 <cfg lang="json">
 {
-  "navigationBarTitleText": "任务列表",
+  "navigationBarTitleText": "组件列表",
   "navigationStyle": "custom",
   "navigationBarTextStyle": "white",
   "enablePullDownRefresh": true

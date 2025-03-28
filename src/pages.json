@@ -10,21 +10,21 @@
       }
     },
     {
+      "path": "pages/tabbar/list/list",
+      "style": {
+        "navigationBarTitleText": "任务列表",
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "white",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
       "path": "pages/tabbar/me/me",
       "style": {
         "navigationBarTitleText": "我的",
         "enablePullDownRefresh": true,
         "navigationStyle": "custom",
         "navigationBarTextStyle": "white"
-      }
-    },
-    {
-      "path": "pages/tabbar/taskList/taskList",
-      "style": {
-        "navigationBarTitleText": "任务列表",
-        "navigationStyle": "custom",
-        "navigationBarTextStyle": "white",
-        "enablePullDownRefresh": true
       }
     }
   ],
@@ -56,16 +56,10 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/tabbar/taskList/taskList",
+        "pagePath": "pages/tabbar/list/list",
         "iconPath": "static/imgs/tabbar/list.png",
         "selectedIconPath": "static/imgs/tabbar/list_active.png",
         "text": "任务列表"
-      },
-      {
-        "pagePath": "pages/tabbar/me/me",
-        "iconPath": "static/imgs/tabbar/me.png",
-        "selectedIconPath": "static/imgs/tabbar/me_active.png",
-        "text": "个人中心"
       }
     ]
   },

@@ -11,16 +11,10 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/tabbar/taskList/taskList",
+        "pagePath": "pages/tabbar/list/list",
         "iconPath": "static/imgs/tabbar/list.png",
         "selectedIconPath": "static/imgs/tabbar/list_active.png",
-        "text": "任务列表"
-      },
-      {
-        "pagePath": "pages/tabbar/me/me",
-        "iconPath": "static/imgs/tabbar/me.png",
-        "selectedIconPath": "static/imgs/tabbar/me_active.png",
-        "text": "个人中心"
+        "text": "组件列表"
       }
     ]
   },
