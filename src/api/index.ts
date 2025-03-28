@@ -163,10 +163,14 @@ export function usePagingAdapter<
   F extends Fun<any[], Promise<PagingApi.Res<any[]>>> = Fun
 >(api: F) {
   return async (
-    ...params: Parameters<F>
+    pageNo: number,
+    ...params: any[]
   ): Promise<RequestList.Res<UnPromise<ReturnType<F>>["result"]["items"]>> => {
-    const req = params.shift();
-    const result = await api({ ...req, page: req.pageNo }, ...params);
+    params[0] ||= {
+      ...params[0],
+      page: pageNo,
+    };
+    const result = await api(...params);
     return {
       message: result.message,
       isSuccess: result.isSuccess,
