@@ -29,7 +29,7 @@ function clickButton(e: MouseEvent) {
     </slot>
     <slot name="button">
       <view class="MT-md">
-        <Rbutton :size="'mini'" @click="clickButton" text="重新加载"> </Rbutton>
+        <uv-button :size="'mini'" @click="clickButton" text="重新加载"> </uv-button>
       </view>
     </slot>
   </view>

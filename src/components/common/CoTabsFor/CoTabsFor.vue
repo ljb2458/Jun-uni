@@ -5,9 +5,7 @@
 <script lang="ts" setup generic="Item extends CoTabsForOptionsItem">
 //@ts-ignore
 import uvTabs from "@climblee/uv-ui/components/uv-tabs/uv-tabs.vue";
-//@ts-ignore
-import uvSticky from "@climblee/uv-ui/components/uv-sticky/uv-sticky.vue";
-import { unitPercent, unitPx } from "@/utils/tools/css";
+import { unitPercent } from "@/utils/tools/css";
 import { queryRect } from "@/utils/rewriteUni";
 import { CSSProperties } from "vue";
 import dayjs from "dayjs";
@@ -29,8 +27,9 @@ const props = withDefaults(
     sticky?: Boolean;
     /**粘性组件tyle */
     stickyStyle?: StyleValue;
-    /**单位px，内部需要对它进行计算 */
-    offsetTop?: number;
+    stickyClass?: any;
+    /**粘性布局上边距 */
+    stickyTop?: StrNumber;
     /**懒加载 */
     lazy?: boolean;
     //----tabs组件开始---
@@ -69,25 +68,22 @@ const emit = defineEmits<{
 type TabsListItem = Item & { load: boolean; slotName: string; index: number };
 
 const currentIndex = useVModel(props, "modelValue", emit);
-const tabsList = computed<Array<TabsListItem>>(() => {
-  return props.options.map((v, index) => ({
-    ...v,
-    slotName: v.slotName || `index-${index}`,
-    index,
-    load: !props.lazy || index === currentIndex.value,
-  }));
-});
-const currentSwiper = computed(() => tabsList.value[+currentIndex.value]);
-
+const tabsList = ref<Array<TabsListItem>>([]);
 watch(
-  currentIndex,
+  () => props.options,
   (newValue) => {
-    tabsList.value[+newValue].load = true;
+    tabsList.value = newValue.map((v, index) => ({
+      ...v,
+      slotName: v.slotName || `index-${index}`,
+      index,
+      load: !props.lazy || index === currentIndex.value,
+    }));
   },
   {
     immediate: true,
   }
 );
+const currentSwiper = computed(() => tabsList.value[+currentIndex.value]);
 const contentSwiperItemStyle = reactive<CSSProperties>({
   "--CoTabsFor-x": "0%",
 });
@@ -147,7 +143,7 @@ function onTouchmove(e: TouchEvent) {
   //*左滑边界限制
   if (skewingX > 0 && currentIndex.value == 0) return;
   //*右滑边界限制
-  if (isRightTo() && !(+currentIndex.value + 1 < props.options.length)) return;
+  if (isRightTo() && !(+currentIndex.value + 1 < tabsList.value.length)) return;
   state.isStatic = false;
   contentSwiperItemStyle["--CoTabsFor-x"] = unitPercent(percent);
 }
@@ -168,7 +164,7 @@ function onTouchend(e: TouchEvent) {
   if (skewingX > 0 && currentIndex.value == 0)
     return swiperToByIndex(currentIndex.value);
   //*右滑边界限制
-  if (isRightTo() && !(+currentIndex.value + 1 < props.options.length)) {
+  if (isRightTo() && !(+currentIndex.value + 1 < tabsList.value.length)) {
     abandon = false;
     return swiperToByIndex(+currentIndex.value);
   }
@@ -193,6 +189,7 @@ function onTouchend(e: TouchEvent) {
     swiperToByIndex(+currentIndex.value);
   }
 }
+
 /**给出滑动时间 */
 function getTouchTime() {
   return dayjs().valueOf() - startTime;
@@ -238,27 +235,28 @@ defineExpose({
   swiperToByIndex,
   updateNodeInfo,
   currentIndex,
+  currentSwiper,
 });
-const platformOffsetTop = computed(() => {
-  let offsetTop = Number(props.offsetTop);
-  if (isNaN(offsetTop)) offsetTop = 0;
-  let res = unitPx(offsetTop);
-  // #ifdef H5
-  res = unitPx(offsetTop + 44);
-  // #endif
-  return res;
-});
+watch(
+  currentIndex,
+  (newValue) => {
+    tabsList.value[+newValue].load = true;
+    swiperToByIndex(+newValue);
+  },
+  {
+    immediate: true,
+  }
+);
 </script>
 
 <template>
   <view :style="{ '--gap': gap }" :id="CoTabsForId" class="CoTabsFor">
-    <uv-sticky
-      :bg-color="sticky ? 'var(--C-B1)' : ''"
-      :style="stickyStyle"
-      class="CoTabsFor_title"
+    <CoSticky
       :disabled="!sticky"
-      :offset-top="offsetTop"
-      :customNavHeight="platformOffsetTop"
+      :style="[stickyStyle]"
+      :class="stickyClass"
+      class="CoTabsFor_title"
+      :offset-top="stickyTop"
     >
       <view class="CoTabsFor_title-top">
         <slot name="title-top"></slot>
@@ -285,7 +283,7 @@ const platformOffsetTop = computed(() => {
       <view class="CoTabsFor_title-bottom">
         <slot name="title-bottom"> </slot>
       </view>
-    </uv-sticky>
+    </CoSticky>
     <!-- 内容部分 -->
     <view
       @touchmove="onTouchmove"
@@ -297,7 +295,7 @@ const platformOffsetTop = computed(() => {
       <view
         :class="{
           ...contentItemClass,
-          CoTabsFor_item__hiddle: currentSwiper !== tab && state.isStatic,
+          CoTabsFor_item__hiddle: currentIndex !== tab.index && state.isStatic,
         }"
         :style="{ ...contentSwiperItemStyle }"
         v-for="tab in tabsList"
@@ -309,7 +307,7 @@ const platformOffsetTop = computed(() => {
             v-if="tab.load"
             name="default"
             :option="tab"
-            :active="currentSwiper === tab"
+            :active="currentIndex === tab.index"
           >
           </slot>
         </view>

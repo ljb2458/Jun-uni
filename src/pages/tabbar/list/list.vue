@@ -41,15 +41,5 @@ const tabsList = reactive([
 </template>
 
 <style lang="scss">
-.u-collapse-item {
-  .u-icon__img {
-    height: 22px !important;
-    width: 16px !important;
-  }
-}
 
-.grid-2 {
-  display: grid;
-  grid-template-columns: auto 1fr;
-}
 </style>

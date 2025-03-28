@@ -6,13 +6,13 @@
         "navigationBarTitleText": "首页",
         "navigationStyle": "custom",
         "navigationBarTextStyle": "white",
-        "enablePullDownRefresh": false
+        "enablePullDownRefresh": true
       }
     },
     {
       "path": "pages/tabbar/list/list",
       "style": {
-        "navigationBarTitleText": "任务列表",
+        "navigationBarTitleText": "组件列表",
         "navigationStyle": "custom",
         "navigationBarTextStyle": "white",
         "enablePullDownRefresh": true
@@ -28,22 +28,7 @@
       }
     }
   ],
-  "subPackages": [
-    {
-      "root": "pages/library",
-      "pages": [
-        {
-          "path": "bookList",
-          "style": {
-            "navigationBarTitleText": "知识库",
-            "enablePullDownRefresh": false,
-            "navigationStyle": "custom",
-            "navigationBarTextStyle": "white"
-          }
-        }
-      ]
-    }
-  ],
+  "subPackages": [],
   "tabBar": {
     "color": "#1e1e1e",
     "selectedColor": "#0078D4",
@@ -59,7 +44,7 @@
         "pagePath": "pages/tabbar/list/list",
         "iconPath": "static/imgs/tabbar/list.png",
         "selectedIconPath": "static/imgs/tabbar/list_active.png",
-        "text": "任务列表"
+        "text": "组件列表"
       }
     ]
   },

@@ -2,12 +2,7 @@ import router, { replaceUrl } from "./utils/router";
 import useSysStore from "@/store/useSysStore";
 import useUserinfoStore from "./store/useUserinfoStore";
 import { Sys } from "./enum/pubsubKey/system";
-import {
-  HouseAdminCode,
-  HouseAdminRoute,
-  LOGIN_WHITE_LIST,
-  LOGIN_PATH,
-} from "@/enum/auth";
+import { LOGIN_WHITE_LIST, LOGIN_PATH } from "@/enum/auth";
 
 /**app setup 时初始化 */
 export function setupAppInit() {
@@ -94,16 +89,6 @@ export async function roleCheck(
       query: { replace: path },
     });
     uni.showToast({ title: "请先登录小程序" });
-    return false;
-  }
-  if (
-    HouseAdminRoute.some((v) => v.test(url)) &&
-    !HouseAdminCode.some((v) => userinfoStore.userinfo?.roleInfo?.code === v)
-  ) {
-    if (replace) {
-      await router.backOrHome();
-    }
-    uni.showToast({ title: "您无权进入！" });
     return false;
   }
   return true;
