@@ -46,7 +46,7 @@ const props = withDefaults(defineProps<Props>(), {
   defPageNo: 1,
   minHeight: "70vh",
   setupLoad: true,
-  giveReq: () => (pageNo: number) => ({}),
+  giveParam: () => (pageNo: number) => ({}),
 });
 (props.onPullDownRefresh || onPullDownRefresh)(pullDownRefreshRequset);
 /**下拉刷新请求 */
@@ -75,7 +75,7 @@ const {
   async (pageNo) =>
     props.api(
       pageNo,
-      { ...props.param, ...(await props.giveReq(pageNo)) },
+      { ...props.param, ...(await props.giveParam(pageNo)) },
       ...(props.extraParams || [])
     ),
   {
