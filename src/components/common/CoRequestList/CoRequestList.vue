@@ -15,25 +15,38 @@ export type CoRequestListInstance<F extends RequestList.Api> = Omit<
 };
 type CoListProps = ComponentPropsType<typeof CoList>;
 interface Props {
+  /**
+   * api(pageNo,props.param,...props.extraParams)=>res
+   */
   api: F;
+  /**
+   * api接口除了
+   */
   extraParams?: any[];
+  /**是否在setup声明周期自动加载数据 */
   setupLoad?: boolean;
+  /**默认初始页码 */
   defPageNo?: number;
-  giveReq?: (req: RequestList.Req) => RequestList.GetParams<F>[0];
-  param?: Partial<RequestList.GetParams<F>[0]>;
+  /**返回的参数作为 param 传入，优先级高于props.param*/
+  giveParam?: (
+    pageNo: number
+  ) => Partial<Parameters<F>[1]> | Promise<Partial<Parameters<F>[1]>>;
+  /**api 接口的第二个参数，索引为1 */
+  param?: Partial<Parameters<F>[1]>;
   /**上拉触底事件，一般可不传 */
   onReachBottom?: CoListProps["onReachBottom"];
   /**下拉刷新事件，一般可不传 */
   onPullDownRefresh?: (callback: Fun) => any;
   /**下拉刷新完成回调，默认uni.stopPullDownRefresh(关闭页面下拉刷新) */
   pullDownRefreshEnd?: (v?: RequestList.State) => void;
+  /**组件最小高度 */
   minHeight?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
   defPageNo: 1,
   minHeight: "70vh",
   setupLoad: true,
-  giveReq: () => (req: RequestList.Req) => req,
+  giveReq: () => (pageNo: number) => ({}),
 });
 (props.onPullDownRefresh || onPullDownRefresh)(pullDownRefreshRequset);
 /**下拉刷新请求 */
@@ -58,13 +71,17 @@ const {
   stateLoading,
   stateNull,
   stateNext,
-} = useRequestList(props.api, {
-  giveExtraParams: () => props.extraParams || [],
-  giveReq(req) {
-    return { ...props.param, ...props.giveReq(req) };
-  },
-  defPageNo: props.defPageNo,
-});
+} = useRequestList(
+  async (pageNo) =>
+    props.api(
+      pageNo,
+      { ...props.param, ...(await props.giveReq(pageNo)) },
+      ...(props.extraParams || [])
+    ),
+  {
+    defPageNo: props.defPageNo,
+  }
+);
 const _expose = {
   result,
   state,
@@ -126,6 +143,7 @@ function isVisible() {
 <style lang="scss" scoped></style>
 <script lang="ts">
 import mpMixin from "@/components/libs/mixin/mpMixin";
+import { NumberBoxEvents } from "@ttou/uv-typings/types/numberBox";
 export default {
   mixins: [mpMixin],
 };

@@ -24,14 +24,14 @@ const tabsList = reactive([
 const currTab = ref(0);
 const searchKey = ref("");
 
-async function api(e: {
-  pageNo: number;
-  name: string;
-}): Promise<RequestList.Res<string[]>> {
+async function api(
+  pageNo: number,
+  e: { name: string }
+): Promise<RequestList.Res<string[]>> {
   console.log(`加载了${e.name}的数据`);
   const list: string[] = [];
   for (let i = 0; i < 10; i++) {
-    list.push(`name:${e.name}; pageNo:${e.pageNo};\nrandom:${Math.random()}`);
+    list.push(`name:${e.name}; pageNo:${pageNo};\nrandom:${Math.random()}`);
   }
   return {
     isEnd: false,

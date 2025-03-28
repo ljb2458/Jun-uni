@@ -18,23 +18,16 @@ export namespace RequestList {
     isEnd: boolean;
     [k: string]: any;
   }
-  export interface Req {
-    pageNo: number;
-  }
   /**分页api方法类型限制 */
-  export type Api<D extends Res = Res, P extends any[] = any[]> = (
-    ...p: P
+  export type Api<D extends Res = Res> = (
+    pageNo: number,
+    ...p: any[]
   ) => Promise<D> | D;
 
-  export interface Config<F> {
+  export interface Config {
     defPageNo?: number;
-    /**默认请求数据 */
-    giveReq?: (req: Req) => Partial<GetParams<F>[0]>;
-    /**额外的方法参数 */
-    giveExtraParams?: () => any[];
   }
-  /**api方法参数 */
-  export type GetParams<F> = F extends Fun ? Parameters<F> : any[];
+
   /**api方法返回类型 */
   export type GetRes<F> = F extends RequestList.Api<infer T>
     ? UnPromise<T>
@@ -65,13 +58,11 @@ export namespace RequestList {
  */
 export function useRequestList<F extends RequestList.Api>(
   api: F,
-  config?: RequestList.Config<F>
+  config?: RequestList.Config
 ): RequestList.Return<F> {
   config = { ...config };
   if (typeof config.defPageNo !== "number") config.defPageNo = 1;
-  const apiParam1: RequestList.Req & AnyObject = {
-    pageNo: config.defPageNo,
-  };
+  let pageNo = config.defPageNo;
   /**api请求状态*/
   const state = ref<RequestList.State>({
     type: "next",
@@ -82,7 +73,7 @@ export function useRequestList<F extends RequestList.Api>(
   const result = ref<RequestList.GetRes<F>>();
   /**重置分页接口 */
   async function rerequest() {
-    apiParam1.pageNo = config!.defPageNo!;
+    pageNo = config!.defPageNo!;
     stateNext();
     return await request();
   }
@@ -94,21 +85,17 @@ export function useRequestList<F extends RequestList.Api>(
         return;
       }
       stateLoading();
-      const giveReq = config?.giveReq || (() => ({}));
-      const giveExtraParams = config?.giveExtraParams || (() => []);
       /**请求api第一个参数 */
-      const param1 = { ...apiParam1, ...giveReq(apiParam1) };
       /**除第一个参数外的额外请求参数 */
-      const params = [param1, ...giveExtraParams()] as RequestList.GetParams<F>;
       stateLoading();
-      result.value = (await api(...params)) as any;
+      result.value = (await api(pageNo)) as any;
       stateNext();
       if (!result.value?.isSuccess) {
         return stateErr(result.value?.message);
       }
-      if (Object.is(apiParam1.pageNo, config!.defPageNo)) list.value = [];
+      if (Object.is(pageNo, config!.defPageNo)) list.value = [];
       list.value = list.value.concat(result.value.list);
-      apiParam1.pageNo++;
+      pageNo++;
       if (result.value.isEnd) {
         if (!list.value.length) return stateNull();
         return stateEnd();

@@ -19,35 +19,40 @@ export type CoTabsForInstance = GenericComponentExports<typeof CoTabsFor>;
 
 const props = withDefaults(
   defineProps<{
+    /**当前选中的 tab index*/
     modelValue?: StrNumber;
     /**间距 */
     gap?: string;
+    /**tabs 配置数据 */
     options: Item[];
     /**开启粘性布局 */
     sticky?: Boolean;
-    /**粘性组件tyle */
+    /**粘性组件的自定义tyle */
     stickyStyle?: StyleValue;
+    /**粘性组件的自定义class */
     stickyClass?: any;
-    /**粘性布局上边距 */
+    /**距离顶部多少触发粘性布局 */
     stickyTop?: StrNumber;
     /**懒加载 */
     lazy?: boolean;
     //----tabs组件开始---
-    /**标题options中的标题键名 */
+    /**标题options中的键名 */
     titleKeyName?: string;
-    /**滑块颜色 */
+    /**标题滑块颜色 */
     titleLineColor?: string;
+    /**标题滑块宽度 */
     titleLineWidth?: StrNumber;
+    /**标题滑块高度 */
     titleLineHeight?: StrNumber;
-    /**滑块背景size */
+    /**标题滑块背景size */
     titleLineBgSize?: "cover" | "contain" | "percentage" | string;
-    /**菜单item的样式 */
+    /**标题item的样式 */
     titleItemStyle?: StyleValue;
-    /**菜单选中样式 */
+    /**标题菜单选中样式 */
     titleActiveStyle?: StyleValue;
-    /**菜单非选中样式 */
+    /**标题非选中样式 */
     titleInactiveStyle?: StyleValue;
-    /**菜单是否可滚动 */
+    /**标题是否可滚动 */
     titleScrollable?: boolean;
     //----tabs组件结束---
   }>(),
@@ -65,7 +70,7 @@ const emit = defineEmits<{
   "update:modelValue": [v: StrNumber];
 }>();
 
-type TabsListItem = Item & { load: boolean; slotName: string; index: number };
+type TabsListItem = Item & { load: boolean; index: number };
 
 const currentIndex = useVModel(props, "modelValue", emit);
 const tabsList = ref<Array<TabsListItem>>([]);
@@ -74,7 +79,6 @@ watch(
   (newValue) => {
     tabsList.value = newValue.map((v, index) => ({
       ...v,
-      slotName: v.slotName || `index-${index}`,
       index,
       load: !props.lazy || index === currentIndex.value,
     }));
