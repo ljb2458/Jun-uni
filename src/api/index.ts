@@ -159,6 +159,9 @@ export namespace PagingApi {
     value?: any;
   }
 }
+/**
+ * 分页接口适配器，用于将 api 接口函数转换为 useRequsetList 函数要求传入的 api 函数
+ */
 export function usePagingAdapter<
   F extends Fun<any[], Promise<PagingApi.Res<any[]>>> = Fun
 >(api: F) {
