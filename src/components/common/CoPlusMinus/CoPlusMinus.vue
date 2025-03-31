@@ -1,7 +1,4 @@
-<!--
- * 介绍:正负文字
--->
-
+<!-- 正负数字展示组件；正数默认为绿色、负数默认为红色。 -->
 <script lang="ts" setup>
 const props = withDefaults(
   defineProps<{

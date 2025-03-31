@@ -1,3 +1,4 @@
+<!-- 地图组件；内置全屏、放大放小、定位、等功能 -->
 <script setup lang="ts">
 import { StyleValue } from "vue";
 import { uniApiToPromise } from "@/utils/rewriteUni";
@@ -47,13 +48,21 @@ const LONGITUDE = 116.39742;
 const MAP_ID = `map-${randomUUID().slice(0, 60)}`;
 const props = withDefaults(
   defineProps<{
+    /**是否显示map地图；cover-view 兼容性不好的下策，为false时，地图及地图控件会被隐藏，默认slot中的内容会被显示出来。*/
     showMap?: boolean;
+    /**隐藏map按钮的 icon 图标默认为菜单图标且不显示 */
     mapHidIcon?: boolean | string;
+    /**原生地图的 props 对象 */
     mapProps?: CoMapMapProps;
+    /**topSlot 的高度 */
     topHeight?: string;
+    /**bottomSlot 的高度 */
     bottomHeight?: string;
+    /**左侧控件集合 */
     leftIcons?: IconItem[];
+    /**右侧控件集合 */
     rightIcons?: IconItem[];
+    /**是否全屏地图 */
     fill?: boolean;
     /**是否显示全屏控件 */
     showFill?: boolean;
@@ -61,6 +70,7 @@ const props = withDefaults(
     fillExcludeCotrol?: CoMapControl[];
     /**非全屏时不展示的控件 */
     normalExcludeCotrol?: CoMapControl[];
+    /**地图缩放等级；默认：16；范围：3-20； */
     scale?: number;
     getLocation?: GetLocation;
   }>(),

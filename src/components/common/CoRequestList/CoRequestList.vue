@@ -1,3 +1,4 @@
+<!-- 分页列表组件；可自动调用并处理分页接口。 -->
 <script lang="ts" setup generic="F extends RequestList.Api">
 import {
   useRequestList,
@@ -5,9 +6,9 @@ import {
 } from "@/components/common/CoRequestList/useRequestList";
 import CoList from "../CoList/CoList.vue";
 import { CoListInstance, LoadParam } from "../CoList/CoList.vue";
-import CRequestList from "./CoRequestList.vue";
+import CoRequestList from "./CoRequestList.vue";
 export type CoRequestListInstance<F extends RequestList.Api> = Omit<
-  GenericComponentExports<typeof CRequestList>,
+  GenericComponentExports<typeof CoRequestList>,
   "list" | "result"
 > & {
   list: RequestList.GetList<F>;

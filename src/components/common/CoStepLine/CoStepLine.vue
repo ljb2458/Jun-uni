@@ -1,3 +1,4 @@
+<!-- 竖状步骤条布局 -->
 <script setup lang="ts"></script>
 
 <template>

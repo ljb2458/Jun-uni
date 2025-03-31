@@ -1,6 +1,4 @@
-<!--
- * 介绍:顶部消息提示组件
--->
+<!--顶部消息提示组件；在CoPageView中已注册-->
 
 <script lang="ts" setup>
 import { ColorTheme } from "@/components/types";

@@ -4,6 +4,7 @@ export const modalProps = ref<ModalProps>({});
 let _resolve = () => {};
 let _reject = () => {};
 const setModal = {
+  /**打开全局 mobal 提示框 */
   open(props?: ModalProps) {
     if (props) modalProps.value = { ...props };
     showModal.value = true;
@@ -12,6 +13,7 @@ const setModal = {
       _reject = reject;
     });
   },
+  /**关闭全局 mobal 提示框 */
   close() {
     showModal.value = false;
   },

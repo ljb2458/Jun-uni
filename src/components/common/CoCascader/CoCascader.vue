@@ -1,3 +1,4 @@
+<!-- 级联选择器 -->
 <script setup lang="ts">
 import { useVModel } from "@/hooks/toolsHooks";
 import { PopupRef } from "@ttou/uv-typings/types/popup";
@@ -17,15 +18,21 @@ const props = withDefaults(
   defineProps<{
     /**是否可取消选择；默认为：true */
     deselectable?: boolean;
+    /**绑定的级联value数组，数组索引与嵌套层数挂钩 */
     modelValue?: CoCascaderOptionsItem["value"][];
+    /**级联选项；children为子选项，没有请传null */
     options?: CoCascaderOptionsItem[] | null;
+    /**选择器 scroll-view 高度； */
     height?: string;
+    /**是否显示选择器 */
     show?: boolean;
+    /**加载子数据；event=CoCascaderLoadChildrenEnvet */
     loadChildren?: Fun<
       [event: CoCascaderLoadChildrenEnvet],
       | (CoCascaderOptionsItem[] | undefined | null)
       | Promise<CoCascaderOptionsItem[] | undefined | null>
     >;
+    /**是否展示加载图标，传入 loadChildren 时将自动控制 */
     loading?: boolean;
   }>(),
   {

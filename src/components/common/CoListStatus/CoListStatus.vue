@@ -1,4 +1,6 @@
+<!-- 列表状态；包含 next:可继续加载 | loading:加载中 | end:加载完成 | error:错误 | null:没有数据 几种状态的页面展示 -->
 <script lang="ts" setup>
+/** next:可继续加载 | loading:加载中 | end:加载完成 | error:错误 | null:没有数据 */
 export type StateType = "next" | "loading" | "end" | "error" | "null";
 const props = withDefaults(
   defineProps<{

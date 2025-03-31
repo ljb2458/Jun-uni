@@ -1,6 +1,4 @@
-<!--
- * 介绍:tabs循环展示面板
--->
+<!--tabs展示面板-->
 
 <script lang="ts" setup generic="Item extends CoTabsForOptionsItem">
 //@ts-ignore

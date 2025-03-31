@@ -20,28 +20,24 @@ button {
   }
 }
 
-/*input提示文本样式*/
+//input提示文本样式
 input::-webkit-input-placeholder {
-  /* WebKit browsers */
   opacity: 0.65;
   color: var(--C-T1);
 }
 input:-moz-placeholder {
-  /* Mozilla Firefox 4 to 18 */
   opacity: 0.65;
   color: var(--C-T1);
 }
 input::-moz-placeholder {
-  /* Mozilla Firefox 19+ */
   opacity: 0.65;
   color: var(--C-T1);
 }
 input:-ms-input-placeholder {
-  /* Internet Explorer 10+ */
   opacity: 0.65;
   color: var(--C-T1);
 }
-/* 滚动条 */
+//滚动条
 ::-webkit-scrollbar {
   display: block !important;
   width: 4px !important;

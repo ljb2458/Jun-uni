@@ -1,3 +1,4 @@
+<!-- icon 组件 搭配 iconfont 使用 -->
 <script lang="ts" setup>
 const props = withDefaults(
   defineProps<{

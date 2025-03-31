@@ -1,6 +1,8 @@
+<!-- 自动正方形；根据盒子的宽度，自动设定盒子高度。 -->
 <script lang="ts" setup>
 const props = withDefaults(
   defineProps<{
+    /**高度比例；默认为1：正方形。 */
     heightScale?: number;
   }>(),
   {

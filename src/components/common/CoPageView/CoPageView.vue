@@ -1,3 +1,4 @@
+<!-- 页面视图组件；集成导航栏、对话框、消息提示框、选择面板等 -->
 <script lang="ts" setup>
 import notify from "@/layout/notify.vue";
 import customNavbar from "@/layout/customNavbar.vue";

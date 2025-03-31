@@ -1,3 +1,4 @@
+<!-- 全局 modal 提示框 -->
 <script lang="ts" setup>
 import { ModalRef } from "@ttou/uv-typings/types/modal";
 import { showModal, modalProps, onReject, onResovle } from "./setModal";

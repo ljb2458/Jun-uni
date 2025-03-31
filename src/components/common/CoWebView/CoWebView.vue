@@ -1,3 +1,4 @@
+<!-- web-view -->
 <script setup lang="ts">
 import { WebViewOnMessageEvent } from "@uni-helper/uni-app-types";
 export interface MessageEvent {

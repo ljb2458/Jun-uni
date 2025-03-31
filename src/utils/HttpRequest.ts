@@ -57,11 +57,16 @@ export namespace CreateHttpRequest {
     config: Config;
   }
   export interface Custom {
+    /**接口请求失败后显示的 message true 则从接口动态获取 */
     failMessage?: string | boolean;
+    /**接口请求成功后显示的 message true 则从接口动态获取 */
     successMessage?: string | boolean;
-    loadingMessage?: string | boolean;
-    filterReq?: boolean;
+    /**接口请求报错后显示的 message true 则从错误信息动态获取 */
     errorMessage?: string | boolean;
+    /**接口请求中全局 loading true 则为 请稍侯... */
+    loadingMessage?: string | boolean;
+    /**是否在请求前过滤无效字段 */
+    filterReq?: boolean;
     /**请求成功后路由返回 */
     routerBack?: boolean;
     [k: string]: any;

@@ -1,3 +1,4 @@
+<!-- 列表组件；推荐使用 CoRequestList 组件。 -->
 <script lang="ts" setup>
 import { randomUUID } from "@/utils/tools/generate";
 import { isNodeVisible } from "@/utils/rewriteUni";

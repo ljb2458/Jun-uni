@@ -1,9 +1,11 @@
+<!-- 错误展示 -->
 <script lang="ts" setup>
 import { _import } from "@/utils/tools/import";
 
 const props = withDefaults(
   defineProps<{
     message?: string;
+    /**错误时，是否展示重试按钮 */
     showButton?: boolean;
   }>(),
   {

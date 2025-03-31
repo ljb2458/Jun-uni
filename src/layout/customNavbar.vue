@@ -1,3 +1,4 @@
+<!-- 全局自定义导航栏 -->
 <script lang="ts">
 import mpMixin from "@/components/libs/mixin/mpMixin";
 export default {

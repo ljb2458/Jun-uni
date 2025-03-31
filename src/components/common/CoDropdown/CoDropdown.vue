@@ -1,9 +1,13 @@
+<!-- 下拉菜单 -->
 <script setup lang="ts">
 import { useVModel } from "@/hooks/toolsHooks";
 export interface CoDropdownProps {
   show?: boolean;
+  /**下拉菜单按钮部分文字 */
   text?: string;
+  /**下拉菜单弹出部分宽度 */
   width?: string;
+  /**下拉菜单弹出部分高度 */
   height?: string;
 }
 const props = defineProps<CoDropdownProps>();
@@ -77,7 +81,7 @@ const show = useVModel(props, "show", emit);
       transform: rotate(45deg) translateY(-50%);
       z-index: -1;
     }
-    .CoDropdown_popup_content{
+    .CoDropdown_popup_content {
       width: 100%;
       height: 100%;
       overflow: hidden;

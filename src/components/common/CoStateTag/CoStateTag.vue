@@ -1,3 +1,4 @@
+<!-- 状态标签 -->
 <script setup lang="ts">
 import type { StyleValue } from "vue";
 import { bitsAuth } from "@/utils/tools/bits";
@@ -11,9 +12,13 @@ export interface StateOrmItem extends AnyObject {
 export interface CoStateOrm extends Array<StateOrmItem> {}
 const props = withDefaults(
   defineProps<{
+    /**状态 */
     value?: StrNumber;
+    /**状态映射 */
     stateOrm?: CoStateOrm;
+    /**默认选中第几个状态（不推荐） */
     defaultIndex?: StrNumber;
+    /**匹配用的方法；二进制权限可使用 bitsAuth */
     isFun?: Fun<[StrNumber, StrNumber], boolean>;
   }>(),
   {
@@ -23,7 +28,7 @@ const props = withDefaults(
 const current = computed<StateOrmItem | undefined>(() => {
   if (!props.stateOrm) return;
   const item = props.stateOrm.find((item) =>
-    (props.isFun || bitsAuth)(props.value!, item.value)
+    props.isFun(props.value!, item.value)
   );
   if (!item) {
     return props.stateOrm.at(Number(props.defaultIndex));

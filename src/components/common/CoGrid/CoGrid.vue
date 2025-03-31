@@ -1,3 +1,4 @@
+<!-- css grid 布局 可搭配 CoGridItem 使用 -->
 <script lang="ts" setup>
 import { JustifyItems, AlignItems } from "@/components/types";
 import { filterObject } from "@/utils/tools/object";

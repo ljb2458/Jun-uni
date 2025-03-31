@@ -4,37 +4,41 @@
   --bevel-c: rgba(0, 0, 0, 0.2);
   box-shadow: inset var(--bevel-c) 3px 3px 6px, var(--bevel-c) 3px 3px 12px;
 }
-.shadow {
-  --shadow-c: rgba(0, 0, 0, 0.2);
-  filter: drop-shadow(var(--shadow-c) 3px 3px 12px);
-}
 //点击效果
 .active:active {
   filter: brightness(90%) invert(0.3);
 }
+//阴影
 .shadow {
-  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+  --shadow-c: rgba(0, 0, 0, 0.2);
+  filter: drop-shadow(0 0 10px var(--shadow-c));
 }
+//底边框
 .border-B {
   --border-c: #dadbde;
   border-bottom: solid 0.5px var(--border-c);
 }
+//顶边框
 .border-T {
   --border-c: #dadbde;
   border-top: solid 0.5px var(--border-c);
 }
+//左边框
 .border-L {
   --border-c: #dadbde;
   border-left: solid 0.5px var(--border-c);
 }
+//有边框
 .border-R {
   --border-c: #dadbde;
   border-right: solid 0.5px var(--border-c);
 }
+//全方向边框
 .border-all {
   --border-c: #dadbde;
   border: solid 0.5px var(--border-c);
 }
+//透明度出现动画
 @keyframes option {
   0% {
     opacity: 0;
@@ -43,6 +47,7 @@
     opacity: 1;
   }
 }
+//从右往左出现动画
 @keyframes rightToLeft {
   0% {
     opacity: 0;

@@ -1,3 +1,4 @@
+<!-- 下拉选择 -->
 <script setup lang="ts" generic="O extends CoSelectionsItem">
 import { CoDropdownProps } from "@/components/common/CoDropdown/CoDropdown.vue";
 import { useVModel } from "@/hooks/toolsHooks";
@@ -9,9 +10,13 @@ export interface CoSelectionsItem extends AnyObject {
 }
 interface CoSelectProps extends CoDropdownProps {
   modelValue?: any;
+  /**选项集合 */
   selections?: O[];
+  /**selections 中，要作为label的字段名；默认为label */
   labelName?: keyof O;
+  /**selections 中，要作为value的字段名；默认为value */
   valueName?: keyof O;
+  /**下拉选择弹出框的最大高度 */
   maxHeight?: string;
 }
 const props = withDefaults(defineProps<CoSelectProps>(), {

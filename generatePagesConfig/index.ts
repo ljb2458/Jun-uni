@@ -2,13 +2,19 @@ import fs from "fs";
 import path from "path";
 import defaultConfig from "./pages.json";
 
-// 常量配置
+/**项目文件地址 */
 const SRC_DIR = path.join(__dirname, "../src");
+/**pages目录地址 */
 const PAGES_DIR = path.join(SRC_DIR, "pages");
+/**结果输出位置 */
 const OUTPUT_FILE = path.join(SRC_DIR, "pages.json");
+/**位于主包首位的页面 */
 const FIRST_PAGE = "pages/tabbar/home/home";
+/**要打包为主包的文件夹 */
 const MAIN_PACKAGE_DIR = "pages/tabbar"; // 主包文件夹
+/**黑名单 */
 const BLACKLIST = [/.?\/components/];
+/**包含的文件后缀 */
 const INCLUDED_EXTENSIONS = [".vue", ".nvue"];
 
 // 页面配置类型

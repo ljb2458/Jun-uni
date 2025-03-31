@@ -1,20 +1,21 @@
+<!-- 卡片 -->
 <script lang="ts" setup>
-import type { Property } from "csstype";
 import { StyleValue } from "vue";
 const props = withDefaults(
   defineProps<{
-    /**背景图片 */
-    bgImg?: string;
     /**背景盒子样式 */
     bgboxStyle?: StyleValue;
     /**背景盒子模糊 */
     bgboxBlur?: string;
+    /**背景盒子class */
     bgboxClass?: any;
+    /**阴影颜色 */
     shadowColor?: string;
+    /**是否启用阴影效果 */
     shadow?: boolean;
-    bgRepeat?: Property.BackgroundRepeat;
-    bgSize?: Property.BackgroundSize;
-    bgPosition?: Property.BackgroundPosition;
+
+    /**背景图片 */
+    bgImg?: string;
   }>(),
   {
     bgboxBlur: "2px",
@@ -31,9 +32,6 @@ const props = withDefaults(
     :style="{
       background: bgImg || false,
       '--shadow-c': props.shadowColor,
-      backgroundRepeat: props.bgRepeat,
-      backgroundSize: props.bgSize,
-      backgroundPosition: props.bgPosition,
     }"
     class="CoCard"
     :class="{ shadow: shadow }"

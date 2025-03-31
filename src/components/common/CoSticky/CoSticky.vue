@@ -1,3 +1,4 @@
+<!-- 粘性布局吸顶 -->
 <script setup lang="ts">
 export interface CoStickyProps {
   /**吸顶时与顶部的距离 */

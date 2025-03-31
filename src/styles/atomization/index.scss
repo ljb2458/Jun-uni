@@ -1,3 +1,6 @@
+//tailwindcss 比较庞大，且对小程序不太兼容，该项目自己手写了一套简单的原子化css
+//该项目中的尺寸从大到小有 max | xxl | xl | lg | md | sm | xs | xxs | auto | 0 这几种。
+//该项目中的 !important 最高权重符为 _ 而非 ! 因为小程序中 class 中的 ! 等特殊符号会被过滤掉；如 flex 的最高权重为：_flex。
 @use "effects.scss";
 @use "text.scss";
 @use "box.scss";

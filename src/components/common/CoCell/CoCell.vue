@@ -1,3 +1,4 @@
+<!-- cell单元格 -->
 <script lang="ts" setup>
 const props = withDefaults(
   defineProps<{
@@ -59,7 +60,7 @@ const emit = defineEmits<{
           <view class="F-S-sm">{{ rightText }}</view>
         </slot>
         <slot v-if="rightIcon !== false" name="right-icon">
-          <u-icon v-if="rightIcon === true" name="arrow-right"></u-icon>
+          <uv-icon v-if="rightIcon === true" name="arrow-right"></uv-icon>
           <CoIcon v-else-if="rightIcon" :name="rightIcon" />
         </slot>
       </view>

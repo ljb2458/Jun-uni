@@ -1,6 +1,8 @@
 import { getSystemInfoCache } from "@/utils/rewriteUni";
 import type { CSSProperties } from "vue";
 import { unitPx } from "@/utils/tools/css";
+
+/**全局自定义导航栏布局样式 */
 export const defaultStyle = reactive<CSSProperties>({});
 
 export function computedDefaultStyle() {

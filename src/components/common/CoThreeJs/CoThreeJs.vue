@@ -1,3 +1,4 @@
+<!-- three.js -->
 <script setup lang="ts">
 import { queryNode } from "@/utils/rewriteUni";
 

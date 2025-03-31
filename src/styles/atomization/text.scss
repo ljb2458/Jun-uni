@@ -9,7 +9,7 @@ $sizes: (
   "xxl": 32px,
 );
 
-// 循环生成样式
+// 循环生成样式 例：F-S-xxs；值：font-size:var(--F-S-xxs)；即：8px；
 @each $key, $value in $sizes {
   .F-S-#{$key} {
     font-size: var(--F-S-#{$key});
@@ -20,7 +20,7 @@ page {
     --F-S-#{$key}: #{$value};
   }
 }
-//行高line-height:1em; == T-H-10em
+//行高 例：T-H-10em；值：line-height:1em;
 @for $i from 5 through 50 {
   .T-H-#{$i}em {
     line-height: #{$i * 0.1}em;
@@ -33,7 +33,7 @@ page {
   white-space: nowrap;
 }
 
-/* 文字多行省略号 */
+//文字多行省略号 例：T-omit-5；
 @for $i from 1 through 5 {
   .T-omit-#{$i} {
     overflow: hidden;
@@ -46,21 +46,24 @@ page {
   }
 }
 
-/* 文字多了自動換行 */
+//允许文字在任何位置换行
 .T-break {
   word-break: break-all;
   word-wrap: break-word;
 }
+//不允许文字换行
 .T-nowrap {
   white-space: nowrap;
 }
-
+//文字加粗
 .T-strong {
   font-weight: bold;
 }
+//文字变细
 .T-weak {
   font-weight: lighter;
 }
+//兼容制表符的文字，适用于用户评论等场景。
 .T-content {
   white-space: pre-wrap;
   word-break: break-all;

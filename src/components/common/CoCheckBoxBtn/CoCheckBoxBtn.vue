@@ -1,3 +1,4 @@
+<!-- 按钮形式的 checkbox（多选） 或 radio（单选） -->
 <script setup lang="ts">
 import type { StyleValue } from "vue";
 type StateKey = "normal" | "active";
@@ -10,7 +11,9 @@ interface Props
   modelValue: any;
   value: any;
   disabled?: boolean;
+  /**是否为radio(单选模式) */
   isRadio?: boolean;
+  /**是否可取消 */
   disabledCancel?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {

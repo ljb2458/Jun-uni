@@ -46,8 +46,8 @@ async function api(
 
 <template>
   <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
-    <view class="MG-md border-all">
-      <text class="F-S-lg">TabsFor</text>
+    <view class="MG-md border-all PD-sm">
+      <text class="F-S-lg">CoTabsFor</text>
       <view>
         适用多端的tabs组件，支持自动高度、懒加载、自动吸顶、滑动等功能。
       </view>
@@ -75,8 +75,8 @@ async function api(
           :api="api"
         >
           <template #default="{ list }">
-            <view class="MG-md border-all">
-              <text class="F-S-lg">RequestList</text>
+            <view class="MG-md border-all PD-sm">
+              <text class="F-S-lg">CoRequestList</text>
               <view>
                 自动为您加载分页数据，支持下拉刷新、上拉触底加载、列表状态自动处理、ref
                 获取数据等。

@@ -1,3 +1,4 @@
+<!-- 折叠面板 -->
 <script lang="ts" setup>
 import type { StyleValue } from "vue";
 type ModuleName = "header" | "content";
@@ -7,10 +8,13 @@ interface Props
     Partial<Record<`${ModuleName}-class`, string>>,
     Partial<Record<`${ModuleName}Style`, StyleValue>>,
     Partial<Record<`${ModuleName}-style`, StyleValue>> {
+  /**当前打开组件的 name 或 name 集合；传入数组则可以多开（非手风琴模式）， */
   value: any | any[];
+  /**标识符 */
   name: any;
   title?: StrNumber;
   message?: StrNumber;
+  /**当内容高度超过200vh时是否允许翻页；默认true */
   scrollY?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
