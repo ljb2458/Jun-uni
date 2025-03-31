@@ -166,8 +166,8 @@ export function usePagingAdapter<
     pageNo: number,
     ...params: any[]
   ): Promise<RequestList.Res<UnPromise<ReturnType<F>>["result"]["items"]>> => {
-    params[0] ||= {
-      ...params[0],
+    params[0] = {
+      ...(params[0] || []),
       page: pageNo,
     };
     const result = await api(...params);
