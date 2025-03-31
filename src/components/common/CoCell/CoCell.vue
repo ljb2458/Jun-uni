@@ -15,7 +15,9 @@ const props = withDefaults(
   }>(),
   {
     shadowColor: "rgba(0,0,0,0.2)",
-    shadow: true,
+    shadow: false,
+    rightIcon: true,
+    active: true,
     bg: "var(--C-B1)",
     mode: "bg",
     borderColor: "var(--C-B1-O2)",
@@ -30,60 +32,57 @@ const emit = defineEmits<{
   <view
     @click="(e:any) => emit('click', e)"
     :style="{
-      '--Cell-bg': bg,
-      '--BOc': props.borderColor,
-      '--SHc': props.shadowColor,
+      '--cell-bg': bg,
+      '--border-c': props.borderColor,
+      '--shadow-c': props.shadowColor,
     }"
     :class="[
       {
         shadow: props.mode === 'bg' && props.shadow,
-        CCell__bg: props.mode === 'bg',
-        CCell__active: active,
-        CCell_border: props.mode === 'border',
+        CoCell__bg: props.mode === 'bg',
+        CoCell__active: active,
+        CoCell_border: props.mode === 'border',
         'border-B': props.mode === 'border',
       },
     ]"
-    class="CCell"
+    class="CoCell"
   >
-    <slot name="left-layout">
-      <view class="flex-A-C auto-ML-xs">
-        <slot name="left">
+    <view class="flex-1">
+      <slot name="left">
+        <view class="flex-A-C">
           <CoIcon v-if="leftIcon" :name="leftIcon" />
           <view>{{ leftText }}</view>
-        </slot>
-      </view>
+        </view>
+      </slot>
+    </view>
+    <slot name="right">
+      <view class="F-S-sm">{{ rightText }}</view>
     </slot>
-    <slot> </slot>
-    <slot name="right-layout">
-      <view class="flex-A-C auto-ML-xs">
-        <slot name="right">
-          <view class="F-S-sm">{{ rightText }}</view>
-        </slot>
-        <slot v-if="rightIcon !== false" name="right-icon">
-          <uv-icon v-if="rightIcon === true" name="arrow-right"></uv-icon>
-          <CoIcon v-else-if="rightIcon" :name="rightIcon" />
-        </slot>
-      </view>
-    </slot>
+    <view class="CoCell_right_icon">
+      <slot v-if="rightIcon !== false" name="right-icon">
+        <uv-icon v-if="rightIcon === true" name="arrow-right"></uv-icon>
+        <CoIcon v-else-if="rightIcon" :name="rightIcon" />
+      </slot>
+    </view>
   </view>
 </template>
 
 <style lang="scss" scoped>
-.CCell {
+.CoCell {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-radius: var(--R-sm);
 }
-.CCell_border {
+.CoCell_border {
   border-radius: 0;
   padding: var(--gap-sm) 0;
 }
-.CCell__bg {
-  background: var(--Cell-bg);
+.CoCell__bg {
+  background: var(--cell-bg);
   padding: var(--gap-sm);
 }
-.CCell__active {
+.CoCell__active {
   &:active {
     background: var(--C-B3);
   }

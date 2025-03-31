@@ -12,33 +12,44 @@ import { _import } from "@/utils/tools/import";
 import { onPageScroll } from "@dcloudio/uni-app";
 import { RequestList } from "@/components/common/CoRequestList/useRequestList";
 import { CoRequestListInstance } from "@/components/common/CoRequestList/CoRequestList.vue";
+import { randomUUID } from "@/utils/tools/generate";
 
 const tabsList = reactive([
   {
-    name: "tabs1",
+    name: "选项卡1",
     CoRequestListRef: defineType<CoRequestListInstance<typeof api>>(),
   },
   {
-    name: "tabs2",
+    name: "选项卡2",
     CoRequestListRef: defineType<CoRequestListInstance<typeof api>>(),
   },
 ]);
 const currTab = ref(0);
 const searchKey = ref("");
 
+interface ApiResItem {
+  pageNo: number;
+  name: string;
+  random: string;
+}
+
 async function api(
   pageNo: number,
-  e: { name: string }
-): Promise<RequestList.Res<string[]>> {
-  console.log(`加载了${e.name}的数据`);
-  const list: string[] = [];
+  { name }: { name: string }
+): Promise<RequestList.Res<ApiResItem[]>> {
+  console.log(`加载了${name}的数据`);
+  const list: ApiResItem[] = [];
   for (let i = 0; i < 10; i++) {
-    list.push(`name:${e.name}; pageNo:${pageNo};\nrandom:${Math.random()}`);
+    list.push({
+      pageNo,
+      name,
+      random: randomUUID(),
+    });
   }
   return {
     isEnd: false,
     isSuccess: true,
-    list: list.filter((v) => new RegExp(searchKey.value).test(v)),
+    list: list.filter((v) => new RegExp(searchKey.value).test(v.random)),
     message: "success",
   };
 }
@@ -73,6 +84,7 @@ async function api(
           :_ref="(e:any)=>tabsList[currTab].CoRequestListRef = e"
           :param="{ name: option.name }"
           :api="api"
+          :key-name="'random'"
         >
           <template #default="{ list }">
             <view class="MG-md border-all PD-sm">
@@ -83,11 +95,17 @@ async function api(
               </view>
             </view>
             <view
-              class="MG-md PD-md B-B1 R-sm"
-              v-for="(item, index) in list"
-              :key="index"
+              class="flex-A-C gap-sm F-S-sm MG-md PD-md B-B1 R-sm anim-rightToLeft"
+              v-for="item in list"
+              :key="item.random"
             >
-              {{ item }}
+              <view class="F-S-xxl C-M1">
+                P<text class="F-S-sm">{{ item.pageNo }}</text>
+              </view>
+              <view>
+                <view class="T-strong">{{ item.name }}</view>
+                <view class="T-break">{{ item.random }}</view>
+              </view>
             </view>
           </template>
         </CoRequestList>

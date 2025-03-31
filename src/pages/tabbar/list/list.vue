@@ -3,7 +3,7 @@
   "navigationBarTitleText": "组件列表",
   "navigationStyle": "custom",
   "navigationBarTextStyle": "white",
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh": false
 }
 </cfg>
 
@@ -13,10 +13,10 @@ import { _import } from "@/utils/tools/import";
 
 const tabsList = reactive([
   {
-    name: "任务列表",
+    name: "展示组件",
   },
   {
-    name: "问题列表",
+    name: "业务组件",
   },
 ]);
 </script>
@@ -26,20 +26,14 @@ const tabsList = reactive([
     <view class="P-row-md">
       <CoTabsFor :options="tabsList">
         <template #title-bottom>
-          <GrFilterSearch
-            class="MT-xs B-none PD-0"
-            bg="var(--C-white)"
-            :selections="tabsList.map((v, i) => ({ label: v.name, value: i }))"
-          />
+          <GrFilterSearch class="MT-xs B-none PD-0" bg="var(--C-white)" />
         </template>
         <template #default="{ option }">
-          <view style="height: 300px" class="B-M1">{{ option.index }}</view>
+          <CoCell class="MT-md" leftText="自动正方形"> </CoCell>
         </template>
       </CoTabsFor>
     </view>
   </CoPageView>
 </template>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

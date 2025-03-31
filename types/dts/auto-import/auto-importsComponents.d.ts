@@ -17,7 +17,6 @@ declare module 'vue' {
     CoDropdown: typeof import('./../../../src/components/common/CoDropdown/CoDropdown.vue')['default']
     CoError: typeof import('./../../../src/components/common/CoError/CoError.vue')['default']
     CoGrid: typeof import('./../../../src/components/common/CoGrid/CoGrid.vue')['default']
-    CoGridCell: typeof import('./../../../src/components/common/CoGridCell/CoGridCell.vue')['default']
     CoGridItem: typeof import('./../../../src/components/common/CoGridItem/CoGridItem.vue')['default']
     CoIcon: typeof import('./../../../src/components/common/CoIcon/CoIcon.vue')['default']
     CoList: typeof import('./../../../src/components/common/CoList/CoList.vue')['default']
@@ -39,8 +38,6 @@ declare module 'vue' {
     EnvCoverImage: typeof import('./../../../src/components/common/CoMap/envCoverImage.vue')['default']
     EnvCoverView: typeof import('./../../../src/components/common/CoMap/envCoverView.vue')['default']
     GrFilterSearch: typeof import('./../../../src/components/group/GrFilterSearch/GrFilterSearch.vue')['default']
-    NaUpload: typeof import('./../../../src/components/native/NaUpload/NaUpload.vue')['default']
-    NaVideo: typeof import('./../../../src/components/native/NaVideo/NaVideo.vue')['default']
     ReUpload: typeof import('./../../../src/components/rewrite/ReUpload/ReUpload.vue')['default']
   }
 }

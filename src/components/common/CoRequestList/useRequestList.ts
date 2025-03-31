@@ -80,6 +80,7 @@ export function useRequestList<F extends RequestList.Api>(
   async function rerequest() {
     pageNo = defPageNo;
     stateNext();
+    list.value.length = 0;
     return await request();
   }
   /**请求分页接口 */
@@ -101,8 +102,8 @@ export function useRequestList<F extends RequestList.Api>(
       if (!result.value?.isSuccess) {
         return stateErr(result.value?.message);
       }
-      if (Object.is(pageNo, defPageNo)) list.value = [];
-      list.value = list.value.concat(result.value.list);
+      if (Object.is(pageNo, defPageNo)) list.value.length = 0;
+      list.value.push(...result.value.list);
       pageNo++;
       if (result.value.isEnd) {
         if (!list.value.length) return stateNull();

@@ -52,6 +52,7 @@ const props = withDefaults(defineProps<Props>(), {
   minHeight: "70vh",
   setupLoad: true,
   giveParam: () => (pageNo: number) => ({}),
+  keyName: "id",
 });
 (props.onPullDownRefresh || onPullDownRefresh)(pullDownRefreshRequset);
 /**下拉刷新请求 */
@@ -122,7 +123,7 @@ function isVisible() {
 </script>
 <template>
   <CoList
-    class="CRequestList"
+    class="CoRequestList"
     ref="CListRef"
     :status="state.type"
     :message="state.message"

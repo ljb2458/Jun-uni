@@ -47,6 +47,9 @@
     opacity: 1;
   }
 }
+.anim-option {
+  animation: option 300ms linear;
+}
 //从右往左出现动画
 @keyframes rightToLeft {
   0% {
@@ -57,4 +60,7 @@
     transform: translateX(0);
     opacity: 1;
   }
+}
+.anim-rightToLeft {
+  animation: rightToLeft 300ms linear;
 }
