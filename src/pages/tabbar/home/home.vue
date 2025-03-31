@@ -16,9 +16,11 @@ import { CoRequestListInstance } from "@/components/common/CoRequestList/CoReque
 const tabsList = reactive([
   {
     name: "tabs1",
+    CoRequestListRef: defineType<CoRequestListInstance<typeof api>>(),
   },
   {
     name: "tabs2",
+    CoRequestListRef: defineType<CoRequestListInstance<typeof api>>(),
   },
 ]);
 const currTab = ref(0);
@@ -36,17 +38,10 @@ async function api(
   return {
     isEnd: false,
     isSuccess: true,
-    list,
+    list: list.filter((v) => new RegExp(searchKey.value).test(v)),
     message: "success",
   };
 }
-const CoRequestListRef = ref<CoRequestListInstance<typeof api>>();
-
-const list = computed(() =>
-  CoRequestListRef.value?.list.filter((v) =>
-    new RegExp(searchKey.value).test(v)
-  )
-);
 </script>
 
 <template>
@@ -54,8 +49,7 @@ const list = computed(() =>
     <view class="MG-md border-all">
       <text class="F-S-lg">TabsFor</text>
       <view>
-        适用多端的tabs组件，有较好的 TypeScript
-        支持，使用成本较低，支持自动高度、懒加载、自动吸顶、滑动等功能。
+        适用多端的tabs组件，支持自动高度、懒加载、自动吸顶、滑动等功能。
       </view>
     </view>
     <CoTabsFor
@@ -66,6 +60,7 @@ const list = computed(() =>
     >
       <template #title-bottom>
         <GrFilterSearch
+          @blur="tabsList[currTab].CoRequestListRef?.rerequest()"
           v-model="searchKey"
           class="MT-xs M-row-md B-none PD-0"
           bg="var(--C-white)"
@@ -75,24 +70,26 @@ const list = computed(() =>
       </template>
       <template #default="{ option }">
         <CoRequestList
-          ref="CoRequestListRef"
+          :_ref="(e:any)=>tabsList[currTab].CoRequestListRef = e"
           :param="{ name: option.name }"
           :api="api"
         >
-          <view class="MG-md border-all">
-            <text class="F-S-lg">RequestList</text>
-            <view>
-              自动为您加载分页数据，使用成本极低，有较好的 TypeScript
-              支持、支持下拉刷新、上拉触底加载、列表状态自动处理、极好的ts支持等。
+          <template #default="{ list }">
+            <view class="MG-md border-all">
+              <text class="F-S-lg">RequestList</text>
+              <view>
+                自动为您加载分页数据，支持下拉刷新、上拉触底加载、列表状态自动处理、ref
+                获取数据等。
+              </view>
             </view>
-          </view>
-          <view
-            class="MG-md PD-md B-B1 R-sm"
-            v-for="(item, index) in list"
-            :key="index"
-          >
-            {{ item }}
-          </view>
+            <view
+              class="MG-md PD-md B-B1 R-sm"
+              v-for="(item, index) in list"
+              :key="index"
+            >
+              {{ item }}
+            </view>
+          </template>
         </CoRequestList>
       </template>
     </CoTabsFor>

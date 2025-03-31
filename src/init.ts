@@ -36,12 +36,15 @@ uni.addInterceptor("showToast", {
 // #ifdef APP
 plus.screen.lockOrientation("portrait-primary");
 // #endif
-/**
- * * 传入什么类型就返回什么类型，方便在对象中定义类型
- */
 globalThis.defineType = <D>(v?: D) => v;
 declare global {
+  /**
+   * * 传入什么类型就返回什么类型，方便在对象中定义类型
+   */
   function defineType<D>(value: D): D;
+  /**
+   * * 传入什么类型就返回什么类型，方便在对象中定义类型
+   */
   function defineType<D>(): D | undefined;
 }
 

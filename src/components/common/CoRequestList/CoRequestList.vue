@@ -41,6 +41,10 @@ interface Props {
   pullDownRefreshEnd?: (v?: RequestList.State) => void;
   /**组件最小高度 */
   minHeight?: string;
+  /**
+   * 小程序处于循环中的组件拿不到实例，使用这个方法获取实例
+   */
+  _ref: Fun<[instance: any], any>;
 }
 const props = withDefaults(defineProps<Props>(), {
   defPageNo: 1,
@@ -60,6 +64,7 @@ function load(e: LoadParam) {
   if (e.reload) return rerequest();
   request();
 }
+
 const {
   result,
   list,
@@ -71,17 +76,15 @@ const {
   stateLoading,
   stateNull,
   stateNext,
-} = useRequestList(
-  async (pageNo) =>
-    props.api(
-      pageNo,
+} = useRequestList(props.api, {
+  defPageNo: props.defPageNo,
+  async giveExtraParams(pageNo) {
+    return [
       { ...props.param, ...(await props.giveParam(pageNo)) },
-      ...(props.extraParams || [])
-    ),
-  {
-    defPageNo: props.defPageNo,
-  }
-);
+      ...(props.extraParams || []),
+    ];
+  },
+});
 const _expose = {
   result,
   state,
@@ -97,6 +100,7 @@ const _expose = {
 };
 /**暴露分页hooks */
 defineExpose(_expose);
+if (typeof props._ref === "function") props._ref(_expose);
 
 const CListRef = ref<CoListInstance>();
 function activeLoad() {
@@ -143,7 +147,6 @@ function isVisible() {
 <style lang="scss" scoped></style>
 <script lang="ts">
 import mpMixin from "@/components/libs/mixin/mpMixin";
-import { NumberBoxEvents } from "@ttou/uv-typings/types/numberBox";
 export default {
   mixins: [mpMixin],
 };

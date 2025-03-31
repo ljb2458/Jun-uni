@@ -26,6 +26,7 @@ export namespace RequestList {
 
   export interface Config {
     defPageNo?: number;
+    giveExtraParams?: Fun<[pageNo: number], any[] | Promise<any[]>>;
   }
 
   /**api方法返回类型 */
@@ -61,8 +62,12 @@ export function useRequestList<F extends RequestList.Api>(
   config?: RequestList.Config
 ): RequestList.Return<F> {
   config = { ...config };
-  if (typeof config.defPageNo !== "number") config.defPageNo = 1;
-  let pageNo = config.defPageNo;
+  const defPageNo = typeof config.defPageNo === "number" ? config.defPageNo : 1;
+  let pageNo = defPageNo;
+  const giveExtraParams =
+    typeof config.giveExtraParams === "function"
+      ? config.giveExtraParams
+      : () => [];
   /**api请求状态*/
   const state = ref<RequestList.State>({
     type: "next",
@@ -73,7 +78,7 @@ export function useRequestList<F extends RequestList.Api>(
   const result = ref<RequestList.GetRes<F>>();
   /**重置分页接口 */
   async function rerequest() {
-    pageNo = config!.defPageNo!;
+    pageNo = defPageNo;
     stateNext();
     return await request();
   }
@@ -88,12 +93,15 @@ export function useRequestList<F extends RequestList.Api>(
       /**请求api第一个参数 */
       /**除第一个参数外的额外请求参数 */
       stateLoading();
-      result.value = (await api(pageNo)) as any;
+      result.value = (await api(
+        pageNo,
+        ...(await giveExtraParams!(pageNo))
+      )) as any;
       stateNext();
       if (!result.value?.isSuccess) {
         return stateErr(result.value?.message);
       }
-      if (Object.is(pageNo, config!.defPageNo)) list.value = [];
+      if (Object.is(pageNo, defPageNo)) list.value = [];
       list.value = list.value.concat(result.value.list);
       pageNo++;
       if (result.value.isEnd) {
