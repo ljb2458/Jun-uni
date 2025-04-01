@@ -61,7 +61,7 @@ defineExpose({ activeLoad, activeRelad, load, reload, isVisible });
   <view :style="{ minHeight: props.minHeight }" :id="CListId" class="CList">
     <slot></slot>
     <CoListStatus
-      class="MT-md"
+      class="PD-md"
       @load="load"
       @reload="reload"
       :type="props.status"

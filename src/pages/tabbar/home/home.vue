@@ -46,6 +46,7 @@ async function api(
       random: randomUUID(),
     });
   }
+  await new Promise((reslove) => setTimeout(reslove, 1000));
   return {
     isEnd: false,
     isSuccess: true,
