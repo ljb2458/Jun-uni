@@ -125,7 +125,14 @@ const tabsList = computed(() => [
 <template>
   <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
     <view class="P-row-md">
-      <CoTabsFor v-model="tabIndex" :options="tabsList" title-scrollable>
+      <CoTabsFor
+        v-model="tabIndex"
+        :sticky="true"
+        sticky-class="B-B2 PB-sm"
+        :options="tabsList"
+        title-scrollable
+        :lazy="false"
+      >
         <template #title-bottom>
           <GrFilterSearch
             v-model="keyword"
