@@ -66,7 +66,7 @@ async function api(
     </view>
     <CoTabsFor
       :sticky="true"
-      sticky-class="B-B2"
+      sticky-class="B-B2 PB-sm"
       :options="tabsList"
       v-model="currTab"
     >

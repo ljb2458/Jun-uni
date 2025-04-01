@@ -1,5 +1,4 @@
-<!--tabs展示面板-->
-
+<!-- 标签页 -->
 <script lang="ts" setup generic="Item extends CoTabsForOptionsItem">
 //@ts-ignore
 import uvTabs from "@climblee/uv-ui/components/uv-tabs/uv-tabs.vue";
