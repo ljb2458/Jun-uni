@@ -15,7 +15,7 @@
         "navigationBarTitleText": "组件列表",
         "navigationStyle": "custom",
         "navigationBarTextStyle": "white",
-        "enablePullDownRefresh": true
+        "enablePullDownRefresh": false
       }
     },
     {
@@ -28,7 +28,247 @@
       }
     }
   ],
-  "subPackages": [],
+  "subPackages": [
+    {
+      "root": "pages/demo",
+      "pages": [
+        {
+          "path": "CoAutoSquare",
+          "style": {
+            "navigationBarTitleText": "自动正方形",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoCard",
+          "style": {
+            "navigationBarTitleText": "卡片",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoCascader",
+          "style": {
+            "navigationBarTitleText": "级联选择器",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoCell",
+          "style": {
+            "navigationBarTitleText": "单元格",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoCheckBoxBtn",
+          "style": {
+            "navigationBarTitleText": "复选按钮 | 单选按钮",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoCollapse",
+          "style": {
+            "navigationBarTitleText": "折叠面板",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoDivider",
+          "style": {
+            "navigationBarTitleText": "分割线",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoDropdown",
+          "style": {
+            "navigationBarTitleText": "下拉菜单",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoError",
+          "style": {
+            "navigationBarTitleText": "错误",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoGrid",
+          "style": {
+            "navigationBarTitleText": "宫格布局",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoIcon",
+          "style": {
+            "navigationBarTitleText": "iconfont图标",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoList",
+          "style": {
+            "navigationBarTitleText": "列表",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoListStatus",
+          "style": {
+            "navigationBarTitleText": "列表状态",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoMap",
+          "style": {
+            "navigationBarTitleText": "地图",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoNotify",
+          "style": {
+            "navigationBarTitleText": "通知栏",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoPageView",
+          "style": {
+            "navigationBarTitleText": "页面",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoRequestList",
+          "style": {
+            "navigationBarTitleText": "自动请求分页列表",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoSelect",
+          "style": {
+            "navigationBarTitleText": "下拉选择",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoSoreControl",
+          "style": {
+            "navigationBarTitleText": "排序控件",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoStateTag",
+          "style": {
+            "navigationBarTitleText": "状态标签",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoStepLine",
+          "style": {
+            "navigationBarTitleText": "竖状步骤条",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoStick",
+          "style": {
+            "navigationBarTitleText": "粘性布局",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoTabsFor",
+          "style": {
+            "navigationBarTitleText": "标签页",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoThreeJs",
+          "style": {
+            "navigationBarTitleText": "3D组件",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoVideo",
+          "style": {
+            "navigationBarTitleText": "视频",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        },
+        {
+          "path": "CoWebview",
+          "style": {
+            "navigationBarTitleText": "webview",
+            "enablePullDownRefresh": false,
+            "navigationStyle": "custom",
+            "navigationBarTextStyle": "white"
+          }
+        }
+      ]
+    }
+  ],
   "tabBar": {
     "color": "#1e1e1e",
     "selectedColor": "#0078D4",

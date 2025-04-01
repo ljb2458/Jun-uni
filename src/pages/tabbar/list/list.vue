@@ -11,6 +11,7 @@
 import { onPageScroll } from "@dcloudio/uni-app";
 import { _import } from "@/utils/tools/import";
 import { bitsAuth } from "@/utils/tools/bits";
+import router from "@/utils/router";
 
 enum ComponentsType {
   /**展示组件 */
@@ -32,52 +33,187 @@ const keyword = ref("");
 
 const cellList = computed(() => {
   const result = [
-    { leftText: "自动正方形 CoAutoSquare", type: ComponentsType.Layout },
-    { leftText: "卡片 CoCard", type: ComponentsType.Exhibition },
-    { leftText: "级联选择器 CoCascader", type: ComponentsType.Form },
-    { leftText: "单元格 CoCell", type: ComponentsType.Exhibition },
+    {
+      leftText: "自动正方形 CoAutoSquare",
+      type: ComponentsType.Layout,
+      tap() {
+        router.push("@/pages/demo/CoAutoSquare.vue");
+      },
+    },
+    {
+      leftText: "卡片 CoCard",
+      type: ComponentsType.Exhibition,
+      tap() {
+        router.push("@/pages/demo/CoCard.vue");
+      },
+    },
+    {
+      leftText: "级联选择器 CoCascader",
+      type: ComponentsType.Form,
+      tap() {
+        router.push("@/pages/demo/CoCascader.vue");
+      },
+    },
+    {
+      leftText: "单元格 CoCell",
+      type: ComponentsType.Exhibition,
+      tap() {
+        router.push("@/pages/demo/CoCell.vue");
+      },
+    },
     {
       leftText: "复选按钮 | 单选按钮 CoCheckBoxBtn",
       type: ComponentsType.Form,
+      tap() {
+        router.push("@/pages/demo/CoCheckBoxBtn.vue");
+      },
     },
-    { leftText: "折叠面板 CoCollapse", type: ComponentsType.Exhibition },
-    { leftText: "分割线 CoDivider", type: ComponentsType.Exhibition },
-    { leftText: "下拉菜单 CoDropdown", type: ComponentsType.Exhibition },
-    { leftText: "错误 CoError", type: ComponentsType.Exhibition },
-    { leftText: "宫格布局 CoGrid", type: ComponentsType.Layout },
-    { leftText: "iconfont图标 CoIcon", type: ComponentsType.Exhibition },
-    { leftText: "列表 CoList", type: ComponentsType.Data },
-    { leftText: "列表状态 CoListStatus", type: ComponentsType.Data },
+    {
+      leftText: "折叠面板 CoCollapse",
+      type: ComponentsType.Exhibition,
+      tap() {
+        router.push("@/pages/demo/CoCollapse.vue");
+      },
+    },
+    {
+      leftText: "分割线 CoDivider",
+      type: ComponentsType.Exhibition,
+      tap() {
+        router.push("@/pages/demo/CoDivider.vue");
+      },
+    },
+    {
+      leftText: "下拉菜单 CoDropdown",
+      type: ComponentsType.Exhibition,
+      tap() {
+        router.push("@/pages/demo/CoDropdown.vue");
+      },
+    },
+    {
+      leftText: "错误 CoError",
+      type: ComponentsType.Exhibition,
+      tap() {
+        router.push("@/pages/demo/CoError.vue");
+      },
+    },
+    {
+      leftText: "宫格布局 CoGrid",
+      type: ComponentsType.Layout,
+      tap() {
+        router.push("@/pages/demo/CoGrid.vue");
+      },
+    },
+    {
+      leftText: "iconfont图标 CoIcon",
+      type: ComponentsType.Exhibition,
+      tap() {
+        router.push("@/pages/demo/CoIcon.vue");
+      },
+    },
+    {
+      leftText: "列表 CoList",
+      type: ComponentsType.Data,
+      tap() {
+        router.push("@/pages/demo/CoList.vue");
+      },
+    },
+    {
+      leftText: "列表状态 CoListStatus",
+      type: ComponentsType.Data,
+      tap() {
+        router.push("@/pages/demo/CoListStatus.vue");
+      },
+    },
     {
       leftText: "地图 CoMap",
       type: ComponentsType.Reinforce | ComponentsType.Exhibition,
+      tap() {
+        router.push("@/pages/demo/CoMap.vue");
+      },
     },
-    { leftText: "通知栏 CoNotify", type: ComponentsType.Message },
+    {
+      leftText: "通知栏 CoNotify",
+      type: ComponentsType.Message,
+      tap() {
+        router.push("@/pages/demo/CoNotify.vue");
+      },
+    },
     {
       leftText: "页面 CoPageView",
       type: ComponentsType.Reinforce | ComponentsType.Layout,
+      tap() {
+        router.push("@/pages/demo/CoPageView.vue");
+      },
     },
     {
       leftText: "自动请求分页列表 CoRequestList",
       type: ComponentsType.Data | ComponentsType.Reinforce,
+      tap() {
+        router.push("@/pages/demo/CoRequestList.vue");
+      },
     },
-    { leftText: "下拉选择 CoSelect", type: ComponentsType.Form },
-    { leftText: "排序控件 CoSortControl", type: ComponentsType.Data },
-    { leftText: "状态标签 CoStateTag", type: ComponentsType.Exhibition },
-    { leftText: "竖状步骤条 CoStepLine", type: ComponentsType.Exhibition },
-    { leftText: "粘性布局 CoSticky", type: ComponentsType.Exhibition },
+    {
+      leftText: "下拉选择 CoSelect",
+      type: ComponentsType.Form,
+      tap() {
+        router.push("@/pages/demo/CoSelect.vue");
+      },
+    },
+    {
+      leftText: "排序控件 CoSortControl",
+      type: ComponentsType.Data,
+      tap() {
+        router.push("@/pages/demo/CoSortControl.vue");
+      },
+    },
+    {
+      leftText: "状态标签 CoStateTag",
+      type: ComponentsType.Exhibition,
+      tap() {
+        router.push("@/pages/demo/CoStateTag.vue");
+      },
+    },
+    {
+      leftText: "竖状步骤条 CoStepLine",
+      type: ComponentsType.Exhibition,
+      tap() {
+        router.push("@/pages/demo/CoStepLine.vue");
+      },
+    },
+    {
+      leftText: "粘性布局 CoSticky",
+      type: ComponentsType.Exhibition,
+      tap() {
+        router.push("@/pages/demo/CoSticky.vue");
+      },
+    },
     {
       leftText: "标签页 CoTabsFor",
       type: ComponentsType.Exhibition | ComponentsType.Exhibition,
+      tap() {
+        router.push("@/pages/demo/CoTabsFor.vue");
+      },
     },
-    { leftText: "3d组件 CoThreeJs", type: ComponentsType.Exhibition },
+    {
+      leftText: "3D组件 CoThreeJs",
+      type: ComponentsType.Exhibition,
+      tap() {
+        router.push("@/pages/demo/CoThreeJs.vue");
+      },
+    },
     {
       leftText: "视频 CoVideo",
       type: ComponentsType.Reinforce | ComponentsType.Exhibition,
+      tap() {
+        router.push("@/pages/demo/CoVideo.vue");
+      },
     },
     {
-      leftText: "webview",
+      leftText: "webview CoWebview",
       type: ComponentsType.Reinforce | ComponentsType.Exhibition,
+      tap() {
+        router.push("@/pages/demo/CoWebview.vue");
+      },
     },
   ];
   if (!keyword) return result;
@@ -143,6 +279,7 @@ const tabsList = computed(() => [
         <template #default="{ option }">
           <view style="min-height: 70vh">
             <CoCell
+              @tap="item.tap"
               class="MT-md F-S-sm anim-rightToLeft"
               :="item"
               :key="item.leftText"
