@@ -3,11 +3,15 @@
 import type { StyleValue } from "vue";
 type StateKey = "normal" | "active";
 
-interface Props
-  extends Partial<Record<`${StateKey}Class`, string>>,
-    Partial<Record<`${StateKey}-class`, string>>,
-    Partial<Record<`${StateKey}Style`, StyleValue>>,
-    Partial<Record<`${StateKey}-style`, StyleValue>> {
+interface Props {
+  "active-class": any;
+  activeClass: any;
+  activeStyle: StyleValue;
+  "active-style": StyleValue;
+  "normal-class": any;
+  normalClass: any;
+  normalStyle: StyleValue;
+  "normal-style": StyleValue;
   modelValue: any;
   value: any;
   disabled?: boolean;
@@ -17,13 +21,13 @@ interface Props
   disabledCancel?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
-  activeClass: "B-LG1 C-white",
+  activeClass: "B-M1 C-white",
   normalClass: "B-B2",
 });
 const stateKey = computed<StateKey>(() => {
   if (props.isRadio)
     return Object.is(props.modelValue, props.value) ? "active" : "normal";
-  return props.modelValue?.some((v: any) => Object.is(v, props.value))
+  return !props.modelValue?.some((v: any) => Object.is(v, props.value))
     ? "active"
     : "normal";
 });

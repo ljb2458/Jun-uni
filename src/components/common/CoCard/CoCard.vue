@@ -13,12 +13,11 @@ const props = withDefaults(
     shadowColor?: string;
     /**是否启用阴影效果 */
     shadow?: boolean;
-
-    /**背景图片 */
+    /**背景图片，小程序APP中使用背景图片受限，故使用一个定位图片实现背景图片 */
     bgImg?: string;
   }>(),
   {
-    bgboxBlur: "2px",
+    bgboxBlur: "none",
     shadowColor: "rgba(0,0,0,0.2)",
     shadow: false,
     bgRepeat: "no-repeat",

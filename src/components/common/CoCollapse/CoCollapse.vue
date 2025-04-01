@@ -1,13 +1,15 @@
 <!-- 折叠面板 -->
 <script lang="ts" setup>
 import type { StyleValue } from "vue";
-type ModuleName = "header" | "content";
-
-interface Props
-  extends Partial<Record<`${ModuleName}Class`, string>>,
-    Partial<Record<`${ModuleName}-class`, string>>,
-    Partial<Record<`${ModuleName}Style`, StyleValue>>,
-    Partial<Record<`${ModuleName}-style`, StyleValue>> {
+interface Props {
+  "header-class": any;
+  headerClass: any;
+  headerStyle: StyleValue;
+  "header-style": StyleValue;
+  "content-class": any;
+  contentClass: any;
+  contentStyle: StyleValue;
+  "content-style": StyleValue;
   /**当前打开组件的 name 或 name 集合；传入数组则可以多开（非手风琴模式）， */
   value: any | any[];
   /**标识符 */
@@ -34,7 +36,7 @@ function collapse(name: typeof props.name) {
   if (Object.is(props.value, name)) name = undefined;
   emit("update:value", name);
 }
-const collapse__active = computed(() => {
+const CoCollapse__active = computed(() => {
   if (Array.isArray(props.value))
     return props.value.some((v) => Object.is(v, props.name));
   return props.name == props.value;
@@ -42,14 +44,14 @@ const collapse__active = computed(() => {
 </script>
 
 <template>
-  <view :class="{ collapse__active }" class="collapse">
+  <view :class="{ CoCollapse__active }" class="CoCollapse">
     <view
       :style="([props.headerStyle, props['header-style']] as any)"
       :class="[props.headerClass, props['header-class']]"
       @tap="collapse(name)"
-      class="collapse_header flex-J-SB flex-A-C gap-sm active"
+      class="CoCollapse_header flex-J-SB flex-A-C gap-sm active"
     >
-      <view class="flex-1 collapse_title">
+      <view class="flex-1 CoCollapse_title">
         <slot name="title">
           <view class="flex-J-SB flex-A-C gap-sm">
             <view>{{ title }}</view>
@@ -57,13 +59,13 @@ const collapse__active = computed(() => {
           </view>
         </slot>
       </view>
-      <view class="collapse_icon">
+      <view class="CoCollapse_icon">
         <slot name="icon">
-          <up-icon
+          <uv-icon
             name="play-right-fill"
             color="inherit"
             size="inherit"
-          ></up-icon>
+          ></uv-icon>
         </slot>
       </view>
     </view>
@@ -71,7 +73,7 @@ const collapse__active = computed(() => {
       :style="([props.contentStyle,props['content-style']] as any)"
       :class="[props.contentClass, props['content-class']]"
       :scroll-y="scrollY"
-      class="collapse_content"
+      class="CoCollapse_content"
     >
       <slot></slot>
     </view>
@@ -79,30 +81,30 @@ const collapse__active = computed(() => {
 </template>
 
 <style scoped lang="scss">
-.collapse {
+.CoCollapse {
   overflow: hidden;
-  > .collapse_content {
+  > .CoCollapse_content {
     overflow: auto;
     transition: all 300ms;
     transition-timing-function: ease-out;
     max-height: 0;
   }
 
-  > .collapse_header {
-    .collapse_icon {
+  > .CoCollapse_header {
+    .CoCollapse_icon {
       transition: all 300ms linear;
     }
   }
 }
 
-.collapse__active {
-  > .collapse_header {
-    .collapse_icon {
+.CoCollapse__active {
+  > .CoCollapse_header {
+    .CoCollapse_icon {
       transform: rotate(90deg);
     }
   }
 
-  > .collapse_content {
+  > .CoCollapse_content {
     transition-timing-function: ease-in;
     max-height: 200vh !important;
   }

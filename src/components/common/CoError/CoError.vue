@@ -27,7 +27,7 @@ function clickButton(e: MouseEvent) {
       :src="_import('src/static/components/imgs/error.svg')"
     ></image>
     <slot>
-      <view class="C-T5 MT-xs">{{ props.message }}</view>
+      <view class="C-T4 MT-xs">{{ props.message }}</view>
     </slot>
     <slot name="button">
       <view class="MT-md">

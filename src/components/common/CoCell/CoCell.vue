@@ -20,7 +20,7 @@ const props = withDefaults(
     active: true,
     bg: "var(--C-B1)",
     mode: "bg",
-    borderColor: "var(--C-B1-O2)",
+    borderColor: "var(--C-T1-O2)",
   }
 );
 const emit = defineEmits<{

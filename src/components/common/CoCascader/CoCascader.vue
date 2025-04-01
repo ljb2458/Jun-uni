@@ -34,11 +34,13 @@ const props = withDefaults(
     >;
     /**是否展示加载图标，传入 loadChildren 时将自动控制 */
     loading?: boolean;
+    showEmpty?: boolean;
   }>(),
   {
     deselectable: true,
     modelValue: [] as any,
     height: "50vh",
+    showEmpty: true,
   }
 );
 
@@ -106,10 +108,12 @@ async function init() {
   }
 }
 init();
+defineExpose({ init });
 
 const optionsArray = computed(() => {
   const result = [options.value];
   selectedOptions.value.forEach((item) => {
+    if (!props.showEmpty && !item.children?.length) return;
     result.push(item.children || []);
   });
   return result;

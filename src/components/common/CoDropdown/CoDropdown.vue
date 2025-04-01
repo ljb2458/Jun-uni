@@ -24,7 +24,9 @@ const show = useVModel(props, "show", emit);
     :class="{ CoDropdown__show: show }"
   >
     <view class="CoDropdown_text">
-      <slot name="text">{{ text }}</slot>
+      <slot name="text">
+        <text>{{ text }}</text>
+      </slot>
     </view>
     <view class="CoDropdown_icon">
       <slot name="icon">
@@ -46,7 +48,6 @@ const show = useVModel(props, "show", emit);
 <style lang="scss" scoped>
 .CoDropdown {
   position: relative;
-  display: inline-block;
   $indicate-size: 12px;
   > .CoDropdown_text {
     display: inline-block;
