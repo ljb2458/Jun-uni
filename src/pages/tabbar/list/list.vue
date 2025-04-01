@@ -140,7 +140,10 @@ const cellList = computed(() => {
     },
     {
       leftText: "页面 CoPageView",
-      type: ComponentsType.Reinforce | ComponentsType.Layout,
+      type:
+        ComponentsType.Reinforce |
+        ComponentsType.Layout |
+        ComponentsType.Message,
       tap() {
         router.push("@/pages/demo/CoPageView.vue");
       },
