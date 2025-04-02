@@ -12,6 +12,7 @@ export interface CoVideoProps {
   videoProps?: VideoProps;
   height?: string;
   width?: string;
+  src?: string;
 }
 
 const VIDEO_ID = `video-${randomUUID().slice(0, 59)}`;
@@ -25,6 +26,7 @@ const props = withDefaults(defineProps<CoVideoProps>(), {
 
 // 合并 props 并提供默认值
 const $videoProps = computed<VideoProps>(() => ({
+  src: props.src,
   direction: 90,
   controls: true,
   showProgress: !nodeInfo.width || nodeInfo.width > 240 || videoData.fullscreen,

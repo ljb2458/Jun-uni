@@ -4,6 +4,12 @@ export function unitPx(pixel: string | undefined | number): string {
 export function unitRem(pixel: string | undefined | number): string {
   return (pixel || 0) + "rem";
 }
+export function unitVw(pixel: string | undefined | number): string {
+  return (pixel || 0) + "vw";
+}
+export function unitVh(pixel: string | undefined | number): string {
+  return (pixel || 0) + "vh";
+}
 export function unitVmax(pixel: string | undefined | number): string {
   return (pixel || 0) + "vmax";
 }

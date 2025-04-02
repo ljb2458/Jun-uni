@@ -46,7 +46,6 @@ const isCustomNavbar = computed(
           </slot>
         </view>
       </view>
-      <view class="customNavbar_bottom PB-xs border-B"></view>
     </block>
   </view>
 </template>

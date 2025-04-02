@@ -48,7 +48,7 @@ const selectedOption = computed(() =>
     v-model:show="show"
   >
     <template #text>
-      <slot name="value" :selectedOption="selectedOption">
+      <slot name="value" :selection="selectedOption && { ...selectedOption }">
         {{ selectedOption?.[labelName] || "请选择" }}
       </slot>
     </template>

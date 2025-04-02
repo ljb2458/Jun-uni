@@ -277,6 +277,9 @@ watch(
         :scrollable="titleScrollable"
         @change="(e:any) => swiperToByIndex(e.index)"
       >
+        <template #left>
+          <slot name="title-left"></slot>
+        </template>
         <template #right>
           <slot name="title-right"></slot>
         </template>

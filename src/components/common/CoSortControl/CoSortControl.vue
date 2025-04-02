@@ -6,11 +6,11 @@ const DESC = "Desc";
 type Order = typeof ASC | typeof DESC | undefined | "";
 const props = withDefaults(
   defineProps<{
-    /**是否可多个 */
+    /**是否可 order by 多个 */
     multiple?: boolean;
-    /**排序字段的 value */
-    value: string;
-    /**排序字段；多个用,隔开 */
+    /**order by 排序字段*/
+    name: string;
+    /**排序字段结果集合；多个用,隔开 */
     field: string | undefined;
     /**排序方式 Desc | Asc；多个用,隔开 */
     order: string | undefined;
@@ -23,6 +23,7 @@ const props = withDefaults(
 
 const orderArr = computed({
   get() {
+    if (!props.order.length) return [];
     return props.order.split(",");
   },
   set(v) {
@@ -31,6 +32,7 @@ const orderArr = computed({
 });
 const fieldArr = computed({
   get() {
+    if (!props.field.length) return [];
     return props.field.split(",");
   },
   set(v) {
@@ -39,9 +41,9 @@ const fieldArr = computed({
 });
 
 const nowIndex = computed<number>(() => {
-  if (!props.field || !props.order || !props.value) return -1;
+  if (!props.field || !props.order || !props.name) return -1;
   const fields = fieldArr.value;
-  return fields.findIndex((v) => v === props.value);
+  return fields.findIndex((v) => v === props.name);
 });
 
 const nowOrder = computed<Order>(() => {
@@ -66,7 +68,7 @@ const emit = defineEmits<{
 function changeSort() {
   const newOrder = giveNot(nowOrder.value);
   if (!props.multiple) {
-    emit("update:field", props.value);
+    emit("update:field", props.name);
     emit("update:order", newOrder);
     emit("change", newOrder);
     return;
@@ -75,7 +77,7 @@ function changeSort() {
   const _fieldArr = [...fieldArr.value];
   const _orderArr = [...orderArr.value];
   if (index === -1) {
-    _fieldArr.push(props.value);
+    _fieldArr.push(props.name);
     _orderArr.push(newOrder);
   } else {
     _orderArr[index] = newOrder;

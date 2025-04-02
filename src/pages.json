@@ -195,7 +195,7 @@
           }
         },
         {
-          "path": "CoSoreControlDemo",
+          "path": "CoSortControlDemo",
           "style": {
             "navigationBarTitleText": "排序控件",
             "enablePullDownRefresh": false,
@@ -222,7 +222,7 @@
           }
         },
         {
-          "path": "CoStickDemo",
+          "path": "CoStickyDemo",
           "style": {
             "navigationBarTitleText": "粘性布局",
             "enablePullDownRefresh": false,

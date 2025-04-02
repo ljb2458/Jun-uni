@@ -12,32 +12,49 @@ import { onPageScroll } from "@dcloudio/uni-app";
 
 // 下拉选择的数据
 const selections = ref([
-  { label: "选项1", value: 1 },
-  { label: "选项2", value: 2 },
-  { label: "选项3", value: 3 },
-  { label: "选项4", value: 4 },
+  { label: "label (1)", name: "name (1)", value: 1 },
+  { label: "label (2)", name: "name (2)", value: 2 },
+  { label: "label (3)", name: "name (3)", value: 3 },
+  { label: "label (4)", name: "name (4)", value: 4 },
 ]);
 
 // 当前选中的值
-const selectedValue = ref<number>();
+const selectedValue1 = ref<number>();
+const selectedValue2 = ref<number>();
+const selectedValue3 = ref<string>();
 </script>
 
 <template>
   <CoPageView class="demoPage B-B2 PB-md" :onPageScroll="onPageScroll">
-    <!-- 下拉选择示例 -->
-    <view class="MT-md T-A-C F-S-lg">基本示例</view>
-    <view class="flex-col PD-md">
-      <CoSelect
-        v-model="selectedValue"
-        :selections="selections"
-      >
-        <template #value="{ selectedOption }">
-          <view v-if="selectedOption">
-            已选择：{{ selectedOption.label }}
-          </view>
+    <view class="PD-md">
+      <view class="MT-md MB-xs F-S-lg">基本示例</view>
+      <CoSelect v-model="selectedValue1" :selections="selections"> </CoSelect>
+      <view class="M-col-xs"> 选中的value：{{ selectedValue1 }} </view>
+      <view class="MT-md MB-xs F-S-lg">自定义插槽</view>
+      <CoSelect v-model="selectedValue2" :selections="selections">
+        <template #value="{ selection }">
+          <view v-if="selection"> 已选择 {{ selection.label }} </view>
           <view v-else>请选择</view>
         </template>
+        <template #selection="{ selection }">
+          <view>label：{{ selection.label }}</view>
+          <view>value：{{ selection.value }}</view>
+          <view>自定义选项布局</view>
+        </template>
+        <template #extraSelection>
+          <uv-loading-icon text="额外插槽" />
+        </template>
       </CoSelect>
+      <view class="M-col-xs"> 选中的value：{{ selectedValue2 }} </view>
+      <view class="MT-md MB-xs F-S-lg">自定义 label value</view>
+      <CoSelect
+        v-model="selectedValue3"
+        :selections="selections"
+        :labelName="'name'"
+        :valueName="'label'"
+      >
+      </CoSelect>
+      <view class="M-col-xs"> 选中的value：{{ selectedValue3 }} </view>
     </view>
   </CoPageView>
 </template>

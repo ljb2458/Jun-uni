@@ -42,9 +42,7 @@ if (props.onPageScroll) {
 const navbarHeightCssVar = computed(() => {
   if (routeInfo?.style?.navigationStyle === "custom") {
     if (props.useCustomNavbar) {
-      return `calc(var(--status-bar-height) + ${
-        defaultStyle.height || "0px"
-      } + var(--gap-xs))`;
+      return `calc(var(--status-bar-height) + ${defaultStyle.height || "0px"})`;
     }
     return `calc(var(--window-top) + var(--status-bar-height))`;
   }

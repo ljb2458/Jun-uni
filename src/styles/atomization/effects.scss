@@ -38,6 +38,9 @@
   --border-c: #dadbde;
   border: solid 0.5px var(--border-c);
 }
+.border-none{
+  border: none;
+}
 //透明度出现动画
 @keyframes option {
   0% {
