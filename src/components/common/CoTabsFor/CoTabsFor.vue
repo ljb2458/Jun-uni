@@ -145,7 +145,8 @@ function onTouchmove(e: TouchEvent) {
   if (skewingX > 0 && currentIndex.value == 0) return;
   //*右滑边界限制
   if (isRightTo() && !(+currentIndex.value + 1 < tabsList.value.length)) return;
-  state.isStatic = false;
+  //*侧滑超过50px将标签栏设为活动的
+  if (Math.abs(skewingX) > 50) state.isStatic = false;
   contentSwiperItemStyle["--CoTabsFor-x"] = unitPercent(percent);
 }
 /**触摸中断 */
@@ -349,7 +350,8 @@ watch(
     overflow: hidden;
   }
   .CoTabsFor_item__hiddle {
-    height: 0;
+    height: 0 !important;
+    overflow: hidden;
   }
 }
 </style>
