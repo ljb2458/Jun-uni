@@ -55,7 +55,7 @@ const currTab = ref(0);
           <view class="T-A-C border-all"> 标题底部插槽 </view>
           <text class="F-S-lg MT-md">控制切换选项卡</text>
           <CoSelect
-            class="MT-xs MB-md B-B1 border-none"
+            class="MT-xs B-B1 border-none"
             v-model="currTab"
             :selections="tabsList.map((v, i) => ({ label: v.name, value: i }))"
           />

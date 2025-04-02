@@ -104,27 +104,27 @@ const _expose = {
 defineExpose(_expose);
 if (typeof props._ref === "function") props._ref(_expose);
 
-const CListRef = ref<CoListInstance>();
+const CoListRef = ref<CoListInstance>();
 function activeLoad() {
-  return CListRef.value?.activeLoad();
+  return CoListRef.value?.activeLoad();
 }
 function _load() {
-  return CListRef.value?.load();
+  return CoListRef.value?.load();
 }
 function activeRelad() {
-  return CListRef.value?.activeRelad();
+  return CoListRef.value?.activeRelad();
 }
 function reload() {
-  return CListRef.value?.reload();
+  return CoListRef.value?.reload();
 }
 function isVisible() {
-  return CListRef.value?.isVisible();
+  return CoListRef.value?.isVisible();
 }
 </script>
 <template>
   <CoList
     class="CoRequestList"
-    ref="CListRef"
+    ref="CoListRef"
     :status="state.type"
     :message="state.message"
     :onReachBottom="onReachBottom"

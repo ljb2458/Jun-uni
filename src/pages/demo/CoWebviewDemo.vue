@@ -22,7 +22,7 @@ const webviewData = ref({
         在官方 webview 的基础上，通过url携带哈希字符串与 @message
         的方式实现了一个v-model，示例暂缺。
       </view>
-      <CoWebView src="#" v-model="webviewData" />
+      <!-- <CoWebView src="#" v-model="webviewData" /> -->
     </view>
   </CoPageView>
 </template>

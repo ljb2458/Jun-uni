@@ -49,6 +49,11 @@ async function api(pageNo: number): Promise<RequestList.Res<ApiResItem[]>> {
             自动为您加载分页数据，支持下拉刷新、上拉触底加载、列表状态自动处理、ref
             获取数据等。
           </view>
+          <view class="PD-sm">
+            将页面配置的 enablePullDownRefresh 设为 true
+            页面中可见的列表将会在下拉刷新被触发后重新加载。
+            你也可以调用列表身上的 reload 或 rerequest 方法重新加载
+          </view>
         </view>
         <CoSticky>
           <uv-search
