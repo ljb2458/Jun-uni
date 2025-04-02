@@ -37,105 +37,105 @@ const cellList = computed(() => {
       leftText: "自动正方形 CoAutoSquare",
       type: ComponentsType.Layout,
       tap() {
-        router.push("@/pages/demo/CoAutoSquare.vue");
+        router.push("@/pages/demo/CoAutoSquareDemo.vue");
       },
     },
     {
       leftText: "卡片 CoCard",
       type: ComponentsType.Exhibition,
       tap() {
-        router.push("@/pages/demo/CoCard.vue");
+        router.push("@/pages/demo/CoCardDemo.vue");
       },
     },
     {
       leftText: "级联选择器 CoCascader",
       type: ComponentsType.Form,
       tap() {
-        router.push("@/pages/demo/CoCascader.vue");
+        router.push("@/pages/demo/CoCascaderDemo.vue");
       },
     },
     {
       leftText: "单元格 CoCell",
       type: ComponentsType.Exhibition,
       tap() {
-        router.push("@/pages/demo/CoCell.vue");
+        router.push("@/pages/demo/CoCellDemo.vue");
       },
     },
     {
       leftText: "复选按钮 | 单选按钮 CoCheckBoxBtn",
       type: ComponentsType.Form,
       tap() {
-        router.push("@/pages/demo/CoCheckBoxBtn.vue");
+        router.push("@/pages/demo/CoCheckBoxBtnDemo.vue");
       },
     },
     {
       leftText: "折叠面板 CoCollapse",
       type: ComponentsType.Exhibition,
       tap() {
-        router.push("@/pages/demo/CoCollapse.vue");
+        router.push("@/pages/demo/CoCollapseDemo.vue");
       },
     },
     {
       leftText: "分割线 CoDivider",
       type: ComponentsType.Exhibition,
       tap() {
-        router.push("@/pages/demo/CoDivider.vue");
+        router.push("@/pages/demo/CoDividerDemo.vue");
       },
     },
     {
       leftText: "下拉菜单 CoDropdown",
       type: ComponentsType.Exhibition,
       tap() {
-        router.push("@/pages/demo/CoDropdown.vue");
+        router.push("@/pages/demo/CoDropdownDemo.vue");
       },
     },
     {
       leftText: "错误 CoError",
       type: ComponentsType.Exhibition,
       tap() {
-        router.push("@/pages/demo/CoError.vue");
+        router.push("@/pages/demo/CoErrorDemo.vue");
       },
     },
     {
       leftText: "宫格布局 CoGrid",
       type: ComponentsType.Layout,
       tap() {
-        router.push("@/pages/demo/CoGrid.vue");
+        router.push("@/pages/demo/CoGridDemo.vue");
       },
     },
     {
       leftText: "iconfont图标 CoIcon",
       type: ComponentsType.Exhibition,
       tap() {
-        router.push("@/pages/demo/CoIcon.vue");
+        router.push("@/pages/demo/CoIconDemo.vue");
       },
     },
     {
       leftText: "列表 CoList",
       type: ComponentsType.Data,
       tap() {
-        router.push("@/pages/demo/CoList.vue");
+        router.push("@/pages/demo/CoListDemo.vue");
       },
     },
     {
       leftText: "列表状态 CoListStatus",
       type: ComponentsType.Data,
       tap() {
-        router.push("@/pages/demo/CoListStatus.vue");
+        router.push("@/pages/demo/CoListStatusDemo.vue");
       },
     },
     {
       leftText: "地图 CoMap",
       type: ComponentsType.Reinforce | ComponentsType.Exhibition,
       tap() {
-        router.push("@/pages/demo/CoMap.vue");
+        router.push("@/pages/demo/CoMapDemo.vue");
       },
     },
     {
       leftText: "通知栏 CoNotify",
       type: ComponentsType.Message,
       tap() {
-        router.push("@/pages/demo/CoNotify.vue");
+        router.push("@/pages/demo/CoNotifyDemo.vue");
       },
     },
     {
@@ -145,77 +145,77 @@ const cellList = computed(() => {
         ComponentsType.Layout |
         ComponentsType.Message,
       tap() {
-        router.push("@/pages/demo/CoPageView.vue");
+        router.push("@/pages/demo/CoPageViewDemo.vue");
       },
     },
     {
       leftText: "自动请求分页列表 CoRequestList",
       type: ComponentsType.Data | ComponentsType.Reinforce,
       tap() {
-        router.push("@/pages/demo/CoRequestList.vue");
+        router.push("@/pages/demo/CoRequestListDemo.vue");
       },
     },
     {
       leftText: "下拉选择 CoSelect",
       type: ComponentsType.Form,
       tap() {
-        router.push("@/pages/demo/CoSelect.vue");
+        router.push("@/pages/demo/CoSelectDemo.vue");
       },
     },
     {
       leftText: "排序控件 CoSortControl",
       type: ComponentsType.Data,
       tap() {
-        router.push("@/pages/demo/CoSortControl.vue");
+        router.push("@/pages/demo/CoSortControlDemo.vue");
       },
     },
     {
       leftText: "状态标签 CoStateTag",
       type: ComponentsType.Exhibition,
       tap() {
-        router.push("@/pages/demo/CoStateTag.vue");
+        router.push("@/pages/demo/CoStateTagDemo.vue");
       },
     },
     {
       leftText: "竖状步骤条 CoStepLine",
       type: ComponentsType.Exhibition,
       tap() {
-        router.push("@/pages/demo/CoStepLine.vue");
+        router.push("@/pages/demo/CoStepLineDemo.vue");
       },
     },
     {
       leftText: "粘性布局 CoSticky",
       type: ComponentsType.Exhibition,
       tap() {
-        router.push("@/pages/demo/CoSticky.vue");
+        router.push("@/pages/demo/CoStickyDemo.vue");
       },
     },
     {
       leftText: "标签页 CoTabsFor",
       type: ComponentsType.Exhibition | ComponentsType.Exhibition,
       tap() {
-        router.push("@/pages/demo/CoTabsFor.vue");
+        router.push("@/pages/demo/CoTabsForDemo.vue");
       },
     },
     {
       leftText: "3D组件 CoThreeJs",
       type: ComponentsType.Exhibition,
       tap() {
-        router.push("@/pages/demo/CoThreeJs.vue");
+        router.push("@/pages/demo/CoThreeJsDemo.vue");
       },
     },
     {
       leftText: "视频 CoVideo",
       type: ComponentsType.Reinforce | ComponentsType.Exhibition,
       tap() {
-        router.push("@/pages/demo/CoVideo.vue");
+        router.push("@/pages/demo/CoVideoDemo.vue");
       },
     },
     {
       leftText: "webview CoWebview",
       type: ComponentsType.Reinforce | ComponentsType.Exhibition,
       tap() {
-        router.push("@/pages/demo/CoWebview.vue");
+        router.push("@/pages/demo/CoWebviewDemo.vue");
       },
     },
   ];

@@ -33,7 +33,7 @@
       "root": "pages/demo",
       "pages": [
         {
-          "path": "CoAutoSquare",
+          "path": "CoAutoSquareDemo",
           "style": {
             "navigationBarTitleText": "自动正方形",
             "enablePullDownRefresh": false,
@@ -42,7 +42,7 @@
           }
         },
         {
-          "path": "CoCard",
+          "path": "CoCardDemo",
           "style": {
             "navigationBarTitleText": "卡片",
             "enablePullDownRefresh": false,
@@ -51,7 +51,7 @@
           }
         },
         {
-          "path": "CoCascader",
+          "path": "CoCascaderDemo",
           "style": {
             "navigationBarTitleText": "级联选择器",
             "enablePullDownRefresh": false,
@@ -60,7 +60,7 @@
           }
         },
         {
-          "path": "CoCell",
+          "path": "CoCellDemo",
           "style": {
             "navigationBarTitleText": "单元格",
             "enablePullDownRefresh": false,
@@ -69,7 +69,7 @@
           }
         },
         {
-          "path": "CoCheckBoxBtn",
+          "path": "CoCheckBoxBtnDemo",
           "style": {
             "navigationBarTitleText": "复选按钮 | 单选按钮",
             "enablePullDownRefresh": false,
@@ -78,7 +78,7 @@
           }
         },
         {
-          "path": "CoCollapse",
+          "path": "CoCollapseDemo",
           "style": {
             "navigationBarTitleText": "折叠面板",
             "enablePullDownRefresh": false,
@@ -87,7 +87,7 @@
           }
         },
         {
-          "path": "CoDivider",
+          "path": "CoDividerDemo",
           "style": {
             "navigationBarTitleText": "分割线",
             "enablePullDownRefresh": false,
@@ -96,7 +96,7 @@
           }
         },
         {
-          "path": "CoDropdown",
+          "path": "CoDropdownDemo",
           "style": {
             "navigationBarTitleText": "下拉菜单",
             "enablePullDownRefresh": false,
@@ -105,7 +105,7 @@
           }
         },
         {
-          "path": "CoError",
+          "path": "CoErrorDemo",
           "style": {
             "navigationBarTitleText": "错误",
             "enablePullDownRefresh": false,
@@ -114,7 +114,7 @@
           }
         },
         {
-          "path": "CoGrid",
+          "path": "CoGridDemo",
           "style": {
             "navigationBarTitleText": "宫格布局",
             "enablePullDownRefresh": false,
@@ -123,7 +123,7 @@
           }
         },
         {
-          "path": "CoIcon",
+          "path": "CoIconDemo",
           "style": {
             "navigationBarTitleText": "iconfont图标",
             "enablePullDownRefresh": false,
@@ -132,7 +132,7 @@
           }
         },
         {
-          "path": "CoList",
+          "path": "CoListDemo",
           "style": {
             "navigationBarTitleText": "列表",
             "enablePullDownRefresh": false,
@@ -141,7 +141,7 @@
           }
         },
         {
-          "path": "CoListStatus",
+          "path": "CoListStatusDemo",
           "style": {
             "navigationBarTitleText": "列表状态",
             "enablePullDownRefresh": false,
@@ -150,7 +150,7 @@
           }
         },
         {
-          "path": "CoMap",
+          "path": "CoMapDemo",
           "style": {
             "navigationBarTitleText": "地图",
             "enablePullDownRefresh": false,
@@ -159,7 +159,7 @@
           }
         },
         {
-          "path": "CoNotify",
+          "path": "CoNotifyDemo",
           "style": {
             "navigationBarTitleText": "通知栏",
             "enablePullDownRefresh": false,
@@ -168,7 +168,7 @@
           }
         },
         {
-          "path": "CoPageView",
+          "path": "CoPageViewDemo",
           "style": {
             "navigationBarTitleText": "页面",
             "enablePullDownRefresh": false,
@@ -177,16 +177,16 @@
           }
         },
         {
-          "path": "CoRequestList",
+          "path": "CoRequestListDemo",
           "style": {
             "navigationBarTitleText": "自动请求分页列表",
-            "enablePullDownRefresh": false,
+            "enablePullDownRefresh": true,
             "navigationStyle": "custom",
             "navigationBarTextStyle": "white"
           }
         },
         {
-          "path": "CoSelect",
+          "path": "CoSelectDemo",
           "style": {
             "navigationBarTitleText": "下拉选择",
             "enablePullDownRefresh": false,
@@ -195,7 +195,7 @@
           }
         },
         {
-          "path": "CoSoreControl",
+          "path": "CoSoreControlDemo",
           "style": {
             "navigationBarTitleText": "排序控件",
             "enablePullDownRefresh": false,
@@ -204,7 +204,7 @@
           }
         },
         {
-          "path": "CoStateTag",
+          "path": "CoStateTagDemo",
           "style": {
             "navigationBarTitleText": "状态标签",
             "enablePullDownRefresh": false,
@@ -213,7 +213,7 @@
           }
         },
         {
-          "path": "CoStepLine",
+          "path": "CoStepLineDemo",
           "style": {
             "navigationBarTitleText": "竖状步骤条",
             "enablePullDownRefresh": false,
@@ -222,7 +222,7 @@
           }
         },
         {
-          "path": "CoStick",
+          "path": "CoStickDemo",
           "style": {
             "navigationBarTitleText": "粘性布局",
             "enablePullDownRefresh": false,
@@ -231,7 +231,7 @@
           }
         },
         {
-          "path": "CoTabsFor",
+          "path": "CoTabsForDemo",
           "style": {
             "navigationBarTitleText": "标签页",
             "enablePullDownRefresh": false,
@@ -240,7 +240,7 @@
           }
         },
         {
-          "path": "CoThreeJs",
+          "path": "CoThreeJsDemo",
           "style": {
             "navigationBarTitleText": "3D组件",
             "enablePullDownRefresh": false,
@@ -249,7 +249,7 @@
           }
         },
         {
-          "path": "CoVideo",
+          "path": "CoVideoDemo",
           "style": {
             "navigationBarTitleText": "视频",
             "enablePullDownRefresh": false,
@@ -258,7 +258,7 @@
           }
         },
         {
-          "path": "CoWebview",
+          "path": "CoWebviewDemo",
           "style": {
             "navigationBarTitleText": "webview",
             "enablePullDownRefresh": false,

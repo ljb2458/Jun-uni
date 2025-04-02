@@ -97,7 +97,7 @@ const navbarHeightCssVar = computed(() => {
     </view>
     <view
       :class="key"
-      v-for="key in ['CoPageView_bottom_placeholder', 'CoPageView_bottom']"
+      v-for="key in ['CoPageView_bottom_placeholder', 'CoPageView_bottom B-B1']"
       :key="key"
       v-if="$slots.fixedBottom"
     >

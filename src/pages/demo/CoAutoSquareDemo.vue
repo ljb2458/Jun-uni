@@ -15,10 +15,10 @@ import { onPageScroll } from "@dcloudio/uni-app";
   <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
     <view class="demo-container PD-md">
       <view class="T-A-C F-S-lg T-strong MB-md">自动正方形组件 Demo</view>
-
+      <view class="C-T3">该组件的高度随宽度变化而变化</view>
       <!-- 默认正方形 -->
       <view class="demo-section MB-lg">
-        <view class="T-A-C F-S-md T-strong MB-sm">默认正方形</view>
+        <view class="T-A-C F-S-md T-strong MB-sm MT-sm">默认正方形</view>
         <CoAutoSquare class="square-box border-all">
           <view class="content flex flex-A-C flex-J-C C-T2">
             这是一个正方形

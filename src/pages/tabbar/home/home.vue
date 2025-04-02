@@ -85,7 +85,6 @@ async function api(
           :_ref="(e:any)=>tabsList[currTab].CoRequestListRef = e"
           :param="{ name: option.name }"
           :api="api"
-          :key-name="'random'"
         >
           <template #default="{ list }">
             <view class="MG-md border-all PD-sm">

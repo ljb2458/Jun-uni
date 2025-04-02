@@ -13,7 +13,7 @@ import { onPageScroll } from "@dcloudio/uni-app";
 </script>
 
 <template>
-  <CoPageView class="loginPage C-white" :onPageScroll="onPageScroll">
+  <CoPageView class="loginPage PB-md C-white" :onPageScroll="onPageScroll">
     <CoCard class="B-B1 R-sm MG-md C-T1">
       <view class="flex-A-C flex-J-C F-S-xl" style="height: 250px">
         基本使用

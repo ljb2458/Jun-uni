@@ -45,7 +45,7 @@ interface Props {
   /**
    * 小程序处于循环中的组件拿不到实例，使用这个方法获取实例
    */
-  _ref: Fun<[instance: any], any>;
+  _ref?: Fun<[instance: any], any>;
 }
 const props = withDefaults(defineProps<Props>(), {
   defPageNo: 1,
