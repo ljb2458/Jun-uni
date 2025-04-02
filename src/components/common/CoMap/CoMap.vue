@@ -37,8 +37,13 @@ export interface GetLocationRes {
   latitude: number;
   longitude: number;
 }
-export interface GetLocation {
-  (): GetLocationRes | Promise<GetLocationRes>;
+export type GetLocation = () => GetLocationRes | Promise<GetLocationRes>;
+export interface CoMapCotrolsItem {
+  class?: any;
+  iconPath?: string;
+  tap?: Fun;
+  style?: StyleValue;
+  orderNo?: number;
 }
 
 const MIN_SCALE = 3;
@@ -59,9 +64,9 @@ const props = withDefaults(
     /**bottomSlot 的高度 */
     bottomHeight?: string;
     /**左侧控件集合 */
-    leftIcons?: IconItem[];
+    leftCotrols?: CoMapCotrolsItem[];
     /**右侧控件集合 */
-    rightIcons?: IconItem[];
+    rightCotrols?: CoMapCotrolsItem[];
     /**是否全屏地图 */
     fill?: boolean;
     /**是否显示全屏控件 */
@@ -76,8 +81,8 @@ const props = withDefaults(
   }>(),
   {
     mapProps: () => ({}),
-    leftIcons: () => [],
-    rightIcons: () => [],
+    leftCotrols: () => [],
+    rightCotrols: () => [],
     topHeight: "100px",
     bottomHeight: "0px",
     showMap: true,
@@ -128,7 +133,7 @@ const scale = computed({
     realScale.value = undefined;
   },
 });
-
+console.log("props", props);
 const layoutInfo = computed(() => {
   let { topHeight, bottomHeight } = props;
   if (!fill.value) topHeight = bottomHeight = "0px";
@@ -197,16 +202,8 @@ async function moveToLocal() {
   changeScale(SCALE);
 }
 
-interface IconItem {
-  class?: any;
-  iconPath?: string;
-  tap?: Fun;
-  style?: StyleValue;
-  orderNo?: number;
-}
-
-const leftIconList = computed<IconItem[]>(() => {
-  const iconArray = [...props.leftIcons];
+const leftCotrolList = computed<CoMapCotrolsItem[]>(() => {
+  const iconArray = [...props.leftCotrols];
   if (!showMap.value) return iconArray;
   iconArray.unshift({
     class: ["_MT-auto", "_B-none"],
@@ -219,8 +216,8 @@ const leftIconList = computed<IconItem[]>(() => {
   return iconArray.toSorted((a, b) => Number(a.orderNo) - Number(b.orderNo));
 });
 
-const rightIconList = computed<IconItem[]>(() => {
-  const iconArray = [...props.rightIcons];
+const rightCotrolList = computed<CoMapCotrolsItem[]>(() => {
+  const iconArray = [...props.rightCotrols];
   if (!showMap.value) return iconArray;
 
   if (fill.value) {
@@ -305,7 +302,7 @@ const rightIconList = computed<IconItem[]>(() => {
       }"
     >
       <envCoverView
-        v-for="(item, index) in leftIconList"
+        v-for="(item, index) in leftCotrolList"
         :key="index"
         class="controls_iconBox"
         :class="item.class"
@@ -326,7 +323,7 @@ const rightIconList = computed<IconItem[]>(() => {
       }"
     >
       <envCoverView
-        v-for="(item, index) in rightIconList"
+        v-for="(item, index) in rightCotrolList"
         :key="index"
         class="controls_iconBox"
         :class="item.class"
