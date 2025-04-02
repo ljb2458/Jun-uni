@@ -14,7 +14,7 @@ watch(showActionSheet, (newValue) => {
 });
 
 function select(item: ActionSheetOptionsItem) {
-  item.tap();
+  item.select(item);
 }
 </script>
 

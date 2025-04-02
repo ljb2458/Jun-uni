@@ -23,13 +23,11 @@ const props = withDefaults(
     useActionSheet?: boolean;
     onPageScroll?: typeof onPageScroll;
     bgImg?: string;
-    fixedBottomHeight?: string;
   }>(),
   {
     useSafetyTop: true,
     useCustomNavbar: true,
     useSafetyBottom: true,
-    fixedBottomHeight: "76px",
   }
 );
 const layoutInfo = reactive({
@@ -98,23 +96,19 @@ const navbarHeightCssVar = computed(() => {
     >
     </view>
     <view
-      class="CoPageView_bottom_placeholder"
-      :style="{ height: fixedBottomHeight }"
-      v-if="$slots.fixedBottom"
-    ></view>
-    <view
-      class="CoPageView_bottom border-T B-B1"
-      :style="{ height: fixedBottomHeight }"
+      :class="key"
+      v-for="key in ['CoPageView_bottom_placeholder', 'CoPageView_bottom']"
+      :key="key"
       v-if="$slots.fixedBottom"
     >
-      <slot name="fixedBottom"></slot>
+      <slot name="fixedBottom" :key="key"></slot>
       <view
         class="safetyBottom"
         v-if="props.useSafetyBottom"
         style="height: var(--window-bottom)"
       >
-      </view>
-    </view>
+      </view
+    ></view>
   </view>
 </template>
 
@@ -139,6 +133,10 @@ const navbarHeightCssVar = computed(() => {
     left: 0;
     right: 0;
     z-index: 100;
+  }
+  .CoPageView_bottom_placeholder {
+    opacity: 0;
+    visibility: hidden;
   }
 }
 .customNavbar__fixed {

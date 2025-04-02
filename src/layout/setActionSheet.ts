@@ -4,7 +4,7 @@ import type {
 } from "@ttou/uv-typings/types/actionSheet";
 
 export interface ActionSheetOptionsItem extends Action {
-  tap: Fun;
+  select: Fun<[e: ActionSheetOptionsItem], any>;
 }
 export type ActionSheetOptions = ActionSheetOptionsItem[];
 

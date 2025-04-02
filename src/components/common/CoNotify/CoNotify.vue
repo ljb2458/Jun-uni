@@ -12,9 +12,7 @@ const props = withDefaults(
     top?: StrNumber;
   }>(),
   {
-    // #ifdef H5
-    top: "44px",
-    // #endif
+    type: "info",
     duration: 3000,
   }
 );
@@ -23,9 +21,9 @@ const emit = defineEmits<{
 }>();
 
 watch(
-  () => props.show,
-  (newValue) => {
-    if (newValue === true) autoClose(props.duration);
+  () => [props.show, props.duration, props.type, props.message],
+  () => {
+    if (props.show === true) autoClose(props.duration);
   },
   { deep: true }
 );
@@ -42,41 +40,43 @@ function autoClose(time: StrNumber) {
 }
 </script>
 <template>
-  <view
-    :style="{ top: props.top || 0 }"
-    v-show="props.show"
-    class="RNotify"
-    :class="`RNotify__${props.type}`"
+  <uv-transition
+    class="CoNotify"
+    :style="{ top: props.top || '0px' }"
+    :class="`CoNotify__${props.type}`"
+    :show="props.show"
+    mode="slide-top"
   >
-    {{ message }}
-  </view>
+    <view class="CoNotify_message PD-sm">
+      {{ message }}
+    </view>
+  </uv-transition>
 </template>
 <style lang="scss" scoped>
-.RNotify {
+.CoNotify {
   position: fixed;
   left: 0;
   right: 0;
-  color: var(--C-B1);
+  color: var(--C-white);
   text-align: center;
-  padding: var(--gap-xs) 0;
+  padding-top: var(--status-bar-height);
   z-index: 10076;
 }
-.RNotify_message {
-  color: var(--C-B1);
+
+.CoNotify__info {
+  background-color: var(--C-B3);
+  color: var(--C-T1);
 }
-.RNotify__info {
-  background-color: var(--C-info);
-}
-.RNotify__success {
+.CoNotify__success {
   background-color: var(--C-success);
 }
-.RNotify__error {
+.CoNotify__error {
   background-color: var(--C-fail);
 }
-.RNotify__warning {
+.CoNotify__warning {
   background-color: var(--C-warn);
 }
-.RNotify__primary {
+.CoNotify__primary {
   background-color: var(--C-M1);
 }
 </style>
