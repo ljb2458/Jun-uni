@@ -36,7 +36,7 @@ function showActionSheet() {
     actions: [
       {
         name: "选项1",
-        subname: "副标题",  
+        subname: "副标题",
         select,
       },
       {
@@ -50,6 +50,7 @@ function showActionSheet() {
     ],
   });
 }
+const showBottomView = ref(true);
 </script>
 
 <template>
@@ -64,7 +65,7 @@ function showActionSheet() {
     :onPageScroll="onPageScroll"
   >
     <template #fixedBottom="{}">
-      <view class="MG-sm">
+      <view v-if="showBottomView" class="MG-sm">
         fixedBottom 固定在底部的插槽,该插槽的内容会被额外注册一遍用于占位
         <uv-button :type="'primary'" @tap="setNotify.primary('点击了底部按钮')">
           底部按钮
@@ -121,6 +122,19 @@ function showActionSheet() {
           显示全局 modal 模态框
         </uv-button>
       </view>
+    </view>
+    <view style="height: var(--layout-navbar-height)" class="border-all">
+      <view class="F-S-lg"> 导航栏高度 var(--layout-navbar-height) </view>
+    </view>
+    <view style="height: var(--layout-page-height)" class="border-all">
+      <view class="F-S-lg"> 内容区高度 var(--layout-page-height) </view>
+      <view class="PD-sm">
+        不带 fixedBottom 插槽高度的内容区高度，其高度刚好等于 (页面高度) -
+        (tabbar) - (navbar) - (顶部安全区) - (底部安全区)。
+      </view>
+      <uv-button @tap="showBottomView = !showBottomView">
+        显隐底部插槽按钮后看看高度是否正确
+      </uv-button>
     </view>
   </CoPageView>
 </template>
