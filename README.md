@@ -2,11 +2,16 @@
 
 ## 项目介绍
 
-`JunUni` 是一个由个人开发者 `Juncoder` 积累四年开发经验打造的适用中小型公司一般开发情况的 uniapp 开箱即用框架。
+- `JunUni` 是一个由个人开发者 `Juncoder` 积累四年开发经验打造的适用中小型公司一般开发情况的 uniapp 开箱即用高效开发框架。
+- `JunUni` 的诞生是为了解决 `Uniapp` 多端兼容麻烦、使用 `HBuilder X` 开发体验一般、对 `TypeScript` 支持不好的问题，旨在优化开发体验、减少兼容代码。
 
-框架封装了 `选项卡(CoTabsFor)`、 `自动请求分页列表(CoRequestList)`、`级联选择器(CoCascader)` 等特色组件；
+- 该框架使用 `Uniapp` `Vue3` `TypeScript` `Pinia` `luchRequest` `Vite` `uv-view` 打造。
 
-**框架解决了以下开发痛点**
+- 因此在使用此框架前，我推荐你先学习或了解 `Uniapp` `Vue3` `TypeScript` `Pinia` `Axios(luchRequest)`
+
+- 该框架使用的 `node` 版本为 `v22.13.1` 为了减少运行时所带来的错误，请尽可能使用与 `v22.13.1` 相近的版本。
+
+### 框架解决了以下开发痛点
 
 - ⭐`pages.json` 配置麻烦、不便查阅？
 
@@ -76,12 +81,17 @@ pnpm i
 启动
 
 ```shell
+//网页
 pnpm run dev:h5
+//微信小程序
+pnpm run dev:mp-weixin
 ```
 
-或在 `HBuilder X` 中启动项目，除 h5 以外都建议在 `HBuilder X` 中启动项目
+或在 `HBuilder X` 中启动项目。
 
-## 配置
+## 习惯配置
+
+**使用该框架，我推荐你添加以下代码片段**
 
 编译器左下角小齿轮=>代码片段=>选择 `vue3`
 
@@ -307,7 +317,7 @@ types |-dts   | //全局配置、组件、等ts存放目录
    ```shell
    pnpm run generate
    ```
+
 ### 页面生成规则
 
 `generatePagesConfig` 会自动将 `/src/pages` 下的每一个目录当作一个分包生成，而`MAIN_PACKAGE_DIR` 所指向的文件夹将会被放到主包配置内。
-
