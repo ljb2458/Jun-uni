@@ -24,6 +24,7 @@ export const defHttp = createHttpRequest(
     baseURL,
   }
 );
+//请求拦截器，在这里设置 token
 defHttp.interceptors.request.use((config) => {
   const sysStore = useSysStore();
   config.header = {
@@ -32,6 +33,7 @@ defHttp.interceptors.request.use((config) => {
   };
   return config;
 });
+//响应拦截器，在这里修改返回结果。
 defHttp.interceptors.response.use(
   (result) => {
     if (!result) return result;

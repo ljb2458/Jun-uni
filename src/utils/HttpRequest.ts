@@ -15,8 +15,11 @@ const env = import.meta.env;
 
 export namespace CreateHttpRequest {
   export interface MyConfig {
+    /**请求是否成功 */
     isSuccess: IsSuccess;
+    /**返回 message 字符串，用于成功提示 */
     giveMsg: ReturnMsg;
+    /**返回 失败 message 字符串，用于失败提示 */
     giveErrMsg: ReturnErrMsg;
   }
   export interface Config<D = any> extends HttpRequestConfig<D> {
