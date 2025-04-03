@@ -60,13 +60,11 @@ const show = useVModel(props, "show", emit);
   }
   > .CoDropdown_popup {
     position: absolute;
-    top: calc(100% + $indicate-size);
+    top: 100%;
     left: 0;
     right: 0;
     z-index: 9;
-
-    background-color: #fff;
-    visibility: hidden;
+    overflow: hidden;
     transition: all ease-out 150ms;
     max-height: 0;
 
@@ -74,19 +72,20 @@ const show = useVModel(props, "show", emit);
 
     .CoDropdown_popup_indicate {
       position: absolute;
-      left: 1em;
+      left: calc(var(--R-sm) + $indicate-size);
       top: 0;
       height: $indicate-size;
       width: $indicate-size;
       background-color: #fff;
-      transform: rotate(45deg) translateY(-50%);
+      transform: rotate(45deg) translateY(50%);
       z-index: -1;
     }
     .CoDropdown_popup_content {
+      background-color: #fff;
       width: 100%;
       height: 100%;
-      overflow: hidden;
       border-radius: var(--R-sm);
+      margin-top: ($indicate-size - 1px);
     }
   }
   > .CoDropdown_masking {
@@ -106,8 +105,7 @@ const show = useVModel(props, "show", emit);
   }
   > .CoDropdown_popup {
     transition-timing-function: ease-in;
-    visibility: initial;
-    max-height: 200vh;
+    max-height: 150vh;
   }
   > .CoDropdown_masking {
     display: block;

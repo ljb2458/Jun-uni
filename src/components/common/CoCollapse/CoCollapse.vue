@@ -106,7 +106,7 @@ const CoCollapse__active = computed(() => {
 
   > .CoCollapse_content {
     transition-timing-function: ease-in;
-    max-height: 200vh !important;
+    max-height: 150vh !important;
   }
 }
 </style>
