@@ -2,14 +2,16 @@
 
 ## 项目介绍
 
-- `JunUni` 是一个由个人开发者 `Juncoder` 积累四年开发经验打造的适用中小型公司一般开发情况的 uniapp 开箱即用高效开发框架。
-- `JunUni` 的诞生是为了解决 `Uniapp` 多端兼容麻烦、使用 `HBuilder X` 开发体验一般、对 `TypeScript` 支持不好的问题，旨在优化开发体验、减少兼容代码。
+> ⭐`JunUni` 是一个由个人开发者 `Juncoder` 积累四年开发经验打造的适用中小型公司一般开发情况的 uniapp 开箱即用高效开发框架。
 
-- 该框架使用 `Uniapp` `Vue3` `TypeScript` `Pinia` `luchRequest` `Vite` `uv-view` 打造。
+> ⭐`JunUni` 的诞生是为了解决 `Uniapp` 多端兼容麻烦、使用 `HBuilder X` 开发体验一般、对 `TypeScript` 支持不好的问题，旨在优化开发体验、减少兼容代码。
 
-- 因此在使用此框架前，我推荐你先学习或了解 `Uniapp` `Vue3` `TypeScript` `Pinia` `Axios(luchRequest)`
+> ⭐ 该框架使用 `Uniapp` `Vue3` `TypeScript` `Pinia` `luchRequest` `Vite` `uv-view` 打造。
+> 因此在使用此框架前，我推荐你先学习或了解 `Uniapp` `Vue3` `TypeScript` `Pinia` `Axios(luchRequest)`
 
-- 该框架使用的 `node` 版本为 `v22.13.1` 为了减少运行时所带来的错误，请尽可能使用与 `v22.13.1` 相近的版本。
+> 该框架使用的 `node` 版本为 `v22.13.1` 为了减少运行时所带来的错误，请尽可能使用与 `v22.13.1` 相近的版本。
+
+[TOC]
 
 ### 框架解决了以下开发痛点
 
