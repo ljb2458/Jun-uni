@@ -1,5 +1,64 @@
 # JunUni
 
+## 项目介绍
+
+**JunUni** 是一个由个人开发者 **Juncoder** 积累四年开发经验打造的适用中小型公司一般开发情况的 uniapp 开箱即用框架。
+
+框架封装了 **选项卡(CoTabsFor)**、 **自动请求分页列表(CoRequestList)**、**级联选择器(CoCascader)**等特色组件；
+
+**框架解决了以下开发痛点**
+
+- ⭐**pages.json 配置麻烦、不便查阅？**
+
+  - 使用 **/generatePagesConfig** 文件夹下的 **generate** 命令 自动生成 **pages.json** 配置文件。
+  - 配置项直接写在当前 **vue** 文件中，一目了然。
+  - 文件目录就是小程序分包方式，非常好理解。
+
+- ⭐**实现 tabs 选项卡，高度总是问题？**
+
+  - 使用组件 **CoTabsFor** 传入一个数组，定义一个插槽可以轻松实现自动高度的 tabs 选项卡。
+
+- ⭐**分页列表处理麻烦，总是涉及数组操作？**
+
+  - 使用组件 **CoRequestList** ，仅需传入一个使用适配器包装后的 **api** 方法 加上一个 **item** 插槽，即可加载分页数据。
+
+- ⭐ 自定义导航栏注册麻烦，担心与原生导航栏冲突，计算页面高度时还需要考虑有没有开启自定义导航？
+
+  - 在组件 **CoPageView** 中根据 **pages.json** 对应配置，**自动注册** 自定义导航栏。
+  - 在组件 **CoPageView** 为您计算好导航栏高度和页面可用高度,生成 css 样式 **--layout-navbar-height** 和 **--layout-page-height**。
+
+- ⭐ 写在底部的固定按钮，忘记计算底部安全区、忘记写占位符，导致页面最底部元素被按钮遮盖，无法完整的查看？
+
+  - 在组件 **CoPageView** 中提供了 **fixedBottom** 插槽，计算安全区并在页面生成占位元素的同时，将你的元素定位到页面最底部。
+
+- ⭐**uni.request** 不够好用？
+
+  - **/utils/HttpRequest** 基于 **luchRequest** 进行二次封装，神似 **Axios** 有请求拦截器、响应拦截器、自动提示等。
+
+- ⭐ 路由跳转、路由传参需要自己拼接字符串？
+
+  - **/utils/router** 二次封装路由跳转，自动拼接 **Query** 参数。
+
+- ⭐ 找不到对 **TypeScript** 支持良好的 **uniapp** 框架？
+
+  - **JunUni** 框架中的所有 方法、组件、示例代码、包括 **uniapp** 的原生组件，均有良好的 **TypeScript** 支持
+
+- 开启了过多相同的循环定时器，造成性能浪费、忘记关闭循环定时器？
+
+  - 使用 **/hooks/toolsHooks** 中的 **useInterval** 同样间隔时间的循环定时器只会被开启一次。
+
+- 全局状态管理 **store(pinia、vuex)** 数据持久化麻烦？
+
+  - **pinia + mp-storage + pinia-plugin-persistedstate** 简单而优雅的解决问题。
+
+- **picker** 用户体验不好，市面上又缺少好用的级联选择器？
+
+  - **CoCascader 级联选择器组件** 动画流畅，使用简单。
+
+- 分栏编写样式麻烦、样式名难想、**tailwindcss** 体积太大，且对小程序支持不好？
+
+  - 组件有自己的**原子化 css** 提升开发效率，降低开发成本，方便做颜色主题与老年模式等相似业务。
+
 ## 首次启动
 
 安装依赖
@@ -96,15 +155,20 @@ pnpm run dev:h5
 }
 ```
 
-## 特殊文件目录
+## 文件目录
 
 ```
-generatePagesConfig |-index.ts    //用于生成pages.json配置文件；在vscode资源管理器中的npm脚本中选择generatePagesConfig\package.json中的generate命令执行
-                    |-pages.json  //pages.json除页面路由以外的配置，修改后需要重新生成pages.json文件
+generatePagesConfig |-index.ts    //用于生成pages.json配置文件；在vscode资源管理器中的npm脚本中选择generatePagesConfig\package.json中的generate命令执行。
+                    |-pages.json  //pages.json除页面路由以外的配置，修改后需要重新生成pages.json文件。
 
-src |-layout  | //存放自定义的navbar等其他每个页面都需要的组件
-    |-style   | //存放预设、公共、scss文件
-    
+src |-layout    | //存放自定义的navbar等其他每个页面都需要的组件。
+    |-style     | //存放预设、公共、scss文件。
+    |-components|-common  //存放公用组件，一般为新组件。
+                |-group   //存放组合组件，一般为多个组件的纯粹组合，非新组件。
+                |-rewrite //存放二次封装的组件，在原有组件上添加新的方法。
+                |-native  //存放一般只有这个项目才能用到的公共业务组件。
+    |-init.ts   //项目加载、App.vue 初始化、登录完成 时干的事。
+
 types |-dts   | //全局配置、组件、等ts存放目录
               |-modult.d.ts //全局模块声明
               |-typeFunction.d.ts //自定义ts类型生成与转换方法
