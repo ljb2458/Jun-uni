@@ -1,9 +1,7 @@
 <!-- css grid 布局 可搭配 CoGridItem 使用 -->
 <script lang="ts" setup>
-import { JustifyItems, AlignItems } from "@/components/types";
+import type { Property, Globals } from "csstype";
 import { filterObject } from "@/utils/tools/object";
-
-import { Globals } from "csstype";
 
 const props = withDefaults(
   defineProps<{
@@ -14,9 +12,9 @@ const props = withDefaults(
     /**col-gap */
     colGap?: string;
     /**justify-items 默认center */
-    justify?: JustifyItems;
+    justify?: Property.JustifyItems;
     /**align-items 默认center */
-    align?: AlignItems;
+    align?: Property.AlignItems;
     /**grid-auto-columns */
     autoCol?: string;
     /**grid-auto-rows */

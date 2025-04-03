@@ -1,6 +1,7 @@
 <!-- css grid item 布局 搭配 CoGrid使用 -->
 <script lang="ts" setup>
-import { JustifyItems } from "@/components/types";
+import { Property } from "csstype";
+
 import { filterObject } from "@/utils/tools/object";
 
 const props = defineProps<{
@@ -17,9 +18,9 @@ const props = defineProps<{
   /**grid-column-end */
   colEnd?: number;
   /**justify-self */
-  justify?: JustifyItems;
+  justify?: Property.JustifyItems;
   /**align-self */
-  align?: JustifyItems;
+  align?: Property.JustifyItems;
   /**grid-area */
   area?: StrNumber;
   width?: string;

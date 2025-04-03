@@ -185,12 +185,129 @@ types |-dts   | //全局配置、组件、等ts存放目录
 ## 快速对接后端接口
 
 1. 设置接口地址及后缀
+
    1. 在 `/.env、/.env.development、/.env.production` 中分别修改 `VITE_API_PREFIX 接口请求后缀`、`VITE_API_URL 接口请求地址`，**⚠ 注 ❗ 如果为空请将该行注释。没有值的 `env` 配置文件 将会造成 `h5` 无法正常启动的诡异问题**
+
+      ```env
+      # 请求后缀
+      VITE_API_PREFIX=/api
+      # 请求接口地址
+      VITE_API_URL=https://xxxx
+      # 其它配置...
+      ```
+
    2. 重启项目。
+
 2. 修改示例 `token` 的传递方式
+
    1. 在 `/src/api/index.ts` 中找到 `defHttp.interceptors.request.use` 修改其中的请求配置。
+
+      ```ts
+      //请求拦截器，在这里设置 token
+      defHttp.interceptors.request.use((config) => {
+        const sysStore = useSysStore();
+        config.header = {
+          ...config.header,
+          token: sysStore.token,
+        };
+        return config;
+      });
+      ```
+
 3. 修改返回结果的类型
+
    1. 在 `/src/api/index.ts` 中找到 `export namespace Api` 修改其中的类型定义。
+
+      ```ts
+      /**请求res类型 */
+      export namespace Api {
+        export interface SuccessRes<T> {
+          code: 200;
+          message: string;
+          time: Date;
+          type: string;
+          isSuccess: true;
+          result: T;
+        }
+        export interface FailRes<T> {
+          code: number;
+          message: string;
+          time: Date;
+          type: string;
+          isSuccess: false;
+          result?: T;
+        }
+        export type Res<T> = SuccessRes<T> | FailRes<T>;
+      }
+      ```
+
 4. 修改示例 `isSuccess`、`giveMsg`、`giveErrMsg` 方法
+
    1. 在 `/src/api/index.ts` 中找到 `export const defHttp = createHttpRequest` 方法，修改传入的三个函数为实际数据。
-5. 在 `/src/api/userinfo` 中复制粘贴或直接修改一个接口尝试调用。
+
+      ```ts
+      export const defHttp = createHttpRequest(
+        {
+          isSuccess(res) {
+            conosole.log("res", res);
+            return res?.data?.code === 200;
+          },
+          giveMsg(res) {
+            return res?.data?.message;
+          },
+          giveErrMsg(error) {
+            return error?.errMsg;
+          },
+        },
+        {
+          baseURL,
+        }
+      );
+      ```
+
+5. 在 `/src/api/userinfo` 中复制粘贴或直接修改一个接口并调用。
+
+## 自动生成 pages.json（generatePagesConfig）
+
+1. 全局安装或在 `/generatePagesConfig/` 目录下安装 `ts-node`
+   ```shellinstall
+   pnpm  ts-node -g
+   ```
+2. 在 `/generatePagesConfig/pages.json` 配置 `tabBar` 以及其它默认配置。
+
+   ```json
+   {
+     //请在这里配置 tabbar，在 /src/pages.json 配置将会在下次自动生成时被覆盖。
+     "tabBar": {},
+     "globalStyle": {},
+     "easycom": {
+       "custom": {}
+     }
+   }
+   ```
+
+3. 在 `/generatePagesConfig/index.ts` 配置 主包、首页、黑名单正则等。
+   ```ts
+   /**项目文件地址 */
+   const SRC_DIR = path.join(__dirname, "../src");
+   /**pages目录地址 */
+   const PAGES_DIR = path.join(SRC_DIR, "pages");
+   /**结果输出位置 */
+   const OUTPUT_FILE = path.join(SRC_DIR, "pages.json");
+   /**位于主包首位的页面 */
+   const FIRST_PAGE = "pages/tabbar/home/home";
+   /**要打包为主包的文件夹 */
+   const MAIN_PACKAGE_DIR = "pages/tabbar"; // 主包文件夹
+   /**黑名单 */
+   const BLACKLIST = [/.?\/components/];
+   /**包含的文件后缀 */
+   const INCLUDED_EXTENSIONS = [".vue", ".nvue"];
+   ```
+4. 运行 `/generatePagesConfig` 目录下的命令 `generate`
+   ```shell
+   pnpm run generate
+   ```
+### 页面生成规则
+
+`generatePagesConfig` 会自动将 `/src/pages` 下的每一个目录当作一个分包生成，而`MAIN_PACKAGE_DIR` 所指向的文件夹将会被放到主包配置内。
+
