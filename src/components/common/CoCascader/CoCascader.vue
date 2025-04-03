@@ -6,6 +6,7 @@ import { PopupRef } from "@ttou/uv-typings/types/popup";
 export interface CoCascaderOptionsItem extends AnyObject {
   value: StrNumber;
   label: any;
+  disabled?: boolean;
   /**子选项，如果为null则表示没有下一项了 */
   children?: CoCascaderOptionsItem[] | undefined | null;
 }
@@ -120,6 +121,7 @@ const optionsArray = computed(() => {
 });
 
 function selectItem(option: CoCascaderOptionsItem, level: number) {
+  if (option.disabled) return;
   const oldOption = modelValue.value.slice(0, level + 1) || [];
   const isCancel =
     props.deselectable &&
@@ -164,8 +166,14 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
 
 <template>
   <view class="CoCascader" @tap="showPopup = true">
-    <view class="CoCascader_text">
-      <slot name="text">{{ selectedOptions.at(-1)?.label || "请选择" }}</slot>
+    <view class="CoCascader_value">
+      <slot
+        name="value"
+        :options="[...selectedOptions]"
+        :values="[...modelValue]"
+      >
+        {{ selectedOptions.at(-1)?.label || "请选择" }}
+      </slot>
     </view>
     <view
       class="CoCascader_icon"
@@ -177,19 +185,25 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
     </view>
     <uv-popup @tap.stop ref="popupRef" mode="bottom">
       <view class="CoCascaderPopup_selected MG-sm">
-        <block v-if="selectedOptions.length">
-          <text
-            class="CoCascaderPopup_selectedItem"
-            v-for="(item, index) in selectedOptions"
-            :key="index"
-            @tap="selectItem(item, index)"
-          >
-            <text>{{ item.label }}</text>
+        <slot name="selected" :options="selectedOptions">
+          <block v-if="selectedOptions.length">
+            <text
+              class="CoCascaderPopup_selectedItem"
+              v-for="(item, index) in selectedOptions"
+              :key="index"
+              @tap="selectItem(item, index)"
+            >
+              <text>
+                <slot name="selectedItem" :option="item" :level="index">
+                  {{ item.label }}
+                </slot>
+              </text>
+            </text>
+          </block>
+          <text class="CoCascaderPopup_selectedItem" v-else>
+            <text>{{ "请选择" }}</text>
           </text>
-        </block>
-        <text class="CoCascaderPopup_selectedItem" v-else>
-          <text>{{ "请选择" }}</text>
-        </text>
+        </slot>
       </view>
       <view class="CoCascader_content B-B2 PD-xs flex" :style="{ height }">
         <scroll-view
@@ -201,20 +215,41 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
         >
           <view
             @tap="selectItem(option, level)"
-            v-for="option in options"
+            v-for="(option, index) in options"
             :key="option.value"
             :id="`item-${option.value}`"
             class="CoCascader_option P-col-xs M-col-xxs P-row-sm flex-A-C flex-J-SB"
             :class="{
-              'C-M1 B-M1-O1': Object.is(modelValue[level], option.value),
+              CoCascader_option__disabled: option.disabled,
+              'C-M1 B-M1-O1 CoCascader_option__active': Object.is(
+                modelValue[level],
+                option.value
+              ),
             }"
           >
-            <view class="CoCascader_option_label">{{ option.label }}</view>
+            <view class="CoCascader_option_label flex-1">
+              <slot
+                name="option"
+                :option="option"
+                :index="index"
+                :level="level"
+              >
+                {{ option.label }}
+              </slot>
+            </view>
             <view
               class="CoCascader_option_selectedIcon"
               v-show="Object.is(modelValue[level], option.value)"
             >
-              <uv-icon size="1em" color="inherit" name="checkmark" />
+              <slot
+                name="optionIcon"
+                :option="option"
+                :index="index"
+                :level="level"
+                :selected="Object.is(modelValue[level], option.value)"
+              >
+                <uv-icon size="1em" color="inherit" name="checkmark" />
+              </slot>
             </view>
           </view>
           <CoListStatus
@@ -268,6 +303,10 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
   }
   .CoCascader_content {
     > .CoCascader_options {
+      .CoCascader_option__disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
       visibility: hidden;
       opacity: 0;
 
@@ -292,3 +331,10 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
   }
 }
 </style>
+
+<script lang="ts">
+import mpMixin from "@/components/libs/mixin/mpMixin";
+export default {
+  mixins: [mpMixin],
+};
+</script>

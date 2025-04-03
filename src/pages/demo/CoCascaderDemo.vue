@@ -72,7 +72,14 @@ async function getNextLevelList(e: CoCascaderLoadChildrenEnvet) {
         :options="cnRegionsTree"
       >
       </CoCascader>
-
+      <view class="F-S-lg MT-md">禁用选项</view>
+      <CoCascader
+        class="MT-xs B-B1 R-sm flex-A-C flex-J-SB PD-sm"
+        :options="
+          cnRegionsTree.map((v, i) => (i % 4 ? v : { ...v, disabled: true }))
+        "
+      >
+      </CoCascader>
       <view class="F-S-lg MT-md">不展示空提示</view>
       <CoCascader
         class="MT-xs B-B1 R-sm flex-A-C flex-J-SB PD-sm"
@@ -88,13 +95,34 @@ async function getNextLevelList(e: CoCascaderLoadChildrenEnvet) {
         :options="cnRegionsTree"
       >
       </CoCascader>
-      <view class="F-S-lg MT-md">懒加载</view>
+      <view class="F-S-lg MT-md">异步加载选项</view>
       <CoCascader
         class="MT-xs B-B1 R-sm flex-A-C flex-J-SB PD-sm"
-        :deselectable="false"
         :options="province_list"
         :loadChildren="getNextLevelList"
       ></CoCascader>
+      <view class="F-S-lg MT-md">自定义插槽</view>
+      <CoCascader
+        class="MT-xs B-B1 R-sm flex-A-C flex-J-SB PD-sm"
+        :options="cnRegionsTree"
+      >
+        <template #value="{ options, values }">
+          {{ options.map((v) => v.label).join(",") || "点击这里选择" }}
+        </template>
+        <template #selectedItem="{ option, level }">
+          {{ level }}：{{ option.label }}
+        </template>
+        <template #option="{ option, level, index }">
+          <view>⭐{{ option.label }} </view>
+        </template>
+        <template #icon> 👇 </template>
+        <template #optionIcon="{ option, level, index, selected }">
+          ❤
+        </template>
+        <template #bottom>
+          <uv-button class="PD-sm" :type="'success'">自定义按钮，使用该插槽，原有的按钮功能将失效</uv-button>
+        </template>
+      </CoCascader>
     </view>
   </CoPageView>
 </template>
