@@ -28,3 +28,9 @@ interface AnyObject<T = any> {
 interface AnyObjectDeep<T = any> {
   [key: string]: AnyObjectDeep | T;
 }
+/**联合类型转交叉类型 */
+type UnionToIntersect<T> = (T extends any ? (p: T) => any : never) extends (
+  v: infer R
+) => any
+  ? R
+  : never;
