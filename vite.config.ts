@@ -1,4 +1,4 @@
-import { defineConfig, loadEnv, UserConfig, ConfigEnv } from "vite";
+import { defineConfig, loadEnv, UserConfig } from "vite";
 import uni from "@dcloudio/vite-plugin-uni";
 import AutoImport from "unplugin-auto-import/vite";
 import commonjs from "@rollup/plugin-commonjs";
@@ -7,7 +7,7 @@ import Components from "unplugin-vue-components/vite";
 
 export default defineConfig((config) => {
   const env = loadEnv(config.mode, process.cwd(), "VITE_");
-  const option = <UserConfig>defineConfig({
+  const option: UserConfig = {
     base: "/",
     resolve: {
       alias: {
@@ -61,7 +61,7 @@ export default defineConfig((config) => {
     ],
     //@ts-ignore
     transpileDependencies: ["uview-plus", "luch-request"],
-  });
+  };
 
   //*只有serve时使用vite的自动引入生成全局ts类型支持，其它情况使用uniapp的easycom模式
   if (config.command === "serve") {
