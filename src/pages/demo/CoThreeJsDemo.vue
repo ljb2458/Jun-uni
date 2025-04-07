@@ -70,7 +70,7 @@ async function onLoad(ctx: CoThreeJsCtx) {
     <view class="PD-md">
       <view class="F-S-lg">基础示例</view>
       <view class="C-T3">详见 three-platformize 官方文档 暂只支持小程序，h5请直接使用 three.js</view>
-      <view class="C-T3 MT-xs">小程序未配白名单，请使用调试模式查看。</view>
+      <view class="C-T3 MT-xs">小程序未配白名单，无法加载网络glb文件，请使用调试模式查看。</view>
       <CoThreeJs class="MT-sm" @load="onLoad"></CoThreeJs>
     </view>
   </CoPageView>
