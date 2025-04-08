@@ -80,7 +80,7 @@ function onTapReset(e: any) {
 </script>
 
 <template>
-  <view class="GrFilterSearch B-B1 P-col-xs P-row-sm">
+  <view class="GrFilterSearch B-B1 PD-col-xs PD-row-sm">
     <view class="flex-A-C gap-xs">
       <slot name="selections">
         <CoSelect
@@ -89,7 +89,7 @@ function onTapReset(e: any) {
           :selections="selections"
           v-if="selections?.length"
           width="150px"
-          class="flex-A-C B-B2 R-xs _P-col-0 _P-row-sm self-A-STR _flex"
+          class="flex-A-C B-B2 R-xs _PD-col-0 _PD-row-sm self-A-STR _flex"
           :style="{ background: bg, border: 'none' }"
         >
         </CoSelect>

@@ -63,7 +63,7 @@ const taskStateOrm = computed<CoStateOrm>(() => [
           TaskStatus.WaitReceiving,
           TaskStatus.WaitProcessed,
         ]"
-        class="P-row-xs F-S-sm R-max"
+        class="PD-row-xs F-S-sm R-max"
         :stateOrm="taskStateOrm"
         :isFun="bitsAuth"
         :value="value"

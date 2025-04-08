@@ -218,7 +218,7 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
             v-for="(option, index) in options"
             :key="option.value"
             :id="`item-${option.value}`"
-            class="CoCascader_option P-col-xs M-col-xxs P-row-sm flex-A-C flex-J-SB"
+            class="CoCascader_option PD-col-xs MG-col-xxs PD-row-sm flex-A-C flex-J-SB"
             :class="{
               CoCascader_option__disabled: option.disabled,
               'C-M1 B-M1-O1 CoCascader_option__active': Object.is(

@@ -56,7 +56,7 @@ const selectedOption = computed(() =>
       <view class="MG-sm">
         <view
           @tap="select(selection)"
-          class="selection gap-sm P-col-xs border-B P-row-sm flex-A-C flex-J-SB active"
+          class="selection gap-sm PD-col-xs border-B PD-row-sm flex-A-C flex-J-SB active"
           :class="{
             selection__selected: Object.is(selection[valueName], modelValue),
           }"

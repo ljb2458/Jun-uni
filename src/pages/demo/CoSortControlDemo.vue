@@ -23,7 +23,7 @@ const value2 = ref("");
       <view class="C-T3">该组件业务味较重，后续可能修改，不建议使用。</view>
       <view class="flex gap-sm flex-wrap">
         <CoSortControl
-          class="P-row-sm P-col-xs B-B1 R-sm active"
+          class="PD-row-sm PD-col-xs B-B1 R-sm active"
           v-for="name in ['createTime', 'viewCount', 'pageCount']"
           :name="name"
           :key="name"
@@ -39,7 +39,7 @@ const value2 = ref("");
       <view class="MT-md MB-xs F-S-lg">可多个</view>
       <view class="flex gap-sm flex-wrap">
         <CoSortControl
-          class="P-row-sm P-col-xs B-B1 R-sm active"
+          class="PD-row-sm PD-col-xs B-B1 R-sm active"
           v-for="name in ['createTime', 'viewCount', 'pageCount']"
           :name="name"
           :key="name"

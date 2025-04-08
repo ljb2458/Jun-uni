@@ -126,17 +126,22 @@ $gaps: (
   "auto": auto,
   "0": 0,
 );
-
 // 循环生成样式
 @each $key, $value in $gaps {
+  // Padding 相关样式
   .PD-#{$key} {
     padding: var(--gap-#{$key});
   }
-  .P-row-#{$key} {
+  @each $subKey, $subValue in $gaps {
+    .PD-#{$key}-#{$subKey} {
+      padding: var(--gap-#{$key}) var(--gap-#{$subKey});
+    }
+  }
+  .PD-row-#{$key} {
     padding-left: var(--gap-#{$key});
     padding-right: var(--gap-#{$key});
   }
-  .P-col-#{$key} {
+  .PD-col-#{$key} {
     padding-top: var(--gap-#{$key});
     padding-bottom: var(--gap-#{$key});
   }
@@ -153,14 +158,20 @@ $gaps: (
     padding-right: var(--gap-#{$key});
   }
 
+  // Margin 相关样式
   .MG-#{$key} {
     margin: var(--gap-#{$key});
   }
-  .M-row-#{$key} {
+  @each $subKey, $subValue in $gaps {
+    .MG-#{$key}-#{$subKey} {
+      margin: var(--gap-#{$key}) var(--gap-#{$subKey});
+    }
+  }
+  .MG-row-#{$key} {
     margin-left: var(--gap-#{$key});
     margin-right: var(--gap-#{$key});
   }
-  .M-col-#{$key} {
+  .MG-col-#{$key} {
     margin-top: var(--gap-#{$key});
     margin-bottom: var(--gap-#{$key});
   }
@@ -177,15 +188,20 @@ $gaps: (
     margin-right: var(--gap-#{$key});
   }
 
-  //最高权重
+  // 最高权重 Padding 相关样式
   ._PD-#{$key} {
     padding: var(--gap-#{$key}) !important;
   }
-  ._P-row-#{$key} {
+  @each $subKey, $subValue in $gaps {
+    ._PD-#{$key}-#{$subKey} {
+      padding: var(--gap-#{$key}) var(--gap-#{$subKey}) !important;
+    }
+  }
+  ._PD-row-#{$key} {
     padding-left: var(--gap-#{$key}) !important;
     padding-right: var(--gap-#{$key}) !important;
   }
-  ._P-col-#{$key} {
+  ._PD-col-#{$key} {
     padding-top: var(--gap-#{$key}) !important;
     padding-bottom: var(--gap-#{$key}) !important;
   }
@@ -202,14 +218,20 @@ $gaps: (
     padding-right: var(--gap-#{$key}) !important;
   }
 
+  // 最高权重 Margin 相关样式
   ._MG-#{$key} {
     margin: var(--gap-#{$key}) !important;
   }
-  ._M-row-#{$key} {
+  @each $subKey, $subValue in $gaps {
+    ._MG-#{$key}-#{$subKey} {
+      margin: var(--gap-#{$key}) var(--gap-#{$subKey}) !important;
+    }
+  }
+  ._MG-row-#{$key} {
     margin-left: var(--gap-#{$key}) !important;
     margin-right: var(--gap-#{$key}) !important;
   }
-  ._M-col-#{$key} {
+  ._MG-col-#{$key} {
     margin-top: var(--gap-#{$key}) !important;
     margin-bottom: var(--gap-#{$key}) !important;
   }
@@ -226,6 +248,7 @@ $gaps: (
     margin-right: var(--gap-#{$key}) !important;
   }
 
+  // Gap 相关样式
   .gap-#{$key} {
     gap: var(--gap-#{$key});
   }

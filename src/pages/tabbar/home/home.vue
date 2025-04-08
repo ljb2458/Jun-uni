@@ -74,7 +74,7 @@ async function api(
         <GrFilterSearch
           @blur="tabsList[currTab].CoRequestListRef?.rerequest()"
           v-model="searchKey"
-          class="MT-xs M-row-md B-none PD-0"
+          class="MT-xs MG-row-md B-none PD-0"
           bg="var(--C-white)"
           v-model:select-value="currTab"
           :selections="tabsList.map((v, i) => ({ label: v.name, value: i }))"

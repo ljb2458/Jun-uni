@@ -101,7 +101,7 @@ const steps3 = [
       <view class="MT-md MB-md F-S-lg">基础示例</view>
       <CoStepLine v-for="item in steps1" :key="item.title">
         <template #right>
-          <view class="P-row-sm PB-sm">
+          <view class="PD-row-sm PB-sm">
             <view>{{ item.title }}</view>
             <view class="C-T3 F-S-sm MT-xs"> {{ item.content }}</view>
             <view class="C-T3 F-S-xs">{{ item.time }}</view>
@@ -114,7 +114,7 @@ const steps3 = [
           <CoIcon name="cicon-fuzhi" />
         </template>
         <template #right>
-          <view class="P-row-sm PB-sm">
+          <view class="PD-row-sm PB-sm">
             <view>{{ item.title }}</view>
             <view class="C-T3 F-S-sm MT-xs"> {{ item.content }}</view>
             <view class="C-T3 F-S-xs">{{ item.time }}</view>
@@ -124,14 +124,14 @@ const steps3 = [
       <view class="MT-md MB-md F-S-lg">左右穿插</view>
       <CoStepLine v-for="(item, index) in steps3" :key="item.title">
         <template #left>
-          <view v-if="index % 2 == 0" class="P-row-sm PB-sm T-A-R">
+          <view v-if="index % 2 == 0" class="PD-row-sm PB-sm T-A-R">
             <view>{{ item.title }}</view>
             <view class="C-T3 F-S-sm MT-xs"> {{ item.content }}</view>
             <view class="C-T3 F-S-xs">{{ item.time }}</view>
           </view>
         </template>
         <template #right>
-          <view v-if="index % 2 == 1" class="P-row-sm PB-sm">
+          <view v-if="index % 2 == 1" class="PD-row-sm PB-sm">
             <view>{{ item.title }}</view>
             <view class="C-T3 F-S-sm MT-xs"> {{ item.content }}</view>
             <view class="C-T3 F-S-xs">{{ item.time }}</view>

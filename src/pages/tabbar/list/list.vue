@@ -263,7 +263,7 @@ const tabsList = computed(() => [
 
 <template>
   <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
-    <view class="P-row-md">
+    <view class="PD-row-md">
       <CoTabsFor
         v-model="tabIndex"
         :sticky="true"

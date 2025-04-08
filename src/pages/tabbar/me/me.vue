@@ -23,7 +23,7 @@ const userAuthEnum: CoStateOrm = [
   {
     value: 1,
     label: "管理员",
-    class: "C-M1 B-M1-O3 R-max P-row-xs F-S-xs ML-xs",
+    class: "C-M1 B-M1-O3 R-max PD-row-xs F-S-xs ML-xs",
   },
 ];
 const layoutInfo = reactive({

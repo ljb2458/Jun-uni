@@ -29,7 +29,7 @@ const selectedValue3 = ref<string>();
     <view class="PD-md">
       <view class="MT-md MB-xs F-S-lg">基本示例</view>
       <CoSelect v-model="selectedValue1" :selections="selections"> </CoSelect>
-      <view class="M-col-xs"> 选中的value：{{ selectedValue1 }} </view>
+      <view class="MG-col-xs"> 选中的value：{{ selectedValue1 }} </view>
       <view class="MT-md MB-xs F-S-lg">自定义插槽</view>
       <CoSelect v-model="selectedValue2" :selections="selections">
         <template #value="{ selection }">
@@ -45,7 +45,7 @@ const selectedValue3 = ref<string>();
           <uv-loading-icon text="额外插槽" />
         </template>
       </CoSelect>
-      <view class="M-col-xs"> 选中的value：{{ selectedValue2 }} </view>
+      <view class="MG-col-xs"> 选中的value：{{ selectedValue2 }} </view>
       <view class="MT-md MB-xs F-S-lg">自定义 label value</view>
       <CoSelect
         v-model="selectedValue3"
@@ -54,7 +54,7 @@ const selectedValue3 = ref<string>();
         :valueName="'label'"
       >
       </CoSelect>
-      <view class="M-col-xs"> 选中的value：{{ selectedValue3 }} </view>
+      <view class="MG-col-xs"> 选中的value：{{ selectedValue3 }} </view>
     </view>
   </CoPageView>
 </template>
