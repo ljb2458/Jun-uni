@@ -126,7 +126,10 @@ $gaps: (
   "auto": auto,
   "0": 0,
 );
-// 循环生成样式
+// 循环生成样式；
+// 例：PD-sm = padding:var(--gap-sm);
+// PD-sm-md = padding:var(--gap-sm) var(--gap-md);
+// PD-row-sm = padding-left:var(--gap-sm); padding-right:var(--gap-sm);
 @each $key, $value in $gaps {
   // Padding 相关样式
   .PD-#{$key} {
