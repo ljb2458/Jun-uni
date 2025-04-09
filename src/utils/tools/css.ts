@@ -14,7 +14,7 @@ export function unitVmax(pixel: string | undefined | number): string {
   return (pixel || 0) + "vmax";
 }
 export function unitVmin(pixel: string | undefined | number): string {
-  return (pixel || 0) + "Vmin";
+  return (pixel || 0) + "vmin";
 }
 export function unitPercent(pixel: string | undefined | number): string {
   return Number(pixel || 0) * 100 + "%";
