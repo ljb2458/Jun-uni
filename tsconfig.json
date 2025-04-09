@@ -38,6 +38,6 @@
     "types/**/*.tsx",
     "types/**/*.vue",
     "vite.config.ts",
-    "env.d.ts"
+    ".envs.d.ts"
   ]
 }
