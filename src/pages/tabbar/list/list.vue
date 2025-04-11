@@ -10,8 +10,9 @@
 <script setup lang="ts">
 import { onPageScroll } from "@dcloudio/uni-app";
 import { _import } from "@/utils/tools/import";
-import { bitsAuth } from "@/utils/tools/bits";
+import { bitsAuth, getBitsArray } from "@/utils/tools/bits";
 import router from "@/utils/router";
+import { CoStateOrm } from "@/components/common/CoStateTag/CoStateTag.vue";
 
 enum ComponentsType {
   /**展示组件 */
@@ -229,31 +230,37 @@ const cellList = computed(() => {
 
 const tabsList = computed(() => [
   {
-    name: "全部组件",
+    label: "全部",
     list: cellList.value,
+    value: 0,
   },
   {
-    name: "展示组件",
+    label: "展示",
+    value: ComponentsType.Exhibition,
     list: cellList.value.filter((v) =>
       bitsAuth(v.type, ComponentsType.Exhibition)
     ),
   },
   {
-    name: "表单组件",
+    label: "表单",
+    value: ComponentsType.Form,
     list: cellList.value.filter((v) => bitsAuth(v.type, ComponentsType.Form)),
   },
   {
-    name: "数据组件",
+    label: "数据",
+    value: ComponentsType.Data,
     list: cellList.value.filter((v) => bitsAuth(v.type, ComponentsType.Data)),
   },
   {
-    name: "通知组件",
+    label: "通知",
+    value: ComponentsType.Message,
     list: cellList.value.filter((v) =>
       bitsAuth(v.type, ComponentsType.Message)
     ),
   },
   {
-    name: "加强组件",
+    label: "加强",
+    value: ComponentsType.Reinforce,
     list: cellList.value.filter((v) =>
       bitsAuth(v.type, ComponentsType.Reinforce)
     ),
@@ -268,7 +275,7 @@ const tabsList = computed(() => [
         v-model="tabIndex"
         :sticky="true"
         sticky-class="B-B2 PB-sm"
-        :options="tabsList"
+        :options="tabsList.map((v) => ({ ...v, name: v.label + '组件' }))"
         title-scrollable
         :lazy="false"
       >
@@ -288,6 +295,17 @@ const tabsList = computed(() => [
               :key="item.leftText"
               v-for="item in option.list"
             >
+              <template #right>
+                <view class="flex gap-xs">
+                  <CoStateTag
+                    class="B-M1 C-white R-max F-S-xs PD-xxs-xs"
+                    v-for="type in getBitsArray(item.type)"
+                    :state-orm="tabsList.slice(1)"
+                    :value="type"
+                    :is-fun="bitsAuth"
+                  />
+                </view>
+              </template>
             </CoCell>
           </view>
         </template>
