@@ -19,9 +19,12 @@ import { onPageScroll } from "@dcloudio/uni-app";
         >在官方 video
         的基础上增加了一个播放倍率，目前功能太少，暂不推荐使用</view
       >
+      <view class="C-T3"> 因微信小程序审核原因，微信小程序暂无法预览 </view>
+      <!--#ifndef MP-WEIXIN-->
       <CoVideo
         src="https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/2minute-demo.mp4"
       />
+      <!--#endif-->
     </view>
   </CoPageView>
 </template>
