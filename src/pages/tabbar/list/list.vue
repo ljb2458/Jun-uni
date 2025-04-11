@@ -242,6 +242,13 @@ const tabsList = computed(() => [
     ),
   },
   {
+    label: "布局",
+    value: ComponentsType.Layout,
+    list: cellList.value.filter((v) =>
+      bitsAuth(v.type, ComponentsType.Layout)
+    ),
+  },
+  {
     label: "表单",
     value: ComponentsType.Form,
     list: cellList.value.filter((v) => bitsAuth(v.type, ComponentsType.Form)),

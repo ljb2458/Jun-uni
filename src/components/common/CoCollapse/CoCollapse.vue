@@ -2,14 +2,14 @@
 <script lang="ts" setup>
 import type { StyleValue } from "vue";
 interface Props {
-  "header-class": any;
-  headerClass: any;
-  headerStyle: StyleValue;
-  "header-style": StyleValue;
-  "content-class": any;
-  contentClass: any;
-  contentStyle: StyleValue;
-  "content-style": StyleValue;
+  "header-class"?: any;
+  headerClass?: any;
+  headerStyle?: StyleValue;
+  "header-style"?: StyleValue;
+  "content-class"?: any;
+  contentClass?: any;
+  contentStyle?: StyleValue;
+  "content-style"?: StyleValue;
   /**当前打开组件的 name 或 name 集合；传入数组则可以多开（非手风琴模式）， */
   value: any | any[];
   /**标识符 */

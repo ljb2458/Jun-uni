@@ -172,7 +172,7 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
         :options="[...selectedOptions]"
         :values="[...modelValue]"
       >
-        {{ selectedOptions.at(-1)?.label || "请选择" }}
+        {{ selectedOptions[selectedOptions.length - 1]?.label || "请选择" }}
       </slot>
     </view>
     <view

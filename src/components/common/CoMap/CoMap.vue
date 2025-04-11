@@ -213,7 +213,8 @@ const leftCotrolList = computed<CoMapCotrolsItem[]>(() => {
     class: ["_MB-auto", "_B-none"],
     orderNo: 999999999999999,
   });
-  return iconArray.toSorted((a, b) => Number(a.orderNo) - Number(b.orderNo));
+  iconArray.sort((a, b) => Number(a.orderNo) - Number(b.orderNo));
+  return iconArray;
 });
 
 const rightCotrolList = computed<CoMapCotrolsItem[]>(() => {
@@ -259,7 +260,8 @@ const rightCotrolList = computed<CoMapCotrolsItem[]>(() => {
     class: ["_MB-auto", "_B-none"],
     orderNo: 999999999999999,
   });
-  return iconArray.toSorted((a, b) => Number(a.orderNo) - Number(b.orderNo));
+  iconArray.sort((a, b) => Number(a.orderNo) - Number(b.orderNo));
+  return iconArray;
   function addLocalCotrol() {
     iconArray.push({
       class: ["_MT-auto"],
@@ -293,7 +295,67 @@ const rightCotrolList = computed<CoMapCotrolsItem[]>(() => {
 
 <template>
   <view class="CoMap" :class="{ CoMap__fill: fill }">
-    <slot></slot>
+    <map
+      v-show="showMap"
+      :id="MAP_ID"
+      :latitude="latitude"
+      :longitude="longitude"
+      :scale="externalScale"
+      :theme="$mapProps.theme"
+      :min-scale="$mapProps.minScale"
+      :max-scale="$mapProps.maxScale"
+      :layer-style="$mapProps.layerStyle"
+      :markers="$mapProps.markers"
+      :polyline="$mapProps.polyline"
+      :circles="$mapProps.circles"
+      :polygons="$mapProps.polygons"
+      :controls="$mapProps.controls"
+      :include-points="$mapProps.includePoints"
+      :enable-3d="$mapProps.enable3D"
+      :show-compass="$mapProps.showCompass"
+      :enable-zoom="$mapProps.enableZoom"
+      :enable-scroll="$mapProps.enableScroll"
+      :enable-rotate="$mapProps.enableRotate"
+      :enable-overlooking="$mapProps.enableOverlooking"
+      :enable-satellite="$mapProps.enableSatellite"
+      :enable-traffic="$mapProps.enableTraffic"
+      :enable-poi="$mapProps.enablePoi"
+      :enable-building="$mapProps.enableBuilding"
+      :show-location="$mapProps.showLocation"
+      :enable-indoor-map="$mapProps.enableIndoorMap"
+      @markertap="$mapProps.onMarkertap"
+      @labeltap="$mapProps.onLabeltap"
+      @callouttap="$mapProps.onCallouttap"
+      @controltap="$mapProps.onControltap"
+      @tap="$mapProps.onTap"
+      @anchorpointtap="$mapProps.onAnchorpointtap"
+      @poitap="$mapProps.onPoitap"
+      @regionchange="onRegionchange"
+      @updated="onUpdated"
+    >
+      <!--#ifndef APP-->
+      <template #callout>
+        <slot
+          name="callout"
+          :markers="$mapProps.markers?.filter((v) => v.customCallout)"
+        ></slot>
+      </template>
+      <!--#endif-->
+    </map>
+    <envCoverView
+      class="controls__top"
+      :show="fill"
+      :style="{ height: layoutInfo.topHeight }"
+    >
+      <slot name="top"></slot>
+    </envCoverView>
+    <envCoverView
+      class="controls__bottom"
+      :show="fill"
+      :style="{ height: layoutInfo.bottomHeight }"
+    >
+      <slot name="bottom"></slot>
+    </envCoverView>
     <envCoverView
       class="controls__left"
       :style="{
@@ -336,65 +398,6 @@ const rightCotrolList = computed<CoMapCotrolsItem[]>(() => {
         ></envCoverImage>
       </envCoverView>
     </envCoverView>
-    <envCoverView
-      class="controls__top"
-      :show="fill"
-      :style="{ height: layoutInfo.topHeight }"
-    >
-      <slot name="top"></slot>
-    </envCoverView>
-    <envCoverView
-      class="controls__bottom"
-      :show="fill"
-      :style="{ height: layoutInfo.bottomHeight }"
-    >
-      <slot name="bottom"></slot>
-    </envCoverView>
-    <map
-      v-show="showMap"
-      :id="MAP_ID"
-      :latitude="latitude"
-      :longitude="longitude"
-      :scale="externalScale"
-      :theme="$mapProps.theme"
-      :min-scale="$mapProps.minScale"
-      :max-scale="$mapProps.maxScale"
-      :layer-style="$mapProps.layerStyle"
-      :markers="$mapProps.markers"
-      :polyline="$mapProps.polyline"
-      :circles="$mapProps.circles"
-      :polygons="$mapProps.polygons"
-      :controls="$mapProps.controls"
-      :include-points="$mapProps.includePoints"
-      :enable-3d="$mapProps.enable3D"
-      :show-compass="$mapProps.showCompass"
-      :enable-zoom="$mapProps.enableZoom"
-      :enable-scroll="$mapProps.enableScroll"
-      :enable-rotate="$mapProps.enableRotate"
-      :enable-overlooking="$mapProps.enableOverlooking"
-      :enable-satellite="$mapProps.enableSatellite"
-      :enable-traffic="$mapProps.enableTraffic"
-      :enable-poi="$mapProps.enablePoi"
-      :enable-building="$mapProps.enableBuilding"
-      :show-location="$mapProps.showLocation"
-      :enable-indoor-map="$mapProps.enableIndoorMap"
-      @markertap="$mapProps.onMarkertap"
-      @labeltap="$mapProps.onLabeltap"
-      @callouttap="$mapProps.onCallouttap"
-      @controltap="$mapProps.onControltap"
-      @tap="$mapProps.onTap"
-      @anchorpointtap="$mapProps.onAnchorpointtap"
-      @poitap="$mapProps.onPoitap"
-      @regionchange="onRegionchange"
-      @updated="onUpdated"
-    >
-      <template #callout>
-        <slot
-          name="callout"
-          :markers="$mapProps.markers?.filter((v) => v.customCallout)"
-        ></slot>
-      </template>
-    </map>
   </view>
 </template>
 
@@ -404,7 +407,6 @@ const rightCotrolList = computed<CoMapCotrolsItem[]>(() => {
   $gap-row: 12px;
   $icon-size: 34px;
   $bottom-height: 54px;
-  transition: all 150ms linear;
   overflow: hidden;
   background-color: #ffffff;
 
@@ -470,7 +472,7 @@ const rightCotrolList = computed<CoMapCotrolsItem[]>(() => {
   left: 0;
   width: 100vw !important;
   height: 100vh !important;
-  z-index: 999;
+  z-index: 8;
   margin: 0 !important;
   border-radius: 0 !important;
 }

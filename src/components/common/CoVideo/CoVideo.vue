@@ -50,7 +50,7 @@ const $videoProps = computed<VideoProps>(() => ({
 }));
 const nodeInfo = reactive<UniNamespace.NodeInfo>({});
 const videoData = reactive({
-  controls: false,
+  controls: true,
   electSpeed: 1,
   fullscreen: false,
   videoCtx: defineType<UniNamespace.VideoContext>()!,
@@ -176,8 +176,8 @@ function changeSpeed(item: ArrayToUnion<typeof selectSpeed>) {
           @tap="changeSpeed(item)"
           v-for="(item, index) in selectSpeed"
           :key="index"
+          :text="item.label"
         >
-          {{ item.label }}
         </envCoverView>
       </envCoverView>
     </video>

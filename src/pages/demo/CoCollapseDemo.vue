@@ -105,9 +105,7 @@ const collapsesTree = [
         <view class="PD-sm border-T">{{ item.content }} </view>
       </CoCollapse>
       <view class="F-S-lg MT-md MB-xs">嵌套使用</view>
-      <view class="F-S-sm C-T3">
-        良好的嵌套支持，欢迎体验
-      </view>
+      <view class="F-S-sm C-T3"> 良好的嵌套支持，欢迎体验 </view>
       <CoCollapse
         v-for="(group, index) in collapsesTree"
         v-model:value="treeLv1"

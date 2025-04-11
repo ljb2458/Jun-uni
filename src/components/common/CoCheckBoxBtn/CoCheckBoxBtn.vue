@@ -4,13 +4,13 @@ import type { StyleValue } from "vue";
 type StateKey = "normal" | "active";
 
 interface Props {
-  "active-class": any;
-  activeClass: any;
-  activeStyle: StyleValue;
-  "active-style": StyleValue;
-  "normal-class": any;
-  normalClass: any;
-  normalStyle: StyleValue;
+  "active-class"?: any;
+  activeClass?: any;
+  activeStyle?: StyleValue;
+  "active-style"?: StyleValue;
+  "normal-class"?: any;
+  normalClass?: any;
+  normalStyle?: StyleValue;
   "normal-style": StyleValue;
   modelValue: any;
   value: any;

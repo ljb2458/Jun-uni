@@ -31,7 +31,7 @@ const current = computed<StateOrmItem | undefined>(() => {
     props.isFun(props.value!, item.value)
   );
   if (!item) {
-    return props.stateOrm.at(Number(props.defaultIndex));
+    return props.stateOrm[Number(props.defaultIndex)];
   }
   return item;
 });
