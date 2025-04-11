@@ -123,10 +123,16 @@ const showBottomView = ref(true);
         </uv-button>
       </view>
     </view>
-    <view style="height: var(--layout-navbar-height)" class="border-all">
+    <view
+      style="height: var(--layout-navbar-height); border-color: red"
+      class="border-all MG-row-md"
+    >
       <view class="F-S-lg"> 导航栏高度 var(--layout-navbar-height) </view>
     </view>
-    <view style="height: var(--layout-page-height)" class="border-all">
+    <view
+      style="height: var(--layout-page-height); border-color: red"
+      class="border-all MG-row-md"
+    >
       <view class="F-S-lg"> 内容区高度 var(--layout-page-height) </view>
       <view class="PD-sm">
         不带 fixedBottom 插槽高度的内容区高度，其高度刚好等于 (页面高度) -
