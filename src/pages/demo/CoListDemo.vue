@@ -21,7 +21,6 @@ interface ApiResItem {
 }
 let pageNo = 1;
 async function load() {
-  console.log(`加载了${name}的数据`);
   const _list: ApiResItem[] = [];
   for (let i = 0; i < 10; i++) {
     _list.push({
@@ -44,7 +43,7 @@ async function load() {
       <view class="MT-md F-S-lg">基本使用</view>
       <view class="C-T3"
         >如非特殊需要，建议使用 CoRequestList 组件，CoRequestList
-        组件二次封装于该组件，功能十分强大！</view
+        基于该组件二次开发，功能十分强大！</view
       >
       <CoList :status="status" @load="load">
         <view

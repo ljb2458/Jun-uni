@@ -187,22 +187,22 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
       <view class="CoCascaderPopup_selected MG-sm">
         <slot name="selected" :options="selectedOptions">
           <block v-if="selectedOptions.length">
-            <text
+            <view
               class="CoCascaderPopup_selectedItem"
               v-for="(item, index) in selectedOptions"
               :key="index"
               @tap="selectItem(item, index)"
             >
               <text>
-                <slot name="selectedItem" :option="item" :level="index">
+                <slot name="test" :option="item" :level="index">
                   {{ item.label }}
                 </slot>
               </text>
-            </text>
+            </view>
           </block>
-          <text class="CoCascaderPopup_selectedItem" v-else>
+          <view class="CoCascaderPopup_selectedItem" v-else>
             <text>{{ "请选择" }}</text>
-          </text>
+          </view>
         </slot>
       </view>
       <view class="CoCascader_content B-B2 PD-xs flex" :style="{ height }">
@@ -285,6 +285,7 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
   }
   .CoCascaderPopup_selected {
     > .CoCascaderPopup_selectedItem {
+      display: inline;
       text {
         color: var(--C-M1);
         text-decoration: underline;

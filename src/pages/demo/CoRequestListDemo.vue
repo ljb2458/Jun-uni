@@ -51,6 +51,12 @@ async function api(pageNo: number): Promise<RequestList.Res<ApiResItem[]>> {
           </view>
           <view class="PD-sm">
             将页面配置的 enablePullDownRefresh 设为 true
+            页面中可见的列表将会在下拉刷新被触发后重新加载。 你也可以调用
+            ref.reload 或 ref.rerequest 方法重新加载。如果有需要，你也可以通过
+            ref.list 获取列表数据并直接修改或替换
+          </view>
+          <view class="PD-sm">
+            将页面配置的 enablePullDownRefresh 设为 true
             页面中可见的列表将会在下拉刷新被触发后重新加载。
             你也可以调用列表身上的 reload 或 rerequest 方法重新加载
           </view>

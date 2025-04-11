@@ -110,7 +110,7 @@ async function getNextLevelList(e: CoCascaderLoadChildrenEnvet) {
           {{ options.map((v) => v.label).join(",") || "点击这里选择" }}
         </template>
         <template #selectedItem="{ option, level }">
-          {{ level }}：{{ option.label }}
+          选项{{ level }}：{{ option.label }}
         </template>
         <template #option="{ option, level, index }">
           <view>⭐{{ option.label }} </view>
