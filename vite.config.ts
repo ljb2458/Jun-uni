@@ -7,6 +7,8 @@ import Components from "unplugin-vue-components/vite";
 
 export default defineConfig((config) => {
   const env = loadEnv(config.mode, process.cwd(), "VITE_");
+  console.log("config", config);
+  console.log("env", env);
   const option: UserConfig = {
     base: "/",
     resolve: {
@@ -28,16 +30,11 @@ export default defineConfig((config) => {
     },
 
     build: {
+      minify: "terser",
       terserOptions: {
         compress: {
-          drop_console: true, // 生产环境移除console
-          drop_debugger: true, // 生产环境移除debugger
-        },
-      },
-      rollupOptions: {
-        output: {
-          format: "es",
-          sourcemap: true, // 生成 sourcemap，方便调试
+          drop_console: config.mode === "production", // 生产环境移除console
+          drop_debugger: config.mode === "production", // 生产环境移除debugger
         },
       },
     },
