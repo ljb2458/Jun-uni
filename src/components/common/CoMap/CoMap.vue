@@ -147,7 +147,6 @@ const latitude = useVModel(props.mapProps, "latitude", undefined, {
 const longitude = useVModel(props.mapProps, "longitude", undefined, {
   defaultValue: LONGITUDE,
 });
-
 const event = useUniOn();
 const hidAll = ref(false);
 event.$on(CoMap.ChangeFill, ({ id, value }) => {
