@@ -17,6 +17,8 @@ import { useVModel } from "@/hooks/toolsHooks";
 import envCoverView from "./envCoverView.vue";
 import envCoverImage from "./envCoverImage.vue";
 import { debounce } from "lodash";
+import { useUniOn } from "@/hooks/toolsHooks";
+import { CoMap } from "@/enum/pubsubKey/components";
 
 export interface CoMapMarker extends MapMarker, AnyObject {
   iconPath?: string;
@@ -133,7 +135,6 @@ const scale = computed({
     realScale.value = undefined;
   },
 });
-console.log("props", props);
 const layoutInfo = computed(() => {
   let { topHeight, bottomHeight } = props;
   if (!fill.value) topHeight = bottomHeight = "0px";
@@ -146,6 +147,25 @@ const latitude = useVModel(props.mapProps, "latitude", undefined, {
 const longitude = useVModel(props.mapProps, "longitude", undefined, {
   defaultValue: LONGITUDE,
 });
+
+const event = useUniOn();
+const hidAll = ref(false);
+event.$on(CoMap.ChangeFill, ({ id, value }) => {
+  if (id !== MAP_ID) {
+    //有其它地图全屏
+    hidAll.value = value;
+  }
+});
+
+watch(
+  fill,
+  (newValue) => {
+    uni.$emit(CoMap.ChangeFill, { id: MAP_ID, value: newValue });
+  },
+  {
+    immediate: true,
+  }
+);
 
 onMounted(() => {
   mapCtx = uni.createMapContext(MAP_ID, getCurrentInstance());
@@ -294,7 +314,7 @@ const rightCotrolList = computed<CoMapCotrolsItem[]>(() => {
 </script>
 
 <template>
-  <view class="CoMap" :class="{ CoMap__fill: fill }">
+  <view class="CoMap" v-show="!hidAll" :class="{ CoMap__fill: fill }">
     <map
       v-show="showMap"
       :id="MAP_ID"
@@ -467,12 +487,13 @@ const rightCotrolList = computed<CoMapCotrolsItem[]>(() => {
   }
 }
 .CoMap__fill {
-  position: fixed;
+  //设置成 fixed 在手机端会导致 map 遮盖 cover-view
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100vw !important;
-  height: 100vh !important;
-  z-index: 8;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 999999999999999;
   margin: 0 !important;
   border-radius: 0 !important;
 }
