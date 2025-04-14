@@ -1,4 +1,3 @@
-<!-- 带下拉菜单+高级筛选的搜索栏 -->
 <script setup lang="ts" generic="S extends CoSelectionsItem,K extends keyof S">
 import type { PopupRef, PopupProps } from "@ttou/uv-typings/types/popup";
 import type { SearchProps } from "@ttou/uv-typings/types/search";
@@ -83,16 +82,17 @@ function onTapReset(e: any) {
   <view class="GrFilterSearch B-B1 PD-col-xs PD-row-sm">
     <view class="flex-A-C gap-xs">
       <slot name="selections">
-        <CoSelect
-          @selected="(v:any) => emit('selected',v)"
-          v-model="selectValue"
-          :selections="selections"
-          v-if="selections?.length"
-          width="150px"
-          class="flex-A-C B-B2 R-xs _PD-col-0 _PD-row-sm self-A-STR _flex"
-          :style="{ background: bg, border: 'none' }"
-        >
-        </CoSelect>
+        <view class="self-A-STR">
+          <CoSelect
+            @selected="(v:any) => emit('selected',v)"
+            v-model="selectValue"
+            :selections="selections"
+            width="150px"
+            class="flex-A-C B-B2 R-xs _PD-col-0 _PD-row-sm _flex H-fill"
+            :style="{ background: bg, border: 'none' }"
+          >
+          </CoSelect>
+        </view>
       </slot>
       <uv-search
         @blur="(e:string) => emit('blur', e)"
@@ -159,7 +159,6 @@ function onTapReset(e: any) {
 <style lang="scss" scoped></style>
 <script lang="ts">
 import mpMixin from "@/components/libs/mixin/mpMixin";
-import { unwatchFile } from "fs";
 export default {
   mixins: [mpMixin],
 };
