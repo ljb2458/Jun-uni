@@ -68,6 +68,13 @@ const controls: CoMapCotrolsItem[] = [
     <view class="PD-md">
       <view class="MT-md F-S-lg">基本使用</view>
       <view class="C-T3 MB-xs">使用微信小程序和 APP 查看</view>
+      <!-- #ifdef APP -->
+      <view class="C-T3 MB-xs"
+        >APP上 markers 图标 width height
+        设置无效，使用图片工具更改图片尺寸</view
+      >
+      <!-- #endif -->
+
       <CoMap :mapProps="mapProps" style="height: 300px">
         <template #callout="{ markers }">
           <cover-view
@@ -88,6 +95,9 @@ const controls: CoMapCotrolsItem[] = [
       </CoMap>
 
       <view class="MT-md MB-xs F-S-lg">自定义图标与插槽</view>
+      <!-- #ifdef APP -->
+      <view class="C-T3 MB-xs">APP上 不支持 callout 插槽</view>
+      <!-- #endif -->
       <CoMap
         :left-cotrols="controls"
         :right-cotrols="controls"
