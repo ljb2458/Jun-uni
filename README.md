@@ -23,10 +23,9 @@
   - 配置项直接写在当前 `vue` 文件中，一目了然。
   - 文件目录就是小程序分包方式，非常好理解。
 
-- ⭐习惯 `vs code` 开发，可在 vs code 中 `uniapp` 原生组件总是没代码提示？
+- ⭐ 习惯 `vs code` 开发，可在 vs code 中 `uniapp` 原生组件总是没代码提示？
 
   - 每个 uniapp 原生组件都有类型标注，无需担心代码提示问题。
-
 
 - ⭐ 实现 `tabs` 选项卡，高度总是问题？
 
@@ -300,7 +299,7 @@ types |-dts   | //全局配置、组件、等ts存放目录
 
 1. 全局安装或在 `/generatePagesConfig/` 目录下安装 `ts-node`
    ```shellinstall
-   pnpm  ts-node -g
+   pnpm ts-node -G
    ```
 2. 在 `/generatePagesConfig/pages.json` 配置 `tabBar` 以及其它默认配置。
 
