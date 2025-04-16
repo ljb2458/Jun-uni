@@ -1,10 +1,10 @@
-# jun-uni
+# <img src="./src/static/imgs/icon/logo.svg" height="26px"/> Jun-uni
 
 ## 项目介绍
 
-> ⭐`jun-uni` 是一个由个人开发者 `Juncoder` 积累四年开发经验打造的适用中小型公司一般开发情况的 uniapp 开箱即用高效开发框架。
+> ⭐`Jun-uni` 是一个由个人开发者 `Juncoder` 积累四年开发经验打造的适用中小型公司一般开发情况的 uniapp 开箱即用高效开发框架。
 
-> ⭐`jun-uni` 的诞生是为了解决 `Uniapp` 多端兼容麻烦、使用 `HBuilder X` 开发体验一般、对 `TypeScript` 支持不好的问题，旨在优化开发体验、减少兼容代码。
+> ⭐`Jun-uni` 的诞生是为了解决 `Uniapp` 多端兼容麻烦、使用 `HBuilder X` 开发体验一般、对 `TypeScript` 支持不好的问题，旨在优化开发体验、减少兼容代码。
 
 > ⭐ 该框架使用 `Uniapp` `Vue3` `TypeScript` `Pinia` `luchRequest` `Vite` `uv-view` 打造。
 > 因此在使用此框架前，我推荐你先学习或了解 `Uniapp` `Vue3` `TypeScript` `Pinia` `Axios(luchRequest)`
@@ -50,13 +50,13 @@
 
 - ⭐ 找不到对 `TypeScript` 支持良好的 `uniapp` 框架？
 
-  - `jun-uni` 框架中的所有 方法、组件、示例代码、包括 `uniapp` 的原生组件，均有良好的 `TypeScript` 支持
+  - `Jun-uni` 框架中的所有 方法、组件、示例代码、包括 `uniapp` 的原生组件，均有良好的 `TypeScript` 支持
 
 - ⭐ 微信小程序组件总是多渲染一层组件盒，影响样式编写？
 
   - 每个公共组件都不会有多余的组件盒，减少平台差异。
 
-- `jun-uni` 框架中的所有 方法、组件、示例代码、包括 `uniapp` 的原生组件，均有良好的 `TypeScript` 支持
+- `Jun-uni` 框架中的所有 方法、组件、示例代码、包括 `uniapp` 的原生组件，均有良好的 `TypeScript` 支持
 
 - 开启了过多相同的循环定时器，造成性能浪费、忘记关闭循环定时器？
 
