@@ -1,5 +1,3 @@
-一个由个人开发者 Juncoder 积累四年开发经验打造的适用中小型公司一般开发情况的 uniapp 开箱即用高效开发框架
-
 # <img src="./src/static/imgs/icon/logo.svg" height="26px"/> Jun-uni
 
 ## 项目介绍
