@@ -23,6 +23,11 @@
   - 配置项直接写在当前 `vue` 文件中，一目了然。
   - 文件目录就是小程序分包方式，非常好理解。
 
+- ⭐习惯 `vs code` 开发，可在 vs code 中 `uniapp` 原生组件总是没代码提示？
+
+  - 每个 uniapp 原生组件都有类型标注，无需担心代码提示问题。
+
+
 - ⭐ 实现 `tabs` 选项卡，高度总是问题？
 
   - 使用组件 `CoTabsFor` 传入一个数组，定义一个插槽可以轻松实现自动高度的 tabs 选项卡。
@@ -97,13 +102,17 @@ pnpm run dev:h5
 pnpm run dev:mp-weixin
 ```
 
+然后根据控制台提示进行操作。
+
 或在 `HBuilder X` 中启动项目。
 
 ## 习惯配置
 
+**使用该框架，我推荐你使用 `vs code` 编译器并安装插件 `Prettier - Code formatter` `Vue - Official`**
+
 **使用该框架，我推荐你添加以下代码片段**
 
-编译器左下角小齿轮=>代码片段=>选择 `vue3`
+`vs code` 左下角小齿轮=>代码片段=>选择 `vue3-module.code-snippets`
 
 ```json
 {
@@ -139,7 +148,7 @@ pnpm run dev:mp-weixin
 }
 ```
 
-编译器左下角小齿轮=>代码片段=>选择 `ts`
+`vs code` 左下角小齿轮=>代码片段=>选择 `typescript.json`
 
 ```json
 {
