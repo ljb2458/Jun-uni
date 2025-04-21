@@ -1,11 +1,11 @@
-<cfg lang="json">
+<route lang="json">
 {
   "navigationBarTitleText": "标签页",
   "enablePullDownRefresh": false,
   "navigationStyle": "custom",
   "navigationBarTextStyle": "white"
 }
-</cfg>
+</route>
 
 <script setup lang="ts">
 import { CoTabsForInstance } from "@/components/common/CoTabsFor/CoTabsFor.vue";

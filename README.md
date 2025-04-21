@@ -19,7 +19,7 @@
 
 - ⭐`pages.json` 配置麻烦、不便查阅？
 
-  - 使用 `/generatePagesConfig` 文件夹下的 `generate` 命令 自动生成 `pages.json` 配置文件。
+  - 使用 `vite` 插件 `generatePagesJson` 自动生成 `pages.json` 配置文件。
   - 配置项直接写在当前 `vue` 文件中，一目了然。
   - 文件目录就是小程序分包方式，非常好理解。
 
@@ -119,14 +119,14 @@ pnpm run dev:mp-weixin
   "uniapp页面": {
     "prefix": "uni-page",
     "body": [
-      "<cfg lang=\"json\">",
+      "<route lang=\"json\">",
       "{",
       "  \"navigationBarTitleText\": \"$1\",",
       "  \"enablePullDownRefresh\": false,",
       "  \"navigationStyle\": \"custom\",",
       "  \"navigationBarTextStyle\": \"white\"",
       "}",
-      "</cfg>",
+      "</route>",
       "",
       "<script setup lang=\"ts\">",
       "import { onPageScroll } from \"@dcloudio/uni-app\";",
@@ -192,8 +192,9 @@ pnpm run dev:mp-weixin
 ## 文件目录
 
 ```
-generatePagesConfig |-index.ts    //用于生成pages.json配置文件；在vscode资源管理器中的npm脚本中选择generatePagesConfig\package.json中的generate命令执行。
-                    |-pages.json  //pages.json除页面路由以外的配置，修改后需要重新生成pages.json文件。
+vite-plugins  | //存放本地 vite 插件。
+              |-generatePagesJson |-index.ts    //用于生成pages.json配置文件；
+                    
 
 src |-layout    | //存放自定义的navbar等其他每个页面都需要的组件。
     |-style     | //存放预设、公共、scss文件。
@@ -295,47 +296,30 @@ types |-dts   | //全局配置、组件、等ts存放目录
 
 5. 在 `/src/api/userinfo` 中复制粘贴或直接修改一个接口并调用。
 
-## 自动生成 pages.json（generatePagesConfig）
+## 自动生成 pages.json（vite 插件）
 
-1. 全局安装或在 `/generatePagesConfig/` 目录下安装 `ts-node`
-   ```shellinstall
-   pnpm ts-node -G
-   ```
-2. 在 `/generatePagesConfig/pages.json` 配置 `tabBar` 以及其它默认配置。
+在 `vite.config.ts` 中需改 `generatePagesJson` 中的相关配置
 
-   ```json
-   {
-     //请在这里配置 tabbar，在 /src/pages.json 配置将会在下次自动生成时被覆盖。
-     "tabBar": {},
-     "globalStyle": {},
-     "easycom": {
-       "custom": {}
-     }
-   }
-   ```
-
-3. 在 `/generatePagesConfig/index.ts` 配置 主包、首页、黑名单正则等。
-   ```ts
-   /**项目文件地址 */
-   const SRC_DIR = path.join(__dirname, "../src");
-   /**pages目录地址 */
-   const PAGES_DIR = path.join(SRC_DIR, "pages");
-   /**结果输出位置 */
-   const OUTPUT_FILE = path.join(SRC_DIR, "pages.json");
-   /**位于主包首位的页面 */
-   const FIRST_PAGE = "pages/tabbar/home/home";
-   /**要打包为主包的文件夹 */
-   const MAIN_PACKAGE_DIR = "pages/tabbar"; // 主包文件夹
-   /**黑名单 */
-   const BLACKLIST = [/.?\/components/];
-   /**包含的文件后缀 */
-   const INCLUDED_EXTENSIONS = [".vue", ".nvue"];
-   ```
-4. 运行 `/generatePagesConfig` 目录下的命令 `generate`
-   ```shell
-   pnpm run generate
-   ```
+```ts
+  //其它代码...
+  generatePagesJson({
+    /**输出文件 */
+    outFile: "./src/pages.json",
+    /**第一个页面 */
+    firstPage: "./src/pages/tabbar/home/home.vue",
+    /**主包文件夹 */
+    mainPackageDir: "./src/pages/tabbar/",
+    /**页面所在目录 */
+    pagesDir: "./src/pages/",
+  }),
+```
 
 ### 页面生成规则
 
-`generatePagesConfig` 会自动将 `/src/pages` 下的每一个目录当作一个分包生成，而`MAIN_PACKAGE_DIR` 所指向的文件夹将会被放到主包配置内。
+- `generatePagesJson` 会自动将 `/src/pages` 下的每一个目录当作一个分包生成，而`mainPackageDir` 所指向的文件夹将会被放到主包配置内。
+
+- `generatePagesJson` 插件会读取 `pages.json` 下的配置对象，并替换 `pages` 和 `subPackages` 这两项配置，你可以放心的修改除这两项配置以外的配置。
+
+### 选型解释
+- 为什么不使用 `vite-plugin-uni-pages`？
+  - `vite-plugin-uni-pages` 从大体上确实能实现该功能，但 `vite-plugin-uni-pages` 不符合规范大于配置的设计理念，在使用了 `vite-plugin-uni-pages` 后，任需要手动配置分包规则，因此，作者自己写了一个本地 `vite` 插件。

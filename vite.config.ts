@@ -4,6 +4,7 @@ import AutoImport from "unplugin-auto-import/vite";
 import commonjs from "@rollup/plugin-commonjs";
 import path from "path";
 import Components from "unplugin-vue-components/vite";
+import { generatePagesJson } from "./vite-plugins/generatePagesJson/index";
 
 export default defineConfig((config) => {
   const env = loadEnv(config.mode, process.cwd(), "VITE_");
@@ -50,6 +51,12 @@ export default defineConfig((config) => {
     plugins: [
       uni(),
       commonjs(),
+      generatePagesJson({
+        outFile: "./src/pages.json",
+        firstPage: "./src/pages/tabbar/home/home.vue",
+        mainPackageDir: "./src/pages/tabbar/",
+        pagesDir: "./src/pages/",
+      }),
       AutoImport({
         // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
         imports: ["vue", "uni-app"],

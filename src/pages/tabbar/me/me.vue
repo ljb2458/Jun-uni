@@ -1,11 +1,11 @@
-<cfg lang="json">
+<route lang="json">
 {
   "navigationBarTitleText": "我的",
   "enablePullDownRefresh": true,
   "navigationStyle": "custom",
   "navigationBarTextStyle": "white"
 }
-</cfg>
+</route>
 <script lang="ts" setup>
 import { _import } from "@/utils/tools/import";
 import { onPageScroll } from "@dcloudio/uni-app";

@@ -1,11 +1,11 @@
-<cfg lang="json">
+<route lang="json">
 {
   "navigationBarTitleText": "首页",
   "navigationStyle": "custom",
   "navigationBarTextStyle": "white",
   "enablePullDownRefresh": true
 }
-</cfg>
+</route>
 
 <script setup lang="ts">
 import { _import } from "@/utils/tools/import";
