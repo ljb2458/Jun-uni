@@ -1,5 +1,5 @@
-import fs from "fs";
-import path from "path";
+import Fs from "fs";
+import Path from "path";
 import type { Plugin } from "vite";
 
 interface Page {
@@ -84,19 +84,19 @@ export function generatePagesJson(config: Options): Plugin {
     const { subPackagesPageCfg, mainPagesCfg } = pagesSubpackages(pages); // 对页面进行分包处理
     let pagesJson: any;
     try {
-      pagesJson = JSON.parse(fs.readFileSync(outFile, "utf-8") || "{}");
+      pagesJson = JSON.parse(Fs.readFileSync(outFile, "utf-8") || "{}");
     } catch (error) {
       throw {
         message: "源 pages.json 格式错误。",
-        path: path.resolve(outFile),
+        path: Path.resolve(outFile),
       };
     }
 
     pagesJson.pages = mainPagesCfg;
     pagesJson.subPackages = subPackagesPageCfg;
 
-    fs.writeFileSync(outFile, JSON.stringify(pagesJson, null, 2));
-    console.log("pages.json 文件已生成");
+    Fs.writeFileSync(outFile, JSON.stringify(pagesJson, null, 2));
+    console.info("🎉 生成文件 pages.json");
   }
 
   /**
@@ -107,13 +107,13 @@ export function generatePagesJson(config: Options): Plugin {
   function traversePagesDir(dirPath: string): Page[] {
     const pages: Page[] = [];
 
-    const files = fs.readdirSync(dirPath);
+    const files = Fs.readdirSync(dirPath);
 
     for (const file of files) {
-      const filePath = path.join(dirPath, file);
+      const filePath = Path.join(dirPath, file);
       if (isBlacklisted(filePath)) continue;
 
-      if (fs.statSync(filePath).isDirectory()) {
+      if (Fs.statSync(filePath).isDirectory()) {
         pages.push(...traversePagesDir(filePath)); // 递归处理子目录
         continue;
       }
@@ -168,7 +168,7 @@ export function generatePagesJson(config: Options): Plugin {
     /**主包配置 */
     const mainPagesCfg: Page[] = [];
     for (const [root, pages] of Object.entries(subPackagesMap)) {
-      const mainPackagePath = getPagePath(path.join(mainPackageDir)).slice(
+      const mainPackagePath = getPagePath(Path.join(mainPackageDir)).slice(
         0,
         -1
       );
@@ -216,7 +216,7 @@ export function generatePagesJson(config: Options): Plugin {
    * @returns 是否有效
    */
   function isValidPageFile(filePath: string): boolean {
-    const extname = path.extname(filePath);
+    const extname = Path.extname(filePath);
     return includedExtensions.includes(extname);
   }
 
@@ -227,7 +227,7 @@ export function generatePagesJson(config: Options): Plugin {
    */
   function generatePageConfig(filePath: string): Page | null {
     const pagePath = getPagePath(filePath);
-    const pageContent = fs.readFileSync(filePath, "utf-8");
+    const pageContent = Fs.readFileSync(filePath, "utf-8");
     try {
       const style = parsePageConfig(pageContent);
       return {
@@ -237,7 +237,7 @@ export function generatePagesJson(config: Options): Plugin {
     } catch (error) {
       throw {
         message: "配置文件解析错误",
-        path: path.resolve(filePath),
+        path: Path.resolve(filePath),
         code: pageContent,
       };
     }
@@ -260,24 +260,19 @@ export function generatePagesJson(config: Options): Plugin {
    * @returns 页面路径
    */
   function getPagePath(filePath: string): string {
-    const endLength = path.extname(filePath).length;
+    const endLength = Path.extname(filePath).length;
     const startLength =
-      path.join(pagesDir).length - path.basename(pagesDir).length - 1;
+      Path.join(pagesDir).length - Path.basename(pagesDir).length - 1;
     filePath = filePath.replace(/\\/g, "/");
     return filePath.slice(startLength, filePath.length - endLength);
   }
+  generatePagesJson();
+  console.info(`🎉 开始监听 ${Path.join(pagesDir)}`);
+  Fs.watch(pagesDir, { recursive: true }, () => {
+    generatePagesJson();
+  });
 
   return {
     name: "generatePagesJson",
-    options() {
-      generatePagesJson();
-    },
-    configureServer(server) {
-      server.watcher.on("all", (state, _path) => {
-        if (_path.includes(path.resolve(pagesDir))) {
-          generatePagesJson();
-        }
-      });
-    },
   };
 }
