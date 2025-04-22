@@ -89,12 +89,7 @@ export function useVModel<
   T extends AnyObject,
   K extends keyof T & string,
   O extends UseVModelOptions<T[K]> = {}
->(
-  props: T,
-  key: K,
-  emit?: Fun,
-  options: O = {} as O
-): Ref<T[K]> {
+>(props: T, key: K, emit?: Fun, options: O = {} as O): Ref<T[K]> {
   type UK = `update:${K}`;
   const event: UK = `update:${key}`;
   const { defaultValue, deep = false } = options;

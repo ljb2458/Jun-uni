@@ -11,6 +11,7 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "types": [
+      "node",
       "@dcloudio/types",
       // wx API 相关的 TypeScript 类型，需要安装 miniprogram-api-typings
       "miniprogram-api-typings",
