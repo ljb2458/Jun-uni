@@ -1,5 +1,5 @@
 import { pages, tabBar, subPackages } from "@/pages.json";
-import { cloneDeep } from "lodash";
+import { cloneDeep } from "lodash-es";
 import { name } from "@/manifest.json";
 
 export const appCfg = {

@@ -16,7 +16,7 @@ import type {
 import { useVModel } from "@/hooks/toolsHooks";
 import envCoverView from "./envCoverView.vue";
 import envCoverImage from "./envCoverImage.vue";
-import { debounce } from "lodash";
+import { debounce } from "lodash-es";
 import { useUniOn } from "@/hooks/toolsHooks";
 import { CoMap } from "@/enum/pubsubKey/components";
 

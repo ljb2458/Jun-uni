@@ -1,4 +1,4 @@
-import { multiply, divide } from "lodash";
+import { multiply, divide } from "lodash-es";
 /**
  * * 任意数据转number，' '将不被视为0
  * @param req 原数据

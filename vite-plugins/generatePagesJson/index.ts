@@ -1,6 +1,7 @@
 import Fs from "fs";
 import Path from "path";
 import type { Plugin } from "vite";
+import { debounce } from "lodash-es";
 
 interface Page {
   path: string;
@@ -263,10 +264,14 @@ export function generatePagesJson(config: Options): Plugin {
     filePath = filePath.replace(/\\/g, "/");
     return filePath.slice(startLength, filePath.length - endLength);
   }
-  generatePagesJson();
+  const debounceGeneratePagesJson = debounce(generatePagesJson, 300, {
+    leading: true,
+    trailing: false,
+  });
+  debounceGeneratePagesJson();
   console.info(`🎉 开始监听 ${Path.join(pagesDir)}`);
   Fs.watch(pagesDir, { recursive: true }, () => {
-    generatePagesJson();
+    debounceGeneratePagesJson();
   });
 
   return {
