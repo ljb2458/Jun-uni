@@ -37,11 +37,9 @@ function globToRegex(glob: string) {
     string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
   let regexStr = "^";
-  let inGroup = false;
 
   for (let i = 0; i < glob.length; i++) {
     const char = glob[i];
-
     if (char === "*") {
       // 处理 ** 的情况
       if (glob[i + 1] === "*") {
@@ -58,7 +56,6 @@ function globToRegex(glob: string) {
       regexStr += escapeRegExp(char);
     }
   }
-
   // 确保匹配到字符串末尾
   regexStr += "$";
 
