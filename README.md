@@ -194,7 +194,7 @@ pnpm run dev:mp-weixin
 ```
 vite-plugins  | //存放本地 vite 插件。
               |-generatePagesJson |-index.ts    //用于生成pages.json配置文件；
-                    
+
 
 src |-layout    | //存放自定义的navbar等其他每个页面都需要的组件。
     |-style     | //存放预设、公共、scss文件。
@@ -320,6 +320,11 @@ types |-dts   | //全局配置、组件、等ts存放目录
 
 - `generatePagesJson` 插件会读取 `pages.json` 下的配置对象，并替换 `pages` 和 `subPackages` 这两项配置，你可以放心的修改除这两项配置以外的配置。
 
-### 选型解释
-- 为什么不使用 `vite-plugin-uni-pages`？
+# 选型解释
+
+- 为什么不使用 `vite-plugin-uni-pages` 来实现自动生成 `pages.json`？
   - `vite-plugin-uni-pages` 从大体上确实能实现该功能，但 `vite-plugin-uni-pages` 不符合规范大于配置的设计理念，在使用了 `vite-plugin-uni-pages` 后，任需要手动配置分包规则，因此，作者自己写了一个本地 `vite` 插件。
+- 为什么不使用 `tailwindcss` 来作为项目的 `css` 原子库？
+  - `tailwindcss` 存在 `!important` 语法，这在小程序中是不被允许的，兼容性不够好。
+  - 编写自定义 `css` 原子库并不难，还可以实现高定制化。
+  - 作者希望在后续能够使用控制 `css` 变量的方式为项目制作主题与字体大小，因此编写了自定义 `css` 原子库
