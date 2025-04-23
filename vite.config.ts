@@ -37,15 +37,12 @@ export default defineConfig((config) => {
           drop_console: config.mode === "production", // 生产环境移除console
           drop_debugger: config.mode === "production", // 生产环境移除debugger
         },
-      },
-    },
-
-    css: {
-      preprocessorOptions: {
-        scss: {
-          api: "modern-compiler", // 修改api调用方式
+        format: {
+          comments: config.mode === "production" ? false : "all",
         },
       },
+      //不生成代码映射，减少编译时常
+      sourcemap: false,
     },
 
     plugins: [
