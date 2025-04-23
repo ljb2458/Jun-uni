@@ -1,7 +1,7 @@
 import Fs from "fs";
 import Path from "path";
 import type { Plugin } from "vite";
-import { debounce } from "lodash-es";
+import { debounce } from "lodash";
 
 interface Page {
   path: string;
