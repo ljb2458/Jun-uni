@@ -106,6 +106,7 @@ const show = useVModel(props, "show", emit);
   > .CoDropdown_popup {
     transition-timing-function: ease-in;
     max-height: 150vh;
+    overflow: initial;
   }
   > .CoDropdown_masking {
     display: block;

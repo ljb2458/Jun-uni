@@ -82,13 +82,13 @@ function onTapReset(e: any) {
   <view class="GrFilterSearch B-B1 PD-col-xs PD-row-sm">
     <view class="flex-A-C gap-xs">
       <slot name="selections">
-        <view class="self-A-STR">
+        <view class="self-A-STR" v-if="selections">
           <CoSelect
             @selected="(v:any) => emit('selected',v)"
             v-model="selectValue"
             :selections="selections"
             width="150px"
-            class="flex-A-C B-B2 R-xs _PD-col-0 _PD-row-sm _flex H-fill"
+            class="B-B2 R-xs _PD-col-0 _PD-row-sm H-fill"
             :style="{ background: bg, border: 'none' }"
           >
           </CoSelect>

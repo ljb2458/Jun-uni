@@ -17,9 +17,7 @@
             "delay" : 0
         },
         "compatible" : {
-            "ignoreVersion" : true,
-            /* 打包时版本 */
-            "runtimeVersion" : "3.99"
+            "ignoreVersion" : true
         },
         /* 模块配置 */
         "modules" : {
