@@ -3,19 +3,20 @@ import useSysStore from "@/store/useSysStore";
 import useUserinfoStore from "./store/useUserinfoStore";
 import { Sys } from "./enum/pubsubKey/system";
 import { LOGIN_WHITE_LIST, LOGIN_PATH } from "@/enum/auth";
+import { uniShowModal } from "./utils/rewriteUni";
 
 /**app setup 时初始化 */
 export function setupAppInit() {
   useRouterInterceptor();
-  const userinfoStore = useUserinfoStore();
-  if (userinfoStore.tokenInfo) loginedInit();
+  // const userinfoStore = useUserinfoStore();
+  // if (userinfoStore.tokenInfo) loginedInit();
 }
 /**登录完成时初始化 */
 export async function loginedInit() {
-  const sysStore = useSysStore();
-  const userinfoStore = useUserinfoStore();
-  userinfoStore.getWxUserinfo(true);
-  await sysStore.geAllDictList();
+  // const sysStore = useSysStore();
+  // const userinfoStore = useUserinfoStore();
+  // userinfoStore.getWxUserinfo(true);
+  // await sysStore.geAllDictList();
   uni.$emit(Sys.OnLogin);
 }
 
@@ -36,15 +37,12 @@ uni.addInterceptor("showToast", {
 // #ifdef APP
 plus.screen.lockOrientation("portrait-primary");
 // #endif
+/**
+ * * 传入什么类型就返回什么类型，方便在对象中定义类型
+ */
 globalThis.defineType = <D>(v?: D) => v;
 declare global {
-  /**
-   * * 传入什么类型就返回什么类型，方便在对象中定义类型
-   */
   function defineType<D>(value: D): D;
-  /**
-   * * 传入什么类型就返回什么类型，方便在对象中定义类型
-   */
   function defineType<D>(): D | undefined;
 }
 
@@ -88,11 +86,18 @@ export async function roleCheck(
     if (replace) {
       await router.backOrHome();
     }
-    await router.push(LOGIN_PATH, {
-      query: { replace: path },
+
+    uniShowModal({
+      title: "未登录",
+      content: "登录小程序后使用完整功能",
+      confirmText: "去登录",
+    }).then(() => {
+      router.push(LOGIN_PATH, {
+        query: { replace: path },
+      });
     });
-    uni.showToast({ title: "请先登录小程序" });
     return false;
   }
+
   return true;
 }

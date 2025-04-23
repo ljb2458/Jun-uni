@@ -37,8 +37,25 @@ const cellList = computed(() => {
     {
       leftText: "自动正方形 CoAutoSquare",
       type: ComponentsType.Layout,
-      tap() {
-        router.push("@/pages/demo/CoAutoSquareDemo.vue");
+      async tap() {
+        try {
+          uni.showModal({ content: "router.push" });
+          router
+            .push("@/pages/demo/CoAutoSquareDemo.vue")
+            .then((res) => {
+              uni.showModal({ content: JSON.stringify(res) });
+            })
+            .catch((error) => {
+              uni.showModal({
+                content: JSON.stringify(error),
+                computed() {
+                  uni.setClipboardData({
+                    data: JSON.stringify(error),
+                  });
+                },
+              });
+            });
+        } catch (error) {}
       },
     },
     {
@@ -244,9 +261,7 @@ const tabsList = computed(() => [
   {
     label: "布局",
     value: ComponentsType.Layout,
-    list: cellList.value.filter((v) =>
-      bitsAuth(v.type, ComponentsType.Layout)
-    ),
+    list: cellList.value.filter((v) => bitsAuth(v.type, ComponentsType.Layout)),
   },
   {
     label: "表单",

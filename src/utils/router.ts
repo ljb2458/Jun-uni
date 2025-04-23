@@ -11,10 +11,11 @@ const router = {
     return new Promise<UniApp.NavigateToSuccessOptions>((resolve, reject) => {
       let queryStr = "";
       if (config?.query) queryStr = `${objToQuery(config.query, false)}`;
+      url = `${replaceUrl(url)}?${queryStr}`;
       delete config?.query;
       uni.navigateTo({
         ...config,
-        url: `${replaceUrl(url)}?${queryStr}`,
+        url,
         success: resolve,
         fail: reject,
       });
@@ -25,10 +26,11 @@ const router = {
     return new Promise<UniApp.NavigateToSuccessOptions>((resolve, reject) => {
       let queryStr = "";
       if (config?.query) queryStr = `${objToQuery(config.query, false)}`;
+      url = `${replaceUrl(url)}?${queryStr}`;
       delete config?.query;
       uni.redirectTo({
         ...config,
-        url: `${replaceUrl(url)}?${queryStr}`,
+        url,
         success: resolve,
         fail: reject,
       });
@@ -77,10 +79,11 @@ const router = {
     return new Promise<UniApp.NavigateToSuccessOptions>((resolve, reject) => {
       let queryStr = "";
       if (config?.query) queryStr = `${objToQuery(config.query, false)}`;
+      url = `${replaceUrl(url)}?${queryStr}`;
       delete config?.query;
       uni.reLaunch({
         ...config,
-        url: `${replaceUrl(url)}?${queryStr}`,
+        url,
         success: resolve,
         fail: reject,
       });
