@@ -72,6 +72,7 @@ export function generatePagesJson(config: Options): Plugin {
     blacklist: _blacklist = ["**/components/**"],
     includedExtensions = [".vue", ".nvue"],
   } = config;
+
   const blacklist = _blacklist.map((v) => globToRegex(v));
   /**
    * 主函数：生成 pages.json 文件
@@ -269,12 +270,15 @@ export function generatePagesJson(config: Options): Plugin {
     trailing: false,
   });
   debounceGeneratePagesJson();
-  console.info(`🎉 开始监听 ${Path.join(pagesDir)}`);
-  Fs.watch(pagesDir, { recursive: true }, () => {
-    debounceGeneratePagesJson();
-  });
 
   return {
     name: "generatePagesJson",
+    config(config) {
+      if (config.mode !== "development") return;
+      console.info(`🎉 开始监听 ${Path.join(pagesDir)}`);
+      Fs.watch(pagesDir, { recursive: true }, () => {
+        debounceGeneratePagesJson();
+      });
+    },
   };
 }
