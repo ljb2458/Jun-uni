@@ -2,6 +2,7 @@ import Fs from "fs";
 import Path from "path";
 import type { Plugin } from "vite";
 import { debounce } from "lodash";
+import CommentJson from "comment-json";
 
 interface Page {
   path: string;
@@ -83,18 +84,34 @@ export function generatePagesJson(config: Options): Plugin {
     const { subPackagesPageCfg, mainPagesCfg } = pagesSubpackages(pages); // 对页面进行分包处理
     let pagesJson: any;
     try {
-      pagesJson = JSON.parse(Fs.readFileSync(outFile, "utf-8") || "{}");
+      pagesJson = CommentJson.parse(Fs.readFileSync(outFile, "utf-8") || "{}");
     } catch (error) {
-      throw {
-        message: "源 pages.json 格式错误。",
-        path: Path.resolve(outFile),
-      };
+      console.error(`源 pages.json 格式错误。在：${Path.resolve(outFile)}`);
+      throw error;
     }
 
-    pagesJson.pages = mainPagesCfg;
-    pagesJson.subPackages = subPackagesPageCfg;
+    CommentJson.assign(pagesJson, {
+      pages: mainPagesCfg,
+      [Symbol.for("before:pages")]: [
+        {
+          type: "BlockComment",
+          value: "主包配置（由 generatePagesJson 插件生成）",
+          inline: false,
+        },
+      ],
+    });
+    CommentJson.assign(pagesJson, {
+      subPackages: subPackagesPageCfg,
+      [Symbol.for("before:subPackages")]: [
+        {
+          type: "BlockComment",
+          value: "分包配置（由 generatePagesJson 插件生成）",
+          inline: false,
+        },
+      ],
+    });
 
-    Fs.writeFileSync(outFile, JSON.stringify(pagesJson, null, 2));
+    Fs.writeFileSync(outFile, CommentJson.stringify(pagesJson, null, 2));
     console.info("🎉 生成文件 pages.json");
   }
 
@@ -234,11 +251,8 @@ export function generatePagesJson(config: Options): Plugin {
         style,
       };
     } catch (error) {
-      throw {
-        message: "配置文件解析错误",
-        path: Path.resolve(filePath),
-        code: pageContent,
-      };
+      console.error(`配置文件解析错误。在：${Path.resolve(filePath)}`);
+      throw error;
     }
   }
   const routeRegExp = /<route([\s\S]*)?>([\s\S]*?)<\/route>/;
@@ -250,7 +264,7 @@ export function generatePagesJson(config: Options): Plugin {
   function parsePageConfig(content: string): any | null {
     const match = content.match(routeRegExp);
     if (!match) return null;
-    return JSON.parse(match[2].trim());
+    return CommentJson.parse(match[2].trim());
   }
 
   /**
