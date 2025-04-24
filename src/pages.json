@@ -40,7 +40,7 @@
       "^uv-(.*)": "@climblee/uv-ui/components/uv-$1/uv-$1.vue"
     }
   },
-  /*主包配置（由 generatePagesJson 插件生成）*/
+  /*主包配置（修改将被覆盖，由 generatePagesJson 插件自动生成）*/
   "pages": [
     {
       "path": "pages/tabbar/home/home",
@@ -70,7 +70,7 @@
       }
     }
   ],
-  /*分包配置（由 generatePagesJson 插件生成）*/
+  /*分包配置（修改将被覆盖，由 generatePagesJson 插件自动生成）*/
   "subPackages": [
     {
       "root": "pages/demo",

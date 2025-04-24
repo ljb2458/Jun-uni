@@ -95,7 +95,7 @@ export function generatePagesJson(config: Options): Plugin {
       [Symbol.for("before:pages")]: [
         {
           type: "BlockComment",
-          value: "主包配置（由 generatePagesJson 插件生成）",
+          value: "主包配置（修改将被覆盖，由 generatePagesJson 插件自动生成）",
           inline: false,
         },
       ],
@@ -105,7 +105,7 @@ export function generatePagesJson(config: Options): Plugin {
       [Symbol.for("before:subPackages")]: [
         {
           type: "BlockComment",
-          value: "分包配置（由 generatePagesJson 插件生成）",
+          value: "分包配置（修改将被覆盖，由 generatePagesJson 插件自动生成）",
           inline: false,
         },
       ],
