@@ -31,20 +31,13 @@ export default defineConfig((config) => {
     },
 
     build: {
-      minify: "terser",
-      terserOptions: {
-        compress: {
-          drop_console: config.mode === "production", // 生产环境移除console
-          drop_debugger: config.mode === "production", // 生产环境移除debugger
-        },
-        format: {
-          comments: config.mode === "production" ? false : "all",
-        },
-      },
+      minify: "esbuild",
       //不生成代码映射，减少编译时常
       sourcemap: false,
     },
-
+    esbuild: {
+      drop: config.mode === "production" ? ["console", "debugger"] : [],
+    },
     plugins: [
       uni(),
       commonjs(),
@@ -56,8 +49,8 @@ export default defineConfig((config) => {
       }),
       AutoImport({
         // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
-        imports: ["vue", "uni-app"],
-        dts: "./types/dts/auto-import/auto-importsVue.d.ts",
+        imports: ["vue", "uni-app", "pinia"],
+        dts: "./types/dts/auto-import/imports.d.ts",
       }),
     ],
     //@ts-ignore
@@ -72,7 +65,7 @@ export default defineConfig((config) => {
         dirs: ["src/components"],
         deep: true,
         extensions: ["vue"],
-        dts: "./types/dts/auto-import/auto-importsComponents.d.ts",
+        dts: "./types/dts/auto-import/components.d.ts",
       })
     );
   }
