@@ -254,11 +254,11 @@ watch(
 <template>
   <view :style="{ '--gap': gap }" :id="CoTabsForId" class="CoTabsFor">
     <CoSticky
-      :disabled="!sticky"
-      :style="[stickyStyle]"
-      :class="stickyClass"
+      :disabled="!props.sticky"
+      :style="[props.stickyStyle]"
+      :class="props.stickyClass"
       class="CoTabsFor_title"
-      :offset-top="stickyTop"
+      :offset-top="props.stickyTop"
     >
       <view class="CoTabsFor_title-top">
         <slot name="title-top"></slot>
