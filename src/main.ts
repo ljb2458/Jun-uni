@@ -3,6 +3,7 @@ import App from "./App.vue";
 import * as Pinia from "pinia";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import "@/init";
+import 'virtual:uno.css'
 
 export function createApp() {
   const app = createSSRApp(App);

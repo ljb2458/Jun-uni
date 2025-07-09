@@ -23,6 +23,10 @@ const props = withDefaults(defineProps<CoListProps>(), {
   setupLoad: true,
 });
 
+const emit = defineEmits<{
+  (e: "load", v: LoadParam): void;
+}>();
+
 if (props.setupLoad) load();
 
 const CListId = `CList${randomUUID()}`;
@@ -30,9 +34,7 @@ const _this = getCurrentInstance();
 const reachBottom = props.onReachBottom || onReachBottom;
 reachBottom(activeLoad);
 
-const emit = defineEmits<{
-  (e: "load", v: LoadParam): void;
-}>();
+
 
 async function activeLoad() {
   if (!(await isVisible())) return;

@@ -3,12 +3,13 @@
 import { CoDropdownProps } from "@/components/common/CoDropdown/CoDropdown.vue";
 import { useVModel } from "@/hooks/toolsHooks";
 
+
 export type CoSelections = CoSelectionsItem[];
 export interface CoSelectionsItem extends AnyObject {
   label?: StrNumber;
   value?: any;
 }
-interface CoSelectProps extends CoDropdownProps {
+interface CoSelectProps extends /* @vue-ignore */  CoDropdownProps {
   modelValue?: any;
   /**选项集合 */
   selections?: O[];
@@ -44,7 +45,7 @@ const selectedOption = computed(() =>
 <template>
   <CoDropdown
     class="CoSelect border-all flex-J-SB flex-A-C _flex R-sm PD-sm"
-    :="{ ...props }"
+    :="{ ...$attrs,...props }"
     v-model:show="show"
   >
     <template #text>

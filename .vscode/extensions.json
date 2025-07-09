@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "antfu.unocss",
+        "ionutvmi.path-autocomplete",
+        "esbenp.prettier-vscode",
+        "foxundermoon.shell-format"
+    ]
+}

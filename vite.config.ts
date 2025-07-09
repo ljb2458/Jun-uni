@@ -1,12 +1,14 @@
 import { defineConfig, loadEnv, UserConfig } from "vite";
 import uni from "@dcloudio/vite-plugin-uni";
 import AutoImport from "unplugin-auto-import/vite";
+import Components from "@uni-helper/vite-plugin-uni-components";
+
 import commonjs from "@rollup/plugin-commonjs";
 import path from "path";
-import Components from "unplugin-vue-components/vite";
 import { generatePagesJson } from "./vite-plugins/generatePagesJson/index";
 
-export default defineConfig((config) => {
+export default defineConfig(async (config) => {
+  const UnoCSS = (await import("unocss/vite")).default;
   const env = loadEnv(config.mode, process.cwd(), "VITE_");
   console.log("config", config);
   console.log("env", env);
@@ -32,8 +34,6 @@ export default defineConfig((config) => {
 
     build: {
       minify: "esbuild",
-      //不生成代码映射，减少编译时常
-      sourcemap: false,
     },
     esbuild: {
       drop: config.mode === "production" ? ["console", "debugger"] : [],
@@ -47,28 +47,23 @@ export default defineConfig((config) => {
         mainPackageDir: "./src/pages/tabbar/",
         pagesDir: "./src/pages/",
       }),
+      UnoCSS(),
       AutoImport({
         // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
         imports: ["vue", "uni-app", "pinia"],
         dts: "./types/dts/auto-import/imports.d.ts",
       }),
-    ],
-    //@ts-ignore
-    transpileDependencies: ["uview-plus", "luch-request"],
-  };
-
-  //*只有serve时使用vite的自动引入生成全局ts类型支持，其它情况使用uniapp的easycom模式
-  if (config.command === "serve") {
-    option.plugins!.push(
       Components({
         exclude: ["RouterLink", "RouterView"],
         dirs: ["src/components"],
         deep: true,
         extensions: ["vue"],
         dts: "./types/dts/auto-import/components.d.ts",
-      })
-    );
-  }
+      }),
+    ],
+    //@ts-ignore
+    transpileDependencies: ["uview-plus", "luch-request"],
+  };
 
   return option;
 });
