@@ -19,8 +19,6 @@ export namespace CreateHttpRequest {
     isSuccess: IsSuccess;
     /**返回 message 字符串，用于成功提示 */
     giveMsg: ReturnMsg;
-    /**返回 失败 message 字符串，用于失败提示 */
-    giveErrMsg: ReturnErrMsg;
   }
   export interface Config<D = any> extends HttpRequestConfig<D> {
     custom?: Custom;
@@ -28,10 +26,7 @@ export namespace CreateHttpRequest {
   export interface IsSuccess<D = HttpResponse> {
     (res: D): boolean;
   }
-  export interface ReturnMsg<D = HttpResponse> {
-    (res: D): string;
-  }
-  export interface ReturnErrMsg<D = HttpError> {
+  export interface ReturnMsg<D = HttpResponse | HttpError> {
     (res: D): string;
   }
   export interface NotGetRequest {
@@ -91,12 +86,12 @@ export function createHttpRequest(
     return config;
   });
   httpRequest.interceptors.response.use(
-    (res) => {
-      if (env.VITE_API_LOG === "1") console.info(res);
+    (result) => {
+      if (env.VITE_API_LOG === "1") console.info(result);
       handleAfter();
-      return res;
+      return result;
       async function handleAfter() {
-        const custom = res.config.custom;
+        const custom = result.config.custom;
         const {
           showFailMsg,
           failText,
@@ -105,9 +100,9 @@ export function createHttpRequest(
           successText,
         } = customHelper(custom);
         if (showLoading) uni.hideLoading();
-        const message = myConfig.giveMsg(res);
-        const isSuccess = myConfig.isSuccess(res);
-        if (res.data) res.data.isSuccess = isSuccess;
+        const message = myConfig.giveMsg(result);
+        const isSuccess = myConfig.isSuccess(result);
+        if (result.data) result.data.isSuccess = isSuccess;
         if (isSuccess) {
           if (custom?.routerBack === true) {
             try {
@@ -132,7 +127,7 @@ export function createHttpRequest(
     (error) => {
       console.error(error);
       const custom = error.config.custom;
-      const message = myConfig.giveErrMsg(error);
+      const message = myConfig.giveMsg(error);
       const { showErrorMsg, errorText, showLoading } = customHelper(custom);
       if (showLoading) uni.hideLoading();
       if (showErrorMsg) {

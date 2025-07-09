@@ -1,5 +1,11 @@
 # <img src="./src/static/imgs/icon/logo.svg" height="26px"/> Jun-uni
 
+## 写在前面
+
+该框架正在从自写 `原子化 css` 迁移至 `unocss` 不建议再使用建议使用 `unocss` 进行开发。
+
+该框架正在支持 `wot-design-uni` 框架，并打算以后将 `wot-design-uni` 作为主力框架，建议使用 `wot-design-uni` 作为 UI 框架进行开发，已有的组件会支持**双 UI**，但由于我是个人开发者，薪资也不高，还需要谋生，因此以后不会投入过多的精力支持**双 UI**。
+
 ## 项目介绍
 
 > ⭐`Jun-uni` 是一个由个人开发者 `Juncoder` 积累四年开发经验打造的适用中小型公司一般开发情况的 uniapp 开箱即用高效开发框架。
@@ -10,8 +16,6 @@
 > 因此在使用此框架前，我推荐你先学习或了解 `Uniapp` `Vue3` `TypeScript` `Pinia` `Axios(luchRequest)`
 
 > 该框架使用的 `node` 版本为 `v22.13.1` 为了减少运行时所带来的错误，请尽可能使用与 `v22.13.1` 相近的版本。
-
-> 因为 uniapp 自 `@dcloudio` 版本 `3.0.0-4000620240325001` 版本更新后，无法正常编译 vue 3.3+ 新特新的代码。因此该项目锁定 `@dcloudio` 版本为 `3.0.0-3090920231225001` 该版本相对稳定且能满足日常开发。如需自行升级，需要修改少量不受支持的组件代码。 [该 bug 已提交，点这里查看详情](https://ask.dcloud.net.cn/question/207967)
 
 [TOC]
 
@@ -75,8 +79,8 @@
   - `CoCascader 级联选择器组件` 动画流畅，使用简单。
 
 - 分栏编写样式麻烦、样式名难想、`tailwindcss` 体积太大，且对小程序支持不好？
-
-  - 组件有自己的 `原子化 css` 提升开发效率，降低开发成本，方便做颜色主题与老年模式等相似业务。
+  - 支持 `unocss` + `unocss-preset-uni` 来支持小程序，使用官方插件获得代码提示。
+  - (已不推荐使用，正在迁移到 `unocss`，后续将会保留该文件到单独目录。) 组件有自己的 `原子化 css` 提升开发效率，降低开发成本，方便做颜色主题与老年模式等相似业务。
 
 ## 预览
 
@@ -272,7 +276,7 @@ types |-dts   | //全局配置、组件、等ts存放目录
 
 4. 修改示例 `isSuccess`、`giveMsg`、`giveErrMsg` 方法
 
-   1. 在 `/src/api/index.ts` 中找到 `export const defHttp = createHttpRequest` 方法，修改传入的三个函数为实际数据。
+   1. 在 `/src/api/index.ts` 中找到 `export const defHttp = createHttpRequest` 方法，修改传入的两个个函数为实际数据。
 
       ```ts
       export const defHttp = createHttpRequest(
@@ -283,9 +287,6 @@ types |-dts   | //全局配置、组件、等ts存放目录
           },
           giveMsg(res) {
             return res?.data?.message;
-          },
-          giveErrMsg(error) {
-            return error?.errMsg;
           },
         },
         {
@@ -325,6 +326,7 @@ types |-dts   | //全局配置、组件、等ts存放目录
 - 为什么不使用 `vite-plugin-uni-pages` 来实现自动生成 `pages.json`？
   - `vite-plugin-uni-pages` 从大体上确实能实现该功能，但 `vite-plugin-uni-pages` 不符合规范大于配置的设计理念，在使用了 `vite-plugin-uni-pages` 后，任需要手动配置分包规则，因此，作者自己写了一个本地 `vite` 插件。
 - 为什么不使用 `tailwindcss` 来作为项目的 `css` 原子库？
+  - `unocss` 支持按需引入，在 `uni-helper` 也有现成的兼容库 `unocss-preset-uni`。
   - `tailwindcss` 存在 `!important` 语法，这在小程序中是不被允许的，兼容性不够好。
-  - 编写自定义 `css` 原子库并不难，还可以实现高定制化。
+  - (已不推荐使用，正在迁移至 `unocss` )编写自定义 `css` 原子库并不难，还可以实现高定制化。
   - 作者希望在后续能够使用控制 `css` 变量的方式为项目制作主题与字体大小，因此编写了自定义 `css` 原子库

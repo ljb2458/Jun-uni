@@ -16,9 +16,6 @@ export const defHttp = createHttpRequest(
     giveMsg(res) {
       return res?.data?.message;
     },
-    giveErrMsg(error) {
-      return error?.errMsg;
-    },
   },
   {
     baseURL,
