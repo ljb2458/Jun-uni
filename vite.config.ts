@@ -2,10 +2,12 @@ import { defineConfig, loadEnv, UserConfig } from "vite";
 import uni from "@dcloudio/vite-plugin-uni";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "@uni-helper/vite-plugin-uni-components";
-
+import { WotResolver } from "@uni-helper/vite-plugin-uni-components/resolvers";
 import commonjs from "@rollup/plugin-commonjs";
 import path from "path";
 import { generatePagesJson } from "./vite-plugins/generatePagesJson/index";
+import Optimization from "@uni-ku/bundle-optimizer";
+import ViteRestart from "vite-plugin-restart";
 
 export default defineConfig(async (config) => {
   const UnoCSS = (await import("unocss/vite")).default;
@@ -41,6 +43,10 @@ export default defineConfig(async (config) => {
     plugins: [
       uni(),
       commonjs(),
+      ViteRestart({
+        // 通过这个插件，在修改vite.config.js文件则不需要重新运行也生效配置
+        restart: ["vite.config.js"],
+      }),
       generatePagesJson({
         outFile: "./src/pages.json",
         firstPage: "./src/pages/tabbar/home/home.vue",
@@ -59,6 +65,18 @@ export default defineConfig(async (config) => {
         deep: true,
         extensions: ["vue"],
         dts: "./types/dts/auto-import/components.d.ts",
+        //(wd-ui 自动引入)
+        resolvers: [WotResolver()],
+      }),
+      Optimization({
+        enable: {
+          optimization: true,
+          "async-import": true,
+          "async-component": true,
+        },
+        dts: {
+          base: "./types/dts/auto-import",
+        },
       }),
     ],
     //@ts-ignore

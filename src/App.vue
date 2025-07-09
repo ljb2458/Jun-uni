@@ -17,6 +17,7 @@ onHide(() => {
 });
 </script>
 <style lang="scss">
+//(uv-ui 样式)
 @import "@climblee/uv-ui/index.scss";
 @import "@/styles/atomization/index.scss";
 @import "@/styles/uv-ui-reset/css.scss";

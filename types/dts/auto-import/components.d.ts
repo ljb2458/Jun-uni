@@ -39,5 +39,6 @@ declare module 'vue' {
     EnvCoverView: typeof import('./../../../src/components/common/CoMap/envCoverView.vue')['default']
     GrFilterSearch: typeof import('./../../../src/components/group/GrFilterSearch/GrFilterSearch.vue')['default']
     ReUpload: typeof import('./../../../src/components/rewrite/ReUpload/ReUpload.vue')['default']
+    WdButton: typeof import('wot-design-uni/components/wd-button/wd-button.vue')['default']
   }
 }

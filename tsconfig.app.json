@@ -15,7 +15,10 @@
       "@dcloudio/types",
       // wx API 相关的 TypeScript 类型，需要安装 miniprogram-api-typings
       "miniprogram-api-typings",
-      "@ttou/uv-typings/v3"
+      //(uv-ui 类型提示)
+      "@ttou/uv-typings/v3",
+      // //(wd-ui 类型提示)
+      // "wot-design-uni/global"
     ],
     "baseUrl": ".",
     "paths": {

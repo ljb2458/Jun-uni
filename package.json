@@ -63,7 +63,8 @@
     "pinia-plugin-persistedstate": "^3.0.2",
     "three-platformize": "^1.133.3",
     "vue": "^3.5.12",
-    "vue-i18n": "9.2.2"
+    "vue-i18n": "9.2.2",
+    "wot-design-uni": "^1.10.0"
   },
   "devDependencies": {
     "@dcloudio/types": "3.4.16",
@@ -78,6 +79,7 @@
     "@uni-helper/uni-app-types": "1.0.0-alpha.6",
     "@uni-helper/unocss-preset-uni": "^0.2.11",
     "@uni-helper/vite-plugin-uni-components": "^0.2.0",
+    "@uni-ku/bundle-optimizer": "^1.3.8",
     "@vue/runtime-core": "^3.4.21",
     "comment-json": "^4.2.5",
     "csstype": "^3.1.3",
@@ -88,6 +90,7 @@
     "typescript": "^5.1.3",
     "unocss": "65.4.2",
     "unplugin-auto-import": "^0.18.2",
-    "vite": "5.2.8"
+    "vite": "5.2.8",
+    "vite-plugin-restart": "^0.4.2"
   }
 }
