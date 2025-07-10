@@ -47,7 +47,7 @@ function autoClose(time: StrNumber) {
     :show="props.show"
     mode="slide-top"
   >
-    <view class="CoNotify_message PD-sm">
+    <view class="CoNotify_message p-2.2">
       {{ message }}
     </view>
   </uv-transition>
@@ -57,18 +57,18 @@ function autoClose(time: StrNumber) {
   position: fixed;
   left: 0;
   right: 0;
-  color: var(--C-white);
+  color: var(--c-white);
   text-align: center;
   padding-top: var(--status-bar-height);
   z-index: 10076;
 }
 
 .CoNotify__info {
-  background-color: var(--C-B3);
-  color: var(--C-T1);
+  background-color: var(--c-jun-bg-2);
+  color: var(--c-jun-c);
 }
 .CoNotify__success {
-  background-color: var(--C-success);
+  background-color: var(--c-jun-success);
 }
 .CoNotify__error {
   background-color: var(--C-fail);
@@ -77,7 +77,7 @@ function autoClose(time: StrNumber) {
   background-color: var(--C-warn);
 }
 .CoNotify__primary {
-  background-color: var(--C-M1);
+  background-color: var(--c-jun-primary);
 }
 </style>
 <script lang="ts">

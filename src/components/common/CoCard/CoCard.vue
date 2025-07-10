@@ -62,7 +62,7 @@ const props = withDefaults(
 <style lang="scss" scoped>
 .CoCard {
   position: relative;
-  border-radius: var(--R-sm);
+  border-radius: var(--rd-md);
   .CoCard_bgbox {
     overflow: hidden;
     pointer-events: none;

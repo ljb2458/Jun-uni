@@ -31,16 +31,16 @@ const isCustomNavbar = computed(
       style="height: var(--status-bar-height)"
     ></view>
     <block v-if="useCustomNavbar">
-      <view :style="{ ...defaultStyle }" class="navbar flex-A-C">
+      <view :style="{ ...defaultStyle }" class="navbar flex items-center">
         <CoIcon
-          class="customNavbar_backIcon MR-xs"
+          class="customNavbar_backIcon mr-1"
           color="inherit"
           size="1em"
           v-if="!routeInfo?.tabbar"
           @tap="router.back()"
           name="cicon-fanhui"
         />
-        <view class="flex-1">
+        <view class="flex flex-1">
           <slot :slotProps="{ ...routeInfo! }">
             {{ routeInfo?.style?.navigationBarTitleText }}
           </slot>
@@ -54,8 +54,7 @@ const isCustomNavbar = computed(
   position: sticky;
   top: 0;
   z-index: 100;
-  padding-left: var(--gap-md);
-  color: var(--C-B1);
+  @apply c-white pl-sm;
   transition: all 0.3s;
   background-image: var(--C-LG1);
   box-sizing: border-box;

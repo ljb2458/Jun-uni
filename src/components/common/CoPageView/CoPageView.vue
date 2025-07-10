@@ -95,7 +95,7 @@ const navbarHeightCssVar = computed(() => {
     </view>
     <view
       :class="key"
-      v-for="key in ['CoPageView_bottom_placeholder', 'CoPageView_bottom B-B1']"
+      v-for="key in ['CoPageView_bottom_placeholder', 'CoPageView_bottom bg-jun-bg']"
       :key="key"
       v-if="$slots.fixedBottom"
     >
@@ -138,8 +138,7 @@ const navbarHeightCssVar = computed(() => {
   }
 }
 .customNavbar__fixed {
-  background: var(--C-B1);
-  color: var(--C-T1);
+ @apply bg-jun-bg c-jun-c bg-none;
 }
 </style>
 <script lang="ts">

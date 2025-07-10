@@ -26,11 +26,11 @@ const currTab = ref(0);
 </script>
 
 <template>
-  <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
-    <view class="PD-md">
-      <view class="PD-sm">
-        <view class="F-S-lg">CoTabsFor</view>
-        <view class="C-T3 P-sm">
+  <CoPageView class="bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
+    <view class="p-lg">
+      <view class="p-2.2">
+        <view class="text-lg">CoTabsFor</view>
+        <view class="c-jun-c-2 P-sm">
           适用多端的tabs组件，支持自动高度、懒加载、自动吸顶、滑动等功能。
         </view>
       </view>
@@ -39,7 +39,7 @@ const currTab = ref(0);
         ref="CoTabsForRef"
         v-model="currTab"
         :sticky="true"
-        sticky-class="B-B2 PB-sm"
+        sticky-class="bg-jun-bg-1 pb-2.2"
         :options="tabsList"
       >
         <template #title-top>
@@ -53,16 +53,16 @@ const currTab = ref(0);
         </template>
         <template #title-bottom>
           <view class="T-A-C border-all"> 标题底部插槽 </view>
-          <text class="F-S-lg MT-md">控制切换选项卡</text>
+          <text class="text-lg mt-lg">控制切换选项卡</text>
           <CoSelect
-            class="MT-xs B-B1 border-none"
+            class="mt-2 bg-jun-bg border-none"
             v-model="currTab"
             :selections="tabsList.map((v, i) => ({ label: v.name, value: i }))"
           />
         </template>
         <template #default="{ option }">
           <view
-            class="B-B1 MT-md PD-md R-sm"
+            class="bg-jun-bg mt-lg p-lg rd-md"
             v-for="item in (option.index + 1) * 100"
           >
             <view>

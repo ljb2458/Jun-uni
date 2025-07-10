@@ -21,8 +21,8 @@ interface Props {
   disabledCancel?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
-  activeClass: "B-M1 C-white",
-  normalClass: "B-B2",
+  activeClass: "bg-jun-primary c-white",
+  normalClass: "bg-jun-bg-1",
 });
 const stateKey = computed<StateKey>(() => {
   if (props.isRadio)

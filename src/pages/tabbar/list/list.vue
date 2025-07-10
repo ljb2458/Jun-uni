@@ -38,24 +38,7 @@ const cellList = computed(() => {
       leftText: "自动正方形 CoAutoSquare",
       type: ComponentsType.Layout,
       async tap() {
-        try {
-          uni.showModal({ content: "router.push" });
-          router
-            .push("@/pages/demo/CoAutoSquareDemo.vue")
-            .then((res) => {
-              uni.showModal({ content: JSON.stringify(res) });
-            })
-            .catch((error) => {
-              uni.showModal({
-                content: JSON.stringify(error),
-                computed() {
-                  uni.setClipboardData({
-                    data: JSON.stringify(error),
-                  });
-                },
-              });
-            });
-        } catch (error) {}
+        router.push("@/pages/demo/CoAutoSquareDemo.vue")
       },
     },
     {
@@ -291,12 +274,12 @@ const tabsList = computed(() => [
 </script>
 
 <template>
-  <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
-    <view class="PD-row-md">
+  <CoPageView class="bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
+    <view class="px-sm">
       <CoTabsFor
         v-model="tabIndex"
         :sticky="true"
-        sticky-class="B-B2 PB-sm"
+        sticky-class="bg-jun-bg-1 pb-2.2"
         :options="tabsList.map((v) => ({ ...v, name: v.label + '组件' }))"
         title-scrollable
         :lazy="false"
@@ -304,15 +287,14 @@ const tabsList = computed(() => [
         <template #title-bottom>
           <GrFilterSearch
             v-model="keyword"
-            class="MT-xs B-none PD-0"
-            bg="var(--C-white)"
+            class="mt-2 bg-transparent p-0"
           />
         </template>
         <template #default="{ option }">
           <view style="min-height: 70vh">
             <CoCell
               @tap="item.tap"
-              class="MT-md F-S-sm anim-rightToLeft"
+              class="mt-lg text-sm anim-rightToLeft"
               :="item"
               :key="item.leftText"
               v-for="item in option.list"
@@ -320,7 +302,7 @@ const tabsList = computed(() => [
               <template #right>
                 <view class="flex gap-xs">
                   <CoStateTag
-                    class="B-M1 C-white R-max F-S-xs PD-xxs-xs"
+                    class="bg-jun-primary c-white rd-9999999px text-xs px-2"
                     v-for="type in getBitsArray(item.type)"
                     :state-orm="tabsList.slice(1)"
                     :value="type"

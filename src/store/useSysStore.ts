@@ -45,24 +45,24 @@ export default defineStore("SysStore", {
       if (!this.allDictList) return dictOrm;
       const styleOrm: Record<ApiGeAllDictList.TagType, CSSProperties> = {
         primary: {
-          color: "var(--C-M1)",
-          background: "var(--C-M1-O3)",
+          color: "var(--c-jun-primary)",
+          background: "var(--c-jun-primary  c-op-30)",
         },
         danger: {
           color: "var(--C-fail)",
-          background: "var(--C-fail-O3)",
+          background: "var(--C-fail  c-op-30)",
         },
         info: {
-          color: "var(--C-T3)",
-          background: "var(--C-T1-O3)",
+          color: "var(--c-jun-c-2)",
+          background: "var(--c-jun-c  c-op-30)",
         },
         success: {
-          color: "var(--C-success)",
-          background: "var(--C-success-O3)",
+          color: "var(--c-jun-success)",
+          background: "var(--c-jun-success  c-op-30)",
         },
         warning: {
           color: "var(--C-warn)",
-          background: "var(--C-warn-O3)",
+          background: "var(--C-warn  c-op-30)",
         },
       };
       for (const _key in this.allDictList) {

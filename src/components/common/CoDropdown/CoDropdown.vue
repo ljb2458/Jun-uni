@@ -51,7 +51,7 @@ const show = useVModel(props, "show", emit);
   $indicate-size: 12px;
   > .CoDropdown_text {
     display: inline-block;
-    margin-right: var(--gap-xxs);
+    @apply mr-1;
   }
   > .CoDropdown_icon {
     display: inline-block;
@@ -72,7 +72,7 @@ const show = useVModel(props, "show", emit);
 
     .CoDropdown_popup_indicate {
       position: absolute;
-      left: calc(var(--R-sm) + $indicate-size);
+      left: calc($indicate-size * 1.5);
       top: 0;
       height: $indicate-size;
       width: $indicate-size;
@@ -84,7 +84,7 @@ const show = useVModel(props, "show", emit);
       background-color: #fff;
       width: 100%;
       height: 100%;
-      border-radius: var(--R-sm);
+      @apply rd-md;
       margin-top: ($indicate-size - 1px);
     }
   }
@@ -115,7 +115,7 @@ const show = useVModel(props, "show", emit);
 </style>
 <style lang="scss" scoped>
 .CoDivider {
-  border-radius: var(--R-max);
+  border-radius: var(--rd-9999999px);
 }
 </style>
 <script lang="ts">

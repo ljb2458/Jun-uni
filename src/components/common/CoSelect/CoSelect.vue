@@ -44,7 +44,7 @@ const selectedOption = computed(() =>
 
 <template>
   <CoDropdown
-    class="CoSelect border-all flex-J-SB flex-A-C _flex R-sm PD-sm"
+    class="CoSelect border-all !flex justify-between flex items-center rd-md p-2.2"
     :="{ ...$attrs,...props }"
     v-model:show="show"
   >
@@ -54,23 +54,23 @@ const selectedOption = computed(() =>
       </slot>
     </template>
     <scroll-view :style="{ maxHeight }" scroll-y>
-      <view class="MG-sm">
+      <view class="m-2.2">
         <view
           @tap="select(selection)"
-          class="selection gap-sm PD-col-xs border-B PD-row-sm flex-A-C flex-J-SB active"
+          class="selection gap-sm py-2 border-B px-2.2 flex items-center justify-between active"
           :class="{
             selection__selected: Object.is(selection[valueName], modelValue),
           }"
           v-for="(selection, index) in props.selections"
           :key="selection[valueName]"
         >
-          <view class="flex-1">
+          <view class="flex flex-1">
             <slot name="selection" :index="index" :selection="selection">
               <view>{{ selection[labelName] }}</view>
             </slot>
           </view>
           <view
-            class="selection_icon C-M1"
+            class="selection_icon c-jun-primary"
             :class="{
               selection_icon__active: Object.is(
                 selection[valueName],
@@ -92,7 +92,7 @@ const selectedOption = computed(() =>
 <style lang="scss" scoped>
 .CoSelect {
   .selection {
-    background-color: var(--C-B1);
+    background-color: var(--c-jun-bg);
     .selection_icon {
       opacity: 0;
     }

@@ -25,12 +25,12 @@ const selectedValue3 = ref<string>();
 </script>
 
 <template>
-  <CoPageView class="demoPage B-B2 PB-md" :onPageScroll="onPageScroll">
-    <view class="PD-md">
-      <view class="MT-md MB-xs F-S-lg">基本示例</view>
+  <CoPageView class="demoPage bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
+    <view class="p-lg">
+      <view class="mt-lg mb-1 text-lg">基本示例</view>
       <CoSelect v-model="selectedValue1" :selections="selections"> </CoSelect>
-      <view class="MG-col-xs"> 选中的value：{{ selectedValue1 }} </view>
-      <view class="MT-md MB-xs F-S-lg">自定义插槽</view>
+      <view class="my-2"> 选中的value：{{ selectedValue1 }} </view>
+      <view class="mt-lg mb-1 text-lg">自定义插槽</view>
       <CoSelect v-model="selectedValue2" :selections="selections">
         <template #value="{ selection }">
           <view v-if="selection"> 已选择 {{ selection.label }} </view>
@@ -45,8 +45,8 @@ const selectedValue3 = ref<string>();
           <uv-loading-icon text="额外插槽" />
         </template>
       </CoSelect>
-      <view class="MG-col-xs"> 选中的value：{{ selectedValue2 }} </view>
-      <view class="MT-md MB-xs F-S-lg">自定义 label value</view>
+      <view class="my-2"> 选中的value：{{ selectedValue2 }} </view>
+      <view class="mt-lg mb-1 text-lg">自定义 label value</view>
       <CoSelect
         v-model="selectedValue3"
         :selections="selections"
@@ -54,7 +54,7 @@ const selectedValue3 = ref<string>();
         :valueName="'label'"
       >
       </CoSelect>
-      <view class="MG-col-xs"> 选中的value：{{ selectedValue3 }} </view>
+      <view class="my-2"> 选中的value：{{ selectedValue3 }} </view>
     </view>
   </CoPageView>
 </template>

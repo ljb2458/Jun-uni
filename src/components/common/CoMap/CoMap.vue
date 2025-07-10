@@ -225,11 +225,11 @@ const leftCotrolList = computed<CoMapCotrolsItem[]>(() => {
   const iconArray = [...props.leftCotrols];
   if (!showMap.value) return iconArray;
   iconArray.unshift({
-    class: ["_MT-auto", "_B-none"],
+    class: ["!mT-auto", "bg-transparent"],
     orderNo: -999999999999999,
   });
   iconArray.push({
-    class: ["_MB-auto", "_B-none"],
+    class: ["!mb-auto", "bg-transparent"],
     orderNo: 999999999999999,
   });
   iconArray.sort((a, b) => Number(a.orderNo) - Number(b.orderNo));
@@ -266,24 +266,24 @@ const rightCotrolList = computed<CoMapCotrolsItem[]>(() => {
         ? _import("src/static/components/imgs/fullScreenExit.png")
         : _import("src/static/components/imgs/fullScreen.png"),
       tap: () => changeFill(),
-      class: ["_MT-auto"],
+      class: ["!mT-auto"],
       orderNo: 31,
     });
   }
 
   iconArray.unshift({
-    class: ["_MT-auto", "_B-none"],
+    class: ["!mT-auto", "bg-transparent"],
     orderNo: -999999999999999,
   });
   iconArray.push({
-    class: ["_MB-auto", "_B-none"],
+    class: ["!mb-auto", "bg-transparent"],
     orderNo: 999999999999999,
   });
   iconArray.sort((a, b) => Number(a.orderNo) - Number(b.orderNo));
   return iconArray;
   function addLocalCotrol() {
     iconArray.push({
-      class: ["_MT-auto"],
+      class: ["!mT-auto"],
       iconPath: _import("src/static/components/imgs/local.png"),
       tap: () => moveToLocal(),
       orderNo: 21,
@@ -292,7 +292,7 @@ const rightCotrolList = computed<CoMapCotrolsItem[]>(() => {
   function addScaleCotrol() {
     iconArray.push(
       {
-        class: ["_MB-0 _MT-auto"],
+        class: ["!mb-0 !mT-auto"],
         iconPath: _import("src/static/components/imgs/plus.png"),
         tap() {
           changeScale(scale.value + 1);
@@ -300,7 +300,7 @@ const rightCotrolList = computed<CoMapCotrolsItem[]>(() => {
         orderNo: 11,
       },
       {
-        class: ["_MT-0"],
+        class: ["!mt-0"],
         iconPath: _import("src/static/components/imgs/reduce.png"),
         tap() {
           changeScale(scale.value - 1);
@@ -469,7 +469,7 @@ const rightCotrolList = computed<CoMapCotrolsItem[]>(() => {
     align-items: center;
     justify-content: center;
     justify-items: center;
-    flex-direction: column;
+    flex flex-direction: column;
   }
   .controls__left {
     left: $gap-row;

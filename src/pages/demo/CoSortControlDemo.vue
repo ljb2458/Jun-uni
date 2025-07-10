@@ -17,13 +17,13 @@ const value2 = ref("");
 </script>
 
 <template>
-  <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
-    <view class="PD-md">
-      <view class="MT-md MB-xs F-S-lg">基本示例</view>
-      <view class="C-T3">该组件业务味较重，后续可能修改，不建议使用。</view>
-      <view class="flex gap-sm flex-wrap">
+  <CoPageView class="bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
+    <view class="p-lg">
+      <view class="mt-lg mb-1 text-lg">基本示例</view>
+      <view class="c-jun-c-2">该组件业务味较重，后续可能修改，不建议使用。</view>
+      <view class="flex gap-sm flex flex-wrap">
         <CoSortControl
-          class="PD-row-sm PD-col-xs B-B1 R-sm active"
+          class="px-2.2 py-2 bg-jun-bg rd-md active"
           v-for="name in ['createTime', 'viewCount', 'pageCount']"
           :name="name"
           :key="name"
@@ -36,10 +36,10 @@ const value2 = ref("");
       <view> 排序字段：{{ keyName1 }} </view>
       <view> 排序方式：{{ value1 }} </view>
 
-      <view class="MT-md MB-xs F-S-lg">可多个</view>
-      <view class="flex gap-sm flex-wrap">
+      <view class="mt-lg mb-1 text-lg">可多个</view>
+      <view class="flex gap-sm flex flex-wrap">
         <CoSortControl
-          class="PD-row-sm PD-col-xs B-B1 R-sm active"
+          class="px-2.2 py-2 bg-jun-bg rd-md active"
           v-for="name in ['createTime', 'viewCount', 'pageCount']"
           :name="name"
           :key="name"

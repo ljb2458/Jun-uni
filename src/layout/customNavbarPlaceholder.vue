@@ -17,10 +17,10 @@ const isCustomNavbar = computed(
 <template>
   <view class="customNavbar" v-if="isCustomNavbar">
     <view style="height: var(--status-bar-height)"></view>
-    <view :style="{ ...defaultStyle }" class="navbar flex-A-C">
+    <view :style="{ ...defaultStyle }" class="navbar flex items-center">
       <slot :slotProps="{ ...routeInfo! }"> </slot>
     </view>
-    <view class="PB-xs"></view>
+    <view class="pb-2"></view>
   </view>
 </template>
 <style lang="scss" scoped>
@@ -28,7 +28,7 @@ const isCustomNavbar = computed(
   position: sticky;
   top: 0;
   z-index: 100;
-  padding-left: var(--gap-md);
+  @apply pl-sm;
   transition: all 0.3s;
   box-sizing: border-box;
 }

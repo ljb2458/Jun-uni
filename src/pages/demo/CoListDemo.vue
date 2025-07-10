@@ -38,21 +38,21 @@ async function load() {
 </script>
 
 <template>
-  <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
-    <view class="PD-md">
-      <view class="MT-md F-S-lg">基本使用</view>
-      <view class="C-T3"
+  <CoPageView class="bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
+    <view class="p-lg">
+      <view class="mt-lg text-lg">基本使用</view>
+      <view class="c-jun-c-2"
         >如非特殊需要，建议使用 CoRequestList 组件，CoRequestList
         基于该组件二次开发，功能十分强大！</view
       >
       <CoList :status="status" @load="load">
         <view
-          class="flex-A-C gap-sm F-S-sm MT-md PD-md B-B1 R-sm anim-rightToLeft"
+          class="flex items-center gap-sm text-sm mt-lg p-lg bg-jun-bg rd-md anim-rightToLeft"
           v-for="item in list"
           :key="item.random"
         >
-          <view class="F-S-xxl C-M1">
-            P<text class="F-S-sm">{{ item.pageNo }}</text>
+          <view class="text-xxl c-jun-primary">
+            P<text class="text-sm">{{ item.pageNo }}</text>
           </view>
           <view>
             <view class="T-break">{{ item.random }}</view>

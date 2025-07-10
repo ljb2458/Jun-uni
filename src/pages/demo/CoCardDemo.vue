@@ -10,37 +10,45 @@
 <script setup lang="ts">
 import { _import } from "@/utils/tools/import";
 import { onPageScroll } from "@dcloudio/uni-app";
-
 </script>
 
 <template>
-  <CoPageView class="loginPage PB-md C-white" :onPageScroll="onPageScroll">
-    <CoCard class="B-B1 R-sm MG-md C-T1">
-      <view class="flex-A-C flex-J-C F-S-xl" style="height: 250px">
+  <CoPageView class="loginPage pb-lg c-white" :onPageScroll="onPageScroll">
+    <CoCard class="bg-jun-bg rd-md m-lg c-jun-c">
+      <view
+        class="flex items-center flex justify-center text-xl"
+        style="height: 250px"
+      >
         基本使用
       </view>
     </CoCard>
     <CoCard
       :bg-img="_import('@/static/components/imgs/error.svg')"
-      class="B-B1 R-sm MG-md C-black"
+      class="bg-jun-bg rd-md m-lg c-black"
     >
-      <view class="flex-A-C flex-J-C F-S-xl z-I-2" style="height: 250px">
+      <view
+        class="flex items-center flex justify-center text-xl z-2"
+        style="height: 250px"
+      >
         <view class="T-A-C">
           使用图片背景
-          <view class="F-S-sm">非必要不推荐使用，需要设置z-index</view>
+          <view class="text-sm">非必要不推荐使用，需要设置z-index</view>
         </view>
       </view>
     </CoCard>
     <CoCard
       bgboxBlur="8px"
-      bgboxClass="PD-sm"
-      class="loginCard B-B1-O3 R-sm MG-md PD-md"
+      bgboxClass="p-2.2"
+      class="loginCard bg-jun-bg c-op-30 rd-md m-lg p-sm"
     >
       <template #bgbox>
-        <view class="colorbox flex-J-SB"></view>
+        <view class="colorbox flex justify-between"></view>
       </template>
-      <view class="z-I-2">
-        <view class="flex-J-C flex-A-C F-S-xl" style="height: 250px">
+      <view class="z-2">
+        <view
+          class="flex justify-center flex items-center text-xl"
+          style="height: 250px"
+        >
           模糊卡片示例
         </view>
       </view>
@@ -68,7 +76,7 @@ import { onPageScroll } from "@dcloudio/uni-app";
       content: "";
       width: 80px;
       height: 80px;
-      border-radius: var(--R-max);
+      border-radius: var(--rd-9999999px);
 
       background-image: linear-gradient(135deg, #fce38a, #f38181);
       transform: translate(30%, 50%);
@@ -78,7 +86,7 @@ import { onPageScroll } from "@dcloudio/uni-app";
       content: "";
       width: 100px;
       height: 100px;
-      border-radius: var(--R-max);
+      border-radius: var(--rd-9999999px);
       transform: translate(-30%, 100%);
 
       background-image: linear-gradient(135deg, #feb692, #ea5455);

@@ -23,7 +23,7 @@ const userAuthEnum: CoStateOrm = [
   {
     value: 1,
     label: "管理员",
-    class: "C-M1 B-M1-O3 R-max PD-row-xs F-S-xs ML-xs",
+    class: "c-jun-primary bg-jun-primary  c-op-30 rd-9999999px px-2 text-xs ml-2",
   },
 ];
 const layoutInfo = reactive({
@@ -55,15 +55,15 @@ function uploadAvater(url: string) {
 }
 </script>
 <template>
-  <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
-    <view class="flex-A-C MG-md gap-sm F-S-sm">
+  <CoPageView class="bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
+    <view class="flex items-center m-lg gap-sm text-sm">
       <button
         :open-type="'chooseAvatar'"
         @chooseavatar="chooseavatar"
-        class="PD-0 B-B0"
+        class="p-0 B-B0"
       >
         <uv-image
-          radius="var(--R-sm)"
+          radius="var(--rd-md)"
           height="58px"
           width="58px"
           :src="
@@ -74,18 +74,18 @@ function uploadAvater(url: string) {
         ></uv-image>
       </button>
       <view>
-        <view class="flex-A-C">
-          <view class="F-S-md T-strong">张三</view>
+        <view class="flex items-center">
+          <view class="text-md T-strong">张三</view>
           <!-- <button
               open-type="getPhoneNumber"
               @getphonenumber="getPhoneNumber"
-              class="PD-0 B-none F-S-md T-strong"
+              class="p-0 bg-transparent text-md T-strong"
             >
               点击登录
             </button> -->
           <CoStateTag :state-orm="userAuthEnum" :value="1" />
         </view>
-        <view class="C-T3">18888888888</view>
+        <view class="c-jun-c-2">18888888888</view>
         <view>某某企业</view>
       </view>
     </view>

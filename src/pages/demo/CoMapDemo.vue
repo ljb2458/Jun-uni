@@ -64,12 +64,12 @@ const controls: CoMapCotrolsItem[] = [
 </script>
 
 <template>
-  <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
-    <view class="PD-md">
-      <view class="MT-md F-S-lg">基本使用</view>
-      <view class="C-T3 MB-xs">使用微信小程序和 APP 查看</view>
+  <CoPageView class="bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
+    <view class="p-lg">
+      <view class="mt-lg text-lg">基本使用</view>
+      <view class="c-jun-c-2 mb-1">使用微信小程序和 APP 查看</view>
       <!-- #ifdef APP -->
-      <view class="C-T3 MB-xs"
+      <view class="c-jun-c-2 mb-1"
         >APP上 markers 图标 width height
         设置无效，使用图片工具更改图片尺寸</view
       >
@@ -79,24 +79,24 @@ const controls: CoMapCotrolsItem[] = [
         <template #callout="{ markers }">
           <cover-view
             style="width: 60vw"
-            class="flex-A-STR B-B1 R-sm"
+            class="flex items-stretch bg-jun-bg rd-md"
             v-for="item in markers"
             :key="item.id"
             :marker-id="item.id"
           >
-            <cover-view class="flex-1 PD-xs">
+            <cover-view class="flex flex-1 p-2">
               {{ item.address }}
             </cover-view>
-            <cover-view class="flex-J-C flex-A-C PD-xs B-M1 C-white">
+            <cover-view class="flex justify-center flex items-center p-2 bg-jun-primary c-white">
               <cover-view>导航</cover-view>
             </cover-view>
           </cover-view>
         </template>
       </CoMap>
 
-      <view class="MT-md MB-xs F-S-lg">自定义图标与插槽</view>
+      <view class="mt-lg mb-1 text-lg">自定义图标与插槽</view>
       <!-- #ifdef APP -->
-      <view class="C-T3 MB-xs">APP上 不支持 callout 插槽</view>
+      <view class="c-jun-c-2 mb-1">APP上 不支持 callout 插槽</view>
       <!-- #endif -->
       <CoMap
         :left-cotrols="controls"
@@ -107,28 +107,28 @@ const controls: CoMapCotrolsItem[] = [
         bottomHeight="300px"
       >
         <template #top>
-          <cover-view class="B-B1 PD-sm">
+          <cover-view class="bg-jun-bg p-2.2">
             <cover-view style="height: var(--status-bar-height)"> </cover-view>
             <cover-view> 全屏后可见，顶部插槽 </cover-view>
           </cover-view>
         </template>
         <template #bottom>
-          <cover-view class="B-B1 PD-sm size-fill">
+          <cover-view class="bg-jun-bg p-2.2 size-fill">
             全屏后可见，底部插槽
           </cover-view>
         </template>
         <template #callout="{ markers }">
           <cover-view
             style="width: 60vw"
-            class="flex-A-STR B-B1 R-sm"
+            class="flex items-stretch bg-jun-bg rd-md"
             v-for="item in markers"
             :key="item.id"
             :marker-id="item.id"
           >
-            <cover-view class="flex-1 PD-xs">
+            <cover-view class="flex flex-1 p-2">
               {{ item.address }}
             </cover-view>
-            <cover-view class="flex-J-C flex-A-C PD-xs B-M1 C-white">
+            <cover-view class="flex justify-center flex items-center p-2 bg-jun-primary c-white">
               <cover-view>导航</cover-view>
             </cover-view>
           </cover-view>

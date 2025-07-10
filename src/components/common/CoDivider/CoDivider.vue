@@ -7,7 +7,7 @@ const props = withDefaults(
     bg?: string;
   }>(),
   {
-    bg: "var(--C-T1-O3)",
+    bg: "var(--c-jun-c  c-op-30)",
     height: "1px",
     width: "100%",
   }
@@ -20,7 +20,7 @@ const props = withDefaults(
 
 <style lang="scss" scoped>
 .CoDivider {
-  border-radius: var(--R-max);
+  border-radius: var(--rd-9999999px);
 }
 </style>
 <script lang="ts">

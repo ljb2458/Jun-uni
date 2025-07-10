@@ -12,9 +12,9 @@ import { onPageScroll } from "@dcloudio/uni-app";
 </script>
 
 <template>
-  <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
-    <view class="PD-md">
-      <view class="MT-md F-S-lg">基本使用</view>
+  <CoPageView class="bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
+    <view class="p-lg">
+      <view class="mt-lg text-lg">基本使用</view>
       <CoListStatus :type="'next'" message="继续加载"/>
       <CoListStatus :type="'loading'" message="加载中"/>
       <CoListStatus :type="'end'" message="没有更多了"/>

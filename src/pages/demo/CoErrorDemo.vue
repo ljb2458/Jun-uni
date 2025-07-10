@@ -16,9 +16,9 @@ function reload() {
 </script>
 
 <template>
-  <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
-    <view class="PD-md">
-      <view class="F-S-lg MT-md MB-xs">基本示例</view>
+  <CoPageView class="bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
+    <view class="p-lg">
+      <view class="text-lg mt-lg mb-1">基本示例</view>
       <CoError @tap="reload" message="出错了" />
     </view>
   </CoPageView>

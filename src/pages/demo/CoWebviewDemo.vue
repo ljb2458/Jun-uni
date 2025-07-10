@@ -15,10 +15,10 @@ const webviewData = ref({
 </script>
 
 <template>
-  <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
-    <view class="PD-md">
-      <view class="F-S-lg">示例暂缺</view>
-      <view class="C-T3">
+  <CoPageView class="bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
+    <view class="p-lg">
+      <view class="text-lg">示例暂缺</view>
+      <view class="c-jun-c-2">
         在官方 webview 的基础上，通过url携带哈希字符串与 @message
         的方式实现了一个v-model，示例暂缺。
       </view>

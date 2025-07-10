@@ -13,25 +13,25 @@ const show = ref(false);
 </script>
 
 <template>
-  <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
-    <view class="PD-md">
-      <view class="F-S-lg MT-md MB-xs">基本使用</view>
-      <CoDropdown text="点我展开" class="B-B1 PD-sm R-sm flex-J-SB">
-        <view class="PD-sm">
+  <CoPageView class="bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
+    <view class="p-lg">
+      <view class="text-lg mt-lg mb-1">基本使用</view>
+      <CoDropdown text="点我展开" class="bg-jun-bg p-2.2 rd-md flex justify-between">
+        <view class="p-2.2">
           我是展开后你能看到的内容，怎么样你看到我了吗？</view
         >
       </CoDropdown>
-      <view class="F-S-lg MT-md MB-xs">控制展开</view>
+      <view class="text-lg mt-lg mb-1">控制展开</view>
       <CoDropdown
         v-model:show="show"
         text="别点我，点下面的按钮控制我"
-        class="B-B1 PD-sm R-sm flex-J-SB"
+        class="bg-jun-bg p-2.2 rd-md flex justify-between"
       >
-        <view class="PD-sm">
+        <view class="p-2.2">
           我是展开后你能看到的内容，怎么样你看到我了吗？</view
         >
       </CoDropdown>
-      <uv-button class="MT-sm" :type="'primary'" @tap="show = true"
+      <uv-button class="mt-2.2" :type="'primary'" @tap="show = true"
         >展开下拉菜单</uv-button
       >
     </view>

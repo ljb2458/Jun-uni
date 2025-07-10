@@ -30,7 +30,7 @@ function load() {
     ></uv-loading-icon>
     <uv-empty
       :show="props.type === 'null'"
-      class="Rempty PT-xl PB-xl"
+      class="Rempty pt-xl pb-xl"
       :text="props.message"
     >
     </uv-empty>
@@ -42,7 +42,7 @@ function load() {
     </view>
     <view v-show="props.type === 'error'">
       <CoError
-        class="PT-xl PB-xl"
+        class="pt-xl pb-xl"
         :message="props.message || '出错了！'"
         @click-button="reload"
       >

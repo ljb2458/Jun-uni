@@ -74,23 +74,23 @@ const collapsesTree = [
 </script>
 
 <template>
-  <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
-    <view class="PD-md">
-      <view class="F-S-lg MT-md MB-xs">基本使用</view>
+  <CoPageView class="bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
+    <view class="p-lg">
+      <view class="text-lg mt-lg mb-1">基本使用</view>
       <CoCollapse
         v-for="(item, index) in collapses"
         v-model:value="activeNames"
         :name="index"
         :title="item.title"
         :message="item.message"
-        class="B-B1 R-sm MT-sm"
-        header-class="PD-sm"
+        class="bg-jun-bg rd-md mt-2.2"
+        header-class="p-2.2"
       >
-        <view class="PD-sm border-T">{{ item.content }} </view>
+        <view class="p-2.2 border-T">{{ item.content }} </view>
       </CoCollapse>
 
-      <view class="F-S-lg MT-md MB-xs">手风琴模式</view>
-      <view class="F-S-sm C-T3">
+      <view class="text-lg mt-lg mb-1">手风琴模式</view>
+      <view class="text-sm c-jun-c-2">
         只需要将 value 的默认值设置为非数组，即可开启手风琴模式
       </view>
       <CoCollapse
@@ -99,23 +99,23 @@ const collapsesTree = [
         :name="index"
         :title="item.title"
         :message="item.message"
-        class="B-B1 R-sm MT-sm"
-        header-class="PD-sm"
+        class="bg-jun-bg rd-md mt-2.2"
+        header-class="p-2.2"
       >
-        <view class="PD-sm border-T">{{ item.content }} </view>
+        <view class="p-2.2 border-T">{{ item.content }} </view>
       </CoCollapse>
-      <view class="F-S-lg MT-md MB-xs">嵌套使用</view>
-      <view class="F-S-sm C-T3"> 良好的嵌套支持，欢迎体验 </view>
+      <view class="text-lg mt-lg mb-1">嵌套使用</view>
+      <view class="text-sm c-jun-c-2"> 良好的嵌套支持，欢迎体验 </view>
       <CoCollapse
         v-for="(group, index) in collapsesTree"
         v-model:value="treeLv1"
         :name="index"
         :title="group.title"
         :message="group.message"
-        class="R-sm MT-sm"
-        header-class="B-M1 C-white PD-sm"
+        class="rd-md mt-2.2"
+        header-class="bg-jun-primary c-white p-2.2"
       >
-        <view class="border-T B-T1-O1 PD-sm">
+        <view class="border-T B-T1-O1 p-2.2">
           <view>{{ group.content }} </view>
           <CoCollapse
             v-for="(item, index) in group.childrens"
@@ -123,10 +123,10 @@ const collapsesTree = [
             :name="index"
             :title="item.title"
             :message="item.message"
-            class="B-B1 R-sm MT-sm"
-            header-class="PD-sm"
+            class="bg-jun-bg rd-md mt-2.2"
+            header-class="p-2.2"
           >
-            <view class="PD-sm border-T">{{ item.content }} </view>
+            <view class="p-2.2 border-T">{{ item.content }} </view>
           </CoCollapse>
         </view>
       </CoCollapse>

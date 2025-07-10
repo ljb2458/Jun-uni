@@ -66,12 +66,12 @@ async function onLoad(ctx: CoThreeJsCtx) {
 </script>
 
 <template>
-  <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
-    <view class="PD-md">
-      <view class="F-S-lg">基础示例</view>
-      <view class="C-T3">详见 three-platformize 官方文档 暂只支持小程序，h5请直接使用 three.js</view>
-      <view class="C-T3 MT-xs">若加载失败，请使用调试模式替换glb文件地址后查看</view>
-      <CoThreeJs class="MT-sm border-all" @load="onLoad"></CoThreeJs>
+  <CoPageView class="bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
+    <view class="p-lg">
+      <view class="text-lg">基础示例</view>
+      <view class="c-jun-c-2">详见 three-platformize 官方文档 暂只支持小程序，h5请直接使用 three.js</view>
+      <view class="c-jun-c-2 mt-2">若加载失败，请使用调试模式替换glb文件地址后查看</view>
+      <CoThreeJs class="mt-2.2 border-all" @load="onLoad"></CoThreeJs>
     </view>
   </CoPageView>
 </template>

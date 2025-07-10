@@ -163,7 +163,7 @@ function changeSpeed(item: ArrayToUnion<typeof selectSpeed>) {
           (Number(nodeInfo.height) > 250 || videoData.fullscreen) &&
           videoData.controls
         "
-        class="CoVideo_selectSpeed flex-col flex-A-C flex-J-C PD-xs"
+        class="CoVideo_selectSpeed flex flex-col flex items-center flex justify-center p-2"
       >
         <envCoverView
           class="CoVideo_selectSpeedItem"

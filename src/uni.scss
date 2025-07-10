@@ -17,22 +17,22 @@
 /* 颜色变量 */
 
 /* 行为相关颜色 */
-$uni-color-primary: var(--C-M1);
+$uni-color-primary: var(--c-jun-primary);
 $uni-color-success: #5ac725;
 $uni-color-warning: #f0ad4e;
 $uni-color-error: #dd524d;
 
 /* 文字基本颜色 */
-$uni-text-color: var(--C-T1); // 基本色
-$uni-text-color-inverse: var(--C-T5); // 反色
-$uni-text-color-grey: var(--C-T3); // 辅助灰色，如加载更多的提示信息
-$uni-text-color-placeholder: var(--C-T2);
-$uni-text-color-disable: var(--C-T2);
+$uni-text-color: var(--c-jun-c); // 基本色
+$uni-text-color-inverse: var(--c-jun-c-4); // 反色
+$uni-text-color-grey: var(--c-jun-c-2); // 辅助灰色，如加载更多的提示信息
+$uni-text-color-placeholder: var(--c-jun-c-1);
+$uni-text-color-disable: var(--c-jun-c-1);
 
 /* 背景颜色 */
-$uni-bg-color: var(--C-B1);
-$uni-bg-color-grey: var(--C-B1);
-$uni-bg-color-hover: var(--C-B2); // 点击状态颜色
+$uni-bg-color: var(--c-jun-bg);
+$uni-bg-color-grey: var(--c-jun-bg);
+$uni-bg-color-hover: var(--c-jun-bg-1); // 点击状态颜色
 $uni-bg-color-mask: rgba(0, 0, 0, 0.4); // 遮罩颜色
 
 /* 边框颜色 */
@@ -41,18 +41,18 @@ $uni-border-color: var(--C-O1);
 /* 尺寸变量 */
 
 /* 文字尺寸 */
-$uni-font-size-sm: var(--F-S-sm);
-$uni-font-size-base: var(--F-S-md);
-$uni-font-size-lg: var(--F-S-lg);
+$uni-font-size-sm: var(--text-sm);
+$uni-font-size-base: var(--text-md);
+$uni-font-size-lg: var(--text-lg);
 
 /* 图片尺寸 */
-$uni-img-size-sm: calc(var(--F-S-sm) * 4);
-$uni-img-size-base: calc(var(--F-S-md) * 4);
-$uni-img-size-lg: calc(var(--F-S-lg) * 4);
+$uni-img-size-sm: calc(var(--text-sm) * 4);
+$uni-img-size-base: calc(var(--text-md) * 4);
+$uni-img-size-lg: calc(var(--text-lg) * 4);
 
 /* Border Radius */
-$uni-border-radius-sm: var(--R-sm);
-$uni-border-radius-base: var(--R-md);
+$uni-border-radius-sm: var(--rd-md);
+$uni-border-radius-base: var(--rd-lg);
 $uni-border-radius-lg: var(--R-lg);
 $uni-border-radius-circle: 50%;
 

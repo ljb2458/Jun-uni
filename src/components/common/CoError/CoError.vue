@@ -27,10 +27,10 @@ function clickButton(e: MouseEvent) {
       :src="_import('src/static/components/imgs/error.svg')"
     ></image>
     <slot>
-      <view class="C-T4 MT-xs">{{ props.message }}</view>
+      <view class="c-jun-c-3 mt-2">{{ props.message }}</view>
     </slot>
     <slot name="button">
-      <view class="MT-md">
+      <view class="mt-lg">
         <uv-button :size="'mini'" @click="clickButton" text="重新加载"> </uv-button>
       </view>
     </slot>

@@ -118,7 +118,7 @@ function delMedia(e: { index: number; name: string; file: FileListItem }) {
     @afterRead="onAfterRead"
     @delete="delMedia"
     :fileList="fileList"
-    class="MT-xs"
+    class="mt-2"
   />
 </template>
 

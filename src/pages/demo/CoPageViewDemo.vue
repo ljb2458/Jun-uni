@@ -55,7 +55,7 @@ const showBottomView = ref(true);
 
 <template>
   <CoPageView
-    class="B-B2 PB-md"
+    class="bg-jun-bg-1 pb-lg"
     :useCustomNavbar="true"
     :useSafetyBottom="true"
     :useSafetyTop="true"
@@ -65,76 +65,76 @@ const showBottomView = ref(true);
     :onPageScroll="onPageScroll"
   >
     <template #fixedBottom="{}">
-      <view v-if="showBottomView" class="MG-sm">
+      <view v-if="showBottomView" class="m-2.2">
         fixedBottom 固定在底部的插槽,该插槽的内容会被额外注册一遍用于占位
         <uv-button :type="'primary'" @tap="setNotify.primary('点击了底部按钮')">
           底部按钮
         </uv-button>
       </view>
     </template>
-    <view class="PD-md">
-      <view class="MT-md F-S-lg">基本使用</view>
-      <view class="C-T3 PD-sm">
+    <view class="p-lg">
+      <view class="mt-lg text-lg">基本使用</view>
+      <view class="c-jun-c-2 p-2.2">
         一般项目根目录下 README.md
         中所提供的代码片段足以满足基本使用。但是你任可以对组件进行更多自定义修改。
       </view>
       <view> useCustomNavbar </view>
-      <view class="C-T3 PD-sm">
+      <view class="c-jun-c-2 p-2.2">
         是否使用自定义顶部导航栏，默认为true，在页面配置 navigationStyle 不为
         custom 时设置为 true 无效。
       </view>
       <view> useSafetyTop </view>
-      <view class="C-T3 PD-sm">
+      <view class="c-jun-c-2 p-2.2">
         是否使用顶部安全区，默认为true，开启后会在顶部生成一个定高的 view
         进行占位，在页面配置 navigationStyle 不为 custom 时设置为 true 无效。
       </view>
       <view> useSafetyBottom </view>
-      <view class="C-T3 PD-sm">
+      <view class="c-jun-c-2 p-2.2">
         是否使用底部安全区，默认为true，开启后会在底部生成一个定高的 view
         进行占位
       </view>
       <view> onPageScroll </view>
-      <view class="C-T3 PD-sm">
+      <view class="c-jun-c-2 p-2.2">
         请传入该方法，内部使用该方法监听滚动条，从而设置顶部导航栏，后续可能继续扩展
       </view>
       <view> bgImg </view>
-      <view class="C-T3 PD-sm">
+      <view class="c-jun-c-2 p-2.2">
         在小程序中背景图使用受限，使用该 props 定义背景图，背景图 image 的
         z-index 为 -1，因此，使用该属性时请不要设置元素的背景颜色
       </view>
-      <view class="MT-md F-S-lg">全局组件</view>
-      <view class="PD-md">
+      <view class="mt-lg text-lg">全局组件</view>
+      <view class="p-lg">
         <uv-button
           @click="setNotify.success('全局 notify 提示')"
           type="primary"
-          class="MT-sm"
+          class="mt-2.2"
         >
           显示全局 notify 提示
         </uv-button>
       </view>
-      <view class="PD-md">
-        <uv-button @click="showActionSheet" type="primary" class="MT-sm">
+      <view class="p-lg">
+        <uv-button @click="showActionSheet" type="primary" class="mt-2.2">
           显示全局 actionSheet 操作菜单
         </uv-button>
       </view>
-      <view class="PD-md">
-        <uv-button @click="openModal" type="primary" class="MT-sm">
+      <view class="p-lg">
+        <uv-button @click="openModal" type="primary" class="mt-2.2">
           显示全局 modal 模态框
         </uv-button>
       </view>
     </view>
     <view
       style="height: var(--layout-navbar-height); border-color: red"
-      class="border-all MG-row-md"
+      class="border-all mx-sm"
     >
-      <view class="F-S-lg"> 导航栏高度 var(--layout-navbar-height) </view>
+      <view class="text-lg"> 导航栏高度 var(--layout-navbar-height) </view>
     </view>
     <view
       style="height: var(--layout-page-height); border-color: red"
-      class="border-all MG-row-md"
+      class="border-all mx-sm"
     >
-      <view class="F-S-lg"> 内容区高度 var(--layout-page-height) </view>
-      <view class="PD-sm">
+      <view class="text-lg"> 内容区高度 var(--layout-page-height) </view>
+      <view class="p-2.2">
         不带 fixedBottom 插槽高度的内容区高度，其高度刚好等于 (页面高度) -
         (tabbar) - (navbar) - (顶部安全区) - (底部安全区)。
       </view>

@@ -66,7 +66,7 @@ const opts = ref({
 </script>
 
 <template>
-  <CoCard class="B-B1 R-sm MG-md PD-sm">
+  <CoCard class="bg-jun-bg rd-md m-lg p-2.2">
     <view class="T-strong">饼图</view>
     <view class="charts-box">
       <qiun-data-charts

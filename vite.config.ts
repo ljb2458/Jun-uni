@@ -2,7 +2,6 @@ import { defineConfig, loadEnv, UserConfig } from "vite";
 import uni from "@dcloudio/vite-plugin-uni";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "@uni-helper/vite-plugin-uni-components";
-import { WotResolver } from "@uni-helper/vite-plugin-uni-components/resolvers";
 import commonjs from "@rollup/plugin-commonjs";
 import path from "path";
 import { generatePagesJson } from "./vite-plugins/generatePagesJson/index";

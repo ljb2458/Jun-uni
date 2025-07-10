@@ -40,22 +40,22 @@ async function api(pageNo: number): Promise<RequestList.Res<ApiResItem[]>> {
 </script>
 
 <template>
-  <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
+  <CoPageView class="bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
     <CoRequestList ref="CoRequestListRef" :api="api">
       <template #default="{ list }">
-        <view class="MG-md MB-0">
-          <view class="F-S-lg">CoRequestList</view>
-          <view class="PD-sm">
+        <view class="m-lg mb-0">
+          <view class="text-lg">CoRequestList</view>
+          <view class="p-2.2">
             自动为您加载分页数据，支持下拉刷新、上拉触底加载、列表状态自动处理、ref
             获取数据等。
           </view>
-          <view class="PD-sm">
+          <view class="p-2.2">
             将页面配置的 enablePullDownRefresh 设为 true
             页面中可见的列表将会在下拉刷新被触发后重新加载。 你也可以调用
             ref.reload 或 ref.rerequest 方法重新加载。如果有需要，你也可以通过
             ref.list 获取列表数据并直接修改或替换
           </view>
-          <view class="PD-sm">
+          <view class="p-2.2">
             将页面配置的 enablePullDownRefresh 设为 true
             页面中可见的列表将会在下拉刷新被触发后重新加载。
             你也可以调用列表身上的 reload 或 rerequest 方法重新加载
@@ -63,7 +63,7 @@ async function api(pageNo: number): Promise<RequestList.Res<ApiResItem[]>> {
         </view>
         <CoSticky>
           <uv-search
-            class="B-B1 R-sm PD-sm"
+            class="bg-jun-bg rd-md p-2.2"
             v-model="searchKey"
             :inputAlign="'left'"
             @search="CoRequestListRef?.reload"
@@ -71,12 +71,12 @@ async function api(pageNo: number): Promise<RequestList.Res<ApiResItem[]>> {
           />
         </CoSticky>
         <view
-          class="flex-A-C gap-sm F-S-sm MG-md PD-md B-B1 R-sm anim-rightToLeft"
+          class="flex items-center gap-sm text-sm m-lg p-lg bg-jun-bg rd-md anim-rightToLeft"
           v-for="item in list"
           :key="item.random"
         >
-          <view class="F-S-xxl C-M1">
-            P<text class="F-S-sm">{{ item.pageNo }}</text>
+          <view class="text-xxl c-jun-primary">
+            P<text class="text-sm">{{ item.pageNo }}</text>
           </view>
           <view>
             <view class="T-break">{{ item.random }}</view>

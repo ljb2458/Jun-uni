@@ -95,46 +95,46 @@ const steps3 = [
 </script>
 
 <template>
-  <CoPageView class="demoPage B-B2 PB-md" :onPageScroll="onPageScroll">
+  <CoPageView class="demoPage bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
     <!-- 竖状步骤条布局示例 -->
-    <view class="PD-md">
-      <view class="MT-md MB-md F-S-lg">基础示例</view>
+    <view class="p-lg">
+      <view class="mt-lg mb-lg text-lg">基础示例</view>
       <CoStepLine v-for="item in steps1" :key="item.title">
         <template #right>
-          <view class="PD-row-sm PB-sm">
+          <view class="px-2.2 pb-2.2">
             <view>{{ item.title }}</view>
-            <view class="C-T3 F-S-sm MT-xs"> {{ item.content }}</view>
-            <view class="C-T3 F-S-xs">{{ item.time }}</view>
+            <view class="c-jun-c-2 text-sm mt-2"> {{ item.content }}</view>
+            <view class="c-jun-c-2 text-xs">{{ item.time }}</view>
           </view>
         </template>
       </CoStepLine>
-      <view class="MT-md MB-md F-S-lg">自定义标点</view>
+      <view class="mt-lg mb-lg text-lg">自定义标点</view>
       <CoStepLine v-for="item in steps2" :key="item.title">
         <template #dot>
           <CoIcon name="cicon-fuzhi" />
         </template>
         <template #right>
-          <view class="PD-row-sm PB-sm">
+          <view class="px-2.2 pb-2.2">
             <view>{{ item.title }}</view>
-            <view class="C-T3 F-S-sm MT-xs"> {{ item.content }}</view>
-            <view class="C-T3 F-S-xs">{{ item.time }}</view>
+            <view class="c-jun-c-2 text-sm mt-2"> {{ item.content }}</view>
+            <view class="c-jun-c-2 text-xs">{{ item.time }}</view>
           </view>
         </template>
       </CoStepLine>
-      <view class="MT-md MB-md F-S-lg">左右穿插</view>
+      <view class="mt-lg mb-lg text-lg">左右穿插</view>
       <CoStepLine v-for="(item, index) in steps3" :key="item.title">
         <template #left>
-          <view v-if="index % 2 == 0" class="PD-row-sm PB-sm T-A-R">
+          <view v-if="index % 2 == 0" class="px-2.2 pb-2.2 T-A-R">
             <view>{{ item.title }}</view>
-            <view class="C-T3 F-S-sm MT-xs"> {{ item.content }}</view>
-            <view class="C-T3 F-S-xs">{{ item.time }}</view>
+            <view class="c-jun-c-2 text-sm mt-2"> {{ item.content }}</view>
+            <view class="c-jun-c-2 text-xs">{{ item.time }}</view>
           </view>
         </template>
         <template #right>
-          <view v-if="index % 2 == 1" class="PD-row-sm PB-sm">
+          <view v-if="index % 2 == 1" class="px-2.2 pb-2.2">
             <view>{{ item.title }}</view>
-            <view class="C-T3 F-S-sm MT-xs"> {{ item.content }}</view>
-            <view class="C-T3 F-S-xs">{{ item.time }}</view>
+            <view class="c-jun-c-2 text-sm mt-2"> {{ item.content }}</view>
+            <view class="c-jun-c-2 text-xs">{{ item.time }}</view>
           </view>
         </template>
       </CoStepLine>

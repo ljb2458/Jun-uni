@@ -24,73 +24,73 @@ const radioOptions = [
 ];
 </script>
 <template>
-  <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
-    <view class="PD-md">
+  <CoPageView class="bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
+    <view class="p-lg">
       <!-- 多选模式 -->
-      <view class="F-S-lg MT-md MB-sm">多选模式</view>
-      <view class="flex-A-C gap-sm">
+      <view class="text-lg mt-lg mb-2">多选模式</view>
+      <view class="flex items-center gap-sm">
         <CoCheckBoxBtn
           v-for="option in options"
           :key="option.value"
           v-model="selectedValues"
           :value="option.value"
-          :activeClass="'B-B1'"
-          :normalClass="'B-success C-white'"
-          class="R-sm"
+          :activeClass="'bg-jun-bg'"
+          :normalClass="'bg-jun-success c-white'"
+          class="rd-md"
         >
-          <view class="PD-sm">{{ option.label }}</view>
+          <view class="p-2.2">{{ option.label }}</view>
         </CoCheckBoxBtn>
       </view>
-      <view class="F-S-sm C-T3 MT-xs">已选值：{{ selectedValues }}</view>
+      <view class="text-sm c-jun-c-2 mt-2">已选值：{{ selectedValues }}</view>
 
       <!-- 单选模式 -->
-      <view class="F-S-lg MT-md MB-sm">单选模式</view>
-      <view class="flex-A-C gap-sm">
+      <view class="text-lg mt-lg mb-2">单选模式</view>
+      <view class="flex items-center gap-sm">
         <CoCheckBoxBtn
           v-for="option in radioOptions"
           :key="option.value"
           v-model="selectedValue"
           :value="option.value"
           isRadio
-          :normal-class="'B-B1'"
-          class="R-sm"
+          :normal-class="'bg-jun-bg'"
+          class="rd-md"
         >
-          <view class="PD-sm">{{ option.label }}</view>
+          <view class="p-2.2">{{ option.label }}</view>
         </CoCheckBoxBtn>
       </view>
-      <view class="F-S-sm C-T3 MT-xs">已选值：{{ selectedValue }}</view>
+      <view class="text-sm c-jun-c-2 mt-2">已选值：{{ selectedValue }}</view>
 
       <!-- 可取消选择示例 -->
-      <view class="F-S-lg MT-md MB-sm">不可取消选择</view>
-      <view class="flex-A-C gap-sm">
+      <view class="text-lg mt-lg mb-2">不可取消选择</view>
+      <view class="flex items-center gap-sm">
         <CoCheckBoxBtn
           v-model="selectedValue"
           value="X"
           isRadio
-          :normal-class="'B-B1'"
+          :normal-class="'bg-jun-bg'"
           :disabledCancel="true"
-          class="R-sm"
+          class="rd-md"
         >
-          <view class="PD-sm">不可取消选项 X</view>
+          <view class="p-2.2">不可取消选项 X</view>
         </CoCheckBoxBtn>
       </view>
-      <view class="F-S-sm C-T3 MT-xs">已选值：{{ selectedValue }}</view>
+      <view class="text-sm c-jun-c-2 mt-2">已选值：{{ selectedValue }}</view>
 
       <!-- 可禁用示例 -->
-      <view class="F-S-lg MT-md MB-sm">禁用</view>
-      <view class="flex-A-C gap-sm">
+      <view class="text-lg mt-lg mb-2">禁用</view>
+      <view class="flex items-center gap-sm">
         <CoCheckBoxBtn
           v-model="selectedValues"
           value="A"
-          :activeClass="'B-B1'"
-          :normalClass="'B-success C-white'"
+          :activeClass="'bg-jun-bg'"
+          :normalClass="'bg-jun-success c-white'"
           :disabled="true"
-          class="R-sm"
+          class="rd-md"
         >
-          <view class="PD-sm">禁用选项 A</view>
+          <view class="p-2.2">禁用选项 A</view>
         </CoCheckBoxBtn>
       </view>
-      <view class="F-S-sm C-T3 MT-xs">已选值：{{ selectedValues }}</view>
+      <view class="text-sm c-jun-c-2 mt-2">已选值：{{ selectedValues }}</view>
     </view>
   </CoPageView>
 </template>

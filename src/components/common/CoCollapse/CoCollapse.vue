@@ -49,11 +49,11 @@ const CoCollapse__active = computed(() => {
       :style="([props.headerStyle, props['header-style']] as any)"
       :class="[props.headerClass, props['header-class']]"
       @tap="collapse(name)"
-      class="CoCollapse_header flex-J-SB flex-A-C gap-sm active"
+      class="CoCollapse_header flex justify-between flex items-center gap-sm active"
     >
-      <view class="flex-1 CoCollapse_title">
+      <view class="flex flex-1 CoCollapse_title">
         <slot name="title">
-          <view class="flex-J-SB flex-A-C gap-sm">
+          <view class="flex justify-between flex items-center gap-sm">
             <view>{{ title }}</view>
             <view>{{ message }}</view>
           </view>

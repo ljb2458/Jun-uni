@@ -184,7 +184,7 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
       </slot>
     </view>
     <uv-popup @tap.stop ref="popupRef" mode="bottom">
-      <view class="CoCascaderPopup_selected MG-sm">
+      <view class="CoCascaderPopup_selected m-2.2">
         <slot name="selected" :options="selectedOptions">
           <block v-if="selectedOptions.length">
             <view
@@ -205,9 +205,9 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
           </view>
         </slot>
       </view>
-      <view class="CoCascader_content B-B2 PD-xs flex" :style="{ height }">
+      <view class="CoCascader_content bg-jun-bg-1 p-2 flex" :style="{ height }">
         <scroll-view
-          class="CoCascader_options H-fill B-B1 R-sm"
+          class="CoCascader_options h-full bg-jun-bg rd-md"
           scroll-y
           v-for="(options, level) in optionsArray"
           :key="modelValue[level - 1] || `i-${level}`"
@@ -218,16 +218,16 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
             v-for="(option, index) in options"
             :key="option.value"
             :id="`item-${option.value}`"
-            class="CoCascader_option PD-col-xs MG-col-xxs PD-row-sm flex-A-C flex-J-SB"
+            class="CoCascader_option py-2 my-1 px-2.2 flex items-center flex justify-between"
             :class="{
               CoCascader_option__disabled: option.disabled,
-              'C-M1 B-M1-O1 CoCascader_option__active': Object.is(
+              'c-jun-primary bg-jun-primary-O1 CoCascader_option__active': Object.is(
                 modelValue[level],
                 option.value
               ),
             }"
           >
-            <view class="CoCascader_option_label flex-1">
+            <view class="CoCascader_option_label flex flex-1">
               <slot
                 name="option"
                 :option="option"
@@ -253,7 +253,7 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
             </view>
           </view>
           <CoListStatus
-            class="MT-md"
+            class="mt-lg"
             v-if="!options?.length"
             :type="loading ? 'loading' : 'null'"
             :message="loading ? '加载中...' : '没有更多选项了！'"
@@ -261,7 +261,7 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
         </scroll-view>
       </view>
       <slot name="bottom">
-        <view class="PD-sm">
+        <view class="p-2.2">
           <uv-button @tap="submit" :type="'primary'">确定</uv-button>
         </view>
       </slot>
@@ -287,7 +287,7 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
     > .CoCascaderPopup_selectedItem {
       display: inline;
       text {
-        color: var(--C-M1);
+        color: var(--c-jun-primary);
         text-decoration: underline;
       }
       &::after {

@@ -3,7 +3,7 @@
 
 <template>
   <view
-    class="CoStepLine PB-md"
+    class="CoStepLine pb-lg"
     :style="{
       gridTemplateColumns: `${$slots.left ? '1fr' : ''} auto ${
         $slots.right ? '1fr' : ''
@@ -42,7 +42,7 @@
   }
   .CoStepLine_gap {
     display: flex;
-    flex-direction: column;
+    flex flex-direction: column;
     align-items: center;
     align-content: center;
     justify-content: center;
@@ -51,13 +51,13 @@
     .CoStepLine_dot {
       height: var(--size);
       width: var(--size);
-      background-color: var(--C-M1);
-      border-radius: var(--R-max);
-      border: solid 0.25em var(--C-T1);
+      background-color: var(--c-jun-primary);
+      border-radius: var(--rd-9999999px);
+      border: solid 0.25em var(--c-jun-c);
     }
     .CoStepLine_line {
       flex: 1;
-      border-left: dotted 1px var(--C-T1);
+      border-left: dotted 1px var(--c-jun-c);
     }
   }
 }

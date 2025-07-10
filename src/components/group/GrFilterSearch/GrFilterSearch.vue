@@ -79,8 +79,8 @@ function onTapReset(e: any) {
 </script>
 
 <template>
-  <view class="GrFilterSearch B-B1 PD-col-xs PD-row-sm">
-    <view class="flex-A-C gap-xs">
+  <view class="GrFilterSearch bg-jun-bg py-2 px-2.2">
+    <view class="flex items-center gap-xs">
       <slot name="selections">
         <view class="self-A-STR" v-if="selections">
           <CoSelect
@@ -88,45 +88,46 @@ function onTapReset(e: any) {
             v-model="selectValue"
             :selections="selections"
             width="150px"
-            class="B-B2 R-xs _PD-col-0 _PD-row-sm H-fill"
-            :style="{ background: bg, border: 'none' }"
+            class="!bg-jun-bg rd-sm !py-0 !px-2.2 h-full bg-jun-bg !b-none"
           >
           </CoSelect>
         </view>
       </slot>
-      <uv-search
-        @blur="(e:string) => emit('blur', e)"
-        @custom="(e:string) => emit('custom', e)"
-        @search="(e:string) => emit('search', e)"
-        @change="(e:string) => emit('change', e)"
-        @focus="(e:string) => emit('focus', e)"
-        v-model="modelValue"
-        shape="square"
-        input-align="left"
-        :show-action="false"
-        :="searchProps"
-        :bg-color="bg"
-      />
+      <view class="flex-1 bg-jun-bg rd-sm">
+        <uv-search
+          @blur="(e:string) => emit('blur', e)"
+          @custom="(e:string) => emit('custom', e)"
+          @search="(e:string) => emit('search', e)"
+          @change="(e:string) => emit('change', e)"
+          @focus="(e:string) => emit('focus', e)"
+          v-model="modelValue"
+          shape="square"
+          input-align="left"
+          :show-action="false"
+          :="searchProps"
+          :bg-color="false"
+        />
+      </view>
       <block v-if="$slots.popup">
         <view
           @tap="uvPopupRef?.open"
-          class="F-S-sm C-T2 flex-A-C gap-xxs active"
+          class="text-sm c-jun-c-1 flex items-center gap-xxs active"
         >
           <CoIcon size="1.7em" name="cicon-shaixuan" />
           <view style="width: 1em" class="T-H-9em">筛选</view>
         </view>
         <uv-popup ref="uvPopupRef" mode="right" :="popupProps">
           <view
-            class="PD-sm PT-0 flex-col H-fill"
+            class="p-2.2 PT-0 flex flex-col h-full"
             :style="{ width: popupWidth }"
           >
-            <customNavbarPlaceholder class="_PL-0">
-              <view class="flex-A-C W-fill">
+            <customNavbarPlaceholder class="!pl-0">
+              <view class="flex items-center w-full">
                 <slot name="popup-navbar">
-                  <view class="T-strong C-M1">高级筛选</view>
+                  <view class="T-strong c-jun-primary">高级筛选</view>
                 </slot>
                 <uv-icon
-                  class="ML-auto"
+                  class="ml-auto"
                   name="close"
                   size="18px"
                   @tap="uvPopupRef?.close"
@@ -135,13 +136,13 @@ function onTapReset(e: any) {
             </customNavbarPlaceholder>
             <slot name="popup"> </slot>
             <slot name="popup-bottom">
-              <view class="flex gap-md MT-auto">
-                <view class="flex-1">
+              <view class="flex gap-md mt-auto">
+                <view class="flex flex-1">
                   <uv-button @tap="onTapReset" :type="'primary'" plain>
                     重置
                   </uv-button>
                 </view>
-                <view class="flex-1">
+                <view class="flex flex-1">
                   <uv-button @tap="onTapSubmit" :type="'primary'">
                     确定
                   </uv-button>

@@ -20,9 +20,9 @@ const props = withDefaults(
   }>(),
   {
     value: "--",
-    plusColor: "var(--C-success)",
+    plusColor: "var(--c-jun-success)",
     minusColor: "var(--C-fail)",
-    radius: "var(--R-sm)",
+    radius: "var(--rd-md)",
     mode: "bg",
     showSymbol: false,
   }
@@ -30,7 +30,7 @@ const props = withDefaults(
 const isMinus = computed(() => Number(props.value) < 0);
 const $style = computed(() => ({
   background: isBg() ? currentColor() : "",
-  color: isText() ? currentColor() : "var(--C-B1)",
+  color: isText() ? currentColor() : "var(--c-jun-bg)",
   borderRadius: props.radius,
 }));
 

@@ -54,16 +54,16 @@ const taskStateOrm = computed<CoStateOrm>(() => [
 </script>
 
 <template>
-  <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
-    <view class="PD-md">
-      <view class="MT-md MB-xs F-S-lg">基本示例</view>
+  <CoPageView class="bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
+    <view class="p-lg">
+      <view class="mt-lg mb-1 text-lg">基本示例</view>
       <CoStateTag
         v-for="value in [
           TaskStatus.WaitPublished,
           TaskStatus.WaitReceiving,
           TaskStatus.WaitProcessed,
         ]"
-        class="PD-row-xs F-S-sm R-max"
+        class="px-2 text-sm rd-9999999px"
         :stateOrm="taskStateOrm"
         :isFun="bitsAuth"
         :value="value"

@@ -64,46 +64,46 @@ async function getNextLevelList(e: CoCascaderLoadChildrenEnvet) {
 </script>
 
 <template>
-  <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
-    <view class="PD-md">
-      <view class="F-S-lg MT-md">基本使用</view>
+  <CoPageView class="bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
+    <view class="p-lg">
+      <view class="text-lg mt-lg">基本使用</view>
       <CoCascader
-        class="MT-xs B-B1 R-sm flex-A-C flex-J-SB PD-sm"
+        class="mt-2 bg-jun-bg rd-md flex items-center flex justify-between p-2.2"
         :options="cnRegionsTree"
       >
       </CoCascader>
-      <view class="F-S-lg MT-md">禁用选项</view>
+      <view class="text-lg mt-lg">禁用选项</view>
       <CoCascader
-        class="MT-xs B-B1 R-sm flex-A-C flex-J-SB PD-sm"
+        class="mt-2 bg-jun-bg rd-md flex items-center flex justify-between p-2.2"
         :options="
           cnRegionsTree.map((v, i) => (i % 4 ? v : { ...v, disabled: true }))
         "
       >
       </CoCascader>
-      <view class="F-S-lg MT-md">不展示空提示</view>
+      <view class="text-lg mt-lg">不展示空提示</view>
       <CoCascader
-        class="MT-xs B-B1 R-sm flex-A-C flex-J-SB PD-sm"
+        class="mt-2 bg-jun-bg rd-md flex items-center flex justify-between p-2.2"
         :showEmpty="false"
         :options="cnRegionsTree"
       >
       </CoCascader>
 
-      <view class="F-S-lg MT-md">点击相同项不取消选择</view>
+      <view class="text-lg mt-lg">点击相同项不取消选择</view>
       <CoCascader
-        class="MT-xs B-B1 R-sm flex-A-C flex-J-SB PD-sm"
+        class="mt-2 bg-jun-bg rd-md flex items-center flex justify-between p-2.2"
         :deselectable="false"
         :options="cnRegionsTree"
       >
       </CoCascader>
-      <view class="F-S-lg MT-md">异步加载选项</view>
+      <view class="text-lg mt-lg">异步加载选项</view>
       <CoCascader
-        class="MT-xs B-B1 R-sm flex-A-C flex-J-SB PD-sm"
+        class="mt-2 bg-jun-bg rd-md flex items-center flex justify-between p-2.2"
         :options="province_list"
         :loadChildren="getNextLevelList"
       ></CoCascader>
-      <view class="F-S-lg MT-md">自定义插槽</view>
+      <view class="text-lg mt-lg">自定义插槽</view>
       <CoCascader
-        class="MT-xs B-B1 R-sm flex-A-C flex-J-SB PD-sm"
+        class="mt-2 bg-jun-bg rd-md flex items-center flex justify-between p-2.2"
         :options="cnRegionsTree"
       >
         <template #value="{ options, values }">
@@ -120,7 +120,7 @@ async function getNextLevelList(e: CoCascaderLoadChildrenEnvet) {
           ❤
         </template>
         <template #bottom>
-          <uv-button class="PD-sm" :type="'success'"
+          <uv-button class="p-2.2" :type="'success'"
             >自定义按钮，使用该插槽，原有的按钮功能将失效</uv-button
           >
         </template>

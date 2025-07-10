@@ -137,7 +137,7 @@ pnpm run dev:mp-weixin
       "</script>",
       "",
       "<template>",
-      "  <CoPageView class=\"B-B2 PB-md\" :onPageScroll=\"onPageScroll\">",
+      "  <CoPageView class=\"bg-jun-bg-1 pb-lg\" :onPageScroll=\"onPageScroll\">",
       "$2",
       "  </CoPageView>",
       "</template>",
