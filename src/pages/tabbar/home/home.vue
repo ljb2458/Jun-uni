@@ -58,7 +58,6 @@ async function api(
 
 <template>
   <CoPageView class="B-B2 PB-md" :onPageScroll="onPageScroll">
-    <WdButton>你好</WdButton>
     <view class="MG-md border-all PD-sm">
       <text class="F-S-lg">CoTabsFor</text>
       <view>

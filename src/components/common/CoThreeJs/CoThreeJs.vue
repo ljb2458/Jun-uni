@@ -15,7 +15,7 @@ import {
 } from "three-platformize";
 import { WechatPlatform } from "three-platformize/src/WechatPlatform";
 import { OrbitControls } from "three-platformize/examples/jsm/controls/OrbitControls";
-import {
+import type {
   Canvas,
   CanvasOnErrorEvent,
   CanvasOnLongtapEvent,

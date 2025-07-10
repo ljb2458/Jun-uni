@@ -17,8 +17,8 @@
       "miniprogram-api-typings",
       //(uv-ui 类型提示)
       "@ttou/uv-typings/v3",
-      // //(wd-ui 类型提示)
-      // "wot-design-uni/global"
+      //(wd-ui 类型提示)
+      "wot-design-uni/global"
     ],
     "baseUrl": ".",
     "paths": {

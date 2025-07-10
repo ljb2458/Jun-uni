@@ -44,8 +44,8 @@ export default defineConfig(async (config) => {
       uni(),
       commonjs(),
       ViteRestart({
-        // 通过这个插件，在修改vite.config.js文件则不需要重新运行也生效配置
-        restart: ["vite.config.js"],
+        // 通过这个插件，在修改vite.config.ts文件则不需要重新运行也生效配置
+        restart: ["vite.config.ts"],
       }),
       generatePagesJson({
         outFile: "./src/pages.json",
@@ -59,15 +59,7 @@ export default defineConfig(async (config) => {
         imports: ["vue", "uni-app", "pinia"],
         dts: "./types/dts/auto-import/imports.d.ts",
       }),
-      Components({
-        exclude: ["RouterLink", "RouterView"],
-        dirs: ["src/components"],
-        deep: true,
-        extensions: ["vue"],
-        dts: "./types/dts/auto-import/components.d.ts",
-        //(wd-ui 自动引入)
-        resolvers: [WotResolver()],
-      }),
+
       Optimization({
         enable: {
           optimization: true,
@@ -77,11 +69,23 @@ export default defineConfig(async (config) => {
         dts: {
           base: "./types/dts/auto-import",
         },
+        logger: false,
       }),
     ],
     //@ts-ignore
     transpileDependencies: ["uview-plus", "luch-request"],
   };
-
+  //*只有serve时使用vite的自动引入生成全局ts类型支持，其它情况使用uniapp的easycom模式
+  if (config.command === "serve") {
+    option.plugins!.push(
+      Components({
+        exclude: ["RouterLink", "RouterView"],
+        dirs: ["src/components"],
+        deep: true,
+        extensions: ["vue"],
+        dts: "./types/dts/auto-import/components.d.ts",
+      })
+    );
+  }
   return option;
 });

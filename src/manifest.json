@@ -107,6 +107,9 @@
             "urlCheck" : false,
             "minified" : true
         },
+        "optimization": {
+            "subPackages": true
+        },
         "usingComponents" : true,
         "mergeVirtualHostAttributes" : true,
         "permission" : {

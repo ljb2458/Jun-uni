@@ -38,9 +38,9 @@
       "^Gr(.*)": "@/components/group/Gr$1/Gr$1.vue",
       "^Co(.*)": "@/components/common/Co$1/Co$1.vue",
       //(uv-ui 自动引入)
-      "^uv-(.*)": "@climblee/uv-ui/components/uv-$1/uv-$1.vue"
+      "^uv-(.*)": "@climblee/uv-ui/components/uv-$1/uv-$1.vue",
       //(wd-ui 自动引入)
-      // "^wd-(.*)": "wot-design-uni/components/wd-$1/wd-$1.vue"
+      "^wd-(.*)": "wot-design-uni/components/wd-$1/wd-$1.vue"
     }
   },
   /*主包配置（修改将被覆盖，由 generatePagesJson 插件自动生成）*/
