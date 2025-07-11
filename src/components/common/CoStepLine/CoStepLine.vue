@@ -42,7 +42,7 @@
   }
   .CoStepLine_gap {
     display: flex;
-    flex flex-direction: column;
+    flex-direction: column;
     align-items: center;
     align-content: center;
     justify-content: center;
@@ -51,13 +51,11 @@
     .CoStepLine_dot {
       height: var(--size);
       width: var(--size);
-      background-color: var(--c-jun-primary);
-      border-radius: var(--rd-9999999px);
-      border: solid 0.25em var(--c-jun-c);
+      @apply bg-jun-primary rd-9999999px border-all
     }
     .CoStepLine_line {
       flex: 1;
-      border-left: dotted 1px var(--c-jun-c);
+      @apply border-left
     }
   }
 }

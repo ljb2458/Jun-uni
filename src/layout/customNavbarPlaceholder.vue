@@ -20,7 +20,7 @@ const isCustomNavbar = computed(
     <view :style="{ ...defaultStyle }" class="navbar flex items-center">
       <slot :slotProps="{ ...routeInfo! }"> </slot>
     </view>
-    <view class="pb-2"></view>
+    <view class="pb-2px"></view>
   </view>
 </template>
 <style lang="scss" scoped>

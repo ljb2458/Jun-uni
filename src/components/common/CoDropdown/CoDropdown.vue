@@ -113,11 +113,6 @@ const show = useVModel(props, "show", emit);
   }
 }
 </style>
-<style lang="scss" scoped>
-.CoDivider {
-  border-radius: var(--rd-9999999px);
-}
-</style>
 <script lang="ts">
 import mpMixin from "@/components/libs/mixin/mpMixin";
 export default {

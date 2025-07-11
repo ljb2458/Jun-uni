@@ -29,7 +29,7 @@ const props = withDefaults(
     repeat?: string;
   }>(),
   {
-    gap: "var(--gap-sm)",
+    gap: "4px",
     col: 3,
     repeat: "auto",
     align: "center",

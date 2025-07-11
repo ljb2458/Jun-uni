@@ -3,13 +3,12 @@
 import { CoDropdownProps } from "@/components/common/CoDropdown/CoDropdown.vue";
 import { useVModel } from "@/hooks/toolsHooks";
 
-
 export type CoSelections = CoSelectionsItem[];
 export interface CoSelectionsItem extends AnyObject {
   label?: StrNumber;
   value?: any;
 }
-interface CoSelectProps extends /* @vue-ignore */  CoDropdownProps {
+interface CoSelectProps extends /* @vue-ignore */ CoDropdownProps {
   modelValue?: any;
   /**选项集合 */
   selections?: O[];
@@ -44,8 +43,8 @@ const selectedOption = computed(() =>
 
 <template>
   <CoDropdown
-    class="CoSelect border-all !flex justify-between flex items-center rd-md p-2.2"
-    :="{ ...$attrs,...props }"
+    class="CoSelect border-all !flex justify-between items-center rd-md p-2.2"
+    :="{ ...$attrs, ...props }"
     v-model:show="show"
   >
     <template #text>
@@ -57,14 +56,14 @@ const selectedOption = computed(() =>
       <view class="m-2.2">
         <view
           @tap="select(selection)"
-          class="selection gap-sm py-2 border-B px-2.2 flex items-center justify-between active"
+          class="selection gap-sm py-2 border-bottom px-2.2 flex items-center justify-between active"
           :class="{
             selection__selected: Object.is(selection[valueName], modelValue),
           }"
           v-for="(selection, index) in props.selections"
           :key="selection[valueName]"
         >
-          <view class="flex flex-1">
+          <view class="flex-1">
             <slot name="selection" :index="index" :selection="selection">
               <view>{{ selection[labelName] }}</view>
             </slot>
@@ -92,7 +91,7 @@ const selectedOption = computed(() =>
 <style lang="scss" scoped>
 .CoSelect {
   .selection {
-    background-color: var(--c-jun-bg);
+    @apply bg-jun-bg;
     .selection_icon {
       opacity: 0;
     }

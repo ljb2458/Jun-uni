@@ -57,27 +57,26 @@ function autoClose(time: StrNumber) {
   position: fixed;
   left: 0;
   right: 0;
-  color: var(--c-white);
+  @apply c-white
   text-align: center;
   padding-top: var(--status-bar-height);
   z-index: 10076;
 }
 
 .CoNotify__info {
-  background-color: var(--c-jun-bg-2);
-  color: var(--c-jun-c);
+  @apply c-jun-c bg-jun-bg-2;
 }
 .CoNotify__success {
-  background-color: var(--c-jun-success);
+  @apply bg-jun-success;
 }
 .CoNotify__error {
-  background-color: var(--C-fail);
+  @apply bg-jun-fail;
 }
 .CoNotify__warning {
-  background-color: var(--C-warn);
+  @apply bg-jun-warn;
 }
 .CoNotify__primary {
-  background-color: var(--c-jun-primary);
+  @apply bg-jun-primary;
 }
 </style>
 <script lang="ts">

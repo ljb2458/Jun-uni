@@ -66,7 +66,7 @@ function generateBorderRules() {
   ];
   return borderRules.map<[string, any]>(({ key, property }) => [
     `border-${key}`,
-    { [property]: "1px solid var(--el-border-color,#88888888)" },
+    { [property]: "1px solid #88888888" },
   ]);
 }
 

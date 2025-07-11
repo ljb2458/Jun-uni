@@ -7,7 +7,6 @@ const props = withDefaults(
     bg?: string;
   }>(),
   {
-    bg: "var(--c-jun-c  c-op-30)",
     height: "1px",
     width: "100%",
   }
@@ -15,12 +14,12 @@ const props = withDefaults(
 </script>
 
 <template>
-  <view class="CoDivider" :style="{ background: bg, height, width }"></view>
+  <view class="CoDivider" :style="{ height, width }"></view>
 </template>
 
 <style lang="scss" scoped>
 .CoDivider {
-  border-radius: var(--rd-9999999px);
+  @apply rd-9999999px bg-jun-primary;
 }
 </style>
 <script lang="ts">

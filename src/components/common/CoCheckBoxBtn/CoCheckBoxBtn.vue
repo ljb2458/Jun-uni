@@ -11,7 +11,7 @@ interface Props {
   "normal-class"?: any;
   normalClass?: any;
   normalStyle?: StyleValue;
-  "normal-style": StyleValue;
+  "normal-style"?: StyleValue;
   modelValue: any;
   value: any;
   disabled?: boolean;

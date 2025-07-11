@@ -4,13 +4,11 @@ const props = withDefaults(
   defineProps<{
     value?: StrNumber;
     /**为正时颜色 */
-    plusColor?: string;
+    plusClass?: any;
     /**为负时颜色 */
-    minusColor?: string;
+    minusClass?: any;
     /**是否显示正负符号 */
     showSymbol?: boolean;
-    radius?: string;
-    mode?: "bg" | "text";
     leftText?: string;
     rightText?: string;
     /**数字为正时显示的符号 */
@@ -20,36 +18,17 @@ const props = withDefaults(
   }>(),
   {
     value: "--",
-    plusColor: "var(--c-jun-success)",
-    minusColor: "var(--C-fail)",
-    radius: "var(--rd-md)",
-    mode: "bg",
+    plusClass: "c-jun-success",
+    minusClass: "c-jun-fail",
     showSymbol: false,
   }
 );
 const isMinus = computed(() => Number(props.value) < 0);
-const $style = computed(() => ({
-  background: isBg() ? currentColor() : "",
-  color: isText() ? currentColor() : "var(--c-jun-bg)",
-  borderRadius: props.radius,
-}));
 
-/**获得当前颜色 */
-function currentColor() {
-  return isMinus.value ? props.minusColor : props.plusColor;
-}
 
-/**是文本模式 */
-function isText() {
-  return props.mode === "text";
-}
-
-/**是背景模式 */
-function isBg() {
-  return props.mode === "bg";
-}
+const currentClass= computed(()=>isMinus.value ? props.minusClass : props.plusClass)
 const symbol = computed(() =>
-  isMinus.value ? props.minusColor : props.plusSymbol
+  isMinus.value ? props.minusClass : props.plusSymbol
 );
 const $value = computed(() => {
   if (isNaN(Number(props.value)) || (!props.value && props.value !== 0))
@@ -62,10 +41,8 @@ const $value = computed(() => {
 
 <template>
   <text
-    :class="{
-      CPlusMinus__bg: props.mode == 'bg',
-    }"
-    :style="$style"
+  class="CoPlusMinus"
+   :class="[currentClass]"
   >
     <slot name="left"> </slot>
     {{ leftText }}{{ $value }}{{ rightText }}

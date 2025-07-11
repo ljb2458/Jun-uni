@@ -225,7 +225,7 @@ const leftCotrolList = computed<CoMapCotrolsItem[]>(() => {
   const iconArray = [...props.leftCotrols];
   if (!showMap.value) return iconArray;
   iconArray.unshift({
-    class: ["!mT-auto", "bg-transparent"],
+    class: ["!mt-auto", "bg-transparent"],
     orderNo: -999999999999999,
   });
   iconArray.push({
@@ -266,13 +266,13 @@ const rightCotrolList = computed<CoMapCotrolsItem[]>(() => {
         ? _import("src/static/components/imgs/fullScreenExit.png")
         : _import("src/static/components/imgs/fullScreen.png"),
       tap: () => changeFill(),
-      class: ["!mT-auto"],
+      class: ["!mt-auto"],
       orderNo: 31,
     });
   }
 
   iconArray.unshift({
-    class: ["!mT-auto", "bg-transparent"],
+    class: ["!mt-auto", "bg-transparent"],
     orderNo: -999999999999999,
   });
   iconArray.push({
@@ -283,7 +283,7 @@ const rightCotrolList = computed<CoMapCotrolsItem[]>(() => {
   return iconArray;
   function addLocalCotrol() {
     iconArray.push({
-      class: ["!mT-auto"],
+      class: ["!mt-auto"],
       iconPath: _import("src/static/components/imgs/local.png"),
       tap: () => moveToLocal(),
       orderNo: 21,
@@ -292,7 +292,7 @@ const rightCotrolList = computed<CoMapCotrolsItem[]>(() => {
   function addScaleCotrol() {
     iconArray.push(
       {
-        class: ["!mb-0 !mT-auto"],
+        class: ["!mb-0 !mt-auto"],
         iconPath: _import("src/static/components/imgs/plus.png"),
         tap() {
           changeScale(scale.value + 1);
@@ -469,7 +469,7 @@ const rightCotrolList = computed<CoMapCotrolsItem[]>(() => {
     align-items: center;
     justify-content: center;
     justify-items: center;
-    flex flex-direction: column;
+    flex-direction: column;
   }
   .controls__left {
     left: $gap-row;

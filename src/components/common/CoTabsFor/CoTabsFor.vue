@@ -56,7 +56,7 @@ const props = withDefaults(
   {
     modelValue: 0,
     offsetTop: 0,
-    gap: "var(--gap-md)",
+    gap: "14px",
     lazy: true,
     titleKeyName: "name",
     titleScrollable: false,
@@ -329,6 +329,8 @@ watch(
     padding-right: var(--gap);
     // .CoTabsFor_title-top,
     // .CoTabsFor_title-bottom {
+    //   padding-left: var(--gap);
+    //   padding-right: var(--gap);
     // }
   }
 

@@ -218,7 +218,7 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
             v-for="(option, index) in options"
             :key="option.value"
             :id="`item-${option.value}`"
-            class="CoCascader_option py-2 my-1 px-2.2 flex items-center flex justify-between"
+            class="CoCascader_option py-2 my-1 px-2.2 flex items-center justify-between"
             :class="{
               CoCascader_option__disabled: option.disabled,
               'c-jun-primary bg-jun-primary-O1 CoCascader_option__active': Object.is(
@@ -227,7 +227,7 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
               ),
             }"
           >
-            <view class="CoCascader_option_label flex flex-1">
+            <view class="CoCascader_option_label flex-1">
               <slot
                 name="option"
                 :option="option"
@@ -273,7 +273,7 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
 .CoCascader {
   > .CoCascader_text {
     display: inline-block;
-    margin-right: var(--gap-xxs);
+    @apply mr-1;
   }
   > .CoCascader_icon {
     display: inline-block;
@@ -287,13 +287,13 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
     > .CoCascaderPopup_selectedItem {
       display: inline;
       text {
-        color: var(--c-jun-primary);
+        @apply c-jun-primary;
         text-decoration: underline;
       }
       &::after {
         display: inline;
         content: "/";
-        margin: 0 var(--gap-xs);
+        @apply mx-2;
       }
       &:last-of-type {
         &::after {
@@ -321,7 +321,7 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
         visibility: initial;
         opacity: 1;
         flex: 0 92px;
-        margin-right: var(--gap-xs);
+        @apply mr-1;
       }
       &:nth-last-of-type(1) {
         visibility: initial;

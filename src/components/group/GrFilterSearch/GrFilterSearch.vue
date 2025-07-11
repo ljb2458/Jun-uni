@@ -79,10 +79,10 @@ function onTapReset(e: any) {
 </script>
 
 <template>
-  <view class="GrFilterSearch bg-jun-bg py-2 px-2.2">
+  <view class="GrFilterSearch bg-jun-bg ">
     <view class="flex items-center gap-xs">
       <slot name="selections">
-        <view class="self-A-STR" v-if="selections">
+        <view class="self-stretch" v-if="selections">
           <CoSelect
             @selected="(v:any) => emit('selected',v)"
             v-model="selectValue"
@@ -105,7 +105,7 @@ function onTapReset(e: any) {
           input-align="left"
           :show-action="false"
           :="searchProps"
-          :bg-color="false"
+          :bg-color="'none'"
         />
       </view>
       <block v-if="$slots.popup">

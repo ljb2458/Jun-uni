@@ -9,17 +9,11 @@ const props = withDefaults(
     bgboxBlur?: string;
     /**背景盒子class */
     bgboxClass?: any;
-    /**阴影颜色 */
-    shadowColor?: string;
-    /**是否启用阴影效果 */
-    shadow?: boolean;
     /**背景图片，小程序APP中使用背景图片受限，故使用一个定位图片实现背景图片 */
     bgImg?: string;
   }>(),
   {
     bgboxBlur: "none",
-    shadowColor: "rgba(0,0,0,0.2)",
-    shadow: false,
     bgRepeat: "no-repeat",
     bgSize: "cover",
   }
@@ -30,10 +24,8 @@ const props = withDefaults(
   <view
     :style="{
       background: bgImg || false,
-      '--shadow-c': props.shadowColor,
     }"
     class="CoCard"
-    :class="{ shadow: shadow }"
   >
     <view
       class="CoCard_bgbox"
@@ -61,8 +53,7 @@ const props = withDefaults(
 
 <style lang="scss" scoped>
 .CoCard {
-  position: relative;
-  border-radius: var(--rd-md);
+  @apply rd-md relative;
   .CoCard_bgbox {
     overflow: hidden;
     pointer-events: none;

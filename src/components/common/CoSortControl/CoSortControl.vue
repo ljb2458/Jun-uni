@@ -90,21 +90,22 @@ function changeSort() {
 </script>
 
 <template>
-  <view @tap="changeSort" class="CoSortControl inline-flex flex items-stretch">
+  <view @tap="changeSort" class="CoSortControl inline-flex items-stretch">
     <slot> </slot>
     <view class="CoSortControl_marker ml-1 flex flex-col">
       <view class="mt-auto" style="margin-bottom: -2.5px">
         <uv-icon
           name="arrow-up-fill"
           size="12px"
-          :color="nowOrder == ASC ? 'var(--c-jun-primary)' : ''"
+          :class="ASC ? '!c-jun-primary' : ''"
         />
       </view>
       <view class="mb-auto">
         <uv-icon
           name="arrow-down-fill"
           size="12px"
-          :color="nowOrder == DESC ? 'var(--c-jun-primary)' : ''"
+                    :class="DESC ? '!c-jun-primary' : ''"
+
         />
       </view>
     </view>
