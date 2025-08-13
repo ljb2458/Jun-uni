@@ -50,6 +50,13 @@ input:-ms-input-placeholder {
     background-color: var(--C-T1-O5);
   }
 }
+@supports (scrollbar-color: auto) {
+  * {
+    scrollbar-color: var(--C-T1-O2) transparent;
+    scrollbar-width: thin;
+  }
+}
+
 input {
   border: none;
   background: none;
