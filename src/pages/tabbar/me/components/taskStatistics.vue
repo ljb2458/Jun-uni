@@ -69,14 +69,14 @@ const opts = ref({
   <CoCard class="bg-jun-bg rd-md m-lg p-2.2">
     <view class="T-strong">饼图</view>
     <view class="charts-box">
-      <qiun-data-charts
+      <!-- <qiun-data-charts
         :pageScrollTop="scrollTop"
         inScrollView
         type="ring"
         :opts="opts"
         :chartData="chartData"
         canvas-id="taskStatistics"
-      />
+      /> -->
     </view>
   </CoCard>
 </template>

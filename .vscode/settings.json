@@ -21,5 +21,8 @@
     "pages.json": "jsonc" // pages.json 可以写注释
   },
   "unocss.autocomplete.matchType": "fuzzy",
-  "unocss.autocomplete.strict": true
+  "unocss.autocomplete.strict": true,
+  "css.validate": false, // 禁用 CSS 内置验证
+  "scss.validate": false, // 禁用 SCSS 内置验证
+  "less.validate": false // 禁用 LESS 内置验证
 }
