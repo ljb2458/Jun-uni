@@ -71,7 +71,13 @@ function generateBorderRules() {
 }
 
 export default defineConfig({
-  presets: [presetUni()],
+  presets: [
+    presetUni({
+      attributify: {
+        prefixedOnly: true,
+      },
+    }),
+  ],
   transformers: [transformerDirectives(), transformerVariantGroup()],
   theme: {
     colors: { ...generateColors() },
