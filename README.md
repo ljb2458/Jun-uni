@@ -111,9 +111,9 @@ pnpm run dev:mp-weixin
 
 ## 习惯与环境
 
-**使用该框架，我推荐你使用 `vs code` 编译器并安装插件 `Prettier - Code formatter` `Vue - Official`**
+**使用该框架，我推荐你使用 `vs code` 编译器并接受安装我为你推荐的 vscode 插件**  —— 在首次进入项目时编译器会提示你安装我所推荐的插件。你也可以在 .vscode/extensions.json 以此复制 recommendations 的每一项搜索并安装。
 
-**使用该框架，我推荐你添加以下代码片段**
+**使用该框架，我推荐你添加以下代码片段。**
 
 `vs code` 左下角小齿轮=>代码片段=>选择 `vue3-module.code-snippets`
 

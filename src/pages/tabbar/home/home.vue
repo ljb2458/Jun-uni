@@ -13,6 +13,7 @@ import { onPageScroll } from "@dcloudio/uni-app";
 import { RequestList } from "@/components/common/CoRequestList/useRequestList";
 import { CoRequestListInstance } from "@/components/common/CoRequestList/CoRequestList.vue";
 import { randomUUID } from "@/utils/tools/generate";
+import router from "@/utils/router";
 
 const tabsList = reactive([
   {
@@ -54,10 +55,58 @@ async function api(
     message: "success",
   };
 }
+const swiperArray = [
+  {
+    url: _import("/src/static/imgs/block/cascader.jpg"),
+    title: "级联选择器",
+    onTap() {
+      router.push("/src/pages/demo/CoCascaderDemo.vue");
+    },
+  },
+  {
+    url: _import("/src/static/imgs/block/three.jpg"),
+    title: "threejs 3D",
+    onTap() {
+      router.push("/src/pages/demo/CoThreeJsDemo.vue");
+    },
+  },
+  {
+    url: _import("/src/static/imgs/block/echarts.jpg"),
+    title: "echarts 图表",
+    onTap() {
+      router.tabbar("/src/pages/tabbar/me/me.vue");
+    },
+  },
+];
+function onClickSwiper({
+  item,
+}: {
+  item: (typeof swiperArray)[0];
+  index: number;
+}) {
+  item.onTap();
+}
 </script>
 
 <template>
   <CoPageView class="bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
+    <view class="mt-sm">
+      <wd-swiper
+        @click="onClickSwiper"
+        class="mt-1"
+        value-key="url"
+        textKey="title"
+        custom-text-class="swiper_text"
+        :list="swiperArray"
+        previousMargin="48rpx"
+        nextMargin="48rpx"
+        :indicator="{ type: 'dots' }"
+        custom-image-class="rd-lg shadow"
+        custom-next-image-class="swiper_next rd-lg  shadow"
+        custom-prev-image-class="swiper_prev rd-lg  shadow"
+      >
+      </wd-swiper>
+    </view>
     <view
       class="m-lg border-all b-jun-primary rd-md c-jun-primary bg-jun-primary bg-op-20 p-2.2 indent-2"
     >
@@ -89,7 +138,9 @@ async function api(
           :api="api"
         >
           <template #default="{ list }">
-            <view class="m-lg border-all b-jun-primary rd-md c-jun-primary bg-jun-primary bg-op-20 p-2.2 indent-2">
+            <view
+              class="m-lg border-all b-jun-primary rd-md c-jun-primary bg-jun-primary bg-op-20 p-2.2 indent-2"
+            >
               <text class="text-lg">CoRequestList</text>
               <view>
                 自动为您加载分页数据，支持下拉刷新、上拉触底加载、列表状态自动处理、ref
@@ -117,3 +168,16 @@ async function api(
 </template>
 
 <style lang="scss" scoped></style>
+<style lang="scss">
+.swiper_next {
+  @apply transform-origin-l ml-2;
+  transform: scale(0.9);
+}
+.swiper_prev {
+  @apply transform-origin-r mr-2;
+  transform: scale(0.9);
+}
+.swiper_text {
+  @apply \!c-jun-c;
+}
+</style>
