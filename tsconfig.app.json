@@ -24,8 +24,8 @@
     "paths": {
       "@/*": ["src/*"],
       "@": ["src"],
-      "#/*": ["types/*"],
-      "#": ["types"]
+      "#/*": ["config/*"],
+      "#": ["config"]
     }
   },
   "vueCompilerOptions": {
@@ -41,6 +41,7 @@
     "types/**/*.d.ts",
     "types/**/*.tsx",
     "types/**/*.vue",
-    ".envs.d.ts"
+    ".envs.d.ts",
+    "config/**/*.ts"
   ]
 }

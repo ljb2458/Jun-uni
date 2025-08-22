@@ -21,7 +21,7 @@ export default defineConfig(async (config) => {
     resolve: {
       alias: {
         "@": path.join(__dirname, "src"),
-        "#": path.join(__dirname, "types"),
+        "#": path.join(__dirname, "config"),
       },
     },
 

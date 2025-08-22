@@ -9,8 +9,9 @@ import type { onPageScroll } from "@dcloudio/uni-app";
 import { customNavbarInfoStyle } from "@/layout/customNavbar";
 import { getCurrentRouteInfo } from "@/utils/rewriteUni";
 import mpMixin from "@/components/libs/mixin/mpMixin";
-import { StyleValue } from "vue";
+import { CSSProperties, StyleValue } from "vue";
 import { modalProps } from "@/layout/modal";
+import { generateColors, text } from "#/cssVar";
 
 defineOptions(mpMixin);
 const routeInfo = getCurrentRouteInfo();
@@ -58,15 +59,22 @@ const navbarHeightCssVar = computed(() => {
     return `var(--status-bar-height)`;
   }
 });
+const style = computed(() => {
+  const colors = generateColors();
+  const result: CSSProperties = {
+    "--layout-navbar-height": navbarHeightCssVar.value,
+    "--wot-color-theme": text(colors["jun-primary"]),
+    "--wot-color-success": text(colors["jun-success"]),
+    "--wot-color-warning": text(colors['jun-warn']),
+    "--wot-color-danger": text(colors['jun-fail']),
+  };
+  console.log("result", result);
+  return result;
+});
 </script>
 
 <template>
-  <view
-    class="CoPageView"
-    :style="{
-      '--layout-navbar-height': navbarHeightCssVar,
-    }"
-  >
+  <view class="CoPageView" :style="[style]">
     <image
       class="CoPageView__bgImg w-full"
       v-if="bgImg"
