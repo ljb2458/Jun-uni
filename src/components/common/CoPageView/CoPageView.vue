@@ -68,7 +68,6 @@ const style = computed(() => {
     "--wot-color-warning": text(colors['jun-warn']),
     "--wot-color-danger": text(colors['jun-fail']),
   };
-  console.log("result", result);
   return result;
 });
 </script>
