@@ -1,8 +1,9 @@
 import Fs from "fs";
 import Path from "path";
-import type { Plugin } from "vite";
-import { debounce } from "lodash";
+import { loadEnv, type Plugin } from "vite";
+import { debounce, isEqual } from "lodash";
 import CommentJson from "comment-json";
+import process from "process";
 
 interface Page {
   path: string;
@@ -82,15 +83,20 @@ export function generatePagesJson(config: Options): Plugin {
     const pages = traversePagesDir(pagesDir);
     pagesSort(pages); // 对数组进行排序
     const { subPackagesPageCfg, mainPagesCfg } = pagesSubpackages(pages); // 对页面进行分包处理
-    let pagesJson: any;
+    let oldPagesJson: any;
+    const json = Fs.readFileSync(outFile, "utf-8") || "{}";
     try {
-      pagesJson = CommentJson.parse(Fs.readFileSync(outFile, "utf-8") || "{}");
+      oldPagesJson = CommentJson.parse(json);
     } catch (error) {
-      console.error(`源 pages.json 格式错误。在：${Path.resolve(outFile)}`);
+      console.error(
+        `[generatePagesJson] 源 pages.json 格式错误。在：${Path.resolve(
+          outFile
+        )}`
+      );
       throw error;
     }
-
-    CommentJson.assign(pagesJson, {
+    const pageJson = CommentJson.parse(json);
+    CommentJson.assign(pageJson, {
       pages: mainPagesCfg,
       [Symbol.for("before:pages")]: [
         {
@@ -100,7 +106,7 @@ export function generatePagesJson(config: Options): Plugin {
         },
       ],
     });
-    CommentJson.assign(pagesJson, {
+    CommentJson.assign(pageJson, {
       subPackages: subPackagesPageCfg,
       [Symbol.for("before:subPackages")]: [
         {
@@ -110,9 +116,12 @@ export function generatePagesJson(config: Options): Plugin {
         },
       ],
     });
-
-    Fs.writeFileSync(outFile, CommentJson.stringify(pagesJson, null, 2));
-    console.info("🎉 生成文件 pages.json");
+    if (isEqual(pageJson, oldPagesJson)) {
+      console.info("[generatePagesJson] pages.json 文件未修改");
+      return;
+    }
+    Fs.writeFileSync(outFile, CommentJson.stringify(pageJson, null, 2));
+    console.info("[generatePagesJson] 生成文件 pages.json");
   }
 
   /**
@@ -263,7 +272,7 @@ export function generatePagesJson(config: Options): Plugin {
    */
   function parsePageConfig(content: string): any | null {
     const match = content.match(routeRegExp);
-    if (!match) return null;
+    if (!match) return {};
     return CommentJson.parse(match[2].trim());
   }
 
@@ -288,8 +297,9 @@ export function generatePagesJson(config: Options): Plugin {
   return {
     name: "generatePagesJson",
     config(config) {
-      if (config.mode !== "development") return;
-      console.info(`🎉 开始监听 ${Path.join(pagesDir)}`);
+      const env = loadEnv(config.mode!, process.cwd());
+      if (env.VITE_USER_NODE_ENV !== "development") return;
+      console.info(`[generatePagesJson] 开始监听 ${Path.join(pagesDir)}`);
       Fs.watch(pagesDir, { recursive: true }, () => {
         debounceGeneratePagesJson();
       });

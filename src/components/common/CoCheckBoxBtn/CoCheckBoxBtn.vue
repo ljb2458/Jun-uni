@@ -1,17 +1,17 @@
 <!-- 按钮形式的 checkbox（多选） 或 radio（单选） -->
 <script setup lang="ts">
 import type { StyleValue } from "vue";
+
+import mpMixin from "@/components/libs/mixin/mpMixin";
+defineOptions(mpMixin);
+
 type StateKey = "normal" | "active";
 
 interface Props {
-  "active-class"?: any;
   activeClass?: any;
   activeStyle?: StyleValue;
-  "active-style"?: StyleValue;
-  "normal-class"?: any;
   normalClass?: any;
   normalStyle?: StyleValue;
-  "normal-style"?: StyleValue;
   modelValue: any;
   value: any;
   disabled?: boolean;
@@ -33,13 +33,14 @@ const stateKey = computed<StateKey>(() => {
 });
 const emit = defineEmits<{
   (e: "update:modelValue", value: any): void;
+  (e: "change", value: any): void;
 }>();
 function tapItem() {
   if (props.disabled) return;
   if (props.isRadio) return updateRadio();
   updateCheck();
 }
-function updateRadio() {
+async function updateRadio() {
   let modelValue = props.modelValue;
   const isEqual = Object.is(modelValue, props.value);
   if (isEqual) {
@@ -49,8 +50,10 @@ function updateRadio() {
     modelValue = props.value;
   }
   emit("update:modelValue", modelValue);
+  await nextTick();
+  emit("change", modelValue);
 }
-function updateCheck() {
+async function updateCheck() {
   let modelValue = Array.from(props.modelValue || []);
   const index = modelValue.findIndex((item) => Object.is(item, props.value));
   if (index !== -1) {
@@ -60,6 +63,8 @@ function updateCheck() {
     modelValue.push(props.value);
   }
   emit("update:modelValue", modelValue);
+  await nextTick();
+  emit("change", modelValue);
 }
 </script>
 
@@ -69,13 +74,12 @@ function updateCheck() {
     class="CoCheckBoxBtn"
     :class="[
       props[`${stateKey}Class`],
-      props[`${stateKey}-class`],
       `CoCheckBoxBtn__${stateKey}`,
       {
         CoCheckBoxBtn__disabled: props.disabled,
       },
     ]"
-    :style="([props[`${stateKey}Style`],props[`${stateKey}-style`]] as any)"
+    :style="[props[`${stateKey}Style`]]"
   >
     <slot></slot>
   </view>
@@ -86,9 +90,3 @@ function updateCheck() {
   opacity: 0.5;
 }
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

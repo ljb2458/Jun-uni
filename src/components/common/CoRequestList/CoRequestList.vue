@@ -7,6 +7,7 @@ import {
 import CoList from "../CoList/CoList.vue";
 import { CoListInstance, LoadParam } from "../CoList/CoList.vue";
 import CoRequestList from "./CoRequestList.vue";
+import mpMixin from "@/components/libs/mixin/mpMixin";
 export type CoRequestListInstance<F extends RequestList.Api> = Omit<
   GenericComponentExports<typeof CoRequestList>,
   "list" | "result"
@@ -14,6 +15,7 @@ export type CoRequestListInstance<F extends RequestList.Api> = Omit<
   list: RequestList.GetList<F>;
   result: RequestList.GetRes<F> | undefined;
 };
+defineOptions(mpMixin);
 type CoListProps = ComponentPropsType<typeof CoList>;
 interface Props {
   /**
@@ -147,9 +149,3 @@ function isVisible() {
   </CoList>
 </template>
 <style lang="scss" scoped></style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

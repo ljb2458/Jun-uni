@@ -1,14 +1,18 @@
 <!-- 页面视图组件；集成导航栏、对话框、消息提示框、选择面板等 -->
 <script lang="ts" setup>
-import notify from "@/layout/notify.vue";
-import customNavbar from "@/layout/customNavbar.vue";
-import actionSheet from "@/layout/actionSheet.vue";
-import modal from "@/layout/modal.vue";
-
+import notify from "@/layout/notify/notify.vue";
+import customNavbar from "@/layout/customNavbar/customNavbar.vue";
+import actionSheet from "@/layout/actionSheet/actionSheet.vue";
+import modal from "@/layout/modal/modal.vue";
+import loginPopup from "@/layout/loginPopup/loginPopup.vue";
 import type { onPageScroll } from "@dcloudio/uni-app";
-import { defaultStyle } from "@/layout/setCustomNavbar";
+import { customNavbarInfoStyle } from "@/layout/customNavbar";
 import { getCurrentRouteInfo } from "@/utils/rewriteUni";
+import mpMixin from "@/components/libs/mixin/mpMixin";
+import { StyleValue } from "vue";
+import { modalProps } from "@/layout/modal";
 
+defineOptions(mpMixin);
 const routeInfo = getCurrentRouteInfo();
 
 const props = withDefaults(
@@ -21,6 +25,8 @@ const props = withDefaults(
     useCustomNavbar?: boolean;
     useSafetyBottom?: boolean;
     useActionSheet?: boolean;
+    navbarClass?: any;
+    navbarStyle?: StyleValue;
     onPageScroll?: typeof onPageScroll;
     bgImg?: string;
   }>(),
@@ -42,7 +48,9 @@ if (props.onPageScroll) {
 const navbarHeightCssVar = computed(() => {
   if (routeInfo?.style?.navigationStyle === "custom") {
     if (props.useCustomNavbar) {
-      return `calc(var(--status-bar-height) + ${defaultStyle.height || "0px"})`;
+      return `calc(var(--status-bar-height) + ${
+        customNavbarInfoStyle.value.height || "0px"
+      })`;
     }
     return `calc(var(--window-top) + var(--status-bar-height))`;
   }
@@ -59,17 +67,20 @@ const navbarHeightCssVar = computed(() => {
       '--layout-navbar-height': navbarHeightCssVar,
     }"
   >
-    <uv-image
-      class="CoPageView__bgImg"
+    <image
+      class="CoPageView__bgImg w-full"
       v-if="bgImg"
       :src="bgImg"
-      width="100%"
       :mode="'widthFix'"
     />
     <customNavbar
-      :class="{
-        customNavbar__fixed: layoutInfo.scrollTop > 0,
-      }"
+      :class="[
+        {
+          customNavbar__fixed: layoutInfo.scrollTop > 0,
+        },
+        navbarClass,
+      ]"
+      :style="[navbarStyle]"
       :useCustomNavbar="useCustomNavbar"
       :useSafetyTop="useSafetyTop"
     >
@@ -80,11 +91,12 @@ const navbarHeightCssVar = computed(() => {
       </template>
     </customNavbar>
     <actionSheet v-if="useActionSheet"></actionSheet>
+    <loginPopup />
     <notify v-if="useNotify">
       <slot name="notify"></slot>
     </notify>
     <modal v-if="useModal">
-      <slot name="modal"></slot>
+      <slot name="modal">{{ modalProps.content }}</slot>
     </modal>
     <slot></slot>
     <view
@@ -95,7 +107,10 @@ const navbarHeightCssVar = computed(() => {
     </view>
     <view
       :class="key"
-      v-for="key in ['CoPageView_bottom_placeholder', 'CoPageView_bottom bg-jun-bg']"
+      v-for="key in [
+        'CoPageView_bottom_placeholder',
+        'CoPageView_bottom bg-jun-bg',
+      ]"
       :key="key"
       v-if="$slots.fixedBottom"
     >
@@ -116,8 +131,6 @@ const navbarHeightCssVar = computed(() => {
   min-height: calc(100vh - var(--window-top));
   position: relative;
   .CoPageView__bgImg {
-    object-fit: none;
-
     position: fixed;
     top: 0;
     left: 0;
@@ -130,7 +143,7 @@ const navbarHeightCssVar = computed(() => {
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 100;
+    z-index: 2;
   }
   .CoPageView_bottom_placeholder {
     opacity: 0;
@@ -138,12 +151,6 @@ const navbarHeightCssVar = computed(() => {
   }
 }
 .customNavbar__fixed {
- @apply bg-jun-bg c-jun-c bg-none;
+  @apply \!bg-jun-bg \!c-jun-c \!bg-none;
 }
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

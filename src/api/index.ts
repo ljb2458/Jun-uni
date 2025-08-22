@@ -1,5 +1,5 @@
 import { RequestList } from "@/components/common/CoRequestList/useRequestList";
-import useSysStore from "@/store/useSysStore";
+import { useUserStore } from "@/store/user";
 import { createHttpRequest } from "@/utils/HttpRequest";
 const env = import.meta.env;
 let baseURL = "";
@@ -23,11 +23,11 @@ export const defHttp = createHttpRequest(
 );
 //请求拦截器，在这里设置 token
 defHttp.interceptors.request.use((config) => {
-  const sysStore = useSysStore();
+  const userStore = useUserStore();
   config.header = {
     ...config.header,
-    ...sysStore.defHttpHeader,
   };
+  if (userStore.token) config.header.token = userStore.token;
   return config;
 });
 //响应拦截器，在这里修改返回结果。

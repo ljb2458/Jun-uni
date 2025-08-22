@@ -1,97 +1,18 @@
 <route lang="json">
 {
   "navigationBarTitleText": "我的",
-  "enablePullDownRefresh": true,
+  "enablePullDownRefresh": false,
   "navigationStyle": "custom",
   "navigationBarTextStyle": "white"
 }
 </route>
-<script lang="ts" setup>
-import { _import } from "@/utils/tools/import";
+
+<script setup lang="ts">
 import { onPageScroll } from "@dcloudio/uni-app";
-import taskStatistics from "./components/taskStatistics.vue";
-import loopCheck from "./components/loopCheck.vue";
-import { CoStateOrm } from "@/components/common/CoStateTag/CoStateTag.vue";
-import {
-  ButtonOnChooseaddressEvent,
-  ButtonOnGetphonenumberEvent,
-} from "@uni-helper/uni-app-types";
-import { uniApiToPromise } from "@/utils/rewriteUni";
-import useUserinfoStore from "@/store/useUserinfoStore";
-
-const userAuthEnum: CoStateOrm = [
-  {
-    value: 1,
-    label: "管理员",
-    class: "c-jun-primary bg-jun-primary  c-op-30 rd-9999999px px-2 text-xs ml-2",
-  },
-];
-const layoutInfo = reactive({
-  scrollTop: 0,
-});
-onPageScroll((e) => {
-  layoutInfo.scrollTop = e.scrollTop;
-});
-
-const userinfoStore = useUserinfoStore();
-
-async function getPhoneNumber(e: ButtonOnGetphonenumberEvent) {
-  console.log("getPhoneNumber:", e);
-  const { code } = await uniApiToPromise(uni.login);
-  console.log("code", code);
-  const { encryptedData, iv } = e.detail;
-  if (!encryptedData || !iv) return;
-}
-function chooseavatar(e: ButtonOnChooseaddressEvent) {
-  console.log("chooseavatar:", e);
-  uploadAvater(e.detail.avatarUrl);
-}
-
-function uploadAvater(url: string) {
-  userinfoStore.userinfo = {
-    ...userinfoStore.userinfo,
-    avatar: url,
-  };
-}
 </script>
-<template>
-  <CoPageView class="bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
-    <view class="flex items-center m-lg gap-sm text-sm">
-      <button
-        :open-type="'chooseAvatar'"
-        @chooseavatar="chooseavatar"
-        class="p-0 B-B0"
-      >
-        <uv-image
-          radius="var(--rd-md)"
-          height="58px"
-          width="58px"
-          :src="
-            userinfoStore.userinfo?.avatar ||
-            _import('src/static/imgs/icon/avatar__logout.jpg')
-          "
-          :mode="'aspectFill'"
-        ></uv-image>
-      </button>
-      <view>
-        <view class="flex items-center">
-          <view class="text-md T-strong">张三</view>
-          <!-- <button
-              open-type="getPhoneNumber"
-              @getphonenumber="getPhoneNumber"
-              class="p-0 bg-transparent text-md T-strong"
-            >
-              点击登录
-            </button> -->
-          <CoStateTag :state-orm="userAuthEnum" :value="1" />
-        </view>
-        <view class="c-jun-c-2">18888888888</view>
-        <view>某某企业</view>
-      </view>
-    </view>
 
-    <taskStatistics :scrollTop="layoutInfo.scrollTop" />
-    <loopCheck :scrollTop="layoutInfo.scrollTop" />
-  </CoPageView>
+<template>
+  <CoPageView class="bg-jun-bg-1" :onPageScroll="onPageScroll"> </CoPageView>
 </template>
+
 <style lang="scss" scoped></style>

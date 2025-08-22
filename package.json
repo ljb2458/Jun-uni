@@ -91,6 +91,7 @@
     "unocss": "66.0.0",
     "unplugin-auto-import": "^0.18.2",
     "vite": "5.2.8",
-    "vite-plugin-restart": "^0.4.2"
+    "vite-plugin-restart": "^0.4.2",
+    "vue-component-type-helpers": "^3.0.6"
   }
 }

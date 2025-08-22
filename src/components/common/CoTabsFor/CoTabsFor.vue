@@ -10,10 +10,11 @@ import { randomUUID } from "@/utils/tools/generate";
 import { useVModel } from "@/hooks/toolsHooks";
 import type { StyleValue } from "vue";
 import type CoTabsFor from "./CoTabsFor.vue";
+import mpMixin from "@/components/libs/mixin/mpMixin";
 
 export interface CoTabsForOptionsItem extends AnyObject {}
 export type CoTabsForInstance = GenericComponentExports<typeof CoTabsFor>;
-
+defineOptions(mpMixin);
 const props = withDefaults(
   defineProps<{
     /**当前选中的 tab index*/
@@ -357,9 +358,3 @@ watch(
   }
 }
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

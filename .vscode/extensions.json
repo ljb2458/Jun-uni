@@ -1,8 +1,8 @@
 {
     "recommendations": [
         "antfu.unocss",
-        "ionutvmi.path-autocomplete",
         "esbenp.prettier-vscode",
-        "foxundermoon.shell-format"
+        "foxundermoon.shell-format",
+        "christian-kohler.path-intellisense"
     ]
 }

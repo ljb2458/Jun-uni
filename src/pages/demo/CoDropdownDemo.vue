@@ -31,8 +31,8 @@ const show = ref(false);
           我是展开后你能看到的内容，怎么样你看到我了吗？</view
         >
       </CoDropdown>
-      <uv-button class="mt-2.2" :type="'primary'" @tap="show = true"
-        >展开下拉菜单</uv-button
+      <wd-button class="mt-2.2 w-full" :type="'primary'" @tap="show = true"
+        >展开下拉菜单</wd-button
       >
     </view>
   </CoPageView>

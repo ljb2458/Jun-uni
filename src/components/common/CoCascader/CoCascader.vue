@@ -2,6 +2,8 @@
 <script setup lang="ts">
 import { useVModel } from "@/hooks/toolsHooks";
 import { PopupRef } from "@ttou/uv-typings/types/popup";
+import mpMixin from "@/components/libs/mixin/mpMixin";
+defineOptions(mpMixin);
 
 export interface CoCascaderOptionsItem extends AnyObject {
   value: StrNumber;
@@ -59,26 +61,7 @@ const options = useVModel(props, "options", emit);
 const modelValue = useVModel(props, "modelValue", emit);
 const loading = useVModel(props, "loading", emit);
 
-const popupRef = ref<PopupRef & { showPopup: boolean }>();
-const showPopup = computed({
-  get() {
-    return props.show;
-  },
-  async set(v) {
-    if (v && !options.value) loadChildren({ item: undefined, level: 0 });
-    emit("update:show", v);
-    if (!popupRef.value) await nextTick();
-    if (v) popupRef.value!.open();
-    else popupRef.value!.close();
-  },
-});
-watch(
-  () => popupRef.value?.showPopup,
-  (newValue, oldValue) => {
-    if (Object.is(newValue, oldValue)) return;
-    showPopup.value = Boolean(newValue);
-  }
-);
+const show = useVModel(props, "show", emit);
 
 const selectedOptions = computed<CoCascaderOptionsItem[]>(() => {
   const result: CoCascaderOptionsItem[] = [];
@@ -144,7 +127,7 @@ function selectItem(option: CoCascaderOptionsItem, level: number) {
 }
 function submit() {
   emit("submit", selectedOptions.value);
-  showPopup.value = false;
+  show.value = false;
 }
 
 async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
@@ -165,7 +148,7 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
 </script>
 
 <template>
-  <view class="CoCascader" @tap="showPopup = true">
+  <view class="CoCascader" @tap="show = true">
     <view class="CoCascader_value">
       <slot
         name="value"
@@ -175,15 +158,12 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
         {{ selectedOptions[selectedOptions.length - 1]?.label || "请选择" }}
       </slot>
     </view>
-    <view
-      class="CoCascader_icon"
-      :class="{ CoCascader_icon__show: popupRef?.showPopup }"
-    >
+    <view class="CoCascader_icon" :class="{ CoCascader_icon__show: show }">
       <slot name="icon">
-        <uv-icon name="arrow-down" size="1.2em" color="inherit" />
+        <wd-icon name="arrow-down" size="1.2em" color="inherit" />
       </slot>
     </view>
-    <uv-popup @tap.stop ref="popupRef" mode="bottom">
+    <wd-popup @tap.stop v-model="show" position="bottom">
       <view class="CoCascaderPopup_selected m-2.2">
         <slot name="selected" :options="selectedOptions">
           <block v-if="selectedOptions.length">
@@ -221,10 +201,8 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
             class="CoCascader_option py-2 my-1 px-2.2 flex items-center justify-between"
             :class="{
               CoCascader_option__disabled: option.disabled,
-              'c-jun-primary bg-jun-primary-O1 CoCascader_option__active': Object.is(
-                modelValue[level],
-                option.value
-              ),
+              'c-jun-primary bg-jun-primary bg-op-10 CoCascader_option__active':
+                Object.is(modelValue[level], option.value),
             }"
           >
             <view class="CoCascader_option_label flex-1">
@@ -248,7 +226,7 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
                 :level="level"
                 :selected="Object.is(modelValue[level], option.value)"
               >
-                <uv-icon size="1em" color="inherit" name="checkmark" />
+                <wd-icon size="1em" color="inherit" name="check" />
               </slot>
             </view>
           </view>
@@ -262,10 +240,10 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
       </view>
       <slot name="bottom">
         <view class="p-2.2">
-          <uv-button @tap="submit" :type="'primary'">确定</uv-button>
+          <wd-button class="w-full" @tap="submit" :type="'primary'">确定</wd-button>
         </view>
       </slot>
-    </uv-popup>
+    </wd-popup>
   </view>
 </template>
 
@@ -274,6 +252,9 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
   > .CoCascader_text {
     display: inline-block;
     @apply mr-1;
+  }
+  > .CoCascader_value {
+    @apply flex-1;
   }
   > .CoCascader_icon {
     display: inline-block;
@@ -332,10 +313,3 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
   }
 }
 </style>
-
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

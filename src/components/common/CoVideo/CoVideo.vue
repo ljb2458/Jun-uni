@@ -8,13 +8,15 @@ import {
 } from "@uni-helper/uni-app-types";
 import { randomUUID } from "@/utils/tools/generate";
 import envCoverView from "../CoMap/envCoverView.vue";
+import mpMixin from "@/components/libs/mixin/mpMixin";
+
 export interface CoVideoProps {
   videoProps?: VideoProps;
   height?: string;
   width?: string;
   src?: string;
 }
-
+defineOptions(mpMixin);
 const VIDEO_ID = `video-${randomUUID().slice(0, 59)}`;
 
 // 定义组件的 props
@@ -218,11 +220,3 @@ function changeSpeed(item: ArrayToUnion<typeof selectSpeed>) {
   }
 }
 </style>
-
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-import { _import } from "@/utils/tools/import";
-export default {
-  mixins: [mpMixin],
-};
-</script>

@@ -4,6 +4,8 @@ import { randomUUID } from "@/utils/tools/generate";
 import { isNodeVisible } from "@/utils/rewriteUni";
 import type CoList from "./CoList.vue";
 import { StateType } from "@/components/common/CoListStatus/CoListStatus.vue";
+import mpMixin from "@/components/libs/mixin/mpMixin";
+defineOptions(mpMixin);
 
 export interface LoadParam {
   reload: boolean;
@@ -33,8 +35,6 @@ const CListId = `CList${randomUUID()}`;
 const _this = getCurrentInstance();
 const reachBottom = props.onReachBottom || onReachBottom;
 reachBottom(activeLoad);
-
-
 
 async function activeLoad() {
   if (!(await isVisible())) return;
@@ -72,9 +72,3 @@ defineExpose({ activeLoad, activeRelad, load, reload, isVisible });
   </view>
 </template>
 <style lang="scss" scoped></style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

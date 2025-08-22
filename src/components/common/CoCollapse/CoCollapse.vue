@@ -1,6 +1,9 @@
 <!-- 折叠面板 -->
 <script lang="ts" setup>
 import type { StyleValue } from "vue";
+import mpMixin from "@/components/libs/mixin/mpMixin";
+defineOptions(mpMixin);
+
 interface Props {
   "header-class"?: any;
   headerClass?: any;
@@ -61,11 +64,11 @@ const CoCollapse__active = computed(() => {
       </view>
       <view class="CoCollapse_icon">
         <slot name="icon">
-          <uv-icon
-            name="play-right-fill"
+          <wd-icon
+            name="arrow-right"
             color="inherit"
             size="inherit"
-          ></uv-icon>
+          ></wd-icon>
         </slot>
       </view>
     </view>
@@ -110,9 +113,3 @@ const CoCollapse__active = computed(() => {
   }
 }
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

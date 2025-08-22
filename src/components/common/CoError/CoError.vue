@@ -1,6 +1,8 @@
 <!-- 错误展示 -->
 <script lang="ts" setup>
 import { _import } from "@/utils/tools/import";
+import mpMixin from "@/components/libs/mixin/mpMixin";
+defineOptions(mpMixin);
 
 const props = withDefaults(
   defineProps<{
@@ -31,7 +33,7 @@ function clickButton(e: MouseEvent) {
     </slot>
     <slot name="button">
       <view class="mt-lg">
-        <uv-button :size="'mini'" @click="clickButton" text="重新加载"> </uv-button>
+        <wd-button :size="'small'" @click="clickButton"> 重新加载 </wd-button>
       </view>
     </slot>
   </view>
@@ -43,9 +45,3 @@ function clickButton(e: MouseEvent) {
   flex-direction: column;
 }
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

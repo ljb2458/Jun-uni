@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import mpMixin from "@/components/libs/mixin/mpMixin";
+import { StyleValue } from "vue";
+defineOptions(mpMixin);
 const props = withDefaults(
   defineProps<{
     class?: any;
@@ -34,10 +37,3 @@ const props = withDefaults(
 </template>
 
 <style lang="scss" scoped></style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-import { StyleValue } from "vue";
-export default {
-  mixins: [mpMixin],
-};
-</script>

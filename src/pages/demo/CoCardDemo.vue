@@ -27,10 +27,10 @@ import { onPageScroll } from "@dcloudio/uni-app";
       class="bg-jun-bg rd-md m-lg c-black"
     >
       <view
-        class="flex items-center flex justify-center text-xl z-2"
+        class="flex items-center flex justify-center text-xl relative z-2"
         style="height: 250px"
       >
-        <view class="T-A-C">
+        <view class="text-center">
           使用图片背景
           <view class="text-sm">非必要不推荐使用，需要设置z-index</view>
         </view>
@@ -39,14 +39,14 @@ import { onPageScroll } from "@dcloudio/uni-app";
     <CoCard
       bgboxBlur="8px"
       bgboxClass="p-2.2"
-      class="loginCard bg-jun-bg c-op-30 rd-md m-lg p-sm"
+      class="loginCard bg-jun-bg bg-op-30 rd-md m-lg p-sm"
     >
       <template #bgbox>
         <view class="colorbox flex justify-between"></view>
       </template>
-      <view class="z-2">
+      <view class="relative z-2">
         <view
-          class="flex justify-center flex items-center text-xl"
+          class="flex  justify-center flex items-center text-xl"
           style="height: 250px"
         >
           模糊卡片示例

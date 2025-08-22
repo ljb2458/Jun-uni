@@ -2,18 +2,25 @@
 
 <script lang="ts" setup>
 import { ColorTheme } from "@/components/types";
+import mpMixin from "@/components/libs/mixin/mpMixin";
 
+defineOptions(mpMixin);
 const props = withDefaults(
   defineProps<{
     show?: boolean;
     type?: ColorTheme;
     duration?: number;
     message?: string;
-    top?: StrNumber;
+    top?: string;
+    customNavHeight?: string;
+    zIndex?: StrNumber;
   }>(),
   {
     type: "info",
     duration: 3000,
+    top: "0px",
+    customNavHeight: "var(--layout-navbar-height)",
+    zIndex: 9999999999999,
   }
 );
 const emit = defineEmits<{
@@ -40,17 +47,17 @@ function autoClose(time: StrNumber) {
 }
 </script>
 <template>
-  <uv-transition
+  <wd-transition
     class="CoNotify"
-    :style="{ top: props.top || '0px' }"
+    :style="{ top: `calc(${top} + ${customNavHeight})`, zIndex }"
     :class="`CoNotify__${props.type}`"
     :show="props.show"
-    mode="slide-top"
+    name="slide-down"
   >
     <view class="CoNotify_message p-2.2">
       {{ message }}
     </view>
-  </uv-transition>
+  </wd-transition>
 </template>
 <style lang="scss" scoped>
 .CoNotify {
@@ -59,8 +66,6 @@ function autoClose(time: StrNumber) {
   right: 0;
   @apply c-white
   text-align: center;
-  padding-top: var(--status-bar-height);
-  z-index: 10076;
 }
 
 .CoNotify__info {
@@ -79,9 +84,3 @@ function autoClose(time: StrNumber) {
   @apply bg-jun-primary;
 }
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

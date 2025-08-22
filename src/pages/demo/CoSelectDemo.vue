@@ -42,7 +42,7 @@ const selectedValue3 = ref<string>();
           <view>自定义选项布局</view>
         </template>
         <template #extraSelection>
-          <uv-loading-icon text="额外插槽" />
+          <wd-loading text="额外插槽" />
         </template>
       </CoSelect>
       <view class="my-2"> 选中的value：{{ selectedValue2 }} </view>

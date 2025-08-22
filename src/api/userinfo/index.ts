@@ -6,7 +6,7 @@ export async function apiGetWxPhone(
   data: ApiGetWxPhone.Req
 ): Promise<Api.Res<ApiGetWxPhone.Res>> {
   const res = await defHttp.get<Api.Res<ApiGetWxPhone.Res>>(
-    "/SysWxOpenHouseSafety/wxPhone",
+    "/api/sysWxOpen/wxPhone",
     { params: data }
   );
   return res;
@@ -32,7 +32,7 @@ export namespace ApiGetWxPhone {
 /**获取微信用户信息 */
 export async function apiWxUserinfo(): Promise<Api.Res<ApiWxUserinfo.Res>> {
   const res = await defHttp.get<Api.Res<ApiWxUserinfo.Res>>(
-    "/account/wXUserInfo"
+    "/api/account/wXUserInfo"
   );
   return res;
 }
@@ -468,7 +468,7 @@ export async function apiLogin(
   data: ApiLogin.Req
 ): Promise<Api.Res<ApiLogin.Res>> {
   const res = await defHttp.post<Api.Res<ApiLogin.Res>>(
-    "/account/wxMiniLogin",
+    "/api/account/wxOpenIdLogin",
     data,
     {
       custom: {
@@ -487,111 +487,17 @@ export namespace ApiLogin {
   }
   export interface Res {
     accessToken: string;
-    refreshToken: string;
+    avatar: string | null;
+    nickName: string | null;
+    userId: number;
   }
 }
 
-/**检查用户是否有网格员角色 */
-export async function apiCheckUserRole(
-  data: ApiCheckUserRole.Req
-): Promise<Api.Res<ApiCheckUserRole.Res>> {
-  const res = await defHttp.post<Api.Res<ApiCheckUserRole.Res>>(
-    "/account/checkUserRole",
-    data
-  );
-  return res;
-}
-
-/**检查用户是否有网格员角色 */
-export namespace ApiCheckUserRole {
-  export interface Req {
-    mobile?: string;
-    openId: string;
-  }
-  export interface Res {
-    code: Code;
-    msg: string;
-  }
-  export enum Code {
-    /** 无权限 */
-    None = 0,
-
-    /** 审核中 */
-    WaitProcessed = 1,
-
-    /** 通过 */
-    Approved = 2,
-
-    /** 拒绝 */
-    Denied = 3,
-  }
-}
-
-/**微信小程序申请成为网格员 */
-export async function apiUserRequestGridRole(
-  data: ApiUserRequestGridRole.Req
-): Promise<Api.Res<ApiUserRequestGridRole.Res>> {
-  const res = await defHttp.post<Api.Res<ApiUserRequestGridRole.Res>>(
-    "/account/userRequestGridRole",
-    data,
-    {
-      custom: {
-        failMessage: true,
-        successMessage: true,
-      },
-    }
-  );
-  return res;
-}
-
-/**微信小程序申请成为网格员 */
-export namespace ApiUserRequestGridRole {
-  export interface Req {
-    address?: string;
-    mobile?: string;
-    name?: string;
-  }
-  export interface Res {}
-}
-
-/**智能安全帽token */
-export async function apiGetSmartHelmetToken(): Promise<
-  Api.Res<ApiGetSmartHelmetToken.Res>
-> {
-  const res = await defHttp.get<Api.Res<ApiGetSmartHelmetToken.Res>>(
-    "/smartHelmet/getToken"
-  );
-  return res;
-}
-
-/**智能安全帽token */
-export namespace ApiGetSmartHelmetToken {
-  export interface Req {}
-
-  export interface Res {
-    code: number;
-    data: LoginResponse;
-    msg: string;
-  }
-
-  /**
-   * LoginResponse
-   */
-  export interface LoginResponse {
-    appID: number;
-    changePassword: boolean;
-    locking: number;
-    remaining: number;
-    timeout: number;
-    token: string;
-  }
-}
 
 /**上传小程序头像 */
 export async function apiUploadAvatar(
   data: ApiUploadAvatar.Req
 ): Promise<Api.Res<ApiUploadAvatar.Res>> {
-  console.log("data", data);
   const res = await defHttp.upload<Api.Res<ApiUploadAvatar.Res>>(
     "/SysWxOpenHouseSafety/uploadAvatar",
     data
@@ -721,7 +627,7 @@ export async function apiUpdateUserInfo(
     {
       custom: {
         failMessage: true,
-        successMessage: true,
+        successMessage: "更新成功！",
         routerBack: true,
       },
     }
@@ -739,4 +645,55 @@ export namespace ApiUpdateUserInfo {
     name?: string;
   }
   export interface Res {}
+}
+
+/**获取用户详细信息 */
+export async function apiUserInfo(): Promise<Api.Res<ApiUserinfo.Res>> {
+  const res = await defHttp.post<Api.Res<ApiUserinfo.Res>>("/appAuth/userInfo");
+  return res;
+}
+
+export namespace ApiUserinfo {
+  export interface Res {
+    id: number;
+    tenantId: number;
+    account: string;
+    realName: string;
+    phone: string;
+    idCardNum: string;
+    email: string;
+    accountType: number;
+    avatar: string;
+    introduction: string;
+    address: string;
+    signature: string;
+    orgId: number;
+    orgName: string;
+    orgType: string;
+    posName: string;
+    apis: string[];
+    roleIds: number[];
+    watermarkText: string;
+  }
+}
+
+/**获取用户openId */
+export async function apiGetWxOpenId(
+  data: ApiGetWxOpenId.Req
+): Promise<Api.Res<ApiGetWxOpenId.Res>> {
+  const res = await defHttp.get<Api.Res<ApiGetWxOpenId.Res>>(
+    "/api/sysWxOpen/wxOpenId",
+    { params: data }
+  );
+  return res;
+}
+
+/**获取用户openId */
+export namespace ApiGetWxOpenId {
+  export interface Req {
+    JsCode: string;
+  }
+  export interface Res {
+    openId: string;
+  }
 }

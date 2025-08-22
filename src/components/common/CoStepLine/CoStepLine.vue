@@ -1,5 +1,8 @@
 <!-- 竖状步骤条布局 -->
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import mpMixin from "@/components/libs/mixin/mpMixin";
+defineOptions(mpMixin);
+</script>
 
 <template>
   <view
@@ -51,18 +54,12 @@
     .CoStepLine_dot {
       height: var(--size);
       width: var(--size);
-      @apply bg-jun-primary rd-9999999px border-all
+      @apply bg-jun-primary rd-9999999px border-all;
     }
     .CoStepLine_line {
       flex: 1;
-      @apply border-left
+      @apply border-left;
     }
   }
 }
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

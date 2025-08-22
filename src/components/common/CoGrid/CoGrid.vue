@@ -2,6 +2,8 @@
 <script lang="ts" setup>
 import type { Property, Globals } from "csstype";
 import { filterObject } from "@/utils/tools/object";
+import mpMixin from "@/components/libs/mixin/mpMixin";
+defineOptions(mpMixin);
 
 const props = withDefaults(
   defineProps<{
@@ -85,9 +87,3 @@ function repeat(number: number, symbol: string) {
   grid-auto-flow: var(--CoGrid-gridAutoFlow);
 }
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

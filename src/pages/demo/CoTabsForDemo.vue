@@ -43,7 +43,7 @@ const currTab = ref(0);
         :options="tabsList"
       >
         <template #title-top>
-          <view class="T-A-C border-all"> 标题顶部插槽 </view>
+          <view class="text-center border-all"> 标题顶部插槽 </view>
         </template>
         <template #title-left>
           <view class="border-all" style="width: 2em"> 标题左侧插槽 </view>
@@ -52,7 +52,7 @@ const currTab = ref(0);
           <view class="border-all" style="width: 2em"> 标题右侧插槽 </view>
         </template>
         <template #title-bottom>
-          <view class="T-A-C border-all"> 标题底部插槽 </view>
+          <view class="text-center border-all"> 标题底部插槽 </view>
           <text class="text-lg mt-lg">控制切换选项卡</text>
           <CoSelect
             class="mt-2 bg-jun-bg border-none"

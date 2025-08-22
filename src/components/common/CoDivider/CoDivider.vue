@@ -1,5 +1,8 @@
 <!-- 分割线 -->
 <script lang="ts" setup>
+import mpMixin from "@/components/libs/mixin/mpMixin";
+defineOptions(mpMixin);
+
 const props = withDefaults(
   defineProps<{
     height?: string;
@@ -22,9 +25,3 @@ const props = withDefaults(
   @apply rd-9999999px bg-jun-primary;
 }
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

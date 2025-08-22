@@ -1,6 +1,9 @@
 <!-- 卡片 -->
 <script lang="ts" setup>
 import { StyleValue } from "vue";
+import mpMixin from "@/components/libs/mixin/mpMixin";
+defineOptions(mpMixin);
+
 const props = withDefaults(
   defineProps<{
     /**背景盒子样式 */
@@ -23,7 +26,7 @@ const props = withDefaults(
 <template>
   <view
     :style="{
-      background: bgImg || false,
+      backgroundImage: bgImg || 'none',
     }"
     class="CoCard"
   >
@@ -38,11 +41,10 @@ const props = withDefaults(
       ]"
     >
       <slot name="bgbox">
-        <uv-image
-          class="CoCard_bgImg"
+        <image
+          class="CoCard_bgImg w-full"
           v-if="bgImg"
           :src="bgImg"
-          width="100%"
           :mode="'widthFix'"
         />
       </slot>
@@ -65,9 +67,3 @@ const props = withDefaults(
   }
 }
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

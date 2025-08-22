@@ -1,5 +1,8 @@
 <!-- 正负数字展示组件；正数默认为绿色、负数默认为红色。 -->
 <script lang="ts" setup>
+import mpMixin from "@/components/libs/mixin/mpMixin";
+defineOptions(mpMixin);
+
 const props = withDefaults(
   defineProps<{
     value?: StrNumber;
@@ -55,9 +58,3 @@ const $value = computed(() => {
   padding: 0 0.4em;
 }
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

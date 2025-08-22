@@ -2,6 +2,8 @@
 import { FileListOption } from "@ttou/uv-typings/types/upload";
 import { apiUploadFile, ApiUploadFile } from "@/api/sys/index";
 import { UploadAccept } from "@ttou/uv-typings/types/upload";
+import { useVModel } from "@/hooks/toolsHooks";
+import mpMixin from "@/components/libs/mixin/mpMixin";
 
 export interface UploadEvent {
   file: Array<{
@@ -23,6 +25,7 @@ export interface FileListItem extends FileListOption {
   data?: ApiUploadFile.Res;
 }
 export type FileList = FileListItem[];
+defineOptions(mpMixin);
 const props = withDefaults(
   defineProps<{
     /**
@@ -123,10 +126,3 @@ function delMedia(e: { index: number; name: string; file: FileListItem }) {
 </template>
 
 <style lang="scss" scoped></style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-import { useVModel } from "@/hooks/toolsHooks";
-export default {
-  mixins: [mpMixin],
-};
-</script>

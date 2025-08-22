@@ -1,12 +1,14 @@
 <script setup lang="ts" generic="S extends CoSelectionsItem,K extends keyof S">
-import type { PopupRef, PopupProps } from "@ttou/uv-typings/types/popup";
+import wdPopup from "wot-design-uni/components/wd-popup/wd-popup.vue";
 import type { SearchProps } from "@ttou/uv-typings/types/search";
 import type { CoDropdownProps as DropdownProps } from "@/components/common/CoDropdown/CoDropdown.vue";
 import { useVModel } from "@/hooks/toolsHooks";
-import customNavbarPlaceholder from "@/layout/customNavbarPlaceholder.vue";
+import customNavbarPlaceholder from "@/layout/customNavbar/customNavbarPlaceholder.vue";
 import { CoSelectionsItem } from "@/components/common/CoSelect/CoSelect.vue";
+import mpMixin from "@/components/libs/mixin/mpMixin";
+import type { ComponentProps } from "vue-component-type-helpers";
 
-const uvPopupRef = ref<PopupRef>();
+defineOptions(mpMixin);
 
 const props = withDefaults(
   defineProps<{
@@ -16,7 +18,7 @@ const props = withDefaults(
     valueKey?: K;
     selections?: S[];
     showPopup?: boolean;
-    popupProps?: PopupProps;
+    popupProps?: ComponentProps<typeof wdPopup>;
     searchProps?: Partial<SearchProps>;
     popupWidth?: string;
     dropdownProps?: DropdownProps;
@@ -44,7 +46,7 @@ const emit = defineEmits<{
   "update:selectValue": [v: S[K]];
   "update:modelValue": [v: string];
 }>();
-const showPopup = useVModel(props, "showPopup", emit as any, {
+const showPopup = useVModel(props, "showPopup", emit, {
   defaultValue: false,
 });
 const modelValue = computed({
@@ -63,23 +65,20 @@ const selectValue = computed({
     emit("update:selectValue", v as any);
   },
 });
-watch(showPopup, (newValue) => {
-  if (newValue) return uvPopupRef.value?.open();
-  uvPopupRef.value?.close();
-});
 
 function onTapSubmit(e: any) {
-  if (Object.is(props.showPopup, undefined)) uvPopupRef.value?.close();
+  showPopup.value = false;
   emit("popup:tapSubmit", e);
 }
 function onTapReset(e: any) {
-  if (Object.is(props.showPopup, undefined)) uvPopupRef.value?.close();
+  showPopup.value = false;
+
   emit("popup:tapReset", e);
 }
 </script>
 
 <template>
-  <view class="GrFilterSearch bg-jun-bg ">
+  <view class="GrFilterSearch bg-jun-bg">
     <view class="flex items-center gap-xs">
       <slot name="selections">
         <view class="self-stretch" v-if="selections">
@@ -110,13 +109,13 @@ function onTapReset(e: any) {
       </view>
       <block v-if="$slots.popup">
         <view
-          @tap="uvPopupRef?.open"
+          @tap="showPopup = false"
           class="text-sm c-jun-c-1 flex items-center gap-xxs active"
         >
           <CoIcon size="1.7em" name="cicon-shaixuan" />
           <view style="width: 1em" class="T-H-9em">筛选</view>
         </view>
-        <uv-popup ref="uvPopupRef" mode="right" :="popupProps">
+        <wd-popup :="popupProps" position="right" v-model="showPopup">
           <view
             class="p-2.2 PT-0 flex flex-col h-full"
             :style="{ width: popupWidth }"
@@ -124,13 +123,13 @@ function onTapReset(e: any) {
             <customNavbarPlaceholder class="!pl-0">
               <view class="flex items-center w-full">
                 <slot name="popup-navbar">
-                  <view class="T-strong c-jun-primary">高级筛选</view>
+                  <view class="font-bold c-jun-primary">高级筛选</view>
                 </slot>
-                <uv-icon
+                <wd-icon
                   class="ml-auto"
                   name="close"
                   size="18px"
-                  @tap="uvPopupRef?.close"
+                  @tap="showPopup = false"
                 />
               </view>
             </customNavbarPlaceholder>
@@ -138,19 +137,28 @@ function onTapReset(e: any) {
             <slot name="popup-bottom">
               <view class="flex gap-md mt-auto">
                 <view class="flex flex-1">
-                  <uv-button @tap="onTapReset" :type="'primary'" plain>
+                  <wd-button
+                    class="w-full"
+                    @tap="onTapReset"
+                    :type="'primary'"
+                    plain
+                  >
                     重置
-                  </uv-button>
+                  </wd-button>
                 </view>
                 <view class="flex flex-1">
-                  <uv-button @tap="onTapSubmit" :type="'primary'">
+                  <wd-button
+                    class="w-full"
+                    @tap="onTapSubmit"
+                    :type="'primary'"
+                  >
                     确定
-                  </uv-button>
+                  </wd-button>
                 </view>
               </view>
             </slot>
           </view>
-        </uv-popup>
+        </wd-popup>
       </block>
     </view>
     <slot></slot>
@@ -158,9 +166,3 @@ function onTapReset(e: any) {
 </template>
 
 <style lang="scss" scoped></style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

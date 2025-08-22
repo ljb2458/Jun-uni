@@ -39,23 +39,41 @@ input:-ms-input-placeholder {
 }
 //滚动条
 ::-webkit-scrollbar {
-  display: block !important;
-  width: 4px !important;
-  background: none;
+  @apply w-2 bg-transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: var(--C-T1-O2);
-  border-radius: 999px;
+  @apply bg-jun-c rd-max bg-op-30;
+  &:hover {
+    @apply bg-jun-c bg-op-40;
+  }
   &:active {
-    background-color: var(--C-T1-O5);
+    @apply bg-jun-c bg-op-50;
   }
 }
-// @supports (scrollbar-color: auto) {
-//   * {
-//     scrollbar-color: var(--C-T1-O2) transparent;
-//     scrollbar-width: thin;
-//   }
-// }
+// 滚动条轨道
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+// 滚动条角落（水平和垂直滚动条交汇处）
+::-webkit-scrollbar-corner {
+  @apply bg-transparent;
+}
+//#ifdef MP
+@supports (scrollbar-color: auto) {
+  page view text scroll-view {
+    scrollbar-color: #00000088 transparent;
+    scrollbar-width: thin;
+  }
+}
+//#endif
+// #ifndef MP
+@supports (scrollbar-color: auto) {
+  * {
+    scrollbar-color: #00000088 transparent;
+    scrollbar-width: thin;
+  }
+}
+// #endif
 
 input {
   border: none;

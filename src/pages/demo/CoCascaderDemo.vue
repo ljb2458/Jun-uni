@@ -120,8 +120,8 @@ async function getNextLevelList(e: CoCascaderLoadChildrenEnvet) {
           ❤
         </template>
         <template #bottom>
-          <uv-button class="p-2.2" :type="'success'"
-            >自定义按钮，使用该插槽，原有的按钮功能将失效</uv-button
+          <wd-button class="p-2.2 w-full" :type="'success'"
+            >自定义按钮，使用该插槽，原有的按钮功能将失效</wd-button
           >
         </template>
       </CoCascader>

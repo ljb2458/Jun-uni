@@ -24,6 +24,7 @@ import type {
   CanvasOnTouchmoveEvent,
   CanvasOnTouchstartEvent,
 } from "@uni-helper/uni-app-types";
+import mpMixin from "@/components/libs/mixin/mpMixin";
 
 export interface CoThreeJsCtx {
   defScene: Scene;
@@ -35,6 +36,7 @@ export interface CoThreeJsCtx {
   renderer: WebGL1Renderer;
   onUpdate: Fun<[Fun<[Clock]>], void>;
 }
+defineOptions(mpMixin);
 const updateCallBackArray: Fun[] = [];
 const ctx: CoThreeJsCtx = {
   defScene: new Scene(),
@@ -171,10 +173,3 @@ function onError(e: CanvasOnErrorEvent) {
   }
 }
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-import { _import } from "@/utils/tools/import";
-export default {
-  mixins: [mpMixin],
-};
-</script>

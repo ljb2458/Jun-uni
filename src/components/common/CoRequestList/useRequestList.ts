@@ -78,6 +78,8 @@ export function useRequestList<F extends RequestList.Api>(
   const result = ref<RequestList.GetRes<F>>();
   /**重置分页接口 */
   async function rerequest() {
+    list.value = [];
+    await nextTick();
     pageNo = defPageNo;
     stateNext();
     return await request();

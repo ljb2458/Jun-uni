@@ -2,6 +2,7 @@
 <script setup lang="ts">
 import type { StyleValue } from "vue";
 import { bitsAuth } from "@/utils/tools/bits";
+import mpMixin from "@/components/libs/mixin/mpMixin";
 
 export interface StateOrmItem extends AnyObject {
   value: StrNumber;
@@ -10,6 +11,7 @@ export interface StateOrmItem extends AnyObject {
   style?: StyleValue;
 }
 export interface CoStateOrm extends Array<StateOrmItem> {}
+defineOptions(mpMixin);
 const props = withDefaults(
   defineProps<{
     /**状态 */
@@ -52,9 +54,3 @@ const current = computed<StateOrmItem | undefined>(() => {
   display: inline-block;
 }
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

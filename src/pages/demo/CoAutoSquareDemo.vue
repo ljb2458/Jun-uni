@@ -15,11 +15,11 @@ import { onPageScroll } from "@dcloudio/uni-app";
 <template>
   <CoPageView class="bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
     <view class="demo-container p-lg">
-      <view class="T-A-C text-lg T-strong mb-lg">自动正方形组件 Demo</view>
+      <view class="text-center text-lg font-bold mb-lg">自动正方形组件 Demo</view>
       <view class="c-jun-c-2">该组件的高度随宽度变化而变化</view>
       <!-- 默认正方形 -->
       <view class="demo-section mb-lg">
-        <view class="T-A-C text-md T-strong mb-2 mt-2.2">默认正方形</view>
+        <view class="text-center text-sm font-bold mb-2 mt-2.2">默认正方形</view>
         <CoAutoSquare class="square-box border-all">
           <view class="content flex flex items-center flex justify-center c-jun-c-1">
             这是一个正方形
@@ -29,7 +29,7 @@ import { onPageScroll } from "@dcloudio/uni-app";
 
       <!-- 长方形 -->
       <view class="demo-section">
-        <view class="T-A-C text-md T-strong mb-2"
+        <view class="text-center text-sm font-bold mb-2"
           >长方形（高度比例为 0.5）</view
         >
         <CoAutoSquare :heightScale="0.5" class="rectangle-box border-all">
@@ -41,7 +41,7 @@ import { onPageScroll } from "@dcloudio/uni-app";
 
       <!-- Grid 布局中的效果 -->
       <view class="demo-section">
-        <view class="T-A-C text-md T-strong mb-2">Grid 布局中的效果</view>
+        <view class="text-center text-sm font-bold mb-2">Grid 布局中的效果</view>
         <view class="grid-container gap-sm">
           <CoAutoSquare v-for="i in 4" :key="i" class="border-all">
             <view class="content flex flex items-center flex justify-center c-jun-c-1">

@@ -67,7 +67,7 @@
       "path": "pages/tabbar/me/me",
       "style": {
         "navigationBarTitleText": "我的",
-        "enablePullDownRefresh": true,
+        "enablePullDownRefresh": false,
         "navigationStyle": "custom",
         "navigationBarTextStyle": "white"
       }

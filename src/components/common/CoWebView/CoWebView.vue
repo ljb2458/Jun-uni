@@ -1,11 +1,13 @@
 <!-- web-view -->
 <script setup lang="ts">
 import { WebViewOnMessageEvent } from "@uni-helper/uni-app-types";
+import mpMixin from "@/components/libs/mixin/mpMixin";
+
 export interface MessageEvent {
   action: string;
   data: AnyObject;
 }
-
+defineOptions(mpMixin);
 const props = defineProps<{
   src: string;
   modelValue?: AnyObject;
@@ -33,11 +35,3 @@ function onMessage(e: WebViewOnMessageEvent) {
 </template>
 
 <style lang="scss" scoped></style>
-
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-import { _import } from "@/utils/tools/import";
-export default {
-  mixins: [mpMixin],
-};
-</script>

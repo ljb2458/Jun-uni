@@ -19,7 +19,7 @@ import envCoverImage from "./envCoverImage.vue";
 import { debounce } from "lodash-es";
 import { useUniOn } from "@/hooks/toolsHooks";
 import { CoMap } from "@/enum/pubsubKey/components";
-
+import mpMixin from "@/components/libs/mixin/mpMixin";
 export interface CoMapMarker extends MapMarker, AnyObject {
   iconPath?: string;
   callout?: CoMapCallout;
@@ -48,6 +48,7 @@ export interface CoMapCotrolsItem {
   orderNo?: number;
 }
 
+defineOptions(mpMixin);
 const MIN_SCALE = 3;
 const MAX_SCALE = 20;
 const LATITUDE = 39.909;
@@ -225,11 +226,11 @@ const leftCotrolList = computed<CoMapCotrolsItem[]>(() => {
   const iconArray = [...props.leftCotrols];
   if (!showMap.value) return iconArray;
   iconArray.unshift({
-    class: ["!mt-auto", "bg-transparent"],
+    class: ["!mt-auto", "!bg-transparent"],
     orderNo: -999999999999999,
   });
   iconArray.push({
-    class: ["!mb-auto", "bg-transparent"],
+    class: ["!mb-auto", "!bg-transparent"],
     orderNo: 999999999999999,
   });
   iconArray.sort((a, b) => Number(a.orderNo) - Number(b.orderNo));
@@ -272,11 +273,11 @@ const rightCotrolList = computed<CoMapCotrolsItem[]>(() => {
   }
 
   iconArray.unshift({
-    class: ["!mt-auto", "bg-transparent"],
+    class: ["!mt-auto", "!bg-transparent"],
     orderNo: -999999999999999,
   });
   iconArray.push({
-    class: ["!mb-auto", "bg-transparent"],
+    class: ["!mb-auto", "!bg-transparent"],
     orderNo: 999999999999999,
   });
   iconArray.sort((a, b) => Number(a.orderNo) - Number(b.orderNo));
@@ -324,7 +325,7 @@ const rightCotrolList = computed<CoMapCotrolsItem[]>(() => {
       :min-scale="$mapProps.minScale"
       :max-scale="$mapProps.maxScale"
       :layer-style="$mapProps.layerStyle"
-      :markers="$mapProps.markers"
+      :markers="($mapProps.markers as any)"
       :polyline="$mapProps.polyline"
       :circles="$mapProps.circles"
       :polygons="$mapProps.polygons"
@@ -497,9 +498,3 @@ const rightCotrolList = computed<CoMapCotrolsItem[]>(() => {
   border-radius: 0 !important;
 }
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

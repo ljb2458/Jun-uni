@@ -1,6 +1,9 @@
 <!-- 下拉菜单 -->
 <script setup lang="ts">
 import { useVModel } from "@/hooks/toolsHooks";
+import mpMixin from "@/components/libs/mixin/mpMixin";
+defineOptions(mpMixin);
+
 export interface CoDropdownProps {
   show?: boolean;
   /**下拉菜单按钮部分文字 */
@@ -30,7 +33,7 @@ const show = useVModel(props, "show", emit);
     </view>
     <view class="CoDropdown_icon">
       <slot name="icon">
-        <uv-icon name="arrow-down" size="1.2em" color="inherit" />
+        <wd-icon name="arrow-down" size="1.2em" color="inherit" />
       </slot>
     </view>
     <view @tap.stop="show = false" class="CoDropdown_masking"></view>
@@ -113,9 +116,3 @@ const show = useVModel(props, "show", emit);
   }
 }
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

@@ -58,8 +58,11 @@ async function api(
 
 <template>
   <CoPageView class="bg-jun-bg-1 pb-lg" :onPageScroll="onPageScroll">
-    <view class="m-lg border-all p-2.2">
-      <text class="text-lg">CoTabsFor</text>
+    <view
+      class="m-lg border-all b-jun-primary rd-md c-jun-primary bg-jun-primary bg-op-20 p-2.2 indent-2"
+    >
+      <text class="text-lg indent-0">CoTabsFor</text>
+      <view>该组件编写时还没有 wd-uni 现在更推荐使用 wd-tabs </view>
       <view>
         适用多端的tabs组件，支持自动高度、懒加载、自动吸顶、滑动等功能。
       </view>
@@ -86,7 +89,7 @@ async function api(
           :api="api"
         >
           <template #default="{ list }">
-            <view class="m-lg border-all p-2.2">
+            <view class="m-lg border-all b-jun-primary rd-md c-jun-primary bg-jun-primary bg-op-20 p-2.2 indent-2">
               <text class="text-lg">CoRequestList</text>
               <view>
                 自动为您加载分页数据，支持下拉刷新、上拉触底加载、列表状态自动处理、ref
@@ -102,7 +105,7 @@ async function api(
                 P<text class="text-sm">{{ item.pageNo }}</text>
               </view>
               <view>
-                <view class="T-strong">{{ item.name }}</view>
+                <view class="font-bold">{{ item.name }}</view>
                 <view class="T-break">{{ item.random }}</view>
               </view>
             </view>

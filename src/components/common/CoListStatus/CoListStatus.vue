@@ -1,7 +1,9 @@
 <!-- 列表状态；包含 next:可继续加载 | loading:加载中 | end:加载完成 | error:错误 | null:没有数据 几种状态的页面展示 -->
 <script lang="ts" setup>
+import mpMixin from "@/components/libs/mixin/mpMixin";
 /** next:可继续加载 | loading:加载中 | end:加载完成 | error:错误 | null:没有数据 */
 export type StateType = "next" | "loading" | "end" | "error" | "null";
+defineOptions(mpMixin);
 const props = withDefaults(
   defineProps<{
     type?: StateType;
@@ -24,21 +26,18 @@ function load() {
 </script>
 <template>
   <view class="CoListStatus">
-    <uv-loading-icon
-      :show="props.type === 'loading'"
-      :text="props.message"
-    ></uv-loading-icon>
-    <uv-empty
-      :show="props.type === 'null'"
-      class="Rempty pt-xl pb-xl"
-      :text="props.message"
-    >
-    </uv-empty>
+    <view v-show="props.type === 'loading'" class="flex justify-center gap-2">
+      <wd-loading :size="'36rpx'"></wd-loading>
+      <view>{{ props.message }}</view>
+    </view>
+    <view v-show="props.type === 'null'" class="Rempty pt-xl pb-xl">
+      <wd-status-tip image="content" :tip="props.message" />
+    </view>
     <view v-show="props.type === 'next'">
-      <uv-divider @click="load" :text="props.message || '继续加载'" />
+      <wd-divider @tap="load">{{ props.message || "继续加载" }}</wd-divider>
     </view>
     <view v-show="props.type === 'end'">
-      <uv-divider :text="props.message || '没有更多了'" />
+      <wd-divider @tap="load">{{ props.message || "没有更多了" }}</wd-divider>
     </view>
     <view v-show="props.type === 'error'">
       <CoError
@@ -51,9 +50,3 @@ function load() {
   </view>
 </template>
 <style lang="scss" scoped></style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

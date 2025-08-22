@@ -1,22 +1,20 @@
-import router, { replaceUrl } from "./utils/router";
-import useSysStore from "@/store/useSysStore";
-import useUserinfoStore from "./store/useUserinfoStore";
+import router from "./utils/router";
+import { useUserStore } from "./store/user/index";
 import { Sys } from "./enum/pubsubKey/system";
-import { LOGIN_WHITE_LIST, LOGIN_PATH } from "@/enum/auth";
-import { uniShowModal } from "./utils/rewriteUni";
+import { LOGIN_WHITE_LIST } from "@/enum/auth";
+import { openLoginPopup } from "./layout/loginPopup";
 
 /**app setup 时初始化 */
 export function setupAppInit() {
   useRouterInterceptor();
-  // const userinfoStore = useUserinfoStore();
-  // if (userinfoStore.tokenInfo) loginedInit();
+  // const userStore = useUserStore();
+  // if (userStore.token) loginedInit();
 }
 /**登录完成时初始化 */
 export async function loginedInit() {
   // const sysStore = useSysStore();
-  // const userinfoStore = useUserinfoStore();
-  // userinfoStore.getWxUserinfo(true);
-  // await sysStore.geAllDictList();
+  // const userStore = useUserStore();
+  // userStore.getWxUserinfo(true);
   uni.$emit(Sys.OnLogin);
 }
 
@@ -57,47 +55,33 @@ export function useRouterInterceptor() {
     uni.addInterceptor(key, {
       async invoke(args: UniNamespace.NavigateToOptions) {
         const { url } = args;
-        const res = await roleCheck(url as string);
+        const res = await routerCheck(url as string);
         if (res === false) return false;
         return args;
       },
     });
   });
 }
-export async function roleCheck(
+export async function routerCheck(
   url: string,
   replace = false
 ): Promise<boolean> {
   const env = import.meta.env;
+  const userStore = useUserStore();
   if (env.VITE_REQUIRED_LOGIN === "0") return true;
   const [path] = url.split("?");
-  if (Object.is(path, replaceUrl(LOGIN_PATH))) {
-    //是登录页
-    return true;
-  }
-
   if (LOGIN_WHITE_LIST.some((regexp) => regexp.test(path))) {
     //在白名单中
     return true;
   }
-  const userinfoStore = useUserinfoStore();
-  if (!userinfoStore.tokenInfo) {
-    console.warn(`未登录且 url:“${path}” 不在登录白名单中`);
-    if (replace) {
-      await router.backOrHome();
+  if (!userStore.token) {
+    try {
+      await openLoginPopup();
+      return true;
+    } catch (error) {
+      if (replace) router.backOrHome();
+      return false;
     }
-
-    uniShowModal({
-      title: "未登录",
-      content: "登录小程序后使用完整功能",
-      confirmText: "去登录",
-    }).then(() => {
-      router.push(LOGIN_PATH, {
-        query: { replace: path },
-      });
-    });
-    return false;
   }
-
   return true;
 }

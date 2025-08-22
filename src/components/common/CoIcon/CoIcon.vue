@@ -1,25 +1,24 @@
 <!-- icon 组件 搭配 iconfont 使用 -->
 <script lang="ts" setup>
-const props = withDefaults(
-  defineProps<{
-    size?: StrNumber;
-    color?: string;
-    name?: string;
-  }>(),
-  {
-    size: "inherit",
-    color: "inherit",
-  }
-);
+import mpMixin from "@/components/libs/mixin/mpMixin";
+import { CSSProperties } from "vue";
+defineOptions(mpMixin);
+const props = defineProps<{
+  size?: StrNumber;
+  color?: string;
+  name?: string;
+}>();
+const style = computed(() => {
+  const result: CSSProperties = {};
+  if (props.color) result.color = props.color;
+  if (props.size) result.fontSize = props.size;
+
+  return result;
+});
 </script>
 
 <template>
-  <view
-    class="CIcon"
-    :class="name"
-    :style="{ fontSize: props.size, color: props.color }"
-  >
-  </view>
+  <view class="CIcon" :class="name" :style="[style]"> </view>
 </template>
 
 <style lang="scss" scoped>
@@ -31,9 +30,3 @@ const props = withDefaults(
   -moz-osx-font-smoothing: grayscale;
 }
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

@@ -1,8 +1,9 @@
 <!-- css grid item 布局 搭配 CoGrid使用 -->
 <script lang="ts" setup>
 import { Property } from "csstype";
-
 import { filterObject } from "@/utils/tools/object";
+import mpMixin from "@/components/libs/mixin/mpMixin";
+defineOptions(mpMixin);
 
 const props = defineProps<{
   /**grid-row */
@@ -52,9 +53,3 @@ const props = defineProps<{
 </template>
 
 <style lang="scss" scoped></style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

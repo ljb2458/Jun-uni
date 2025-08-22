@@ -18,10 +18,14 @@
   },
   // 配置语言的文件关联
   "files.associations": {
-    "pages.json": "jsonc" // pages.json 可以写注释
+    // pages.json 可以写注释
+    "pages.json": "jsonc"
   },
-  "unocss.autocomplete.matchType": "prefix",//默认前缀匹配，模糊匹配更实用但也更消耗性能
-  "css.validate": false, // 禁用 CSS 内置验证
-  "scss.validate": false, // 禁用 SCSS 内置验证
-  "less.validate": false // 禁用 LESS 内置验证
+  "unocss.autocomplete.matchType": "fuzzy",
+  // 禁用 CSS 内置验证
+  "css.validate": false,
+  // 禁用 SCSS 内置验证
+  "scss.validate": false,
+  // 禁用 LESS 内置验证
+  "less.validate": false,
 }

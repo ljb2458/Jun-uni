@@ -42,12 +42,12 @@ $uni-border-color: var(--C-O1);
 
 /* 文字尺寸 */
 $uni-font-size-sm: var(--text-sm);
-$uni-font-size-base: var(--text-md);
+$uni-font-size-base: var(--text-sm);
 $uni-font-size-lg: var(--text-lg);
 
 /* 图片尺寸 */
 $uni-img-size-sm: calc(var(--text-sm) * 4);
-$uni-img-size-base: calc(var(--text-md) * 4);
+$uni-img-size-base: calc(var(--text-sm) * 4);
 $uni-img-size-lg: calc(var(--text-lg) * 4);
 
 /* Border Radius */

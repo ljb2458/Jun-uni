@@ -1,5 +1,7 @@
 <!-- 排序状态组件 -->
 <script setup lang="ts">
+import mpMixin from "@/components/libs/mixin/mpMixin";
+defineOptions(mpMixin);
 const ASC = "Asc";
 const DESC = "Desc";
 
@@ -94,18 +96,17 @@ function changeSort() {
     <slot> </slot>
     <view class="CoSortControl_marker ml-1 flex flex-col">
       <view class="mt-auto" style="margin-bottom: -2.5px">
-        <uv-icon
-          name="arrow-up-fill"
+        <wd-icon
+          name="arrow-up"
           size="12px"
           :class="ASC ? '!c-jun-primary' : ''"
         />
       </view>
       <view class="mb-auto">
-        <uv-icon
-          name="arrow-down-fill"
+        <wd-icon
+          name="arrow-down"
           size="12px"
-                    :class="DESC ? '!c-jun-primary' : ''"
-
+          :class="DESC ? '!c-jun-primary' : ''"
         />
       </view>
     </view>
@@ -122,9 +123,3 @@ function changeSort() {
   }
 }
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

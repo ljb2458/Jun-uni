@@ -1,5 +1,8 @@
 <!-- cell单元格 -->
 <script lang="ts" setup>
+import mpMixin from "@/components/libs/mixin/mpMixin";
+defineOptions(mpMixin);
+
 const props = withDefaults(
   defineProps<{
     leftIcon?: string;
@@ -33,7 +36,7 @@ const emit = defineEmits<{
     </slot>
     <view class="CoCell_right_icon">
       <slot v-if="rightIcon !== false" name="right-icon">
-        <uv-icon v-if="rightIcon === true" name="arrow-right"></uv-icon>
+        <wd-icon v-if="rightIcon === true" name="arrow-right"></wd-icon>
         <CoIcon v-else-if="rightIcon" :name="rightIcon" />
       </slot>
     </view>
@@ -47,9 +50,3 @@ const emit = defineEmits<{
   align-items: center;
 }
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

@@ -2,12 +2,14 @@
 <script setup lang="ts" generic="O extends CoSelectionsItem">
 import { CoDropdownProps } from "@/components/common/CoDropdown/CoDropdown.vue";
 import { useVModel } from "@/hooks/toolsHooks";
-
+import mpMixin from "@/components/libs/mixin/mpMixin";
 export type CoSelections = CoSelectionsItem[];
 export interface CoSelectionsItem extends AnyObject {
   label?: StrNumber;
   value?: any;
 }
+defineOptions(mpMixin);
+
 interface CoSelectProps extends /* @vue-ignore */ CoDropdownProps {
   modelValue?: any;
   /**选项集合 */
@@ -77,11 +79,11 @@ const selectedOption = computed(() =>
               ),
             }"
           >
-            <uv-icon name="checkmark" color="inherit" size="inherit" />
+            <wd-icon name="check" color="inherit" size="inherit" />
           </view>
         </view>
         <slot name="extraSelection">
-          <uv-loading-icon v-if="!props.selections?.length"></uv-loading-icon>
+          <wd-loading v-if="!props.selections?.length"></wd-loading>
         </slot>
       </view>
     </scroll-view>
@@ -101,9 +103,3 @@ const selectedOption = computed(() =>
   }
 }
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

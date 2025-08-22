@@ -1,5 +1,8 @@
 <!-- 自动正方形；根据盒子的宽度，自动设定盒子高度。 -->
 <script lang="ts" setup>
+import mpMixin from "@/components/libs/mixin/mpMixin";
+defineOptions(mpMixin);
+
 const props = withDefaults(
   defineProps<{
     /**高度比例；默认为1：正方形。 */
@@ -35,9 +38,3 @@ const props = withDefaults(
   }
 }
 </style>
-<script lang="ts">
-import mpMixin from "@/components/libs/mixin/mpMixin";
-export default {
-  mixins: [mpMixin],
-};
-</script>

@@ -7,12 +7,15 @@ import path from "path";
 import { generatePagesJson } from "./vite-plugins/generatePagesJson/index";
 import Optimization from "@uni-ku/bundle-optimizer";
 import ViteRestart from "vite-plugin-restart";
+// import UnoCSS from "unocss/vite";
 
 export default defineConfig(async (config) => {
   const UnoCSS = (await import("unocss/vite")).default;
-  const env = loadEnv(config.mode, process.cwd(), "VITE_");
+  const env = loadEnv(config.mode, process.cwd());
   console.log("config", config);
   console.log("env", env);
+  const isDev = env.VITE_USER_NODE_ENV === "development";
+  const isProd = env.VITE_USER_NODE_ENV === "production";
   const option: UserConfig = {
     base: "/",
     resolve: {
@@ -34,30 +37,32 @@ export default defineConfig(async (config) => {
     },
 
     build: {
-      minify: "esbuild",
+      sourcemap: false,
+      minify: isDev ? false : "esbuild",
+      target: "es6",
     },
     esbuild: {
-      drop: config.mode === "production" ? ["console", "debugger"] : [],
+      drop: isProd ? ["console", "debugger"] : [],
     },
     plugins: [
-      uni(),
-      commonjs(),
-      ViteRestart({
-        // 通过这个插件，在修改vite.config.ts文件则不需要重新运行也生效配置
-        restart: ["vite.config.ts"],
-      }),
       generatePagesJson({
         outFile: "./src/pages.json",
         firstPage: "./src/pages/tabbar/home/home.vue",
         mainPackageDir: "./src/pages/tabbar/",
         pagesDir: "./src/pages/",
       }),
-      UnoCSS(),
       AutoImport({
         // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
         imports: ["vue", "uni-app", "pinia"],
         dts: "./types/dts/auto-import/imports.d.ts",
       }),
+      commonjs(),
+      ViteRestart({
+        // 通过这个插件，在修改vite.config.ts文件则不需要重新运行也生效配置
+        restart: ["vite.config.ts"],
+      }),
+
+      UnoCSS(),
 
       Optimization({
         enable: {
@@ -70,13 +75,14 @@ export default defineConfig(async (config) => {
         },
         logger: false,
       }),
+      uni(),
     ],
     //@ts-ignore
     transpileDependencies: ["uview-plus", "luch-request"],
   };
-  //*只有serve时使用vite的自动引入生成全局ts类型支持，其它情况使用uniapp的easycom模式
+  //*只有serve(h5)时使用vite的自动引入生成全局ts类型支持，其它情况使用uniapp的easycom模式
   if (config.command === "serve") {
-    option.plugins!.push(
+    option.plugins!.unshift(
       Components({
         exclude: ["RouterLink", "RouterView"],
         dirs: ["src/components"],

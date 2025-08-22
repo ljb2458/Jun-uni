@@ -9,43 +9,41 @@
 
 <script setup lang="ts">
 import { onPageScroll } from "@dcloudio/uni-app";
-import setNotify from "@/layout/setNotify";
-import setActionSheet, {
-  ActionSheetOptionsItem,
-} from "@/layout/setActionSheet";
-import setModal from "@/layout/setModal";
+import notify from "@/layout/notify";
+import actionSheet, { OnSelectEvent } from "@/layout/actionSheet";
+import modal from "@/layout/modal";
 
 /**打开模态框 */
 function openModal() {
-  setModal
+  modal
     .open({
       title: "这是全局 modal 模态框",
       showCancelButton: true,
     })
-    .then(() => setNotify.success(`确认`))
-    .catch(() => setNotify.error(`点击了取消`));
+    .then(() => notify.success(`确认`))
+    .catch(() => notify.error(`点击了取消`));
 }
 
 /**打开操作菜单 */
 function showActionSheet() {
-  function select(e: ActionSheetOptionsItem) {
-    console.log(`点击了${e.name}`);
-    setNotify.primary(`点击了${e.name}`);
+  function onSelect({ item }: OnSelectEvent) {
+    console.log(`点击了${item.name}`);
+    notify.primary(`点击了${item.name}`);
   }
-  setActionSheet.open({
+  actionSheet.open({
     actions: [
       {
         name: "选项1",
         subname: "副标题",
-        select,
+        onSelect,
       },
       {
         name: "选项2",
-        select,
+        onSelect,
       },
       {
         name: "选项3",
-        select,
+        onSelect,
       },
     ],
   });
@@ -67,9 +65,13 @@ const showBottomView = ref(true);
     <template #fixedBottom="{}">
       <view v-if="showBottomView" class="m-2.2">
         fixedBottom 固定在底部的插槽,该插槽的内容会被额外注册一遍用于占位
-        <uv-button :type="'primary'" @tap="setNotify.primary('点击了底部按钮')">
+        <wd-button
+          class="w-full"
+          :type="'primary'"
+          @tap="notify.primary('点击了底部按钮')"
+        >
           底部按钮
-        </uv-button>
+        </wd-button>
       </view>
     </template>
     <view class="p-lg">
@@ -104,23 +106,27 @@ const showBottomView = ref(true);
       </view>
       <view class="mt-lg text-lg">全局组件</view>
       <view class="p-lg">
-        <uv-button
-          @click="setNotify.success('全局 notify 提示')"
+        <wd-button
+          @click="notify.success('全局 notify 提示')"
           type="primary"
-          class="mt-2.2"
+          class="mt-2.2 w-full"
         >
           显示全局 notify 提示
-        </uv-button>
+        </wd-button>
       </view>
       <view class="p-lg">
-        <uv-button @click="showActionSheet" type="primary" class="mt-2.2">
+        <wd-button
+          @click="showActionSheet"
+          type="primary"
+          class="mt-2.2 w-full"
+        >
           显示全局 actionSheet 操作菜单
-        </uv-button>
+        </wd-button>
       </view>
       <view class="p-lg">
-        <uv-button @click="openModal" type="primary" class="mt-2.2">
+        <wd-button @click="openModal" type="primary" class="mt-2.2 w-full">
           显示全局 modal 模态框
-        </uv-button>
+        </wd-button>
       </view>
     </view>
     <view
@@ -138,9 +144,9 @@ const showBottomView = ref(true);
         不带 fixedBottom 插槽高度的内容区高度，其高度刚好等于 (页面高度) -
         (tabbar) - (navbar) - (顶部安全区) - (底部安全区)。
       </view>
-      <uv-button @tap="showBottomView = !showBottomView">
+      <wd-button class="w-full" @tap="showBottomView = !showBottomView">
         显隐底部插槽按钮后看看高度是否正确
-      </uv-button>
+      </wd-button>
     </view>
   </CoPageView>
 </template>
