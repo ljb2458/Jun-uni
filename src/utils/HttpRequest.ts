@@ -17,8 +17,10 @@ export namespace CreateHttpRequest {
   export interface MyConfig {
     /**请求是否成功 */
     isSuccess: IsSuccess;
-    /**返回 message 字符串，用于成功提示 */
+    /**返回 message 字符串，用于普通提示 */
     giveMsg: ReturnMsg;
+    /**返回 message 字符串，用于错误提示 */
+    giveErrMsg: ReturnMsg;
   }
   export interface Config<D = any> extends HttpRequestConfig<D> {
     custom?: Custom;
@@ -127,7 +129,7 @@ export function createHttpRequest(
     (error) => {
       console.error(error);
       const custom = error.config.custom;
-      const message = myConfig.giveMsg(error);
+      const message = myConfig.giveErrMsg(error);
       const { showErrorMsg, errorText, showLoading } = customHelper(custom);
       if (showLoading) uni.hideLoading();
       if (showErrorMsg) {

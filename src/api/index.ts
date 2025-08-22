@@ -16,6 +16,9 @@ export const defHttp = createHttpRequest(
     giveMsg(res) {
       return res?.data?.message;
     },
+    giveErrMsg(error) {
+      return error?.errMsg;
+    },
   },
   {
     baseURL,
@@ -26,8 +29,8 @@ defHttp.interceptors.request.use((config) => {
   const userStore = useUserStore();
   config.header = {
     ...config.header,
+    authorization: `Bearer ${userStore.token}`,
   };
-  if (userStore.token) config.header.token = userStore.token;
   return config;
 });
 //响应拦截器，在这里修改返回结果。

@@ -12,7 +12,14 @@ import { onPageScroll } from "@dcloudio/uni-app";
 import { _import } from "@/utils/tools/import";
 import { bitsAuth, getBitsArray } from "@/utils/tools/bits";
 import router from "@/utils/router";
-import { CoStateOrm } from "@/components/common/CoStateTag/CoStateTag.vue";
+import { routerCheck } from "@/init";
+import { getCurrentRouteInfo } from "@/utils/rewriteUni";
+
+onShow(async () => {
+  const verify = await routerCheck(`/${getCurrentRouteInfo()?.path}`, true);
+  if (verify === false) return;
+  uni.startPullDownRefresh();
+});
 
 enum ComponentsType {
   /**展示组件 */
@@ -38,7 +45,7 @@ const cellList = computed(() => {
       leftText: "自动正方形 CoAutoSquare",
       type: ComponentsType.Layout,
       async tap() {
-        router.push("@/pages/demo/CoAutoSquareDemo.vue")
+        router.push("@/pages/demo/CoAutoSquareDemo.vue");
       },
     },
     {
@@ -285,10 +292,7 @@ const tabsList = computed(() => [
         :lazy="false"
       >
         <template #title-bottom>
-          <GrFilterSearch
-            v-model="keyword"
-            class="mt-2 bg-transparent p-0"
-          />
+          <GrFilterSearch v-model="keyword" class="mt-2 bg-transparent p-0" />
         </template>
         <template #default="{ option }">
           <view style="min-height: 70vh">

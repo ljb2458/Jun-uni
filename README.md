@@ -2,9 +2,9 @@
 
 ## 写在前面
 
-该框架正在从自写 `原子化 css` 迁移至 `unocss` 不建议再使用建议使用 `unocss` 进行开发。
+该框架已经从自写 `原子化 css` 迁移至 `unocss` 不再建议使用自写 `原子化 css` 进行开发，旧版本的，可以在 src/styles/index.scss 与同路径下的 effects.scss 中解开相应注释继续使用。
 
-该框架正在支持 `wot-design-uni` 框架，并打算以后将 `wot-design-uni` 作为主力框架，建议使用 `wot-design-uni` 作为 UI 框架进行开发，已有的组件会支持**双 UI**，但由于我是个人开发者，薪资也不高，还需要谋生，因此以后不会投入过多的精力支持**双 UI**。
+该框架已转到 `wot-design-uni` 框架，并打算以后将 `wot-design-uni` 作为主力框架，建议使用 `wot-design-uni` 作为 UI 框架进行开发，已有的组件会进行兼容。
 
 ## 项目介绍
 
@@ -109,7 +109,7 @@ pnpm run dev:mp-weixin
 
 或在 `HBuilder X` 中启动项目。
 
-## 习惯配置
+## 习惯与环境
 
 **使用该框架，我推荐你使用 `vs code` 编译器并安装插件 `Prettier - Code formatter` `Vue - Official`**
 
@@ -125,7 +125,7 @@ pnpm run dev:mp-weixin
     "body": [
       "<route lang=\"json\">",
       "{",
-      "  \"navigationBarTitleText\": \"$1\",",
+      "  \"navigationBarTitleText\": \"${1:新页面}\",",
       "  \"enablePullDownRefresh\": false,",
       "  \"navigationStyle\": \"custom\",",
       "  \"navigationBarTextStyle\": \"white\"",
@@ -137,8 +137,8 @@ pnpm run dev:mp-weixin
       "</script>",
       "",
       "<template>",
-      "  <CoPageView class=\"bg-jun-bg-1 pb-lg\" :onPageScroll=\"onPageScroll\">",
-      "$2",
+      "  <CoPageView class=\"${2:bg-jun-bg-1 pb-lg}\" :onPageScroll=\"onPageScroll\">",
+      "$3",
       "  </CoPageView>",
       "</template>",
       "",
@@ -160,11 +160,11 @@ pnpm run dev:mp-weixin
     "prefix": "pinia-store",
     "body": [
       "import { defineStore } from \"pinia\";",
-      "import { localStorage } from \"mp-storage\";",
+      "//import { localStorage } from \"mp-storage\";",
       "",
-      "export default defineStore(\"$1Store\", {",
+      "export const use$1Store = defineStore(\"$1Store\", {",
       "  //*全局仓库",
-      "  state: initState,",
+      "  state,",
       "  //*全局函数",
       "  actions: {},",
       "  //*计算属性",
@@ -182,13 +182,37 @@ pnpm run dev:mp-weixin
       "  export interface Store {}",
       "}",
       "/**初始化pinia */",
-      "function initState(): $1Store.Store {",
+      "function state(): $1Store.Store {",
       "  return {",
       "  };",
       "}",
       ""
     ],
     "description": "pinia仓库"
+  },
+  "api接口模板": {
+    "prefix": "api-template",
+    "body": [
+      "/**${3:模板接口} */",
+      "export async function api${2:Template}(",
+      "  data: Api${2:Template}.Req",
+      "): Promise<Api.Res<Api${2:Template}.Res>> {",
+      "  const res = await defHttp.post<Api.Res<Api${2:Template}.Res>>(\"${1:记得替换我}\", data, {",
+      "    custom: {",
+      "      failMessage: true,",
+      "    },",
+      "  });",
+      "  return res;",
+      "}",
+      "",
+      "/**${3:模板接口} */",
+      "export namespace Api${2:Template} {",
+      "  export interface Req {}",
+      "  export interface Res {}",
+      "}",
+      ""
+    ],
+    "description": "api接口模板"
   }
 }
 ```
@@ -202,9 +226,9 @@ vite-plugins  | //存放本地 vite 插件。
 
 src |-layout    | //存放自定义的navbar等其他每个页面都需要的组件。
     |-style     | //存放预设、公共、scss文件。
-    |-components|-common  //存放公用组件，一般为新组件。
+    |-components|-common  //存放公用组件，一般为自创组件。
                 |-group   //存放组合组件，一般为多个组件的纯粹组合，非新组件。
-                |-rewrite //存放二次封装的组件，在原有组件上添加新的方法。
+                |-rewrite //存放二次封装的组件，一般改动较小，基本保持原组件的概念。
                 |-native  //存放一般只有这个项目才能用到的公共业务组件。
     |-init.ts   //项目加载、App.vue 初始化、登录完成 时干的事。
 
@@ -282,11 +306,13 @@ types |-dts   | //全局配置、组件、等ts存放目录
       export const defHttp = createHttpRequest(
         {
           isSuccess(res) {
-            conosole.log("res", res);
             return res?.data?.code === 200;
           },
           giveMsg(res) {
             return res?.data?.message;
+          },
+          giveErrMsg(error) {
+            return error?.errMsg;
           },
         },
         {
@@ -297,6 +323,10 @@ types |-dts   | //全局配置、组件、等ts存放目录
 
 5. 在 `/src/api/userinfo` 中复制粘贴或直接修改一个接口并调用。
 
+## 路由鉴权
+
+在 src/init.ts 中有一个 routerCheck 方法，在这里编写路由鉴权的逻辑。让后在 .env.development 中将 VITE_REQUIRED_LOGIN 设为 1
+ 
 ## 自动生成 pages.json（vite 插件）
 
 在 `vite.config.ts` 中需改 `generatePagesJson` 中的相关配置

@@ -86,7 +86,7 @@ const collapsesTree = [
         class="bg-jun-bg rd-md mt-2.2"
         header-class="p-2.2"
       >
-        <view class="p-2.2 border-T">{{ item.content }} </view>
+        <view class="p-2.2 border-top">{{ item.content }} </view>
       </CoCollapse>
 
       <view class="text-lg mt-lg mb-1">手风琴模式</view>
@@ -102,7 +102,7 @@ const collapsesTree = [
         class="bg-jun-bg rd-md mt-2.2"
         header-class="p-2.2"
       >
-        <view class="p-2.2 border-T">{{ item.content }} </view>
+        <view class="p-2.2 border-top">{{ item.content }} </view>
       </CoCollapse>
       <view class="text-lg mt-lg mb-1">嵌套使用</view>
       <view class="text-sm c-jun-c-2"> 良好的嵌套支持，欢迎体验 </view>
@@ -115,7 +115,7 @@ const collapsesTree = [
         class="rd-md mt-2.2"
         header-class="bg-jun-primary c-white p-2.2"
       >
-        <view class="border-T B-T1-O1 p-2.2">
+        <view class="border-top bg-jun-bg p-2.2">
           <view>{{ group.content }} </view>
           <CoCollapse
             v-for="(item, index) in group.childrens"
@@ -126,7 +126,7 @@ const collapsesTree = [
             class="bg-jun-bg rd-md mt-2.2"
             header-class="p-2.2"
           >
-            <view class="p-2.2 border-T">{{ item.content }} </view>
+            <view class="p-2.2 border-top">{{ item.content }} </view>
           </CoCollapse>
         </view>
       </CoCollapse>
