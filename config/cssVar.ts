@@ -7,7 +7,8 @@ export function generateColors() {
     warn: [240, 85, 36],
     primary: [116, 52, 242],
   };
-  type Keys = keyof typeof baseColors;
+  type ColorKeys = keyof typeof baseColors;
+  type ResultKeys = `jun-${ColorKeys}` | `jun-${ColorKeys}-${number}`;
 
   const lighten = (color: number[], value: number) =>
     color.map((c) => Math.min(255, Math.round(c + value)));
@@ -24,13 +25,12 @@ export function generateColors() {
   // const toColorString = (color: number[]) =>
   //   `rgba(${color.join(",")}, var(--un-text-opacity, 1))`;
 
-  const result: Record<`jun-${Keys}` | `jun-${Keys}-${number}`, any> =
-    {} as any;
+  const result: Record<string, any> = {} as any;
 
   for (const [name, color] of Object.entries(baseColors)) {
     const darkMode = isDark(color);
     // result[`jun-${name}`] = toColorString(color);
-    result[`jun-${name as Keys}`] = color;
+    result[`jun-${name}`] = color;
 
     for (let i = 1; i <= 5; i++) {
       let variant: number[];
@@ -40,10 +40,10 @@ export function generateColors() {
         variant = darken(color, i * 20);
       }
       // result[`jun-${name}-${i}`] = toColorString(variant);
-      result[`jun-${name as Keys}-${i}`] = variant;
+      result[`jun-${name}-${i}`] = variant;
     }
   }
-  return result;
+  return result as Record<ResultKeys, any>;
 }
 
 export function text(rgb: number[]) {
