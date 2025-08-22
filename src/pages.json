@@ -2,7 +2,7 @@
   //在这里调整底部导航栏
   "tabBar": {
     "color": "#1e1e1e",
-    "selectedColor": "#0078D4",
+    "selectedColor": "#7434f2",
     "backgroundColor": "#ffffff",
     "list": [
       {
