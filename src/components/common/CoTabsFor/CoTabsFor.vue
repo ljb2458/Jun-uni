@@ -73,9 +73,9 @@ type TabsListItem = Item & { load: boolean; index: number };
 const currentIndex = useVModel(props, "modelValue", emit);
 const tabsList = ref<Array<TabsListItem>>([]);
 watch(
-  () => props.options,
-  (newValue) => {
-    tabsList.value = newValue.map((v, index) => ({
+  () => props.options.length,
+  () => {
+    tabsList.value = props.options.map((v, index) => ({
       ...v,
       index,
       load: !props.lazy || index === currentIndex.value,

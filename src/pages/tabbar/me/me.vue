@@ -1,6 +1,6 @@
 <route lang="json">
 {
-  "navigationBarTitleText": "我的",
+  "navigationBarTitleText": "echarts",
   "enablePullDownRefresh": false,
   "navigationStyle": "custom",
   "navigationBarTextStyle": "white"
@@ -9,6 +9,8 @@
 
 <script setup lang="ts">
 import { onPageScroll } from "@dcloudio/uni-app";
+import hotspotClickStatistics from "./components/hotspotClickStatistics.vue";
+import lookStatistics from "./components/lookStatistics.vue";
 import { routerCheck } from "@/init";
 import { getCurrentRouteInfo } from "@/utils/rewriteUni";
 
@@ -20,7 +22,24 @@ onShow(async () => {
 </script>
 
 <template>
-  <CoPageView class="bg-jun-bg-1" :onPageScroll="onPageScroll"> </CoPageView>
+  <CoPageView class="bg-jun-bg-1" :onPageScroll="onPageScroll">
+    <view class="p-sm">
+      <view class="bg-jun-bg bg-op-70 rd-xl p-sm mt-sm">
+        <view>
+          <view class="h-1em w-1 bg-jun-primary inline-block v--10%"></view>
+          热点点击量统计
+        </view>
+        <hotspotClickStatistics />
+      </view>
+      <view class="bg-jun-bg bg-op-70 rd-xl p-sm mt-sm">
+        <view>
+          <view class="h-1em w-1 bg-jun-primary inline-block v--10%"></view>
+          访问量统计
+        </view>
+        <lookStatistics />
+      </view>
+    </view>
+  </CoPageView>
 </template>
 
 <style lang="scss" scoped></style>

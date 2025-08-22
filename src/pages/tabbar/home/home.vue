@@ -13,14 +13,6 @@ import { onPageScroll } from "@dcloudio/uni-app";
 import { RequestList } from "@/components/common/CoRequestList/useRequestList";
 import { CoRequestListInstance } from "@/components/common/CoRequestList/CoRequestList.vue";
 import { randomUUID } from "@/utils/tools/generate";
-import { routerCheck } from "@/init";
-import { getCurrentRouteInfo } from "@/utils/rewriteUni";
-
-onShow(async () => {
-  const verify = await routerCheck(`/${getCurrentRouteInfo()?.path}`, true);
-  if (verify === false) return;
-  uni.startPullDownRefresh();
-});
 
 const tabsList = reactive([
   {
