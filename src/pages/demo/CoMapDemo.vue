@@ -113,7 +113,7 @@ const controls: CoMapCotrolsItem[] = [
           </cover-view>
         </template>
         <template #bottom>
-          <cover-view class="bg-jun-bg p-2.2 size-fill">
+          <cover-view class="bg-jun-bg p-2.2 size-full">
             全屏后可见，底部插槽
           </cover-view>
         </template>
