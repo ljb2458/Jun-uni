@@ -46,11 +46,9 @@ function generateColorRules() {
             y: ["top", "bottom"],
           };
           const keys = directions[direction];
-          const CSS_VAL = "var(--un-border-opacity,1)";
           return keys.map((key) => {
-            const cssVal = `var(--un-border-${key}-opacity,${CSS_VAL})`;
             return {
-              [`border-${key}-color`]: `rgba(${value.join(",")},${cssVal})`,
+              [`border-${key}-color`]: border(value, key),
             };
           });
         },

@@ -52,7 +52,9 @@ export function text(rgb: number[]) {
 export function bg(rgb: number[]) {
   return `rgba(${rgb.join(",")},var(--un-bg-opacity,1))`;
 }
-export function border(rgb: number[]) {
+export function border(rgb: number[], direction?: string) {
   const CSS_VAL = "var(--un-border-opacity,1)";
-  return `rgba(${rgb.join(",")},${CSS_VAL})`;
+  if (!direction) return `rgba(${rgb.join(",")},${CSS_VAL})`;
+  const cssVal = `var(--un-border-${direction}-opacity,${CSS_VAL})`;
+  return `rgba(${rgb.join(",")},${cssVal})`;
 }
