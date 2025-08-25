@@ -148,7 +148,7 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
 </script>
 
 <template>
-  <view class="CoCascader" @tap="show = true">
+  <view @tap="show = true" class="CoCascader">
     <view class="CoCascader_value">
       <slot
         name="value"
@@ -164,85 +164,92 @@ async function loadChildren(event: CoCascaderLoadChildrenEnvet) {
       </slot>
     </view>
     <wd-popup @tap.stop v-model="show" position="bottom">
-      <view class="CoCascaderPopup_selected m-2.2">
-        <slot name="selected" :options="selectedOptions">
-          <block v-if="selectedOptions.length">
-            <view
-              class="CoCascaderPopup_selectedItem"
-              v-for="(item, index) in selectedOptions"
-              :key="index"
-              @tap="selectItem(item, index)"
-            >
-              <text>
-                <slot name="test" :option="item" :level="index">
-                  {{ item.label }}
-                </slot>
-              </text>
+      <view class="CoCascaderPopup_content" @tap.stop>
+        <view class="CoCascaderPopup_selected m-2.2">
+          <slot name="selected" :options="selectedOptions">
+            <block v-if="selectedOptions.length">
+              <view
+                class="CoCascaderPopup_selectedItem"
+                v-for="(item, index) in selectedOptions"
+                :key="index"
+                @tap="selectItem(item, index)"
+              >
+                <text>
+                  <slot name="test" :option="item" :level="index">
+                    {{ item.label }}
+                  </slot>
+                </text>
+              </view>
+            </block>
+            <view class="CoCascaderPopup_selectedItem" v-else>
+              <text>{{ "请选择" }}</text>
             </view>
-          </block>
-          <view class="CoCascaderPopup_selectedItem" v-else>
-            <text>{{ "请选择" }}</text>
+          </slot>
+        </view>
+        <view
+          class="CoCascader_content bg-jun-bg-1 p-2 flex"
+          :style="{ height }"
+        >
+          <scroll-view
+            class="CoCascader_options h-full bg-jun-bg rd-md"
+            scroll-y
+            v-for="(options, level) in optionsArray"
+            :key="modelValue[level - 1] || `i-${level}`"
+            :scroll-into-view="`item-${modelValue[level]}`"
+          >
+            <view
+              @tap="selectItem(option, level)"
+              v-for="(option, index) in options"
+              :key="option.value"
+              :id="`item-${option.value}`"
+              class="CoCascader_option py-2 my-1 px-2.2 flex items-center justify-between"
+              :class="{
+                CoCascader_option__disabled: option.disabled,
+                'c-jun-primary bg-jun-primary bg-op-10 CoCascader_option__active':
+                  Object.is(modelValue[level], option.value),
+              }"
+            >
+              <view class="CoCascader_option_label flex-1">
+                <slot
+                  name="option"
+                  :option="option"
+                  :index="index"
+                  :level="level"
+                >
+                  {{ option.label }}
+                </slot>
+              </view>
+              <view
+                class="CoCascader_option_selectedIcon"
+                v-show="Object.is(modelValue[level], option.value)"
+              >
+                <slot
+                  name="optionIcon"
+                  :option="option"
+                  :index="index"
+                  :level="level"
+                  :selected="Object.is(modelValue[level], option.value)"
+                >
+                  <wd-icon size="1em" color="inherit" name="check" />
+                </slot>
+              </view>
+            </view>
+            <CoListStatus
+              class="mt-lg"
+              v-if="!options?.length"
+              :type="loading ? 'loading' : 'null'"
+              :message="loading ? '加载中...' : '没有更多选项了！'"
+            />
+          </scroll-view>
+        </view>
+        <slot name="bottom">
+          <view class="p-2.2">
+            <wd-button class="w-full" @tap="submit" :type="'primary'"
+              >确定</wd-button
+            >
           </view>
         </slot>
       </view>
-      <view class="CoCascader_content bg-jun-bg-1 p-2 flex" :style="{ height }">
-        <scroll-view
-          class="CoCascader_options h-full bg-jun-bg rd-md"
-          scroll-y
-          v-for="(options, level) in optionsArray"
-          :key="modelValue[level - 1] || `i-${level}`"
-          :scroll-into-view="`item-${modelValue[level]}`"
-        >
-          <view
-            @tap="selectItem(option, level)"
-            v-for="(option, index) in options"
-            :key="option.value"
-            :id="`item-${option.value}`"
-            class="CoCascader_option py-2 my-1 px-2.2 flex items-center justify-between"
-            :class="{
-              CoCascader_option__disabled: option.disabled,
-              'c-jun-primary bg-jun-primary bg-op-10 CoCascader_option__active':
-                Object.is(modelValue[level], option.value),
-            }"
-          >
-            <view class="CoCascader_option_label flex-1">
-              <slot
-                name="option"
-                :option="option"
-                :index="index"
-                :level="level"
-              >
-                {{ option.label }}
-              </slot>
-            </view>
-            <view
-              class="CoCascader_option_selectedIcon"
-              v-show="Object.is(modelValue[level], option.value)"
-            >
-              <slot
-                name="optionIcon"
-                :option="option"
-                :index="index"
-                :level="level"
-                :selected="Object.is(modelValue[level], option.value)"
-              >
-                <wd-icon size="1em" color="inherit" name="check" />
-              </slot>
-            </view>
-          </view>
-          <CoListStatus
-            class="mt-lg"
-            v-if="!options?.length"
-            :type="loading ? 'loading' : 'null'"
-            :message="loading ? '加载中...' : '没有更多选项了！'"
-          />
-        </scroll-view>
-      </view>
-      <slot name="bottom">
-        <view class="p-2.2">
-          <wd-button class="w-full" @tap="submit" :type="'primary'">确定</wd-button>
-        </view>
-      </slot>
     </wd-popup>
   </view>
 </template>
