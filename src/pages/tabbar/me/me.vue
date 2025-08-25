@@ -26,14 +26,14 @@ onShow(async () => {
     <view class="p-sm">
       <view class="bg-jun-bg bg-op-70 rd-xl p-sm mt-sm">
         <view>
-          <view class="h-1em w-1 bg-jun-primary inline-block v--10%"></view>
+          <view class="h-1em w-1 bg-jun-primary inline-block mr-1 v--10%"></view>
           热点点击量统计
         </view>
         <hotspotClickStatistics />
       </view>
       <view class="bg-jun-bg bg-op-70 rd-xl p-sm mt-sm">
         <view>
-          <view class="h-1em w-1 bg-jun-primary inline-block v--10%"></view>
+          <view class="h-1em w-1 bg-jun-primary inline-block mr-1 v--10%"></view>
           访问量统计
         </view>
         <lookStatistics />

@@ -93,6 +93,7 @@ function onClickSwiper({
     <view class="mt-sm">
       <wd-swiper
         @click="onClickSwiper"
+        height="230"
         class="mt-1"
         value-key="url"
         textKey="title"
