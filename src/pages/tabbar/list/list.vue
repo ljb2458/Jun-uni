@@ -18,7 +18,7 @@ import { getCurrentRouteInfo } from "@/utils/rewriteUni";
 onShow(async () => {
   const verify = await routerCheck(`/${getCurrentRouteInfo()?.path}`, true);
   if (verify === false) return;
-  uni.startPullDownRefresh();
+  console.log("验证登录，通过");
 });
 
 enum ComponentsType {
@@ -227,57 +227,57 @@ const cellList = computed(() => {
       },
     },
   ];
-  if (!keyword) return result;
-  return result.filter((v) =>
-    new RegExp(keyword.value.toLocaleLowerCase()).test(
-      v.leftText.toLocaleLowerCase()
-    )
-  );
+  if (!keyword.value) return result;
+  return [];
 });
 
-const tabsList = computed(() => [
-  {
-    label: "全部",
-    list: cellList.value,
-    value: 0,
-  },
-  {
-    label: "展示",
-    value: ComponentsType.Exhibition,
-    list: cellList.value.filter((v) =>
-      bitsAuth(v.type, ComponentsType.Exhibition)
-    ),
-  },
-  {
-    label: "布局",
-    value: ComponentsType.Layout,
-    list: cellList.value.filter((v) => bitsAuth(v.type, ComponentsType.Layout)),
-  },
-  {
-    label: "表单",
-    value: ComponentsType.Form,
-    list: cellList.value.filter((v) => bitsAuth(v.type, ComponentsType.Form)),
-  },
-  {
-    label: "数据",
-    value: ComponentsType.Data,
-    list: cellList.value.filter((v) => bitsAuth(v.type, ComponentsType.Data)),
-  },
-  {
-    label: "通知",
-    value: ComponentsType.Message,
-    list: cellList.value.filter((v) =>
-      bitsAuth(v.type, ComponentsType.Message)
-    ),
-  },
-  {
-    label: "加强",
-    value: ComponentsType.Reinforce,
-    list: cellList.value.filter((v) =>
-      bitsAuth(v.type, ComponentsType.Reinforce)
-    ),
-  },
-]);
+const tabsList = computed(() => {
+  return [
+    {
+      label: "全部",
+      list: cellList.value,
+      value: 0,
+    },
+    {
+      label: "展示",
+      value: ComponentsType.Exhibition,
+      list: cellList.value.filter((v) =>
+        bitsAuth(v.type, ComponentsType.Exhibition)
+      ),
+    },
+    {
+      label: "布局",
+      value: ComponentsType.Layout,
+      list: cellList.value.filter((v) =>
+        bitsAuth(v.type, ComponentsType.Layout)
+      ),
+    },
+    {
+      label: "表单",
+      value: ComponentsType.Form,
+      list: cellList.value.filter((v) => bitsAuth(v.type, ComponentsType.Form)),
+    },
+    {
+      label: "数据",
+      value: ComponentsType.Data,
+      list: cellList.value.filter((v) => bitsAuth(v.type, ComponentsType.Data)),
+    },
+    {
+      label: "通知",
+      value: ComponentsType.Message,
+      list: cellList.value.filter((v) =>
+        bitsAuth(v.type, ComponentsType.Message)
+      ),
+    },
+    {
+      label: "加强",
+      value: ComponentsType.Reinforce,
+      list: cellList.value.filter((v) =>
+        bitsAuth(v.type, ComponentsType.Reinforce)
+      ),
+    },
+  ];
+});
 </script>
 
 <template>

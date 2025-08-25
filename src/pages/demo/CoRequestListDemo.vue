@@ -62,7 +62,7 @@ async function api(pageNo: number): Promise<RequestList.Res<ApiResItem[]>> {
           </view>
         </view>
         <CoSticky>
-          <uv-search
+          <wd-search
             class="bg-jun-bg rd-md p-2.2"
             v-model="searchKey"
             :inputAlign="'left'"

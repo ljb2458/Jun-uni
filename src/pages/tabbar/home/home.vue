@@ -101,16 +101,16 @@ function onClickSwiper({
         previousMargin="48rpx"
         nextMargin="48rpx"
         :indicator="{ type: 'dots' }"
-        custom-image-class="rd-lg shadow"
-        custom-next-image-class="swiper_next rd-lg  shadow"
-        custom-prev-image-class="swiper_prev rd-lg  shadow"
+        custom-image-class="rd-lg border-all"
+        custom-next-image-class="swiper_next rd-lg  border-all"
+        custom-prev-image-class="swiper_prev rd-lg  border-all"
       >
       </wd-swiper>
     </view>
     <view
       class="m-lg border-all b-jun-primary rd-md c-jun-primary bg-jun-primary bg-op-20 p-2.2 indent-2"
     >
-      <text class="text-lg indent-0">CoTabsFor</text>
+      <text class="text-lg indent-0">CoTabsFor 标签页</text>
       <view>该组件编写时还没有 wd-uni 现在更推荐使用 wd-tabs </view>
       <view>
         适用多端的tabs组件，支持自动高度、懒加载、自动吸顶、滑动等功能。
@@ -141,7 +141,7 @@ function onClickSwiper({
             <view
               class="m-lg border-all b-jun-primary rd-md c-jun-primary bg-jun-primary bg-op-20 p-2.2 indent-2"
             >
-              <text class="text-lg">CoRequestList</text>
+              <text class="text-lg">CoRequestList 请求分页列表</text>
               <view>
                 自动为您加载分页数据，支持下拉刷新、上拉触底加载、列表状态自动处理、ref
                 获取数据等。

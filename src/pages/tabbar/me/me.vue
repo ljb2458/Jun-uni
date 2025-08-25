@@ -17,7 +17,7 @@ import { getCurrentRouteInfo } from "@/utils/rewriteUni";
 onShow(async () => {
   const verify = await routerCheck(`/${getCurrentRouteInfo()?.path}`, true);
   if (verify === false) return;
-  uni.startPullDownRefresh();
+  console.log('验证登录，通过')
 });
 </script>
 

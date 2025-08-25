@@ -30,10 +30,6 @@ const props = withDefaults(
 const emit = defineEmits<{
   change: [v: string];
   /**
-   * 用户确定搜索时触发，用户按回车键，或者手机键盘右下角的"搜索"键时触发
-   */
-  search: [v: string];
-  /**
    * 用户点击右侧控件时触发
    */
   custom: [v: string];
@@ -78,10 +74,10 @@ function onTapReset(e: any) {
 </script>
 
 <template>
-  <view class="GrFilterSearch bg-jun-bg">
-    <view class="flex items-center gap-xs">
+  <view class="GrFilterSearch bg-jun-bg py-1">
+    <view class="flex items-center">
       <slot name="selections">
-        <view class="self-stretch" v-if="selections">
+        <view class="self-stretch border-right" v-if="selections">
           <CoSelect
             @selected="(v:any) => emit('selected',v)"
             v-model="selectValue"
@@ -92,19 +88,18 @@ function onTapReset(e: any) {
           </CoSelect>
         </view>
       </slot>
-      <view class="flex-1 bg-jun-bg rd-sm">
-        <uv-search
-          @blur="(e:string) => emit('blur', e)"
-          @custom="(e:string) => emit('custom', e)"
-          @search="(e:string) => emit('search', e)"
-          @change="(e:string) => emit('change', e)"
-          @focus="(e:string) => emit('focus', e)"
+      <view class="flex-1 bg-jun-bg rd-sm px-xs">
+        <wd-input
           v-model="modelValue"
-          shape="square"
-          input-align="left"
-          :show-action="false"
-          :="searchProps"
-          :bg-color="'none'"
+          @blur="(e:string) => emit('blur', e)"
+          @focus="(e:string) => emit('focus', e)"
+          @custom="(e:string) => emit('custom', e)"
+          @change="(e:string) => emit('change', e)"
+          prefix-icon="search"
+          clearable
+          placeholder="请搜索"
+          confirm-type="search"
+          no-border
         />
       </view>
       <block v-if="$slots.popup">

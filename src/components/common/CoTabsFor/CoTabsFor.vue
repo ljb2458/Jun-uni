@@ -73,7 +73,7 @@ type TabsListItem = Item & { load: boolean; index: number };
 const currentIndex = useVModel(props, "modelValue", emit);
 const tabsList = ref<Array<TabsListItem>>([]);
 watch(
-  () => props.options.length,
+  () => props.options,
   () => {
     tabsList.value = props.options.map((v, index) => ({
       ...v,
@@ -83,6 +83,7 @@ watch(
   },
   {
     immediate: true,
+    deep: true,
   }
 );
 const currentSwiper = computed(() => tabsList.value[+currentIndex.value]);
