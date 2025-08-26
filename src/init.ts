@@ -1,7 +1,7 @@
 import router from "./utils/router";
 import { useUserStore } from "./store/user/index";
-import { Sys } from "./enum/pubsubKey/system";
-import { LOGIN_WHITE_LIST } from "@/enum/auth";
+import { Sys } from "@/constants/pubsubKey/system";
+import { LOGIN_WHITE_LIST } from "@/constants/auth";
 import { openLoginPopup } from "./layout/loginPopup";
 
 /**app setup 时初始化 */

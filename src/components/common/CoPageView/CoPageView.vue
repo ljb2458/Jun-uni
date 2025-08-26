@@ -11,7 +11,7 @@ import { getCurrentRouteInfo } from "@/utils/rewriteUni";
 import mpMixin from "@/components/libs/mixin/mpMixin";
 import { CSSProperties, StyleValue } from "vue";
 import { modalProps } from "@/layout/modal";
-import { generateColors, text } from "#/cssVar";
+import { generateColors, text } from "@/constants/unocss";
 
 defineOptions(mpMixin);
 const routeInfo = getCurrentRouteInfo();
@@ -65,8 +65,8 @@ const style = computed(() => {
     "--layout-navbar-height": navbarHeightCssVar.value,
     "--wot-color-theme": text(colors["jun-primary"]),
     "--wot-color-success": text(colors["jun-success"]),
-    "--wot-color-warning": text(colors['jun-warn']),
-    "--wot-color-danger": text(colors['jun-fail']),
+    "--wot-color-warning": text(colors["jun-warn"]),
+    "--wot-color-danger": text(colors["jun-fail"]),
   };
   return result;
 });

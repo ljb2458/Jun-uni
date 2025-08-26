@@ -18,7 +18,7 @@ import envCoverView from "./envCoverView.vue";
 import envCoverImage from "./envCoverImage.vue";
 import { debounce } from "lodash-es";
 import { useUniOn } from "@/hooks/toolsHooks";
-import { CoMap } from "@/enum/pubsubKey/components";
+import { CoMap } from "@/constants/pubsubKey/components";
 import mpMixin from "@/components/libs/mixin/mpMixin";
 export interface CoMapMarker extends MapMarker, AnyObject {
   iconPath?: string;

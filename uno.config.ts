@@ -5,7 +5,7 @@ import {
   transformerVariantGroup,
   Rule,
 } from "unocss";
-import { generateColors, text, bg, border } from "./config/cssVar";
+import { generateColors, text, bg, border } from "./src/constants/unocss";
 
 function generateColorRules() {
   const colorMap = generateColors();
